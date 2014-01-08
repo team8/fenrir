@@ -1,4 +1,4 @@
-//fenrir.cpp
+// fenrir.cpp
 
 Class Fenrir : public IterativeRobot {
  private:
@@ -7,8 +7,6 @@ Class Fenrir : public IterativeRobot {
 
 };
 
-Fafnir::Fafnir() :
-
-{
+Fenrir::Fenrir() {
 
 }
