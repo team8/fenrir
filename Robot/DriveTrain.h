@@ -1,1 +1,6 @@
-//DriveTrain.h
+class DriveTrain {
+    private:
+    
+    public:
+    
+}
