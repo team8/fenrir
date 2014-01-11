@@ -4,6 +4,7 @@ class AutonomousController {
 
   AutonomousController(Robot *robotPointer);
   void update();
+  void startTimer();
 
  private:
  
