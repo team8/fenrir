@@ -17,3 +17,6 @@ DriveTrain::DriveTrain() :
 {
         
 }
+void DriveTrain::update() {
+        
+}
