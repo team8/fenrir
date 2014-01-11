@@ -6,3 +6,11 @@ Robot::Robot() :
 {
 
 }
+
+Robot::setSpeed(){
+  
+  
+  
+}
+
+
