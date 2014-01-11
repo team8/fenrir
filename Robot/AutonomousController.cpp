@@ -1,6 +1,6 @@
 AutonomousController::AutonomousController(Robot *robotPointer)
 
-
+//instance variables go here
 
 {
   
