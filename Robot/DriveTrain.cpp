@@ -13,3 +13,7 @@ DriveTrain::DriveTrain() :
         rightEnc() // Needs port
         
         // Needs speed controller stuff
+
+{
+        
+}
