@@ -6,7 +6,8 @@ class AutonomousController {
   void update();
 
  private:
-  
+ 
+  Timer time; 
   Robot *robot;
   
   
