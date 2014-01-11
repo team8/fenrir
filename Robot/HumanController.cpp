@@ -24,7 +24,7 @@ HumanController:TeleopPeriodic() {
     leftFrontVic.Set(-input);
     leftBackVic.Set(-input);
     rightFrontVic.Set(input);
-    rightBackVic.Set(input);
+    rightBackVic.Set(input); 
 
 }
 
