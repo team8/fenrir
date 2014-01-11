@@ -10,7 +10,7 @@ DriveTrain::DriveTrain() :
         
         // Encoders
         leftEnc(PORT_ENCODER_RIGHT), 
-        rightEnc(PORT_ENCODER_RIGHT) 
+        rightEnc(PORT_ENCODER_LEFT) 
         
         // Needs speed controller stuff
 
