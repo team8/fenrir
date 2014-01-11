@@ -21,10 +21,10 @@ HumanController:TeleopPeriodic() {
     float turn = 1.0 * turnStick.GetX(); 
     float input = speed - turn;
     
-    leftVic1.Set(-input);
-    leftVic2.Set(-input);
-    rightVic1.Set(input);
-    rightVic2.Set(input);
+    leftFrontVic.Set(-input);
+    leftBackVic.Set(-input);
+    rightFrontVic.Set(input);
+    rightBackVic.Set(input);
 
 }
 
