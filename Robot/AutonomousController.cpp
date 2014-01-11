@@ -1,3 +1,6 @@
+#include "AutonomousController.h"
+#include "Constants.h"
+
 AutonomousController::AutonomousController(Robot *robotPointer)
 
 //instance variables go here
