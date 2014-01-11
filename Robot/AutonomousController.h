@@ -9,7 +9,10 @@ class AutonomousController {
  
   Timer time; 
   Robot *robot;
+  void drive();
+  void stop();
+  bool shoot();
   
-  
+  bool targetReached;
 
 };
