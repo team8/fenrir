@@ -13,12 +13,12 @@ HumanController::HumanController(Robot *robotPointer)
   
 }
 
-HumanController:TeleopPeriodic() {
+HumanController::update() {
     //Joystick.GetY() returns value b/w -1 and 1
     
-    //takes the input from the joysticks and multiplies it by a constant (1.0)
-    float speed = 1.0 * speedStick.GetY(); 
-    float turn = 1.0 * turnStick.GetX(); 
+    //takes the input from the joysticks 
+    float speed = speedStick.GetY(); 
+    float turn = turnStick.GetX(); 
     float input = speed - turn;
     
     leftFrontVic.Set(-input);
@@ -29,4 +29,3 @@ HumanController:TeleopPeriodic() {
 }
 
 
-}
