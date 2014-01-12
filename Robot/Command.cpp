@@ -5,9 +5,9 @@ class Command {
 
 Command::Command() {
     
-    enum commandType{DRIVE};
+    enum commandType{DRIVE, SHOOT};
     
-};
+}
 
 void command(){
     
