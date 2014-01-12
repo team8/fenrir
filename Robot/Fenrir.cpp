@@ -1,12 +1,10 @@
 // fenrir.cpp
 
-Class Fenrir : public IterativeRobot {
+class Fenrir : public IterativeRobot {
  private:
 
  public: //need to input stuff based on the names of stuff
-{
 
-}
  //make sure we call the methods like this.
   void AutonomousInit();
   void AutonomousPeriodic();
