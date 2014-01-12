@@ -28,6 +28,8 @@ class DriveTrain {
     
     void rotateS(double rotspd);
     
+    void update();
+    
     
     
 }
