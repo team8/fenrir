@@ -13,10 +13,32 @@ DriveTrain::DriveTrain() :
         rightEnc(PORT_ENCODER_LEFT) 
         
         // Needs speed controller stuff
-
 {
         
 }
+
 void DriveTrain::update() {
+    
+        
+}
+void DriveTrain::driveD(double dist){
+    
+        
+}
+
+//sets the spd of all vics to the specified amount b/w 1.0 and -1.0
+void DriveTrain::setSpeed(double spd){
+    leftFrontVic.set(-spd);
+    leftBackVic.set(-spd);
+    rightFrontVic.set(spd);
+    rightBackVic.set(spd);
+    
+}
+void DriveTrain::rotateA(double angle){
+        
+        
+}
+void DriveTrain::rotateS(double speed) {
+        
         
 }
