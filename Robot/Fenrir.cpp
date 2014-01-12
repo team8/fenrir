@@ -17,3 +17,33 @@ class Fenrir : public IterativeRobot {
 Fenrir::Fenrir() {
 
 }
+
+void Fenfir:: AutonomousInit(){
+ 
+}
+
+void Fenfir:: AutonomousPeriodic(){
+ 
+}
+
+void Fenfir:: AutonomousDisabled(){
+}
+
+void Fenfir:: TeleopInit(){
+ 
+}
+
+void Fenfir:: TeleopPeriodic(){
+ 
+}
+
+void Fenfir:: TeleopPeriodic(){
+ 
+}
+void Fenfir:: TeleopDisabled(){
+ 
+}
+
+
+
+
