@@ -9,6 +9,12 @@ Command::Command() {
     
 }
 
-void command(){
+void command(int type){ // Use one of the command type enums here
+    if (type == DRIVE) {
+        drive();
+    }
+}
+
+void drive() {
     
 }
