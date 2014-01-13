@@ -1,9 +1,25 @@
-using namespace std;
+#include "Constants.h"
 
-enum commandType{DRIVE, SHOOT};
- 
-void drive();
-void shoot();
+class Command {
+    public:
+        Command();
+        void command(int);
+    private:
+        void drive();
+        void shoot();
+};
+
+Command::Command() {
+    command(DRIVE);
+}
+
+void drive() {
+    // Do driving stuff here
+}
+
+void shoot() {
+    // Do shooting stuff here
+}
 
 void command(int type){ // Use one of the command type enums here
     if (type == DRIVE) {
@@ -11,12 +27,4 @@ void command(int type){ // Use one of the command type enums here
     } else if (type == SHOOT) {
         shoot();
     }
-}
-
-void drive() {
-    // Do driving stuff
-}
-
-void shoot() {
-    // Do shooting stuff
 }
