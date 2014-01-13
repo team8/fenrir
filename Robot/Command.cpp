@@ -1,6 +1,14 @@
 #include "Constants.h"
-#include "Command.h"
 
+class Command {
+    private:
+        void drive();
+        void shoot();
+    public:
+        Command();
+        void command(int);
+
+};
 Command::Command() {
     command(DRIVE);
 }
