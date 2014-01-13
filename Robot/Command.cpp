@@ -1,30 +1,32 @@
 #include "Constants.h"
 
 class Command {
-    private:
-        void drive();
-        void shoot();
     public:
         Command();
+        Command(int, int);
         void command(int);
-
+        int[] getCommand();
+    private:
+        int subsystem;
+        int method;
+        int values [2];
 };
+
 Command::Command() {
-    command(DRIVE);
+    
 }
 
-void drive() {
-    // Do driving stuff here
+Command::Command(int subsystemEnum, int methodEnum) {
+    subsystem = subsystemEnum;
+    method = methodEnum;
 }
 
-void shoot() {
-    // Do shooting stuff here
+void command(int subsystemEnum, int methodEnum){ // Use one of the command type enums here
+    subsystem = subsystemEnum;
+    method = methodEnum;
 }
 
-void command(int type){ // Use one of the command type enums here
-    if (type == DRIVE) {
-        drive();
-    } else if (type == SHOOT) {
-        shoot();
-    }
+int[] getCommand() {
+    values = {subsystem, method};
+    return values;
 }
