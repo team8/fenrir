@@ -16,20 +16,16 @@ class DriveTrain {
     
     // Needs speed controller stuff
     
+    // Command stuff
+    Command * command;
+    
     public:
     
     DriveTrain();
-    
     void driveD(double dist);
-    
     void setSpeed(double spd);
-    
     void rotateA(double angle);
-    
     void rotateS(double rotspd);
-    
     void update();
-    
-    
     
 }
