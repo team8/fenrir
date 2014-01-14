@@ -9,8 +9,8 @@ HumanController::HumanController(Robot *robotPointer)
   speedStick(PORT_SPEED);
   
 {  
+  newCommand = false;
   this-> robot = robotPointer;
-  
 }
 
 HumanController::update() {
@@ -28,4 +28,9 @@ HumanController::update() {
 
 }
 
-
+Command HumanController::getCommand() { // For sending the command to Fenrir.cpp
+  if (newCommand) {
+    newCommand = false;
+    return command;
+  } else return NULL;
+}
