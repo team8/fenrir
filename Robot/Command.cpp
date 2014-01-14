@@ -17,11 +17,6 @@ void command(int subsystemEnum, int methodEnum, int newPassValue){ // Use one of
     passValue = newPassValue;
 }
 
-int[] getCommand() {
-    values = {subsystem, method, passValue};
-    return values;
-}
-
 int getSubsystem() {
     return subsystem;
 }
