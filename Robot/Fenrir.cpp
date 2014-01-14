@@ -21,8 +21,10 @@ class Fenrir : public IterativeRobot {
   void TeleopDisabled();
   void TestInit();
   void TestPeriodic();
+  Command getCommand();
   
   Command * command;
+  bool newCommand;
 };
 
 Fenrir::Fenrir() :
@@ -31,17 +33,18 @@ Fenrir::Fenrir() :
         autoController(&robot, mode),
         robot()
 {
+ newCommand = false;
 }
 
-void Fenrir:: RobotInit(){
+void Fenrir::RobotInit(){
  
 }
 
-void Fenrir:: AutonomousInit(){
+void Fenrir::AutonomousInit(){
  
 }
 
-void Fenrir:: AutonomousPeriodic(){
+void Fenrir::AutonomousPeriodic(){
  /* Command Stuff */
  command = autoController.getCommand();
  if (command != NULL) {
@@ -51,23 +54,23 @@ void Fenrir:: AutonomousPeriodic(){
  }
 }
 
-void Fenrir:: AutonomousDisabled(){
+void Fenrir::AutonomousDisabled(){
  
 }
 
-void Fenrir:: DisabledInit(){
+void Fenrir::DisabledInit(){
  
 }
 
-void Fenrir:: DisabledPeriodic(){
+void Fenrir::DisabledPeriodic(){
  
 }
 
-void Fenrir:: TeleopInit(){
+void Fenrir::TeleopInit(){
  
 }
 
-void Fenrir:: TeleopPeriodic(){
+void Fenrir::TeleopPeriodic(){
  /* Command Stuff */
  command = humanController.getCommand();
  if (command != NULL) {
@@ -77,14 +80,21 @@ void Fenrir:: TeleopPeriodic(){
  }
 }
 
-void Fenrir:: TeleopDisabled(){
+void Fenrir::TeleopDisabled(){
  
 }
 
-void Fenrir:: TestInit(){
+void Fenrir::TestInit(){
  
 }
 
-void Fenrir:: TestPeriodic(){
+void Fenrir::TestPeriodic(){
  
+}
+
+Command Fenrir::getCommand() { // For sending the command to the subsystems
+  if (newCommand) {
+    newCommand = false;
+    return command;
+  } else return NULL;
 }
