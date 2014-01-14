@@ -12,3 +12,6 @@
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT 0;
 #define PORT_ENCODER_LEFT 0;
+
+//ports for vision
+#define ;//add more stuff later
