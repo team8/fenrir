@@ -18,8 +18,13 @@ DriveTrain::DriveTrain() :
 }
 
 void DriveTrain::update() {
-    
-        
+  /* Command Stuff */
+  command = Fenrir.getCommand(); // Don't know how to get Command from Fenrir
+  if (command != NULL) {
+    if (command.getMethod() == /*Whatever*/) {
+      // Do that method
+    }
+  }
 }
 void DriveTrain::driveD(double dist){
     
