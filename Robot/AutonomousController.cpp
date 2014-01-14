@@ -15,16 +15,15 @@ AutonomousController::startTimer(){
 }
 
 AutonomousController::drive(){
-  robot.setCommand(DRIVE, /*method number*/);
+  robot.setCommand(DRIVE, /*method number*/, /*pass value*/);
   //we'll add this later
 }
 
 AutonomousController::stop(){
-  robot.setCommand(DRIVE, /*method number*/);
+  robot.setCommand(DRIVE, /*method number*/, /*pass value*/);
   //we'll add this later
 }
 
 AutonomousController::update(){
-  robot.setCommand(DRIVE, /*method number*/);
   //we'll add this later
 }
