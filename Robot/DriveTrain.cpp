@@ -17,7 +17,7 @@ DriveTrain::DriveTrain() :
         
 }
 
-void DriveTrain::runMethod(int methodNum, int passValue) {
+void DriveTrain::runMethod(int methodNum, double passValue) {
   if (methodNum == SETSPEED) {
     setSpeed(passValue);
   } else if (methodNum == DRIVEDIST) {
@@ -30,13 +30,7 @@ void DriveTrain::runMethod(int methodNum, int passValue) {
 }
 
 void DriveTrain::update() {
-  /* Command Stuff */
-  command = Fenrir.getCommand(); // Don't know how to get Command from Fenrir
-  if (command != NULL) {
-    if (command.getMethod() == /*Whatever*/) {
-      // Do that method
-    }
-  }
+  
 }
 void DriveTrain::driveD(double dist){
     
