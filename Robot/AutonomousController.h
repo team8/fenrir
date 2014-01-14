@@ -19,5 +19,5 @@ class AutonomousController {
   
   bool targetReached;
   Command command;
-  bool newCommand;
+  bool newCommand = false;
 };
