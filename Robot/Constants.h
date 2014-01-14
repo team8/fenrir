@@ -12,7 +12,3 @@
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT 0;
 #define PORT_ENCODER_LEFT 0;
-
-//enum for the Command stuff
-enum commandType{DRIVE, SHOOT};
-enum driveMethod{SETSPEED, DRIVEDIST, ROTATEANGLE, ROTATESPEED};
