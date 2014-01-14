@@ -6,6 +6,7 @@ class HumanController {
 
   void update();
   HumanController(Robot *robotPointer);
+  Command getCommand();
 
  private:
   
@@ -14,6 +15,8 @@ class HumanController {
   Joystick turnStick;
   Joystick operatorStick;
 
+  Command command;
+  bool newCommand;
 };
 
 
