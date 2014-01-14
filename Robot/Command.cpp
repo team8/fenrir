@@ -6,6 +6,8 @@ class Command {
         Command(int, int);
         void command(int);
         int[] getCommand();
+        int getSubsystem();
+        int getMethod();
     private:
         int subsystem;
         int method;
@@ -29,4 +31,12 @@ void command(int subsystemEnum, int methodEnum){ // Use one of the command type 
 int[] getCommand() {
     values = {subsystem, method};
     return values;
+}
+
+int getSubsystem() {
+    return subsystem;
+}
+
+int getMethod() {
+    return method;
 }
