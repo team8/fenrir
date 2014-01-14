@@ -17,15 +17,15 @@ DriveTrain::DriveTrain() :
         
 }
 
-void DriveTrain::runMethod(int methodNum) {
+void DriveTrain::runMethod(int methodNum, int passValue) {
   if (methodNum == SETSPEED) {
-    setSpeed();
+    setSpeed(passValue);
   } else if (methodNum == DRIVEDIST) {
-    direvD();
+    direvD(passValue);
   } else if (methodNum == ROTATEANGLE) {
-    rotateA();
+    rotateA(passValue);
   } else if (methodNum == ROTATESPEED) {
-    rotateS();
+    rotateS(passValue);
   }
 }
 
