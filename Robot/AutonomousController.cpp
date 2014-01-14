@@ -6,9 +6,8 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 //instance variables go here
 
 {
-  
- this -> robot = robotPointer; 
-  
+  newCommand = false;
+  this -> robot = robotPointer;
 }  
 
 AutonomousController::startTimer(){
@@ -34,8 +33,9 @@ AutonomousController::update(){
   
 }
 
-AutonomousController::getCommand() { // For sending the command to Fenrir.cpp
+Command AutonomousController::getCommand() { // For sending the command to Fenrir.cpp
   if (newCommand) {
+    newCommand = false;
     return command;
   } else return NULL;
 }
