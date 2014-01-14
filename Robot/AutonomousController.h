@@ -15,7 +15,9 @@ class AutonomousController {
   void drive();
   void stop();
   bool shoot();
+  Command getCommand();
   
   bool targetReached;
-
+  Command command;
+  bool newCommand;
 };
