@@ -1,5 +1,5 @@
-enum commandType{DRIVE};
-enum driveMethod{SETSPEED, DRIVEDIST, ROTATEANGLE, ROTATESPEED};
+enum CommandType{DRIVE};
+enum DriveMethod{DRIVESPEED, DRIVEDIST, ROTATEANGLE, ROTATESPEED};
 
 class Command {
     public:
