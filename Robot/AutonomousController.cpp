@@ -33,3 +33,9 @@ AutonomousController::update(){
   //we'll add this later
   
 }
+
+AutonomousController::getCommand() { // For sending the command to Fenrir.cpp
+  if (newCommand) {
+    return command;
+  } else return NULL;
+}
