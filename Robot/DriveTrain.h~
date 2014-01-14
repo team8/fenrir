@@ -16,6 +16,9 @@ class DriveTrain {
     
     // Needs speed controller stuff
     
+    // Command stuff
+    Command * command;
+    
     public:
     
     DriveTrain();
@@ -24,5 +27,5 @@ class DriveTrain {
     void rotateA(double angle);
     void rotateS(double rotspd);
     void update();
-    void runMethod(int methodNum);
+    
 }

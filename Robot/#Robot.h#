@@ -10,13 +10,18 @@ class Robot {
     private:
     
       DriveTrain driveTrain;
-      Command command;
+      
       
     
     public:
     
     void setSpeed(float s);
-    void rotateSpeed(float s);
-    void setCommand(Command newCommand);
     
+    void rotateSpeed(float s);
+    
+    void setCommand(Command newCommand);
+}
+
+void setCommand(Command newCommand) {
+  command = newCommand;
 }

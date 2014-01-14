@@ -21,6 +21,10 @@ class Fenrir : public IterativeRobot {
   void TeleopDisabled();
   void TestInit();
   void TestPeriodic();
+  Command getCommand();
+  
+  Command * command;
+  bool newCommand;
 };
 
 Fenrir::Fenrir() :
@@ -29,7 +33,7 @@ Fenrir::Fenrir() :
         autoController(&robot, mode),
         robot()
 {
-
+ newCommand = false;
 }
 
 void Fenrir::RobotInit(){
@@ -41,7 +45,13 @@ void Fenrir::AutonomousInit(){
 }
 
 void Fenrir::AutonomousPeriodic(){
-
+ /* Command Stuff */
+ command = autoController.getCommand();
+ if (command != NULL) {
+  if (command.getSubsystem() == DRIVE) {
+   // Send command to drivetrain.cpp
+  } // Add more if loops here for other subsystems when they exist
+ }
 }
 
 void Fenrir::AutonomousDisabled(){
@@ -61,7 +71,13 @@ void Fenrir::TeleopInit(){
 }
 
 void Fenrir::TeleopPeriodic(){
-
+ /* Command Stuff */
+ command = humanController.getCommand();
+ if (command != NULL) {
+  if (command.getSubsystem() == DRIVE) {
+   // Send command to drivetrain.cpp
+  } // Add more if loops here for other subsystems when they exist
+ }
 }
 
 void Fenrir::TeleopDisabled(){
@@ -74,4 +90,11 @@ void Fenrir::TestInit(){
 
 void Fenrir::TestPeriodic(){
  
+}
+
+Command Fenrir::getCommand() { // For sending the command to the subsystems
+  if (newCommand) {
+    newCommand = false;
+    return command;
+  } else return NULL;
 }

@@ -17,18 +17,6 @@ DriveTrain::DriveTrain() :
         
 }
 
-void DriveTrain::runMethod(int methodNum) {
-  if (methodNum == SETSPEED) {
-    setSpeed();
-  } else if (methodNum == DRIVEDIST) {
-    direvD();
-  } else if (methodNum == ROTATEANGLE) {
-    rotateA();
-  } else if (methodNum == ROTATESPEED) {
-    rotateS();
-  }
-}
-
 void DriveTrain::update() {
   /* Command Stuff */
   command = Fenrir.getCommand(); // Don't know how to get Command from Fenrir

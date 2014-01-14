@@ -16,7 +16,8 @@ class Robot {
     public:
     
     void setSpeed(float s);
+    
     void rotateSpeed(float s);
-    void setCommand(Command newCommand);
+    
     
 }
