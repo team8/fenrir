@@ -25,3 +25,17 @@ HumanController::update() {
     rightFrontVic.Set(input);
     rightBackVic.Set(input); 
 }
+
+HumanController::returnSpeedStick() {
+  
+  
+}
+
+HumanController::returnTurnStick() {
+  
+  
+}
+HumanController::returnOperatorStick() {
+  
+  
+}  
