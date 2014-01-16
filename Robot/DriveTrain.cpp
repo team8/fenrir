@@ -48,7 +48,14 @@ void DriveTrain::setSpeed(double spd){
     rightBackVic.set(spd);
     
 }
-void DriveTrain::rotate(double angle,double speed){
-    
-        
+
+//lets you rotate in place
+void DriveTrain::rotate(double angle){
+	bool mode =Command.getParent(); //true if call is from autonomous, false if command is from teleop
+	if(mode==false){
+		//turns the specified number of degrees
+	}
+	else {
+		//turns according to the joysticks
+	}
 }
