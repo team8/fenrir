@@ -15,7 +15,12 @@ typedef union {
 } Args;
 
 typedef struct {
-    double value;
+    union {
+        double driveSpeed;
+        double driveDist;
+        doulbe rotAngle;
+        double rotSpeed;
+    };
 } DriveArgs;
 
 class Command {
