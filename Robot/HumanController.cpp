@@ -20,10 +20,7 @@ HumanController::update() {
     float turn = turnStick.GetX(); 
     float input = speed - turn;
     
-    leftFrontVic.Set(-input);
-    leftBackVic.Set(-input);
-    rightFrontVic.Set(input);
-    rightBackVic.Set(input); 
+    //here call the appropriate function from drive train
 }
 
 HumanController::returnSpeedStick() {
