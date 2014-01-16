@@ -1,5 +1,13 @@
-enum CommandType{DRIVE};
-enum DriveMethod{DRIVESPEED, DRIVEDIST, ROTATEANGLE, ROTATESPEED};
+typedef enum {
+    DRIVE
+    } CommandType;
+    
+typedef enum {
+    DRIVESPEED,
+    DRIVEDIST,
+    ROTATEANGLE,
+    ROTATESPEED
+    } DriveMethod;
 
 typedef struct {
     double value;
@@ -8,7 +16,7 @@ typedef struct {
 class Command {
     public:
         Command();
-        Command(int subsystemEnum, int methodEnum, void * args);
+        Command(CommandType subsystemType, int methodType, void * args);
         void command(int subsystemEnum, int methodEnum, void * args);
         int getSubsystem();
         int getMethod();
