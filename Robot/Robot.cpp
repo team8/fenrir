@@ -13,9 +13,8 @@ Robot::setSpeed(){
   
 }
 
-void Robot::setCommand(Command newCommand) {
-  command = newCommand;
+void Robot::setCommand(Command command) {
   if (command.getSubsystem() == DRIVE) {
-    driveTrain.runMethod(command.getMethod(), command.getPassValue());
+    driveTrain.runMethod(command);
   }
 }
