@@ -3,6 +3,7 @@
 #include "AutonomousController.h"
 #include "DriveTrain.h"
 #include "HumanController.h"
+#include "Command.h"
 
 
 class Robot {
@@ -10,7 +11,7 @@ class Robot {
     private:
     
       DriveTrain driveTrain;
-      
+      Shooter shooter;
     
     public:
     
