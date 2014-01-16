@@ -19,9 +19,10 @@ DriveTrain::DriveTrain() :
 
 //runs method according to what newCommand is received
 void DriveTrain::runMethod(Command newCommand) {
+	command = newCommand;
         DriveArgs * args = (DriveArgs*) newCommand.argPointer;
         if (newCommand.getMethod() == SETSPEED) {
-                setSpeed(command.args -> value);
+                setSpeed(newCommand.args -> value);
         } else if (newCommand.getMethod() == DRIVEDIST) {
                 direvD(newCommand.args -> value);
         } else if (newCommand.getMethod() == ROTATEANGLE) {
