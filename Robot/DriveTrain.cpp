@@ -21,14 +21,12 @@ DriveTrain::DriveTrain() :
 void DriveTrain::runMethod(Command newCommand) {
 	command = newCommand;
         DriveArgs * args = (DriveArgs*) newCommand.argPointer;
-        if (newCommand.getMethod() == SETSPEED) {
-                setSpeed(newCommand.args -> value);
-        } else if (newCommand.getMethod() == DRIVEDIST) {
-                direvD(newCommand.args -> value);
-        } else if (newCommand.getMethod() == ROTATEANGLE) {
-                rotateA(newCommand.args -> value);
-        } else if (newCommand.getMethod() == ROTATESPEED) {
-                rotateS(newCommand.args -> value);
+        if (command.getMethod() == SETSPEED) {
+                setSpeed(args -> driveSpeed);
+        } else if (command.getMethod() == DRIVEDIST) {
+                driveD(args -> driveDist);
+        } else if (command.getMethod() == ROTATEANGLE) {
+                rotateA(args -> rotAngle);
         }
         free(args);
 }
@@ -53,7 +51,7 @@ void DriveTrain::setSpeed(double spd){
 
 //lets you rotate in place
 void DriveTrain::rotate(double angle){
-	bool mode =Command.getParent(); //true if call is from autonomous, false if command is from teleop
+	bool mode = Command.getParent(); //true if call is from autonomous, false if command is from teleop
 	if(mode==false){
 		//turns the specified number of degrees
 	}
