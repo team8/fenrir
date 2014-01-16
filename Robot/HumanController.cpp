@@ -12,6 +12,12 @@ HumanController::HumanController(Robot *robotPointer)
   this-> robot = robotPointer;
 }
 
+/* Command example
+   void * argPointer = malloc(sizeof(DriveArgs));
+  argPointer -> value = Enter any number here;
+  robot.setCommand(Command command(false, DRIVE, Method, argPointer)); // Replace Method with the method. First value must be false
+*/
+
 HumanController::update() {
     //Joystick.GetY() returns value b/w -1 and 1
     
