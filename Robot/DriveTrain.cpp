@@ -17,16 +17,17 @@ DriveTrain::DriveTrain() :
         
 }
 
-void DriveTrain::runMethod(Command command) {
-        DriveArgs * args = (DriveArgs*) command.argPointer;
-        if (command.getMethod() == SETSPEED) {
+//runs method according to what newCommand is received
+void DriveTrain::runMethod(Command newCommand) {
+        DriveArgs * args = (DriveArgs*) newCommand.argPointer;
+        if (newCommand.getMethod() == SETSPEED) {
                 setSpeed(command.args -> value);
-        } else if (command.getMethod() == DRIVEDIST) {
-                direvD(command.args -> value);
-        } else if (command.getMethod() == ROTATEANGLE) {
-                rotateA(command.args -> value);
-        } else if (command.getMethod() == ROTATESPEED) {
-                rotateS(command.args -> value);
+        } else if (newCommand.getMethod() == DRIVEDIST) {
+                direvD(newCommand.args -> value);
+        } else if (newCommand.getMethod() == ROTATEANGLE) {
+                rotateA(newCommand.args -> value);
+        } else if (newCommand.getMethod() == ROTATESPEED) {
+                rotateS(newCommand.args -> value);
         }
         free(args);
 }
