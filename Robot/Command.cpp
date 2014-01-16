@@ -5,16 +5,16 @@ Command::Command() {
     
 }
 
-Command::Command(int subsystemEnum, int methodEnum, int newPassValue) {
+Command::Command(int subsystemEnum, int methodEnum, void * args) {
     subsystem = subsystemEnum;
     method = methodEnum;
-    passValue = newPassValue;
+    argPointer = args;
 }
 
-void command(int subsystemEnum, int methodEnum, int newPassValue){ // Use one of the command type enums here
+void command(int subsystemEnum, int methodEnum, void * args){ // Use one of the command type enums here
     subsystem = subsystemEnum;
     method = methodEnum;
-    passValue = newPassValue;
+    argPointer = args;
 }
 
 int getSubsystem() {
@@ -23,8 +23,4 @@ int getSubsystem() {
 
 int getMethod() {
     return method;
-}
-
-int getPassValue() {
-    return passValue;
 }
