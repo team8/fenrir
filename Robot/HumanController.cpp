@@ -41,8 +41,7 @@ HumanController::returnTurnStick() {
   argPointer -> value = /*Enter parameter here*/;
   robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
       float turn = turnStick.GetX(); 
-      return turn
-  
+      return turn;
 }
 HumanController::returnOperatorStick() {
     //find what the operator stick actually does :D
