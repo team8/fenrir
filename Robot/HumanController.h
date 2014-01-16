@@ -5,9 +5,9 @@ class HumanController {
  public:
 
   void update();
-  int returnSpeedStick();
-  int returnTurnStick();
-  int returnOperatorStick();
+  float returnSpeedStick();
+  float returnTurnStick();
+  float returnOperatorStick();
   HumanController(Robot *robotPointer);
 
  private:
