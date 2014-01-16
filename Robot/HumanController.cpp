@@ -20,10 +20,8 @@ HumanController::update() {
     float turn = turnStick.GetX(); 
     float input = speed - turn;
     
-    // leftFrontVic.Set(-input);
-    // leftBackVic.Set(-input);
-    // rightFrontVic.Set(input);
-    // rightBackVic.Set(input); 
-
-    robot.setCommand(/*subsystem*/, /*method*/, /*pass value*/);
+    leftFrontVic.Set(-input);
+    leftBackVic.Set(-input);
+    rightFrontVic.Set(input);
+    rightBackVic.Set(input); 
 }
