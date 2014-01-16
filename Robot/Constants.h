@@ -15,3 +15,16 @@
 
 //ports for vision
 #define  //add more stuff later
+
+
+//ports for shooter encoders
+#define PORT_SHOOTER_ENCODER_1 0
+#define PORT_SHOOTER_ENCODER_2 0
+#define PORT_SHOOTER_ENCODER_3 0
+#define PORT_SHOOTER_ENCODER_4 0
+
+//ports for shooter victors
+#define PORT_SHOOTER_VIC_1 0
+#define PORT_SHOOTER_VIC_2 0
+#define PORT_SHOOTER_VIC_3 0
+#define PORT_SHOOTER_VIC_4 0
