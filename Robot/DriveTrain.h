@@ -5,10 +5,10 @@ class DriveTrain {
     private:
     
     // Victors
-    LinearVictor leftFrontVic;
-    LinearVictor leftBackVic;
-    LinearVictor rightFrontVic;
-    LinearVictor rightBackVic;
+    Victor leftFrontVic;
+    Victor leftBackVic;
+    Victor rightFrontVic;
+    Victor rightBackVic;
     
     // Encoders
     Encoder leftEnc;
