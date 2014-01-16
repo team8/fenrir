@@ -1,5 +1,6 @@
 #include "Constants.h"
 #include <WPILib.h>
+#include "Command.h"
 
 class DriveTrain {
     private:
@@ -13,6 +14,8 @@ class DriveTrain {
     // Encoders
     Encoder leftEnc;
     Encoder rightEnc;
+    
+    Command command;
     
     // Needs speed controller stuff
     
