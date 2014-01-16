@@ -9,6 +9,10 @@ typedef enum {
     ROTATESPEED
     } DriveMethod;
 
+typedef union {
+    DriveArgs driveArgs;
+} Args;
+
 typedef struct {
     double value;
 } DriveArgs;
