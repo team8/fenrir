@@ -37,6 +37,9 @@ HumanController::returnSpeedStick() {
 }
 
 HumanController::returnTurnStick() {
+  void * argPointer = malloc(sizeof(DriveArgs));
+  argPointer -> value = /*Enter parameter here*/;
+  robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
       float turn = turnStick.GetX(); 
       return turn
   
