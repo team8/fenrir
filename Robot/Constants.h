@@ -14,4 +14,4 @@
 #define PORT_ENCODER_LEFT 0;
 
 //ports for vision
-#define ;//add more stuff later
+#define  //add more stuff later
