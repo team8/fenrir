@@ -24,5 +24,5 @@ class DriveTrain {
     void rotateA(double angle);
     void rotateS(double rotspd);
     void update();
-    void runMethod(int methodNum, int passValue);
+    void runMethod(Command command);
 }
