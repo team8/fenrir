@@ -40,6 +40,7 @@ void DriveTrain::driveD(double dist){
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
+//this method only makes the robot go staight, sorry guys.
 void DriveTrain::setSpeed(double spd){
     leftFrontVic.set(-spd);
     leftBackVic.set(-spd);
