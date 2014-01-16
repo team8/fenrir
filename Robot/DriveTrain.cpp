@@ -18,15 +18,16 @@ DriveTrain::DriveTrain() :
 }
 
 void DriveTrain::runMethod(Command command) {
-  if (command.getMethod() == SETSPEED) {
-    setSpeed(command.argPointer -> value);
-  } else if (command.getMethod() == DRIVEDIST) {
-    direvD(command.argPointer -> value);
-  } else if (command.getMethod() == ROTATEANGLE) {
-    rotateA(command.argPointer -> value);
-  } else if (command.getMethod() == ROTATESPEED) {
-    rotateS(command.argPointer -> value);
-  }
+        DriveArgs * args = (DriveArgs*) command.argPointer;
+        if (command.getMethod() == SETSPEED) {
+                setSpeed(command.args -> value);
+        } else if (command.getMethod() == DRIVEDIST) {
+                direvD(command.args -> value);
+        } else if (command.getMethod() == ROTATEANGLE) {
+                rotateA(command.args -> value);
+        } else if (command.getMethod() == ROTATESPEED) {
+                rotateS(command.args -> value);
+        }
 }
 
 void DriveTrain::update() {
