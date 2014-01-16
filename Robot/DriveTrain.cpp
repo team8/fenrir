@@ -49,7 +49,12 @@ void DriveTrain::setSpeed(double spd){
     
 }
 void DriveTrain::rotateA(double angle){
-        
+    
+    //temporary old code, may or may not use
+    leftFrontVic.Set(-input);
+    leftBackVic.Set(-input);
+    rightFrontVic.Set(input);
+    rightBackVic.Set(input); 
         
 }
 void DriveTrain::rotateS(double speed) {
