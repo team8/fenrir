@@ -48,12 +48,7 @@ void DriveTrain::setSpeed(double spd){
     rightBackVic.set(spd);
     
 }
-void DriveTrain::rotate(double angle){
+void DriveTrain::rotate(double angle,double speed){
     
-   
-        
-}
-void DriveTrain::rotateS(double speed) {
-        
         
 }
