@@ -15,12 +15,16 @@ AutonomousController::startTimer(){
 }
 
 AutonomousController::drive(){
-  robot.setCommand(DRIVE, /*method number*/, /*pass value*/);
+  void * argPointer = malloc(sizeof(DriveArgs));
+  argPointer -> value = /*Enter any number here*/;
+  robot.setCommand(Command command(DRIVE, /*Method*/, argPointer));
   //we'll add this later
 }
 
 AutonomousController::stop(){
-  robot.setCommand(DRIVE, /*method number*/, /*pass value*/);
+  void * argPointer = malloc(sizeof(DriveArgs));
+  argPointer -> value = 0;
+  robot.setCommand(Command command(DRIVE, DRIVESPEED, argPointer));
   //we'll add this later
 }
 
