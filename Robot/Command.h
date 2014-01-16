@@ -1,6 +1,7 @@
 #include "Constants.h"
 typedef enum {
-    DRIVE
+    DRIVE,
+    SHOOTER
     } SubsystemType;
     
 typedef enum {
@@ -9,19 +10,26 @@ typedef enum {
     ROTATEANGLE,
     ROTATESPEED
     } DriveMethod;
+    
+typedef enum {
+    SHOOT
+} ShooterMethod;
 
 typedef union {
     DriveArgs driveArgs;
+    ShooterArgs shooterArgs;
 } Args;
 
 typedef struct {
-    union {
-        double driveSpeed;
-        double driveDist;
-        doulbe rotAngle;
-        double rotSpeed;
-    };
+    double driveSpeed;
+    double driveDist;
+    doulbe rotAngle;
+    double rotSpeed;
 } DriveArgs;
+
+typedef struct {
+    
+} ShooterArgs;
 
 class Command {
     public:
