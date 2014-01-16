@@ -29,4 +29,5 @@ class Command {
     private:
         int subsystem; // Subsystem number. Defined in the commandType enum in Constants.h
         int method; // Method number. Defined in an enum in Constants.h
+        bool auto;
 }
