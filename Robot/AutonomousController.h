@@ -1,4 +1,5 @@
 #include "Constants.h"
+#include "Command.h"
 
 class AutonomousController {
 
@@ -11,7 +12,7 @@ class AutonomousController {
  private:
  
   Timer time; 
-  Robot *robot;
+  Robot * robot;
   void drive();
   void stop();
   bool shoot();
