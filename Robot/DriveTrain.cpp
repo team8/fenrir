@@ -17,15 +17,15 @@ DriveTrain::DriveTrain() :
         
 }
 
-void DriveTrain::runMethod(int methodNum, double passValue) {
-  if (methodNum == SETSPEED) {
-    setSpeed(passValue);
-  } else if (methodNum == DRIVEDIST) {
-    direvD(passValue);
-  } else if (methodNum == ROTATEANGLE) {
-    rotateA(passValue);
-  } else if (methodNum == ROTATESPEED) {
-    rotateS(passValue);
+void DriveTrain::runMethod(Command command) {
+  if (command.getMethod() == SETSPEED) {
+    setSpeed(command.argPointer -> value);
+  } else if (command.getMethod() == DRIVEDIST) {
+    direvD(command.argPointer -> value);
+  } else if (command.getMethod() == ROTATEANGLE) {
+    rotateA(command.argPointer -> value);
+  } else if (command.getMethod() == ROTATESPEED) {
+    rotateS(command.argPointer -> value);
   }
 }
 
