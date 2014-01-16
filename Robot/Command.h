@@ -1,6 +1,6 @@
 typedef enum {
     DRIVE
-    } CommandType;
+    } SubsystemType;
     
 typedef enum {
     DRIVESPEED,
@@ -16,8 +16,8 @@ typedef struct {
 class Command {
     public:
         Command();
-        Command(CommandType subsystemType, int methodType, void * args);
-        void command(int subsystemEnum, int methodEnum, void * args);
+        Command(SubsystemType subsystemType, int methodType, void * args);
+        void command(SubsystemType subsystem, int methodEnum, void * args);
         int getSubsystem();
         int getMethod();
         void * argPointer; // Points to argument struct
