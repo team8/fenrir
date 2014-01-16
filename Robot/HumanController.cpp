@@ -28,14 +28,17 @@ HumanController::update() {
 
 HumanController::returnSpeedStick() {
   
+      float speed = speedStick.GetY(); 
+      return speed;
   
 }
 
 HumanController::returnTurnStick() {
-  
+      float turn = turnStick.GetX(); 
+      return turn
   
 }
 HumanController::returnOperatorStick() {
-  
+    //find what the operator stick actually does :D
   
 }  
