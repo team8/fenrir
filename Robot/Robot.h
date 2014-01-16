@@ -10,7 +10,6 @@ class Robot {
     private:
     
       DriveTrain driveTrain;
-      Command command;
       
     
     public:
