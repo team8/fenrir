@@ -20,14 +20,15 @@ typedef struct {
 
 class Command {
     public:
-        Command();
-        Command(SubsystemType subsystemType, int methodType, void * args);
+        Command(bool inAuto);
+        Command(bool inAuto, SubsystemType subsystemType, int methodType, void * args);
         void command(SubsystemType subsystem, int methodEnum, void * args);
         int getSubsystem();
         int getMethod();
+        bool getParent();
         void * argPointer; // Points to argument struct
     private:
         int subsystem; // Subsystem number. Defined in the commandType enum in Constants.h
         int method; // Method number. Defined in an enum in Constants.h
-        bool auto;
+        bool parent; // True if autonomous, false if teleop
 }
