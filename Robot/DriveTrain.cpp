@@ -28,6 +28,7 @@ void DriveTrain::runMethod(Command command) {
         } else if (command.getMethod() == ROTATESPEED) {
                 rotateS(command.args -> value);
         }
+        free(args);
 }
 
 void DriveTrain::update() {
