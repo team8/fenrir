@@ -24,7 +24,8 @@ class DriveTrain {
     DriveTrain();
     void driveD(double dist);
     void setSpeed(double spd);
-    void rotate(double angle);
+    void rotateA(double angle);
+    void rotateS(double speed);
     void update();
     void runMethod(Command newCommand);
 }
