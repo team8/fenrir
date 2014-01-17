@@ -1,16 +1,22 @@
 #include "Constants.h"
+
+/*SUBSYSTEM ENUM*/
+// These are the subsystems that you can send the Command to
 typedef enum {
     DRIVE,
     SHOOTER
-    } SubsystemType;
-    
+} SubsystemType;
+
+/*METHOD ENUMS*/
+// These are the methods available in the Drivetrain subsystem
 typedef enum {
     DRIVESPEED,
     DRIVEDIST,
     ROTATEANGLE,
     ROTATESPEED
-    } DriveMethod;
-    
+} DriveMethod;
+
+// These are the methods available in the Shooter subsystem
 typedef enum {
     SHOOT
 } ShooterMethod;
@@ -20,17 +26,22 @@ typedef union {
     ShooterArgs shooterArgs;
 } Args;
 
+/*METHOD ARGUMENTS*/
+// Arguments available for Drivetrain methods
 typedef struct {
     double driveSpeed;
     double driveDist;
-    doulbe rotAngle;
-    double rotSpeed;
+    double rotAngle;
+    float turnValue;
+    float speedValue;
 } DriveArgs;
 
+// Arguments available for Shooter methods
 typedef struct {
     
 } ShooterArgs;
 
+/*COMMAND OBJECT*/
 class Command {
     public:
         Command(bool inAuto);
@@ -41,7 +52,7 @@ class Command {
         bool getParent();
         void * argPointer; // Points to argument struct
     private:
-        int subsystem; // Subsystem number. Defined in the commandType enum in Constants.h
-        int method; // Method number. Defined in an enum in Constants.h
+        int subsystem; // Subsystem e command is to be sent to
+        int method; // Method to be run in the subsystem
         bool parent; // True if autonomous, false if teleop
 }
