@@ -62,10 +62,10 @@ void DriveTrain::setSpeed(double spd) {
 }
 
 //lets you rotate in place
-void DriveTrain::rotateA(double angle){
+void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
 	
-	bool isAutonomous = Command.getParent(); //true if call is from autonomous, false if command is from teleop
-
+	bool isAutonomous;
+	
 	if (isAutonomous == false){
 		//turns according to the joysticks
 	}
@@ -76,14 +76,14 @@ void DriveTrain::rotateA(double angle){
 
 //speed < 0 then turns LEFT
 //speed > 0 then turns RIGHT
-void DriveTrain::rotate(double speed) {
+void DriveTrain::rotateS(double speed, float turnValue, float speedValue) {
 	if (speed > 0) {
 		leftFrontVic.set(leftFrontVic.get()-speed);
 	   	leftBackVic.set(leftBackVic.get()-speed);
    		rightFrontVic.set(rightFrontVic.get()-speed);
    		rightBackVic.set(rightBackVic.get()-speed);
 	}    	
-	if (speed < 0) { 
+	if (speed < 0) {
 		leftFrontVic.set(leftFrontVic.get()+speed);
     	leftBackVic.set(leftBackVic.get()+speed);
     	rightFrontVic.set(rightFrontVic.get()+speed);
