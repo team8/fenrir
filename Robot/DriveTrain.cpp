@@ -76,7 +76,7 @@ void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
 
 //speed < 0 then turns LEFT
 //speed > 0 then turns RIGHT
-void DriveTrain::rotateS(double speed, float turnValue, float speedValue) {
+void DriveTrain::rotateS(double speed) {
 	if (speed > 0) {
 		leftFrontVic.set(leftFrontVic.get()-speed);
 	   	leftBackVic.set(leftBackVic.get()-speed);
@@ -89,4 +89,9 @@ void DriveTrain::rotateS(double speed, float turnValue, float speedValue) {
     	rightFrontVic.set(rightFrontVic.get()+speed);
     	rightBackVic.set(rightBackVic.get()+speed);
 	}    	
+	if (speed == 0){
+		printf("we're not turning anywhere, please give another value\n");
+		return 0;
+		
+	}
 }
