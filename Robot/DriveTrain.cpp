@@ -19,7 +19,6 @@ DriveTrain::DriveTrain() :
 
 //runs method according to what newCommand is received
 void DriveTrain::runMethod(Command newCommand) {
-	command = newCommand;
         DriveArgs * args = (DriveArgs*) newCommand.argPointer;
         if (command.getMethod() == SETSPEED) {
                 setSpeed(args -> driveSpeed);
@@ -50,7 +49,7 @@ void DriveTrain::setSpeed(double spd){
 }
 
 //lets you rotate in place
-void DriveTrain::rotate(double angle){
+void DriveTrain::rotateA(double angle){
 	bool mode = Command.getParent(); //true if call is from autonomous, false if command is from teleop
 	if(mode==false){
 		//turns the specified number of degrees
@@ -58,4 +57,21 @@ void DriveTrain::rotate(double angle){
 	else {
 		//turns according to the joysticks
 	}
+}
+
+//spd < 0 then turns LEFT
+//spd > 0 then turns RIGHT
+void DriveTrain::rotateS(double speed) {
+	if(speed >0) {
+		leftFrontVic.set(-spd);
+    	leftBackVic.set(-spd);
+    	rightFrontVic.set(-spd);
+    	rightBackVic.set(-spd);
+	}    	
+		if(speed < 0) {
+		leftFrontVic.set(spd);
+    	leftBackVic.set(spd);
+    	rightFrontVic.set(spd);
+    	rightBackVic.set(spd);
+	}    	
 }
