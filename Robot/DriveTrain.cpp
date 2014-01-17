@@ -63,12 +63,14 @@ void DriveTrain::setSpeed(double spd) {
 
 //lets you rotate in place
 void DriveTrain::rotateA(double angle){
-	bool mode = Command.getParent(); //true if call is from autonomous, false if command is from teleop
-	if (mode == false){
-		//turns the specified number of degrees
+	
+	bool isAutonomous = Command.getParent(); //true if call is from autonomous, false if command is from teleop
+
+	if (isAutonomous == false){
+		//turns according to the joysticks
 	}
 	else {
-		//turns according to the joysticks
+		//turns the specified number of degrees
 	}
 }
 
