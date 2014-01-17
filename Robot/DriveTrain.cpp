@@ -36,7 +36,20 @@ void DriveTrain::update() {
   
 }
 void DriveTrain::driveD(double dist) {
-        
+	//to be changed
+	float m_P = 0.1;
+	float m_I = 0.001;
+	float m_D = 0.0;
+	//float m_tolerance = set something;
+	float m_error = dist;
+	/*
+	while(current error > tolerance){
+		calculate value to be written to victors
+		set victors
+	}
+	if (current error < tolerance){ return;}
+	*/
+	
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
