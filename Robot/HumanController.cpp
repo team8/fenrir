@@ -1,32 +1,31 @@
 #include "HumanController.h"
+/* Command example - How to issue commands
+  void * argPointer = malloc(sizeof(DriveArgs)); //this lets you access the drive args stored in command
+  argPointer -> variable in DriveArgs = Enter parameter here; //this lets you set a variable to what you want
+  robot.setCommand(Command command(false, DRIVE, Method, argPointer)); //replace Method with appropriate method
+*/
 
 HumanController::HumanController(Robot *robotPointer)
-
-  //
-
   operatorStick(PORT_OPERATOR);
   turnStick(PORT_TURN);
   speedStick(PORT_SPEED);
-  
 {  
   this-> robot = robotPointer;
 }
 
-/* Command example
-   void * argPointer = malloc(sizeof(DriveArgs));
-  argPointer -> value = Enter any number here;
-  robot.setCommand(Command command(false, DRIVE, Method, argPointer)); // Replace Method with the method. First value must be false
-*/
 
+
+//This is the part that loops repeatedly, issuing commands
 HumanController::update() {
-    //Joystick.GetY() returns value b/w -1 and 1
     
-    //takes the input from the joysticks 
-    float speed = speedStick.GetY(); 
-    float turn = turnStick.GetX(); 
-    float input = speed - turn;
+    //Here call the appropriate function from drive train
     
-    //here call the appropriate function from drive train
+    void * argPointer = malloc(sizeof(DriveArgs));
+    
+    argPointer -> speedValue = HumanController.getSpeedStick();
+    argPointer -> turnValue = HumanController.getTurnStick();
+    robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
+    
 }
 
 HumanController::getSpeedStick() {
@@ -37,11 +36,6 @@ HumanController::getSpeedStick() {
 
 HumanController::getTurnStick() {
     float turn = turnStick.GetX();
-      
-    void * argPointer = malloc(sizeof(DriveArgs));
-    argPointer -> value = /*Enter parameter here*/;
-    robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
-      
     return turn;
 }
 
