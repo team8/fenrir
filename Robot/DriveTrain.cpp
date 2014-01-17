@@ -59,19 +59,19 @@ void DriveTrain::rotateA(double angle){
 	}
 }
 
-//spd < 0 then turns LEFT
-//spd > 0 then turns RIGHT
-void DriveTrain::rotateS(double speed) {
+//speed < 0 then turns LEFT
+//speed > 0 then turns RIGHT
+void DriveTrain::rotate(double speed) {
 	if(speed >0) {
-		leftFrontVic.set(-spd);
-    	leftBackVic.set(-spd);
-    	rightFrontVic.set(-spd);
-    	rightBackVic.set(-spd);
+		leftFrontVic.set(leftFrontVic.get()-speed);
+	   	leftBackVic.set(leftBackVic.get()-speed);
+   		rightFrontVic.set(rightFrontVic.get()-speed);
+   		rightBackVic.set(rightBackVic.get()-speed);
 	}    	
-		if(speed < 0) {
-		leftFrontVic.set(spd);
-    	leftBackVic.set(spd);
-    	rightFrontVic.set(spd);
-    	rightBackVic.set(spd);
+	if(speed < 0) {
+		leftFrontVic.set(leftFrontVic.get()+speed);
+    	leftBackVic.set(leftBackVic.get()+speed);
+    	rightFrontVic.set(rightFrontVic.get()+speed);
+    	rightBackVic.set(rightBackVic.get()+speed);
 	}    	
 }
