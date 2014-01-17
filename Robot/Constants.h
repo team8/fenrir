@@ -29,4 +29,4 @@
 #define PORT_SHOOTER_VIC_3 0
 #define PORT_SHOOTER_VIC_4 0
 
-enum ShooterState {EMTPY, LOADED, WARMUP, AIMING, SHOOTING, RECOVERING};
+enum ShooterState {EMTPY, LOADED, AIMING, PRIMED, SHOOTING}; //aiming also includes warming up the motors
