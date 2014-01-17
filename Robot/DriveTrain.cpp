@@ -68,7 +68,7 @@ void DriveTrain::rotate(double speed) {
    		rightFrontVic.set(rightFrontVic.get()-speed);
    		rightBackVic.set(rightBackVic.get()-speed);
 	}    	
-	if (speed < 0) {
+	if (speed < 0) { 
 		leftFrontVic.set(leftFrontVic.get()+speed);
     	leftBackVic.set(leftBackVic.get()+speed);
     	rightFrontVic.set(rightFrontVic.get()+speed);
