@@ -29,21 +29,19 @@ HumanController::update() {
     //here call the appropriate function from drive train
 }
 
-HumanController::returnSpeedStick() {
-  
+HumanController::getSpeedStick() {
       float speed = speedStick.GetY(); 
       return speed;
-  
 }
 
-HumanController::returnTurnStick() {
-  void * argPointer = malloc(sizeof(DriveArgs));
-  argPointer -> value = /*Enter parameter here*/;
-  robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
+
+HumanController::getTurnStick() {
       float turn = turnStick.GetX(); 
       return turn;
 }
-HumanController::returnOperatorStick() {
+
+
+HumanController::getOperatorStick() {
     //find what the operator stick actually does :D
   
 }  
