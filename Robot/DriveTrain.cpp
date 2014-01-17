@@ -9,8 +9,8 @@ DriveTrain::DriveTrain() :
         rightBackVic(PORT_DRIVE_VIC_4),
         
         // Encoders
-        leftEnc(PORT_ENCODER_RIGHT), 
-        rightEnc(PORT_ENCODER_LEFT) 
+        leftEnc(PORT_ENCODER_LEFT), 
+        rightEnc(PORT_ENCODER_RIGHT) 
         
         // Needs speed controller stuff
 {
