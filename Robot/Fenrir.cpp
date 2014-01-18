@@ -1,15 +1,17 @@
 #include "Constants.h"
+#include "Robot.h"
+#include "HumanController.h"
+#include "AutonomousController.h"
 // fenrir.cpp
 
 class Fenrir : public IterativeRobot {
  private:
          HumanController humanController;
-         AutonomousMode mode;
          AutonomousController autoController;
          Robot robot;
 
  public: //need to input stuff based on the names of stuff
-
+        Fenrir();
  //make sure we call the methods like this.
   void RobotInit();
   void AutonomousInit();
@@ -26,8 +28,7 @@ class Fenrir : public IterativeRobot {
 
 Fenrir::Fenrir() :
         humanController(&robot),
-        mode(DEFAULT),
-        autoController(&robot, mode),
+        autoController(&robot),
         robot()
 {
 

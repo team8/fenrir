@@ -10,8 +10,10 @@
 #define PORT_DRIVE_VIC_4 0
 
 //ports for drive train encoders
-#define PORT_ENCODER_RIGHT 0
-#define PORT_ENCODER_LEFT 0
+#define PORT_ENCODER_RIGHT_A 0
+#define PORT_ENCODER_RIGHT_B 0
+#define PORT_ENCODER_LEFT_A 0
+#define PORT_ENCODER_LEFT_B 0
 
 //ports for vision
 

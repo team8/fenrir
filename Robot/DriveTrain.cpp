@@ -10,10 +10,11 @@ DriveTrain::DriveTrain() :
         rightBackVic(PORT_DRIVE_VIC_4),
         
         // Encoders
-        leftEnc(PORT_ENCODER_LEFT), 
-        rightEnc(PORT_ENCODER_RIGHT) 
+        leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B), 
+        rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
         
         // Speed controller stuff
+		encCntrlr(0.1, 0.1, 0.1, &leftEnc, &leftBackVic)
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
@@ -51,8 +52,8 @@ void DriveTrain::driveD(double dist) {
 	float m_D = 0.0;
 	//float m_tolerance = set something;
 	float m_error = dist;
-	leftEnc.SetPIDSourceParameter(kdistance);
-	rightEnc.SetPIDSourceParameter(kdistance);
+	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	/*
 	while(current error > tolerance){
 		calculate value to be written to victors
