@@ -15,9 +15,11 @@ class DriveTrain {
     Encoder leftEnc;
     Encoder rightEnc;
     
+    PIDController encCntrlr;
+	
     Command command;
     
-    PIDController encoderCntrl();
+    
     
     // Needs speed controller stuff
     
