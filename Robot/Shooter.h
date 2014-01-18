@@ -29,3 +29,4 @@ class Shooter {
 		Shooter();
 		void runCommand(RobotCommand command);
 };
+
