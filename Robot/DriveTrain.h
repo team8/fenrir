@@ -12,12 +12,13 @@ class DriveTrain {
     Victor leftBackVic;
     Victor rightFrontVic;
     Victor rightBackVic;
+    Gyro gyroscope;
     
     // Encoders
     Encoder leftEnc;
     Encoder rightEnc;
     
-    PIDController encCntrlr;
+    PIDController controller;
 
     // Needs speed controller stuff
     

@@ -8,13 +8,14 @@ DriveTrain::DriveTrain() :
         leftBackVic(PORT_DRIVE_VIC_2),
         rightFrontVic(PORT_DRIVE_VIC_3),
         rightBackVic(PORT_DRIVE_VIC_4),
+        gyroscope((uint32_t)PORT_GYRO),
         
         // Encoders
         leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B), 
         rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
         
         // Speed controller stuff
-		encCntrlr(0.1, 0.1, 0.1, &leftEnc, &leftBackVic)
+		controller(0.1, 0.1, 0.1, &leftEnc, &leftBackVic)
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
@@ -82,14 +83,8 @@ void DriveTrain::setSpeed(double spd) {
 //lets you rotate in place
 void DriveTrain::rotateA(double angle){
 	
-	bool isAutonomous;
+
 	
-	if (isAutonomous == false){ //Teleop mode
-		//turns according to the joysticks
-	}
-	else { //Autonomous mode
-		//turns the specified number of degrees
-	}
 }
 //Sets speed of rotation
 //speed < 0 then turns LEFT

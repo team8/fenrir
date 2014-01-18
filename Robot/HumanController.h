@@ -1,6 +1,7 @@
 #ifndef HUMANCONTROLLER_H
 #define HUMANCONTROLLER_H
 #include "Constants.h"
+
 #include "Robot.h"
 #include <WPILib.h>
 
@@ -20,6 +21,7 @@ class HumanController {
   Joystick speedStick;
   Joystick turnStick;
   Joystick operatorStick;
+
 
 };
 #endif

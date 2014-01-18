@@ -7,9 +7,11 @@
 
 HumanController::HumanController(Robot *robotPointer):
 
-  operatorStick(PORT_OPERATOR),
-  turnStick(PORT_TURN),
-  speedStick(PORT_SPEED)
+	speedStick(PORT_SPEED),
+	turnStick(PORT_TURN),
+	operatorStick(PORT_OPERATOR)
+
+
 {  
   this-> robot = robotPointer;
 } 

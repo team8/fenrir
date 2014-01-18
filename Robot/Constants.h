@@ -15,6 +15,10 @@
 #define PORT_ENCODER_LEFT_A 0
 #define PORT_ENCODER_LEFT_B 0
 
+//ports for drive train gyroscopes
+
+#define PORT_GYRO 0
+
 //ports for vision
 
 //ports for shooter encoders
