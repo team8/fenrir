@@ -51,6 +51,8 @@ void DriveTrain::driveD(double dist) {
 	float m_D = 0.0;
 	//float m_tolerance = set something;
 	float m_error = dist;
+	leftEnc.SetPIDSourceParameter(kdistance);
+	rightEnc.SetPIDSourceParameter(kdistance);
 	/*
 	while(current error > tolerance){
 		calculate value to be written to victors
