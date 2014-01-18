@@ -39,6 +39,9 @@ void DriveTrain::runMethod(RobotCommand newCommand) {
 void DriveTrain::update() {
   
 }
+//Drives robot certain distance
+//Will use PID to determine output for victors
+//Uses encoders
 void DriveTrain::driveD(double dist) {
 	
 	//to be changed
@@ -48,6 +51,8 @@ void DriveTrain::driveD(double dist) {
 	float m_D = 0.0;
 	//float m_tolerance = set something;
 	float m_error = dist;
+	leftEnc.SetPIDSourceParameter(kdistance);
+	rightEnc.SetPIDSourceParameter(kdistance);
 	/*
 	while(current error > tolerance){
 		calculate value to be written to victors
@@ -85,7 +90,7 @@ void DriveTrain::rotateA(double angle){
 		//turns the specified number of degrees
 	}
 }
-
+//Sets speed of rotation
 //speed < 0 then turns LEFT
 //speed > 0 then turns RIGHT
 void DriveTrain::rotateS(double speed) {
