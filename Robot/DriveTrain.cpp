@@ -11,8 +11,12 @@ DriveTrain::DriveTrain() :
         // Encoders
         leftEnc(PORT_ENCODER_LEFT), 
         rightEnc(PORT_ENCODER_RIGHT) 
+        //leftEnc.SetDistancePerPulse(not known at the moment);
+        //rightEnc.SetDistancePerPulse(not known at the moment);
+        leftEnc.Start();
+        rightEnc.Start();
         
-        // Needs speed controller stuff
+        // Speed controller stuff
 {
         
 }
@@ -36,7 +40,9 @@ void DriveTrain::update() {
   
 }
 void DriveTrain::driveD(double dist) {
+	
 	//to be changed
+	//May use PIDController class
 	float m_P = 0.1;
 	float m_I = 0.001;
 	float m_D = 0.0;
@@ -45,20 +51,26 @@ void DriveTrain::driveD(double dist) {
 	/*
 	while(current error > tolerance){
 		calculate value to be written to victors
-		set victors
+		DriveTrain::setSpeed(result);
+		leftEnc.GetDistance();
+		rightEnc.GetDistance();
 	}
-	if (current error < tolerance){ return;}
+	if (current error < tolerance){ 
+		leftEnc.Reset();
+		rightEnc.Reset();
+		return;
+	}
 	*/
 	
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
-//this method only makes the robot go staight, sorry guys.
-void DriveTrain::setSpeed(double spd) {
-    leftFrontVic.set(-spd);
-    leftBackVic.set(-spd);
-    rightFrontVic.set(spd);
-    rightBackVic.set(spd);
+//Makes robot go straight
+void DriveTrain::SetSpeed(double spd) {
+    leftFrontVic.Set(-spd);
+    leftBackVic.Set(-spd);
+    rightFrontVic.Set(spd);
+    rightBackVic.Set(spd);
 }
 
 //lets you rotate in place
@@ -66,10 +78,10 @@ void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
 	
 	bool isAutonomous;
 	
-	if (isAutonomous == false){
+	if (isAutonomous == false){ //Teleop mode
 		//turns according to the joysticks
 	}
-	else {
+	else { //Autonomous mode
 		//turns the specified number of degrees
 	}
 }
