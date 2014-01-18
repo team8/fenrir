@@ -16,8 +16,11 @@
 #define PORT_ENCODER_LEFT_B 0
 
 //ports for drive train gyroscopes
-
 #define PORT_GYRO 0
+
+//default speeds for DriveTrain
+
+#define DEFAULT_AUTO_ROTATE 0.5
 
 //ports for vision
 
