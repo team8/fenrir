@@ -17,14 +17,19 @@ class DriveTrain {
     
     Command command;
     
+    PIDController encoderCntrl();
+    
     // Needs speed controller stuff
     
     public:
     
     DriveTrain();
+    //Takes input of distance to destination
+    //Will use PID or PIDControllers to calculate input for victors. 
+    //Uses encoders as input for distance from destination
     void driveD(double dist);
-    //takes a speed between 1 through -1 as a parameter and sets all victors to this speed, this will set it to go
-    //straight only because all the victors are at the same speed
+    //Takes input of -1 to 1 and sets speed of victors. 
+    //Only drives straight
     void setSpeed(double spd);
     //this is a work in progress, right now, it doesn't do anything, what we want it to do is call rotateS and rotate 
     //until the target angle has been reached. 
