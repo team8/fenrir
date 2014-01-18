@@ -39,6 +39,9 @@ void DriveTrain::runMethod(Command newCommand) {
 void DriveTrain::update() {
   
 }
+//Drives robot certain distance
+//Will use PID to determine output for victors
+//Uses encoders
 void DriveTrain::driveD(double dist) {
 	
 	//to be changed
@@ -85,7 +88,7 @@ void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
 		//turns the specified number of degrees
 	}
 }
-
+//Sets speed of rotation
 //speed < 0 then turns LEFT
 //speed > 0 then turns RIGHT
 void DriveTrain::rotateS(double speed) {
