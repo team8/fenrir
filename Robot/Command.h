@@ -2,44 +2,44 @@
 
 /*SUBSYSTEM ENUM*/
 // These are the subsystems that you can send the Command to
-typedef enum {
+typedef enum SubsystemType {
     DRIVE,
     SHOOTER
-} SubsystemType;
+}; 
 
 /*METHOD ENUMS*/
 // These are the methods available in the Drivetrain subsystem
-typedef enum {
+typedef enum DriveMethod {
     DRIVESPEED,
     DRIVEDIST,
     ROTATEANGLE,
     ROTATESPEED
-} DriveMethod;
+};
 
 // These are the methods available in the Shooter subsystem
-typedef enum {
+typedef enum ShooterMethod {
     SHOOT
-} ShooterMethod;
+};
 
-typedef union {
+typedef union Args {
     DriveArgs driveArgs;
     ShooterArgs shooterArgs;
-} Args;
+};
 
 /*METHOD ARGUMENTS*/
 // Arguments available for Drivetrain methods
-typedef struct {
+typedef struct DriveArgs {
     double driveSpeed;
     double driveDist;
     double rotAngle;
     float turnValue;
     float speedValue;
-} DriveArgs;
+};
 
 // Arguments available for Shooter methods
-typedef struct {
+typedef struct ShooterArgs {
     
-} ShooterArgs;
+};
 
 /*COMMAND OBJECT*/
 class Command {
