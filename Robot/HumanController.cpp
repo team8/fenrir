@@ -5,45 +5,42 @@
   robot.setCommand(Command command(false, DRIVE, Method, argPointer)); //replace Method with appropriate method
 */
 
-HumanController::HumanController(Robot *robotPointer):
-
-  operatorStick(PORT_OPERATOR),
-  turnStick(PORT_TURN),
-  speedStick(PORT_SPEED)
+HumanController::HumanController(Robot *robotPointer)
+  operatorStick(PORT_OPERATOR);
+  turnStick(PORT_TURN);
+  speedStick(PORT_SPEED);
 {  
   this-> robot = robotPointer;
-} 
+}
 
 
 
 //This is the part that loops repeatedly, issuing commands
-void HumanController::update(){
+HumanController::update() {
     
     //Here call the appropriate function from drive train
     
     void * argPointer = malloc(sizeof(DriveArgs));
     
-    ((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
-    ((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
-    RobotCommand command(false, DRIVE, DRIVESPEED, argPointer);
-    robot -> setCommand(command);
+    argPointer -> speedValue = HumanController.getSpeedStick();
+    argPointer -> turnValue = HumanController.getTurnStick();
+    robot.setCommand(Command command(false, DRIVE, /*Enter method here*/, argPointer));
     
 }
 
-float HumanController::getSpeedStick(){
+HumanController::getSpeedStick() {
       float speed = speedStick.GetY(); 
       return speed;
 }
 
 
-float HumanController::getTurnStick() {
+HumanController::getTurnStick() {
     float turn = turnStick.GetX();
     return turn;
 }
 
 
-float HumanController::getOperatorStick() {
+HumanController::getOperatorStick() {
     //find what the operator stick actually does :D
-	float something = 0.0;
-	return something;
+  
 }  

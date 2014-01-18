@@ -1,31 +1,31 @@
 #include "Constants.h"
-#include "RobotCommand.h"
+#include "Command.h"
 
-RobotCommand::RobotCommand(bool inAuto) { // inAuto should be true if the Command is sent from autonomous, otherwise it is false
+Command::Command(bool inAuto) { // inAuto should be true if the Command is sent from autonomous, otherwise it is false
     parent = inAuto;
 }
 
-RobotCommand::RobotCommand(bool inAuto, SubsystemType subsystemEnum, int methodEnum, void * args) {
+Command::Command(bool inAuto, SubsystemType subsystemEnum, int methodEnum, void * args) {
     subsystem = subsystemEnum;
     method = methodEnum;
     argPointer = args;
     parent = inAuto;
 }
 
-void RobotCommand::command(SubsystemType subsystemEnum, int methodEnum, void * args){ // Use one of the command type enums here
+void command(SubsystemType subsystemEnum, int methodEnum, void * args){ // Use one of the command type enums here
     subsystem = subsystemEnum;
     method = methodEnum;
     argPointer = args;
 }
 
-SubsystemType RobotCommand::getSubsystem() {
+int getSubsystem() {
     return subsystem;
 }
 
-int RobotCommand::getMethod() {
+int getMethod() {
     return method;
 }
 
-bool RobotCommand::getParent() {
+bool getParent() {
     return parent;
 }

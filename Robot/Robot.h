@@ -15,9 +15,9 @@ class Robot {
       Shooter shooter;
     
     public:
-    Robot();
- //   void setSpeed(float s);
-   // void rotateSpeed(float s);
+    
+    void setSpeed(float s);
+    void rotateSpeed(float s);
     void setCommand(RobotCommand newCommand);
     
 };
