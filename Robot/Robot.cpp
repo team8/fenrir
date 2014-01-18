@@ -1,22 +1,15 @@
 //robot.cpp
 #include "Robot.h"
 
-Robot::Robot() :
-
+Robot::Robot()
 {
 
 }
 
-Robot::setSpeed(){
-  
-  
-  
-}
-
-void Robot::setCommand(Command command) {
+void Robot::setCommand(RobotCommand command) {
   if (command.getSubsystem() == DRIVE) {
     driveTrain.runMethod(command);
   } else if(command.getSubsystem() == SHOOTER) {
-    shooter.runMethod(command);
+   // shooter.runMethod(command);
   }
 }
