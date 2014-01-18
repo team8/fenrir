@@ -18,16 +18,7 @@ class DriveTrain {
     Encoder rightEnc;
     
     PIDController encCntrlr;
-<<<<<<< HEAD
-    Command command;
-    
-=======
-	
-    Command command;
-    
-    
-    
->>>>>>> 5149425dadcfc59572c9a34b5dab8aafd2c289a0
+
     // Needs speed controller stuff
     
     public:
