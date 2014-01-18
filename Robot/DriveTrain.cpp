@@ -78,9 +78,9 @@ void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
 //speed > 0 then turns RIGHT
 void DriveTrain::rotateS(double speed) {
 
-		leftFrontVic.Set(leftFrontVic.Get()-speed);
-	   	leftBackVic.Set(leftBackVic.Get()-speed);
-   		rightFrontVic.Set(rightFrontVic.Get()-speed);
-   		rightBackVic.Set(rightBackVic.Get()-speed);
+	leftFrontVic.Set(leftFrontVic.Get()-speed);
+	leftBackVic.Set(leftBackVic.Get()-speed);
+   	rightFrontVic.Set(rightFrontVic.Get()-speed);
+   	rightBackVic.Set(rightBackVic.Get()-speed);
 
 }
