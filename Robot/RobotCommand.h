@@ -1,58 +1,61 @@
+#ifndef COMMAND_H
+#define COMMAND_H
 #include "Constants.h"
-
 /*SUBSYSTEM ENUM*/
 // These are the subsystems that you can send the Command to
-typedef enum SubsystemType {
+typedef enum {
     DRIVE,
     SHOOTER
-}; 
+} SubsystemType; 
 
 /*METHOD ENUMS*/
 // These are the methods available in the Drivetrain subsystem
-typedef enum DriveMethod {
+typedef enum {
     DRIVESPEED,
     DRIVEDIST,
     ROTATEANGLE,
-    ROTATESPEED
-};
+    ROTATESPEED,
+    SETSPEED,
+} DriveMethod;
 
 // These are the methods available in the Shooter subsystem
 typedef enum ShooterMethod {
     SHOOT
 };
 
-typedef union Args {
-    DriveArgs driveArgs;
-    ShooterArgs shooterArgs;
-};
-
 /*METHOD ARGUMENTS*/
 // Arguments available for Drivetrain methods
-typedef struct DriveArgs {
+typedef struct {
     double driveSpeed;
     double driveDist;
     double rotAngle;
     float turnValue;
     float speedValue;
-};
+} DriveArgs;
 
 // Arguments available for Shooter methods
-typedef struct ShooterArgs {
+typedef struct {
     
-};
+} ShooterArgs;
+
+typedef union {
+    DriveArgs driveArgs;
+    ShooterArgs shooterArgs;
+} Args;
 
 /*COMMAND OBJECT*/
-class Command {
+class RobotCommand {
     public:
-        Command(bool inAuto);
-        Command(bool inAuto, SubsystemType subsystemType, int methodType, void * args);
+        RobotCommand(bool inAuto);
+        RobotCommand(bool inAuto, SubsystemType subsystemType, int methodType, void * args);
         void command(SubsystemType subsystem, int methodEnum, void * args);
-        int getSubsystem();
+        SubsystemType getSubsystem();
         int getMethod();
         bool getParent();
         void * argPointer; // Points to argument struct
     private:
-        int subsystem; // Subsystem e command is to be sent to
+        SubsystemType subsystem; // Subsystem e command is to be sent to
         int method; // Method to be run in the subsystem
         bool parent; // True if autonomous, false if teleop
-}
+};
+#endif

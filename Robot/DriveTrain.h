@@ -1,6 +1,8 @@
+#ifndef DRIVETRAIN_H
+#define DRIVETRAIN_H
 #include "Constants.h"
 #include <WPILib.h>
-#include "Command.h"
+#include "RobotCommand.h"
 
 class DriveTrain {
     private:
@@ -14,9 +16,7 @@ class DriveTrain {
     // Encoders
     Encoder leftEnc;
     Encoder rightEnc;
-    
-    Command command;
-    
+        
     PIDController encoderCntrl();
     
     // Needs speed controller stuff
@@ -39,5 +39,6 @@ class DriveTrain {
     //can someone check the logic to this? thanks
     void rotateS(double speed);
     void update();
-    void runMethod(Command newCommand);
-}
+    void runMethod(RobotCommand newCommand);
+};
+#endif

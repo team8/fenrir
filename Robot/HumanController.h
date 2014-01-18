@@ -1,3 +1,5 @@
+#ifndef HUMANCONTROLLER_H
+#define HUMANCONTROLLER_H
 #include "Constants.h"
 
 class HumanController {
@@ -18,5 +20,5 @@ class HumanController {
   Joystick operatorStick;
 
 };
-
+#endif
 
