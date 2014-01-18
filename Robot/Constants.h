@@ -35,5 +35,14 @@
 #define PORT_SHOOTER_VIC_2 0
 #define PORT_SHOOTER_VIC_3 0
 #define PORT_SHOOTER_VIC_4 0
+#define PORT_ACCUMULATOR_VIC_5 0
+#define PORT_ACCUMULATOR_VIC_6 0
+#define PORT_ACCUMULATOR_VIC_7 0
+
+//ports for accumulator encoders
+#define PORT_ACCUMULATOR_ENC_1A 0
+#define PORT_ACCUMULATOR_ENC_1B 0
+#define PORT_ACCUMULATOR_ENC_2A 0
+#define PORT_ACCUMULATOR_ENC_2B 0
 
  //aiming also includes warming up the motors

@@ -39,6 +39,7 @@ class DriveTrain {
     //takes current speed, and subtracts speed one one side and increases on another. -1 is left 1 is right.
     //can someone check the logic to this? thanks
     void rotateS(double speed);
+    void stopRotate(double speed);
     void update();
     void runMethod(RobotCommand newCommand);
 };
