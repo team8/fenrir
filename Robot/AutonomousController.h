@@ -1,10 +1,12 @@
+#ifndef AUTONOMOUSCONTROLLER_H
+#define	AUTONOMOUSCONTROLLER_H
 #include "Constants.h"
-#include "Command.h"
+#include "RobotCommand.h"
+#include "Robot.h"
 
 class AutonomousController {
 
  public:
-
   AutonomousController(Robot *robotPointer);
   void update();
   void startTimer();
@@ -16,7 +18,8 @@ class AutonomousController {
   void drive();
   void stop();
   bool shoot();
-  void sendCommand(Command command);
+  void sendCommand(RobotCommand command);
   
   bool targetReached;
 };
+#endif

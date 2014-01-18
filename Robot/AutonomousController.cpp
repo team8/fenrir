@@ -9,25 +9,26 @@ AutonomousController::AutonomousController(Robot *robotPointer)
   this -> robot = robotPointer;
 }  
 
-AutonomousController::startTimer(){
+void AutonomousController::startTimer(){
   
-  time.start();
+  time.Start();
 }
 
-AutonomousController::drive(){
+void AutonomousController::drive(){
   void * argPointer = malloc(sizeof(DriveArgs));
-  argPointer -> /*parameter*/ = /*Enter any number here*/;
-  robot.setCommand(Command command(true, DRIVE, /*Method*/, argPointer));
+  RobotCommand command(true, DRIVE, DRIVESPEED, argPointer);
+  robot->setCommand(command);
   //we'll add this later
 }
 
-AutonomousController::stop(){
+void AutonomousController::stop(){
   void * argPointer = malloc(sizeof(DriveArgs));
-  argPointer -> driveSpeed = 0;
-  robot.setCommand(Command command(true, DRIVE, DRIVESPEED, argPointer));
+  ((DriveArgs *)argPointer) -> driveSpeed = 0;
+  RobotCommand command(true, DRIVE, DRIVESPEED, argPointer);
+  robot->setCommand(command);
   //we'll add this later
 }
 
-AutonomousController::update(){
+void AutonomousController::update(){
   //we'll add this later
 }

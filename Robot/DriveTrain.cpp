@@ -1,3 +1,4 @@
+#include "Constants.h"
 #include "DriveTrain.h"
 
 DriveTrain::DriveTrain() :
@@ -11,26 +12,25 @@ DriveTrain::DriveTrain() :
         // Encoders
         leftEnc(PORT_ENCODER_LEFT), 
         rightEnc(PORT_ENCODER_RIGHT) 
-        //leftEnc.SetDistancePerPulse(not known at the moment);
-        //rightEnc.SetDistancePerPulse(not known at the moment);
-        leftEnc.Start();
-        rightEnc.Start();
         
         // Speed controller stuff
 {
-        
+    //leftEnc.SetDistancePerPulse(not known at the moment);
+    //rightEnc.SetDistancePerPulse(not known at the moment);
+    leftEnc.Start();
+    rightEnc.Start();
 }
 
 //runs method according to what newCommand is received
-void DriveTrain::runMethod(Command newCommand) {
+void DriveTrain::runMethod(RobotCommand newCommand) {
         DriveArgs* args = (DriveArgs*) newCommand.argPointer;
-        if (command.getMethod() == SETSPEED) {
+        if (newCommand.getMethod() == SETSPEED) {
                 setSpeed(args -> driveSpeed);
         }
-        else if (command.getMethod() == DRIVEDIST) {
+        else if (newCommand.getMethod() == DRIVEDIST) {
                 driveD(args -> driveDist);
         }
-        else if (command.getMethod() == ROTATEANGLE) {
+        else if (newCommand.getMethod() == ROTATEANGLE) {
                 rotateA(args -> rotAngle);
         }
         free(args);
@@ -71,7 +71,7 @@ void DriveTrain::driveD(double dist) {
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
 //Makes robot go straight
-void DriveTrain::SetSpeed(double spd) {
+void DriveTrain::setSpeed(double spd) {
     leftFrontVic.Set(-spd);
     leftBackVic.Set(-spd);
     rightFrontVic.Set(spd);
@@ -79,7 +79,7 @@ void DriveTrain::SetSpeed(double spd) {
 }
 
 //lets you rotate in place
-void DriveTrain::rotateA(double angle,float turnValue, float speedValue){
+void DriveTrain::rotateA(double angle){
 	
 	bool isAutonomous;
 	

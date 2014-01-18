@@ -1,9 +1,10 @@
-#include <WIPLib.h>
+#ifndef ROBOT_H
+#define ROBOT_H
+#include <WPILib.h>
 #include "Constants.h"
-#include "AutonomousController.h"
 #include "DriveTrain.h"
-#include "HumanController.h"
-#include "Command.h"
+#include "Shooter.h"
+#include "RobotCommand.h"
 
 
 class Robot {
@@ -17,6 +18,7 @@ class Robot {
     
     void setSpeed(float s);
     void rotateSpeed(float s);
-    void setCommand(Command newCommand);
+    void setCommand(RobotCommand newCommand);
     
-}
+};
+#endif

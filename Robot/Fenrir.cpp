@@ -76,3 +76,5 @@ void Fenrir::TestInit(){
 void Fenrir::TestPeriodic(){
  
 }
+
+START_ROBOT_CLASS(Fenrir);
