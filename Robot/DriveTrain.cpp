@@ -42,6 +42,11 @@ void DriveTrain::runMethod(RobotCommand newCommand) {
 }
 
 void DriveTrain::update() {
+	
+	leftFrontVic.Set();
+	leftBackVic.Set();
+	rightFrontVic.Set();
+	rightBackVic.Set();
   
 }
 //Drives robot certain distance
@@ -67,10 +72,9 @@ void DriveTrain::driveD(float dist) {
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
-    leftFrontVic.Set(-spd);
-    leftBackVic.Set(-spd);
-    rightFrontVic.Set(spd);
-    rightBackVic.Set(spd);
+	
+	targetSpeed = spd;
+
 }
 
 //lets you rotate in place
@@ -89,11 +93,8 @@ void DriveTrain::rotateA(double angle){
 //speed < 0 then turns LEFT
 //speed > 0 then turns RIGHT
 void DriveTrain::rotateS(double speed) {
-
-	leftFrontVic.Set(leftFrontVic.Get()-speed);
-	leftBackVic.Set(leftBackVic.Get()-speed);
-   	rightFrontVic.Set(rightFrontVic.Get()-speed);
-   	rightBackVic.Set(rightBackVic.Get()-speed);
+	
+	rotateSpeed = speed;
 
 }
 

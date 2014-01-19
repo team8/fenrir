@@ -15,7 +15,7 @@ typedef enum {
 class DriveTrain {
     private:
     
-    // Victors
+    // Victors 
     Victor leftFrontVic;
     Victor leftBackVic;
     Victor rightFrontVic;
@@ -32,7 +32,9 @@ class DriveTrain {
     
     //target speeds 
     
-    int targetSpeed;
+    double targetSpeed;
+    double rotateSpeed;
+    
     
     public:
     
