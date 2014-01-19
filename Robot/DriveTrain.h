@@ -4,6 +4,14 @@
 #include <WPILib.h>
 #include "RobotCommand.h"
 
+typedef enum {
+	DRIVE_DIST,
+	DRIVE_SPEED,
+	TURN_ANGLE
+	
+	
+}driveState;
+
 class DriveTrain {
     private:
     
@@ -17,10 +25,14 @@ class DriveTrain {
     // Encoders
     Encoder leftEnc;
     Encoder rightEnc;
-    
-    PIDController controller;
 
-    // Needs speed controller stuff
+    //PID Controllers
+    PIDController leftController;
+    PIDController rightController;
+    
+    //target speeds 
+    
+    int targetSpeed;
     
     public:
     

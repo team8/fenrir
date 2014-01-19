@@ -15,20 +15,22 @@ DriveTrain::DriveTrain() :
         rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
         
         // Speed controller stuff
-		controller(0.1, 0.1, 0.1, &leftEnc, &leftBackVic)
+		leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+		rightController(0.1,0.1, 0.1, &rightEnc, &rightBackVic)
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
     leftEnc.Start();
     rightEnc.Start();
-    controller.SetOutputRange(-1,1);
+    rightController.SetOutputRange(-1,1);
+    leftController.SetOutputRange(-1,1);
 }
 
 //runs method according to what newCommand is recbeived
 void DriveTrain::runMethod(RobotCommand newCommand) {
         DriveArgs* args = (DriveArgs*) newCommand.argPointer;
         if (newCommand.getMethod() == SETSPEED) {
-                setSpeed(args -> driveSpeed);
+                setSpeed(args -> speedValue);
         }
         else if (newCommand.getMethod() == DRIVEDIST) {
                 driveD(args -> driveDist);
@@ -49,14 +51,16 @@ void DriveTrain::driveD(float dist) {
 	
 	leftEnc.Reset();
 	rightEnc.Reset();
-	controller.SetSetpoint(dist);
-	controller.Enable();
-	while(controller.GetError()>.5){
+	leftController.SetSetpoint(dist);
+	leftController.Enable();
+
+	// might be unnecessary, pid loop does this as a subsystem?
+	/*while(controller.GetError()>.5){
     	leftFrontVic.Set(controller.Get());
     	leftBackVic.Set(controller.Get());
     	rightFrontVic.Set(controller.Get());
     	rightBackVic.Set(controller.Get());
-	}
+	}*/
 	
 }
 

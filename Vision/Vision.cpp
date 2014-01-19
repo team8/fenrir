@@ -45,6 +45,7 @@
 //Maximum number of particles to process
 #define MAX_PARTICLES 8
 
+//I thought our robot was an IterativeRobot
 class Vision : public SimpleRobot
 {
 	//Structure to represent the scores for the various tests used for target identification

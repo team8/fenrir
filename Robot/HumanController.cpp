@@ -27,7 +27,7 @@ void HumanController::update(){
     
     ((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
     ((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
-    RobotCommand command(false, DRIVE, DRIVESPEED, argPointer);
+    RobotCommand command(false, DRIVE, SETSPEED, argPointer);
     robot -> setCommand(command);
     
 }

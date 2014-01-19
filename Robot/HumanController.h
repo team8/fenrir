@@ -3,6 +3,7 @@
 #include "Constants.h"
 
 #include "Robot.h"
+#include "RobotCommand.h"
 #include <WPILib.h>
 
 class HumanController {
