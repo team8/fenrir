@@ -57,10 +57,7 @@ void DriveTrain::driveD(float dist) {
     	rightFrontVic.Set(controller.Get());
     	rightBackVic.Set(controller.Get());
 	}
-		leftFrontVic.Set(0);
-		leftBackVic.Set(0);
-		rightFrontVic.Set(0);
-		rightBackVic.Set(0);
+	
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
