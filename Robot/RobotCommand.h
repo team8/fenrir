@@ -17,6 +17,10 @@ typedef enum {
     ROTATESPEED,
     SETSPEED,
 } DriveMethod;
+typedef enum{
+	ACCUMULATE,
+	STOP
+}AccumulatorMethod;
 
 // These are the methods available in the Shooter subsystem
 typedef enum {

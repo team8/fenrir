@@ -11,15 +11,27 @@ Accumulator::Accumulator():
 {
 		
 }
-void Accumulator::deploy(){
-	
-}
-void Accumulator::retract(){
-	
-}
 void Accumulator::accumulate(){
-	
+	state=ACCUMULATING;
+}
+void Accumulator::stop(){
+	state=IDLE;
+}
+void Accumulator::runMethod(RobotCommand newCommand){
+	if(newCommand.getMethod()==ACCUMULATE){
+		
+	}
+	else if(newCommand.getMethod()==IDLE){
+		
+	}
 }
 void Accumulator::update(){
-
+	switch(state){
+	case IDLE:
+		accumulateVic.Set(0);
+		break;
+	case ACCUMULATING:
+		accumulateVic.Set(1.0);
+		break;
+	}
 }

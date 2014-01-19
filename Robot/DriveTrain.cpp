@@ -43,10 +43,10 @@ void DriveTrain::runMethod(RobotCommand newCommand) {
 
 void DriveTrain::update() {
 	
-	leftFrontVic.Set();
-	leftBackVic.Set();
-	rightFrontVic.Set();
-	rightBackVic.Set();
+	leftFrontVic.Set(0.0);
+	leftBackVic.Set(0.0);
+	rightFrontVic.Set(0.0);
+	rightBackVic.Set(0.0);
   
 }
 //Drives robot certain distance

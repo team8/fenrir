@@ -1,5 +1,11 @@
 #include <WPILib.h>
 #include "Constants.h"
+#include "RobotCommand.h"
+
+typedef enum{
+	IDLE,
+	ACCUMULATING
+} AccumulatorState;
 
 class Accumulator{
 private:
@@ -9,13 +15,14 @@ private:
 	
 	Encoder enc1;
 	Encoder enc2;
+	AccumulatorState state;
 
 	
 public:
-	void deploy();
-	void retract();
 	void accumulate();
+	void stop();
 	void update();
 	Accumulator();
+	void runMethod(RobotCommand newCommand);
 };
 
