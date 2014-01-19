@@ -45,7 +45,7 @@
 //Maximum number of particles to process
 #define MAX_PARTICLES 8
 
-class VisionSample2014 : public SimpleRobot
+class Vision : public SimpleRobot
 {
 	//Structure to represent the scores for the various tests used for target identification
 	struct Scores {
@@ -69,7 +69,7 @@ class VisionSample2014 : public SimpleRobot
 	Joystick stick; // only joystick
 
 public:
-	VisionSample2014(void):
+	Vision(void):
 		myRobot(1, 2),	// these must be initialized in the same order
 		stick(1)		// as they are declared above.
 	{
@@ -337,4 +337,4 @@ public:
 	
 };
 
-START_ROBOT_CLASS(VisionSample2014);
+START_ROBOT_CLASS(Vision);
