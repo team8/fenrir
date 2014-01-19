@@ -80,7 +80,7 @@ public:
 	/**
 	 * Image processing code to identify 2013 Vision targets
 	 */
-	void Autonomous(void)
+	void autonomous(void)
 	{
 		Scores *scores;
 		TargetReport target;
@@ -93,7 +93,7 @@ public:
 		};												//Particle filter criteria, used to filter out small particles
 		// AxisCamera &camera = AxisCamera::GetInstance();	//To use the Axis camera uncomment this line
 		
-		while (IsAutonomous() && IsEnabled()) {
+		while (isAutonomous() && isEnabled()) {
             /**
              * Do the image capture with the camera and apply the algorithm described above. This
              * sample will either get images from the camera or from an image file stored in the top
@@ -214,10 +214,10 @@ public:
 	/**
 	 * Runs the motors with arcade steering. 
 	 */
-	void OperatorControl(void)
+	void operatorControl(void)
 	{
 		myRobot.SetSafetyEnabled(true);
-		while (IsOperatorControl())
+		while (isOperatorControl())
 		{
 			Wait(0.005);	// wait for a motor update time
 		}
