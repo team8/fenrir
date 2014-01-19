@@ -24,7 +24,7 @@ DriveTrain::DriveTrain() :
     controller.SetOutputRange(-1,1);
 }
 
-//runs method according to what newCommand is received
+//runs method according to what newCommand is recbeived
 void DriveTrain::runMethod(RobotCommand newCommand) {
         DriveArgs* args = (DriveArgs*) newCommand.argPointer;
         if (newCommand.getMethod() == SETSPEED) {

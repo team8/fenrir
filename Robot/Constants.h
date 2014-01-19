@@ -45,4 +45,9 @@
 #define PORT_ACCUMULATOR_ENC_2A 0
 #define PORT_ACCUMULATOR_ENC_2B 0
 
+//default distances for accumulator deploy and retract
+
+#define DEFAULT_DEPLOY_DIST 1
+#define DEFAULT_RETRACT_DIST -1
+
  //aiming also includes warming up the motors
