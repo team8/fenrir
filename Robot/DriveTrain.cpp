@@ -21,6 +21,7 @@ DriveTrain::DriveTrain() :
     //rightEnc.SetDistancePerPulse(not known at the moment);
     leftEnc.Start();
     rightEnc.Start();
+    controller.SetOutputRange(-1,1);
 }
 
 //runs method according to what newCommand is received
@@ -44,31 +45,22 @@ void DriveTrain::update() {
 //Drives robot certain distance
 //Will use PID to determine output for victors
 //Uses encoders
-void DriveTrain::driveD(double dist) {
+void DriveTrain::driveD(float dist) {
 	
-	//to be changed
-	//May use PIDController class
-	float m_P = 0.1;
-	float m_I = 0.001;
-	float m_D = 0.0;
-	//float m_tolerance = set something;
-	float m_error = dist;
-	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
-	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-	/*
-	while(current error > tolerance){
-		calculate value to be written to victors
-		DriveTrain::setSpeed(result);
-		leftEnc.GetDistance();
-		rightEnc.GetDistance();
+	leftEnc.Reset();
+	rightEnc.Reset();
+	controller.SetSetpoint(dist);
+	controller.Enable();
+	while(controller.GetError()>.5){
+    	leftFrontVic.Set(controller.Get());
+    	leftBackVic.Set(controller.Get());
+    	rightFrontVic.Set(controller.Get());
+    	rightBackVic.Set(controller.Get());
 	}
-	if (current error < tolerance){ 
-		leftEnc.Reset();
-		rightEnc.Reset();
-		return;
-	}
-	*/
-	
+		leftFrontVic.Set(0);
+		leftBackVic.Set(0);
+		rightFrontVic.Set(0);
+		rightBackVic.Set(0);
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
