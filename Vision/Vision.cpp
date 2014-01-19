@@ -4,7 +4,7 @@
 #include "Math.h"
  
 /**
- * Sample program to use NIVision to find rectangles in the scene that are illuminated
+ * Sample program to use NIVision to find rectangles in the scene that are illuminated asdf
  * by a LED ring light (similar to the model from FIRSTChoice). The camera sensitivity
  * is set very low so as to only show light sources and remove any distracting parts
  * of the image.
