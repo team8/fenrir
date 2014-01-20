@@ -18,11 +18,13 @@ void Accumulator::stop(){
 	state=IDLE;
 }
 void Accumulator::runMethod(RobotCommand newCommand){
-	if(newCommand.getMethod()==ACCUMULATE){
-		
-	}
-	else if(newCommand.getMethod()==IDLE){
-		
+	switch(newCommand.getMethod()){
+	case STOP:
+		stop()
+		break;
+	case ACCUMULATE:
+		accumulate();
+		break;
 	}
 }
 void Accumulator::update(){
