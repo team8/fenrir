@@ -61,6 +61,6 @@ class DriveTrain {
     void rotateS(double speed);
     void stopRotate(double speed);
     void update();
-    void runMethod(RobotCommand newCommand);
+    void runCommand(RobotCommand newCommand);
 };
 #endif

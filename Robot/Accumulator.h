@@ -23,6 +23,6 @@ public:
 	void stop();
 	void update();
 	Accumulator();
-	void runMethod(RobotCommand newCommand);
+	void runCommand(RobotCommand newCommand);
 };
 

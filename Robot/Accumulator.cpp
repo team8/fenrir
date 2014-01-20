@@ -17,7 +17,7 @@ void Accumulator::accumulate(){
 void Accumulator::stop(){
 	state=IDLE;
 }
-void Accumulator::runMethod(RobotCommand newCommand){
+void Accumulator::runCommand(RobotCommand newCommand){
 	if(newCommand.getMethod()==ACCUMULATE){
 		
 	}

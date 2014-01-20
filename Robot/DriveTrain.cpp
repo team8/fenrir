@@ -27,7 +27,7 @@ DriveTrain::DriveTrain() :
 }
 
 //runs method according to what newCommand is recbeived
-void DriveTrain::runMethod(RobotCommand newCommand) {
+void DriveTrain::runCommand(RobotCommand newCommand) {
         DriveArgs* args = (DriveArgs*) newCommand.argPointer;
         if (newCommand.getMethod() == SETSPEED) {
                 setSpeed(args -> speedValue);

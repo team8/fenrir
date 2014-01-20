@@ -1,5 +1,6 @@
 #include <WPILib.h>
 #include "Constants.h"
+#include "RobotCommand.h"
 
 class Shooter {
  
@@ -15,5 +16,6 @@ class Shooter {
   void shoot();
   void update();
   Shooter();
+  void runCommand(RobotCommand command);
  
 };

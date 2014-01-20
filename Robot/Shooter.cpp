@@ -21,3 +21,6 @@ void Shooter::update(){
   
   
 }
+void Shooter::runCommand(RobotCommand command){
+	
+}

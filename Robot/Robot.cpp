@@ -9,12 +9,12 @@ Robot::Robot()
 void Robot::setCommand(RobotCommand command) {
     switch (command.getSubsystem()) {
         case DRIVE:
-            driveTrain.runMethod(command);
+            driveTrain.runCommand(command);
             break;
         case SHOOTER:
-            shooter.runMethod(command);
+            shooter.runCommand(command);
             break;
         case ACCUMULATOR:
-            accumulator.runMethod(command);
+            accumulator.runCommand(command);
     }
 }
