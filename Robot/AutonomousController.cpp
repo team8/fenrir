@@ -30,7 +30,7 @@ void AutonomousController::stop(){
   ((DriveArgs *) argPointer) -> speedValue = 0;
   Method method;
   method.driveMethod = SETSPEED;
-  Command command(DRIVE, method, argPointer);
+  RobotCommand command(DRIVE, method, argPointer);
   robot -> setCommand(command);
 }
 

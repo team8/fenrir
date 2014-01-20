@@ -27,8 +27,8 @@ DriveTrain::DriveTrain() :
 }
 
 //runs method according to what newCommand is received
-void DriveTrain::runCommand(RobotCommand newCommand) {
-    DriveArgs* args = (DriveArgs*) newCommand.argPointer;
+void DriveTrain::runCommand(RobotCommand command) {
+    DriveArgs* args = (DriveArgs*) command.argPointer;
     switch (command.getMethod().driveMethod) {
     case SETSPEED:
       setSpeed(args -> speedValue);

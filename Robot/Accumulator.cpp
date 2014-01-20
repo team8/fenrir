@@ -18,10 +18,10 @@ void Accumulator::stop(){
 	state=IDLE;
 }
 
-void Accumulator::runMethod(RobotCommand newCommand){
+void Accumulator::runCommand(RobotCommand newCommand){
 	switch(newCommand.getMethod().accumulatorMethod){
 	case STOP:
-		stop()
+		stop();
 		break;
 	case ACCUMULATE:
 		accumulate();
