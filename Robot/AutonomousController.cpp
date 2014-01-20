@@ -15,18 +15,23 @@ void AutonomousController::startTimer(){
 }
 
 void AutonomousController::drive(){
+  /* Needs to take variables
   void * argPointer = malloc(sizeof(DriveArgs));
-  RobotCommand command(DRIVE, SETSPEED, argPointer);
-  robot->setCommand(command);
-  //we'll add this later
+  ((DriveArgs *) argPointer) -> speedValue = 23;
+  Method method;
+  method.driveMethod = SETSPEED;
+  Command command(DRIVE, method, argPointer);
+  robot -> setCommand(command);
+  */
 }
 
 void AutonomousController::stop(){
   void * argPointer = malloc(sizeof(DriveArgs));
-  ((DriveArgs *)argPointer) -> speedValue = 0;
-  RobotCommand command(DRIVE, SETSPEED, argPointer);
-  robot->setCommand(command);
-  //we'll add this later
+  ((DriveArgs *) argPointer) -> speedValue = 0;
+  Method method;
+  method.driveMethod = SETSPEED;
+  Command command(DRIVE, method, argPointer);
+  robot -> setCommand(command);
 }
 
 void AutonomousController::update(){
