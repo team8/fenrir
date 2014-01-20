@@ -62,9 +62,10 @@ typedef union {
 } Args;
 
 /*COMMAND OBJECT*/
-class RobotCommand {
+class RobotCommand{
     public:
         RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
+        RobotCommand(const RobotCommand& dksa);
         SubsystemType getSubsystem();
         Method getMethod();
         void * argPointer; // Points to argument struct
