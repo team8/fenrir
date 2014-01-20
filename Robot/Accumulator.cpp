@@ -17,16 +17,8 @@ void Accumulator::accumulate(){
 void Accumulator::stop(){
 	state=IDLE;
 }
-<<<<<<< HEAD
-void Accumulator::runCommand(RobotCommand newCommand){
-	if(newCommand.getMethod()==ACCUMULATE){
-		
-	}
-	else if(newCommand.getMethod()==IDLE){
-		
-=======
+
 void Accumulator::runMethod(RobotCommand newCommand){
-	AccumulatorArgs * args = (AccumulatorArgs *) command.argPointer;
 	switch(newCommand.getMethod().accumulatorMethod){
 	case STOP:
 		stop()
@@ -34,7 +26,6 @@ void Accumulator::runMethod(RobotCommand newCommand){
 	case ACCUMULATE:
 		accumulate();
 		break;
->>>>>>> da8abd38df2f289ef6167df221cdafa6ad175608
 	}
 	free(args);
 }
