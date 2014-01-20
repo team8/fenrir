@@ -50,8 +50,6 @@ typedef union {
 /*COMMAND OBJECT*/
 class RobotCommand {
     public:
-        RobotCommand(bool inAuto);
-        RobotCommand(bool inAuto, SubsystemType subsystemType, int methodType, void * args);
         void command(SubsystemType subsystem, int methodEnum, void * args);
         SubsystemType getSubsystem();
         int getMethod();
