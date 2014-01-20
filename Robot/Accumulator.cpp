@@ -26,7 +26,8 @@ void Accumulator::runCommand(RobotCommand newCommand){
 		
 =======
 void Accumulator::runMethod(RobotCommand newCommand){
-	switch(newCommand.getMethod()){
+	AccumulatorArgs * args = (AccumulatorArgs *) command.argPointer;
+	switch(newCommand.getMethod().accumulatorMethod){
 	case STOP:
 		stop()
 		break;
@@ -35,6 +36,7 @@ void Accumulator::runMethod(RobotCommand newCommand){
 		break;
 >>>>>>> da8abd38df2f289ef6167df221cdafa6ad175608
 	}
+	free(args);
 }
 void Accumulator::update(){
 	switch(state){
