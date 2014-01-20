@@ -7,9 +7,14 @@ Robot::Robot()
 }
 
 void Robot::setCommand(RobotCommand command) {
-  if (command.getSubsystem() == DRIVE) {
-    driveTrain.runMethod(command);
-  } else if(command.getSubsystem() == SHOOTER) {
-   // shooter.runMethod(command);
-  }
+    switch (command.getSubsystem()) {
+        case DRIVE:
+            driveTrain.runMethod(command);
+            break;
+        case SHOOTER:
+            shooter.runMethod(command);
+            break;
+        case ACCUMULATOR:
+            accumulator.runMethod(command);
+    }
 }
