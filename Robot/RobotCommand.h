@@ -29,6 +29,12 @@ typedef enum ShooterMethod{
     SHOOT
 }ShooterMethod;
 
+typedef union Method{
+  DriveMethod driveMethod;
+  ShooterMethod shooterMethod;
+  AccumulatorMethod accumulatorMethod;
+}Method;
+
 /*METHOD ARGUMENTS*/
 // Arguments available for Drivetrain methods
 typedef struct DriveArgs{
