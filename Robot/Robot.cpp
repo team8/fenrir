@@ -16,5 +16,6 @@ void Robot::setCommand(RobotCommand command) {
             break;
         case ACCUMULATOR:
             accumulator.runCommand(command);
+            break;
     }
 }
