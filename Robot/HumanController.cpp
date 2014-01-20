@@ -30,11 +30,11 @@ void HumanController::update(){
     RobotCommand command(false, DRIVE, SETSPEED, argPointer);
     robot -> setCommand(command);
     if(buttonPrev!=operatorStick.GetTrigger()){
-    	if(operatorStick.GetTrigger()==true){
-    		RobotCommand command(true, ACCUMULATOR, ACCUMULATE, 0);
+    	if(operatorStick.GetTrigger()){
+    		RobotCommand command(false, ACCUMULATOR, ACCUMULATE, 0);
     		robot -> setCommand(command);
     	}
-    	else if(operatorStick.GetTrigger()==false){
+    	else{
     		RobotCommand command(false, ACCUMULATOR, STOP, 0);
     		robot -> setCommand(command);
     	}

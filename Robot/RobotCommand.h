@@ -53,11 +53,9 @@ class RobotCommand {
         void command(SubsystemType subsystem, int methodEnum, void * args);
         SubsystemType getSubsystem();
         int getMethod();
-        bool getParent();
         void * argPointer; // Points to argument struct
     private:
         SubsystemType subsystem; // Subsystem e command is to be sent to
         int method; // Method to be run in the subsystem
-        bool parent; // True if autonomous, false if teleop
 };
 #endif
