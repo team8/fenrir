@@ -27,7 +27,6 @@ void Accumulator::runMethod(RobotCommand newCommand){
 		accumulate();
 		break;
 	}
-	free(args);
 }
 void Accumulator::update(){
 	switch(state){
