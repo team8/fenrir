@@ -5,6 +5,7 @@
 #include "RobotCommand.h"
 
 typedef enum {
+	IDLE,
 	DRIVE_DIST,
 	DRIVE_SPEED,
 	TURN_ANGLE

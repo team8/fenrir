@@ -73,6 +73,7 @@ void DriveTrain::setSpeed(double spd) {
 
 //lets you rotate in place
 void DriveTrain::rotateA(double angle){
+	state = TURN_ANGLE;
 	gyroscope.Reset();
 	if(gyroscope.GetAngle()!=angle){
 		rotateS(DEFAULT_AUTO_ROTATE);
@@ -80,6 +81,7 @@ void DriveTrain::rotateA(double angle){
 	if(gyroscope.GetAngle()==angle){
 		stopRotate(DEFAULT_AUTO_ROTATE);
 	}
+	
 
 	
 }
@@ -89,6 +91,7 @@ void DriveTrain::rotateA(double angle){
 void DriveTrain::rotateS(double speed) {
 	
 	rotateSpeed = speed;
+	state = DRIVE_SPEED;
 
 }
 
