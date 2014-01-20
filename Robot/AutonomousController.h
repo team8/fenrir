@@ -18,7 +18,6 @@ class AutonomousController {
   void drive();
   void stop();
   bool shoot();
-  void sendCommand(RobotCommand command);
   
   bool targetReached;
 };
