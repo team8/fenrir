@@ -41,7 +41,9 @@ typedef struct DriveArgs{
   float driveDist;
   double rotAngle;
   double rotSpeed;
-  double speedValue;
+  double driveSpeed;
+  float speedValue;
+  float turnValue;
 }DriveArgs;
 
 // Arguments available for Shooter methods
