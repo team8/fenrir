@@ -50,7 +50,7 @@ typedef union {
 /*COMMAND OBJECT*/
 class RobotCommand {
     public:
-        void command(SubsystemType subsystem, int methodEnum, void * args);
+        RobotCommand(SubsystemType subsystem, int methodEnum, void * args);
         SubsystemType getSubsystem();
         int getMethod();
         void * argPointer; // Points to argument struct
