@@ -5,9 +5,9 @@
 #include "RobotCommand.h"
 
 typedef enum {
-	IDLE,
+	
 	DRIVE_DIST,
-	DRIVE_SPEED,
+	TELEOP,
 	TURN_ANGLE
 	
 	
@@ -35,6 +35,7 @@ class DriveTrain {
     
     double targetSpeed;
     double rotateSpeed;
+    double rotateAngle;
     
     //state 
     

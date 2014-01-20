@@ -43,10 +43,21 @@ void DriveTrain::runMethod(RobotCommand newCommand) {
 
 void DriveTrain::update() {
 	
-	leftFrontVic.Set(-(targetSpeed+rotateSpeed));
-	leftBackVic.Set(-(targetSpeed+rotateSpeed));
-	rightFrontVic.Set(targetSpeed-rotateSpeed);
-	rightBackVic.Set(targetSpeed-rotateSpeed);
+	switch(state) {
+	
+		case TELEOP : 
+			leftFrontVic.Set(-(targetSpeed+rotateSpeed));
+			leftBackVic.Set(-(targetSpeed+rotateSpeed));
+			rightFrontVic.Set(targetSpeed-rotateSpeed);
+			rightBackVic.Set(targetSpeed-rotateSpeed);
+			break;
+		case DRIVE_DIST :
+			
+			break;
+			
+	}
+	
+
   
 }
 //Drives robot certain distance
@@ -67,22 +78,16 @@ void DriveTrain::driveD(float dist) {
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
 	
+	state = TELEOP;
 	targetSpeed = spd;
 
 }
 
 //lets you rotate in place
 void DriveTrain::rotateA(double angle){
-	state = TURN_ANGLE;
-	gyroscope.Reset();
-	if(gyroscope.GetAngle()!=angle){
-		rotateS(DEFAULT_AUTO_ROTATE);
-	}
-	if(gyroscope.GetAngle()==angle){
-		stopRotate(DEFAULT_AUTO_ROTATE);
-	}
 	
-
+	state = TURN_ANGLE;
+	rotateAngle = angle;
 	
 }
 //Sets speed of rotation
@@ -91,7 +96,7 @@ void DriveTrain::rotateA(double angle){
 void DriveTrain::rotateS(double speed) {
 	
 	rotateSpeed = speed;
-	state = DRIVE_SPEED;
+	state = TELEOP;
 
 }
 
