@@ -2,6 +2,13 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
+typedef enum ShooterState {
+  IDLE,  
+  LOADED,
+  SPINNING_UP,
+  AIMING
+} ShooterState;
+
 class Shooter {
  
  private:
@@ -11,6 +18,7 @@ class Shooter {
   Victor vic3;
   Victor vic4;
   
+  ShooterState state;
  public:
  
   void shoot();
