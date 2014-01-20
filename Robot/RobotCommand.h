@@ -3,7 +3,7 @@
 #include "Constants.h"
 /*SUBSYSTEM ENUM*/
 // These are the subsystems that you can send the Command to
-typedef enum {
+typedef enum SubsystemType{
     DRIVE,
     SHOOTER,
     ACCUMULATOR
@@ -11,51 +11,57 @@ typedef enum {
 
 /*METHOD ENUMS*/
 // These are the methods available in the Drivetrain subsystem
-typedef enum {
-    DRIVEDIST,
-    ROTATEANGLE,
-    ROTATESPEED,
-    SETSPEED,
-} DriveMethod;
-typedef enum{
+typedef enum DriveMethod{
+  SETSPEED,
+  DRIVEDIST,
+  ROTATEANGLE,
+  ROTATESPEED,
+  STOPROTATE
+}DriveMethod;
+
+typedef enum AccumulatorMethod{
 	ACCUMULATE,
 	STOP
 }AccumulatorMethod;
 
 // These are the methods available in the Shooter subsystem
-typedef enum {
+typedef enum ShooterMethod{
     SHOOT
 }ShooterMethod;
 
 /*METHOD ARGUMENTS*/
 // Arguments available for Drivetrain methods
-typedef struct {
-	
-    double driveDist;
-    double rotAngle;
-    float turnValue;
-    float speedValue;
-} DriveArgs;
+typedef struct DriveArgs{
+  float driveDist;
+  double rotAngle;
+  double rotSpeed;
+  double speedValue;
+}DriveArgs;
 
 // Arguments available for Shooter methods
-typedef struct {
+typedef struct ShooterArgs{
     
 } ShooterArgs;
+
+typedef struct AccumulatorArgs {
+	
+} AccumulatorArgs;
 
 typedef union {
     DriveArgs driveArgs;
     ShooterArgs shooterArgs;
+    AccumulatorArgs accumulatorArgs;
 } Args;
 
 /*COMMAND OBJECT*/
 class RobotCommand {
     public:
-        RobotCommand(SubsystemType subsystem, int methodEnum, void * args);
+        RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
         SubsystemType getSubsystem();
-        int getMethod();
+        Method getMethod();
         void * argPointer; // Points to argument struct
     private:
         SubsystemType subsystem; // Subsystem e command is to be sent to
-        int method; // Method to be run in the subsystem
+        Method method; // Method to be run in the subsystem
 };
 #endif
