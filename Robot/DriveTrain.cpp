@@ -26,19 +26,27 @@ DriveTrain::DriveTrain() :
     leftController.SetOutputRange(-1,1);
 }
 
-//runs method according to what newCommand is recbeived
+//runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand newCommand) {
-        DriveArgs* args = (DriveArgs*) newCommand.argPointer;
-        if (newCommand.getMethod() == SETSPEED) {
-                setSpeed(args -> speedValue);
-        }
-        else if (newCommand.getMethod() == DRIVEDIST) {
-                driveD(args -> driveDist);
-        }
-        else if (newCommand.getMethod() == ROTATEANGLE) {
-                rotateA(args -> rotAngle);
-        }
-        free(args);
+    DriveArgs* args = (DriveArgs*) newCommand.argPointer;
+    switch (command.getMethod().driveMethod) {
+    case SETSPEED:
+      setSpeed(args -> speedValue);
+      break;
+    case DRIVEDIST:
+      driveD(args -> driveDist);
+      break;
+    case ROTATEANGLE:
+      rotateA(args -> rotAngle);
+      break;
+    case ROTATESPEED:
+      rotateS(args -> rotSpeed);
+      break;
+    case STOPROTATE:
+      stopRotate(args -> speedValue);
+      break;
+    }
+    free(args);
 }
 
 void DriveTrain::update() {
