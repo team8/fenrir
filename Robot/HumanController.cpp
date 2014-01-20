@@ -32,9 +32,11 @@ void HumanController::update(){
     if(buttonPrev!=operatorStick.GetTrigger()){
     	if(operatorStick.GetTrigger()==true){
     		RobotCommand command(true, ACCUMULATOR, ACCUMULATE, 0);
+    		robot -> setCommand(command);
     	}
     	else if(operatorStick.GetTrigger()==false){
     		RobotCommand command(false, ACCUMULATOR, STOP, 0);
+    		robot -> setCommand(command);
     	}
     }
     buttonPrev=operatorStick.GetTrigger();

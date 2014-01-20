@@ -43,10 +43,10 @@ void DriveTrain::runMethod(RobotCommand newCommand) {
 
 void DriveTrain::update() {
 	
-	leftFrontVic.Set(0.0);
-	leftBackVic.Set(0.0);
-	rightFrontVic.Set(0.0);
-	rightBackVic.Set(0.0);
+	leftFrontVic.Set(-(targetSpeed+rotateSpeed));
+	leftBackVic.Set(-(targetSpeed+rotateSpeed));
+	rightFrontVic.Set(targetSpeed-rotateSpeed);
+	rightBackVic.Set(targetSpeed-rotateSpeed);
   
 }
 //Drives robot certain distance
@@ -59,13 +59,7 @@ void DriveTrain::driveD(float dist) {
 	leftController.SetSetpoint(dist);
 	leftController.Enable();
 
-	// might be unnecessary, pid loop does this as a subsystem?
-	/*while(controller.GetError()>.5){
-    	leftFrontVic.Set(controller.Get());
-    	leftBackVic.Set(controller.Get());
-    	rightFrontVic.Set(controller.Get());
-    	rightBackVic.Set(controller.Get());
-	}*/
+
 	
 }
 

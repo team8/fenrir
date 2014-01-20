@@ -35,6 +35,10 @@ class DriveTrain {
     double targetSpeed;
     double rotateSpeed;
     
+    //state 
+    
+    driveState state;
+    
     
     public:
     
