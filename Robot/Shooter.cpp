@@ -19,13 +19,13 @@ void Shooter::update(){
 	switch(state) {
 		case IDLE:
 			shooterVic1.Set(0);
-      		shooterVic2.Set(0);
-      		shooterVic3.Set(0);
-    		shooterVic4.Set(0);
+      			shooterVic2.Set(0);
+      			shooterVic3.Set(0);
+    			shooterVic4.Set(0);
 		break;
-    	case LOADED:
-      	break;
-    	case SPINNING_UP:
+		case LOADED:
+		break;
+		case SPINNING_UP:
 		break;
 		case AIMING:
 		break;
