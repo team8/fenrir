@@ -3,7 +3,7 @@
 #include "RobotCommand.h"
 
 typedef enum ShooterState {
-  IDLE,  
+  STILL,  
   LOADED,
   SPINNING_UP,
   AIMING

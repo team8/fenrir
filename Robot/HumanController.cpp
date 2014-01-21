@@ -27,15 +27,21 @@ void HumanController::update(){
     
     ((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
     ((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
-    RobotCommand command(DRIVE, SETSPEED, argPointer);
+    Method setSpeed;
+    setSpeed.driveMethod=SETSPEED;
+    RobotCommand command(DRIVE,setSpeed, argPointer);
     robot -> setCommand(command);
     if(buttonPrev!=operatorStick.GetTrigger()){
     	if(operatorStick.GetTrigger()){
-    		RobotCommand command(ACCUMULATOR, ACCUMULATE, 0);
+    		Method setAccumulator;
+    		setAccumulator.accumulatorMethod=ACCUMULATE;
+    		RobotCommand command(ACCUMULATOR, setAccumulator, 0);
     		robot -> setCommand(command);
     	}
     	else{
-    		RobotCommand command(ACCUMULATOR, STOP, 0);
+    		Method stopAccumulator;
+    		stopAccumulator.accumulatorMethod=STOP;
+    		RobotCommand command(ACCUMULATOR, stopAccumulator, 0);
     		robot -> setCommand(command);
     	}
     }
