@@ -65,6 +65,7 @@ typedef union {
 class RobotCommand{
     public:
         RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
+        RobotCommand::RobotCommand(const RobotCommand&);
         SubsystemType getSubsystem();
         Method getMethod();
         void * argPointer; // Points to argument struct
