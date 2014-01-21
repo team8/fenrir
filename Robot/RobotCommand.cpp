@@ -12,6 +12,6 @@ SubsystemType RobotCommand::getSubsystem() {
     return subsystem;
 }
 
-int RobotCommand::getMethod() {
+Method RobotCommand::getMethod() {
     return method;
 }
