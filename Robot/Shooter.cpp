@@ -11,31 +11,32 @@ Shooter::Shooter():
 
 }
 
-
 void Shooter::shoot(){
   
 }
 
 void Shooter::update(){
-  switch(state) {
-    case IDLE:
-      shooterVic1.Set(0);
-      shooterVic2.Set(0);
-      shooterVic3.Set(0);
-      shooterVic4.Set(0);
-      break;
-    case LOADED:
-      break;
-    case SPINNING_UP:
-      break;
-    case AIMING:
-      break;
-  }
+	switch(state) {
+		case IDLE:
+			shooterVic1.Set(0);
+      		shooterVic2.Set(0);
+      		shooterVic3.Set(0);
+    		shooterVic4.Set(0);
+		break;
+    	case LOADED:
+      	break;
+    	case SPINNING_UP:
+		break;
+		case AIMING:
+		break;
+	}
 }
+
 void Shooter::runCommand(RobotCommand command){
-ShooterArgs * args = (ShooterArgs *) command.argPointer;
-  switch (command.getMethod().shooterMethod) {
-    
-  }
-  free(args);
+	ShooterArgs * args = (ShooterArgs *) command.argPointer;
+	switch (command.getMethod().shooterMethod) {
+		case;
+		break;
+	}
+	free(args);
 }
