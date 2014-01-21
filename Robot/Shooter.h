@@ -13,10 +13,10 @@ class Shooter {
  
  private:
   
-  Victor vic1;
-  Victor vic2;
-  Victor vic3;
-  Victor vic4;
+  Victor shooterVic1;
+  Victor shooterVic2;
+  Victor shooterVic3;
+  Victor shooterVic4;
   
   ShooterState state;
  public:
