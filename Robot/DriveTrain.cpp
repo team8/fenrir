@@ -14,9 +14,10 @@ DriveTrain::DriveTrain() :
         leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B), 
         rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
         
-        // Speed controller stuff
+        // PIDControllers
 		leftController(0.1, 0.001, 0.1, &leftEnc, &leftBackVic),
-		rightController(0.1,0.001, 0.1, &rightEnc, &rightBackVic)
+		rightController(0.1,0.001, 0.1, &rightEnc, &rightBackVic),
+		angleController(0.1, 0.001, 0.1, &gyroscope, &leftBackVic)
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
@@ -24,6 +25,7 @@ DriveTrain::DriveTrain() :
     rightEnc.Start();
     rightController.SetOutputRange(-1,1);
     leftController.SetOutputRange(-1,1);
+    angleController.SetOutputRange(-1, 1);
 }
 
 //runs method according to what newCommand is received
@@ -78,18 +80,15 @@ void DriveTrain::update() {
 //Uses encoders
 void DriveTrain::driveD(float dist) {
 	
+	state = DRIVE_DIST;
 	leftEnc.Reset();
 	rightEnc.Reset();
-	
-	state = DRIVE_DIST;
 	
 	leftController.SetSetpoint(dist);
 	rightController.SetSetpoint(dist);
 	leftController.Enable();
 	rightController.Enable();
 
-
-	
 }
 
 //sets the spd of all vics to the specified amount b/w 1.0 and -1.0
@@ -105,6 +104,11 @@ void DriveTrain::setSpeed(double spd) {
 void DriveTrain::rotateA(double angle){
 	
 	state = TURN_ANGLE;
+	gyroscope.Reset();
+	
+	angleController.SetSetpoint(angle);
+	angleController.Enable();
+	
 	rotateAngle = angle;
 	
 }
