@@ -35,6 +35,8 @@
 #define PORT_SHOOTER_VIC_2 0
 #define PORT_SHOOTER_VIC_3 0
 #define PORT_SHOOTER_VIC_4 0
+
+//ports for accumulator victors
 #define PORT_ACCUMULATOR_VIC_5 0
 #define PORT_ACCUMULATOR_VIC_6 0
 #define PORT_ACCUMULATOR_VIC_7 0

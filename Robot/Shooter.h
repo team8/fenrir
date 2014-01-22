@@ -5,8 +5,9 @@
 typedef enum ShooterState {
 	IDLE,  
 	LOADED,
+	AIMING,
 	SPINNING_UP,
-	AIMING
+	SHOOTING
 }ShooterState;
 
 class Shooter {

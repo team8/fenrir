@@ -21,13 +21,19 @@ void Shooter::update(){
 			shooterVic2.Set(0);
 			shooterVic3.Set(0);
 			shooterVic4.Set(0);
-		break;
+			break;
 		case LOADED:
-		break;
-		case SPINNING_UP:
-		break;
+			// Do we need this?
+			break;
 		case AIMING:
-		break;
+			// Aim the shooter
+			break;
+		case SPINNING_UP:
+			// Spin the wheels up to speed
+			break;
+		case SHOOTING:
+			// Do something
+			break;
 	}
 }
 
