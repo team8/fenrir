@@ -2,9 +2,8 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
-typedef enum ShooterState 
-{
-	SHOOTER_IDLE,  
+typedef enum ShooterState {
+	IDLE,  
 	LOADED,
 	AIMING,
 	SPINNING_UP,
