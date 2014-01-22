@@ -16,7 +16,7 @@ void Shooter::shoot(){
 
 void Shooter::update(){
 	switch(state) {
-		case SHOOTER_IDLE:
+		case IDLE:
 			shooterVic1.Set(0);
 			shooterVic2.Set(0);
 			shooterVic3.Set(0);
