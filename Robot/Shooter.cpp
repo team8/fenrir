@@ -40,8 +40,11 @@ void Shooter::update(){
 void Shooter::runCommand(RobotCommand command){
 	ShooterArgs * args = (ShooterArgs *) command.argPointer;
 	switch (command.getMethod().shooterMethod) {
-		case;
+	case SHOOT:
+	{
+		shoot();
 		break;
+	}
 	}
 	free(args);
 }
