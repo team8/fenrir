@@ -3,8 +3,8 @@
 #include "RobotCommand.h"
 
 typedef enum{
-	IDLE,
-	ACCUMULATING
+	ACCUMULATING,
+	NOT_ACCUMULATING
 } AccumulatorState;
 
 class Accumulator{

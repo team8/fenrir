@@ -15,7 +15,7 @@ void Accumulator::accumulate(){
 	state=ACCUMULATING;
 }
 void Accumulator::stop(){
-	state=IDLE;
+	state=NOT_ACCUMULATING;
 }
 
 void Accumulator::runCommand(RobotCommand newCommand){
@@ -30,7 +30,7 @@ void Accumulator::runCommand(RobotCommand newCommand){
 }
 void Accumulator::update(){
 	switch(state){
-	case IDLE:
+	case NOT_ACCUMULATING:
 		accumulateVic.Set(0);
 		break;
 	case ACCUMULATING:
