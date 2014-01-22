@@ -64,7 +64,9 @@ class DriveTrain {
     //can someone check the logic to this? thanks
     void rotateS(double speed);
     
-    void stopRotate(double speed);
+    //Stops victors
+    void stopVictors();
+    
     void update();
     void runCommand(RobotCommand command);
 };
