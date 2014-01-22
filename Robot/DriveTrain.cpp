@@ -55,21 +55,27 @@ void DriveTrain::update() {
 	
 	switch(state) {
 	
-		case ROTATE_SPEED : 
+		case ROTATE_SPEED : {
 			leftFrontVic.Set(-(targetSpeed+rotateSpeed));
 			leftBackVic.Set(-(targetSpeed+rotateSpeed));
 			rightFrontVic.Set(targetSpeed-rotateSpeed);
 			rightBackVic.Set(targetSpeed-rotateSpeed);
 			break;
-		case DRIVE_DIST :
+	}
+		case DRIVE_DIST :{
 			leftFrontVic.Set(-(leftController.Get()));
 			leftBackVic.Set(-(leftController.Get()));
 			rightFrontVic.Set(rightController.Get());
 			rightBackVic.Set(rightController.Get());
 			break;
-		case TURN_ANGLE:
-			
+		}
+		case TURN_ANGLE:{
+			leftFrontVic.Set(-(angleController.Get()));
+			leftBackVic.Set(-(angleController.Get()));
+			rightFrontVic.Set(angleController.Get());
+			rightBackVic.Set(angleController.Get());
 			break;
+		}
 	}
 	
 
