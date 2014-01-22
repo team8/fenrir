@@ -77,9 +77,7 @@ void DriveTrain::update() {
 			break;
 		}
 	}
-	
-
-  
+	 
 }
 //Drives robot certain distance
 //Will use PID to determine output for victors
