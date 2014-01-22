@@ -53,16 +53,21 @@ void DriveTrain::update() {
 	
 	switch(state) {
 	
-		case TELEOP : 
+		case ROTATE_SPEED : 
 			leftFrontVic.Set(-(targetSpeed+rotateSpeed));
 			leftBackVic.Set(-(targetSpeed+rotateSpeed));
 			rightFrontVic.Set(targetSpeed-rotateSpeed);
 			rightBackVic.Set(targetSpeed-rotateSpeed);
 			break;
 		case DRIVE_DIST :
+			leftFrontVic.Set(-(leftController.Get()));
+			leftBackVic.Set(-(leftController.Get()));
+			rightFrontVic.Set(rightController.Get());
+			rightBackVic.Set(rightController.Get());
+			break;
+		case TURN_ANGLE:
 			
 			break;
-			
 	}
 	
 
@@ -75,8 +80,11 @@ void DriveTrain::driveD(float dist) {
 	
 	leftEnc.Reset();
 	rightEnc.Reset();
+	
+	state = DRIVE_DIST;
+	
 	leftController.SetSetpoint(dist);
-	rightController.SetSetPoint(dist);
+	rightController.SetSetpoint(dist);
 	leftController.Enable();
 	rightController.Enable();
 
@@ -88,7 +96,7 @@ void DriveTrain::driveD(float dist) {
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
 	
-	state = TELEOP;
+	state = ROTATE_SPEED;
 	targetSpeed = spd;
 
 }
@@ -106,7 +114,7 @@ void DriveTrain::rotateA(double angle){
 void DriveTrain::rotateS(double speed) {
 	
 	rotateSpeed = speed;
-	state = TELEOP;
+	state = ROTATE_SPEED;
 
 }
 
