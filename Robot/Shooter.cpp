@@ -43,6 +43,5 @@ void Shooter::runCommand(RobotCommand command){
 		case SHOOT:
 			break;
 	}
-	}
 	free(args);
 }
