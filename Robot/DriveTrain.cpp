@@ -131,8 +131,4 @@ void DriveTrain::rotateS(double speed) {
 void DriveTrain::stopVictors(){
 	state = ROTATE_SPEED; 
 
-	//leftFrontVic.Set(0);
-	//leftBackVic.Set(0);
-	//rightFrontVic.Set(0);
-	//rightBackVic.Set(0);
 }

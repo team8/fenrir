@@ -24,4 +24,3 @@ class HumanController {
   Joystick operatorStick;
   bool buttonPrev;
 };
-#endif
