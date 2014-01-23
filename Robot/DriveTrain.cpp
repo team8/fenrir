@@ -56,10 +56,10 @@ void DriveTrain::update() {
 	switch(state) {
 	
 		case ROTATE_SPEED:
-			leftFrontVic.Set(-(targetSpeed+rotateSpeed));
-			leftBackVic.Set(-(targetSpeed+rotateSpeed));
-			rightFrontVic.Set(targetSpeed-rotateSpeed);
-			rightBackVic.Set(targetSpeed-rotateSpeed);
+			leftFrontVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1));
+			leftBackVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1)));
+			rightFrontVic.Set(min(max(targetSpeed-rotateSpeed,-1),1));
+			rightBackVic.Set(min(max(targetSpeed-rotateSpeed,-1),1));
 			break;
 		case DRIVE_DIST:
 			leftFrontVic.Set(-(leftController.Get()));
