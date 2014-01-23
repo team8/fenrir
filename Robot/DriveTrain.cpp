@@ -15,9 +15,9 @@ DriveTrain::DriveTrain() :
         rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
         
         // PIDControllers
-		leftController(0.1, 0.001, 0.1, &leftEnc, &leftBackVic),
-		rightController(0.1,0.001, 0.1, &rightEnc, &rightBackVic),
-		angleController(0.1, 0.001, 0.1, &gyroscope, &leftBackVic)
+		leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+		rightController(0.1,0.1, 0.1, &rightEnc, &rightBackVic),
+		angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic)
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
