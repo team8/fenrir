@@ -20,7 +20,7 @@ void Shooter::shoot(){
 void Shooter::update(){
 	switch(state) {
 		case IDLE:
-			setAllVics(0);
+			setAllVics(setVicsSpeed);
 			break;
 		case LOADED:
 			// Do we need this?
@@ -29,7 +29,10 @@ void Shooter::update(){
 			// Aim the shooter
 			break;
 		case SPINNING_UP:
-			setAllVics(SHOOTER_TOP_SPEED);
+			shooterVic1.Set(setVicsSpeed);
+			shooterVic2.Set(setVicsSpeed);
+			shooterVic3.Set(setVicsSpeed);
+			shooterVic4.Set(setVicsSpeed);
 			break;
 		case SHOOTING:
 			// Do something
@@ -38,16 +41,14 @@ void Shooter::update(){
 }
 
 void Shooter::setAllVics(float speed){
-	shooterVic1.Set(speed);
-	shooterVic2.Set(speed);
-	shooterVic3.Set(speed);
-	shooterVic4.Set(speed);
+	state = SPINNING_UP;
+	setVicsSpeed = speed;
 }
 
 void Shooter::runCommand(RobotCommand command){
 	ShooterArgs * args = (ShooterArgs *) command.argPointer;
 	switch (command.getMethod().shooterMethod) {
-		case SHOOT:
+		case SHOOT:   
 			break;
 	}
 	free(args);

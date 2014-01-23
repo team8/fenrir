@@ -20,6 +20,7 @@ class Shooter {
 		Victor loaderVic2;
 		ShooterState state;
 		void setAllVics(float speed);
+		double setVicsSpeed;
 	public:
 		void shoot();
 		void update();
