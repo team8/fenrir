@@ -44,7 +44,7 @@ void DriveTrain::runCommand(RobotCommand command) {
     case ROTATESPEED:
       rotateS(args -> rotSpeed);
       break;
-    case STOPROTATE:
+    case STOPVICTORS:
       stopVictors();
       break;
     }
