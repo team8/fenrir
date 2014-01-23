@@ -21,8 +21,8 @@ void Shooter::runCommand(RobotCommand command){
 	free(args);
 }
 void Shooter::shoot(){
-	loaderVic1.set(LOAD_SPEED);
-	loaderVic2.set(LOAD_SPEED);
+	loaderVic1.Set(LOAD_SPEED);
+	loaderVic2.Set(LOAD_SPEED);
 }
 
 void Shooter::update(){
@@ -54,6 +54,6 @@ void Shooter::setShooterVics(float speed){
 
 void Shooter::setAllVics(float speed){
 	setShooterVics(0);
-	loaderVic1.set(0);
-	loaderVic2.set(0);
+	loaderVic1.Set(0);
+	loaderVic2.Set(0);
 }

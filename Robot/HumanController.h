@@ -22,6 +22,7 @@ class HumanController {
   Joystick speedStick;
   Joystick turnStick;
   Joystick operatorStick;
-  bool buttonPrev;
+  bool accuButtonPrev;
+  bool shootButtonPrev;
 };
 #endif

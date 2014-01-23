@@ -31,8 +31,8 @@ void HumanController::update(){
     setSpeed.driveMethod=SETSPEED;
     RobotCommand command(DRIVE,setSpeed, argPointer);
     robot -> setCommand(command);
-    if(buttonPrev!=operatorStick.GetTrigger()){
-    	if(operatorStick.GetTrigger()){
+    if(accuButtonPrev!=getAccumulatorButton()){
+    	if(getAccumulatorButton()){
     		Method setAccumulator;
     		setAccumulator.accumulatorMethod=ACCUMULATE;
     		RobotCommand command(ACCUMULATOR, setAccumulator, 0);
@@ -45,7 +45,17 @@ void HumanController::update(){
     		robot -> setCommand(command);
     	}
     }
-    buttonPrev=operatorStick.GetTrigger();
+    
+    if(shootButtonPrev!=getShootButton()){
+    	if(getShootButton()){
+    		Method shoot;
+    		shoot.shooterMethod = SHOOT;
+    		RobotCommand command(SHOOTER, shoot, 0);
+    		robot -> setCommand(command);
+    	}
+    }
+    accuButtonPrev=getAccumulatorButton();
+    shootButtonPrev=getShootButton();
 }
 
 float HumanController::getSpeedStick(){
