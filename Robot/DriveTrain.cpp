@@ -57,7 +57,7 @@ void DriveTrain::update() {
 	
 		case ROTATE_SPEED:
 			leftFrontVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1));
-			leftBackVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1)));
+			leftBackVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1));
 			rightFrontVic.Set(min(max(targetSpeed-rotateSpeed,-1),1));
 			rightBackVic.Set(min(max(targetSpeed-rotateSpeed,-1),1));
 			break;
