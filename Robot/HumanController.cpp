@@ -53,15 +53,19 @@ float HumanController::getSpeedStick(){
       return speed;
 }
 
-
 float HumanController::getTurnStick() {
     float turn = turnStick.GetX();
     return turn;
 }
 
+float HumanController::getAccumulatorStick() {
+	return operatorStick.GetY(); // For adjusting the accumulator with Operator stick
+}
 
-float HumanController::getOperatorStick() {
-    //find what the operator stick actually does :D
-	float something = 0.0;
-	return something;
-}  
+bool HumanController::getAccumulatorButton() {
+    return operatorStick. // Get button to start accumulator from Operator stick
+}
+
+bool HumanController::getShootButton() {
+    return operatorStick. // Get trigger button to shoot from Operator stick
+}

@@ -9,22 +9,19 @@
 class HumanController {
 
  public:
-
   void update();
   float getSpeedStick();
   float getTurnStick();
-  float getOperatorStick();
+  float getAccumulatorStick();
+  bool getAccumulatorButton();
+  bool getShootButton();
   HumanController(Robot *robotPointer);
 
  private:
-  
   Robot *robot;
   Joystick speedStick;
   Joystick turnStick;
   Joystick operatorStick;
   bool buttonPrev;
-
-
 };
 #endif
-
