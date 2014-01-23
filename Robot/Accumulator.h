@@ -6,6 +6,11 @@ typedef enum{
 	ACCUMULATING,
 	NOT_ACCUMULATING
 } AccumulatorState;
+typedef enum{
+	EXTEND,
+	RETRACT,
+	ACCUMULATORSTOP
+}AccumulatorExtension;
 
 class Accumulator{
 private:
@@ -16,6 +21,7 @@ private:
 	Encoder enc1;
 	Encoder enc2;
 	AccumulatorState state;
+	AccumulatorExtension extensionState;
 
 	
 public:

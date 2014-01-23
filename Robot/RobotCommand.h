@@ -23,6 +23,11 @@ typedef enum AccumulatorMethod{
 	ACCUMULATE,
 	STOP
 }AccumulatorMethod;
+typedef enum AccumulatorExtensionMethod{
+	FOWARD,
+	BACKWARD,
+	HALT
+};
 
 // These are the methods available in the Shooter subsystem
 typedef enum ShooterMethod{
@@ -34,6 +39,7 @@ typedef union Method{
   DriveMethod driveMethod;
   ShooterMethod shooterMethod;
   AccumulatorMethod accumulatorMethod;
+  AccumulatorExtensionMethod extensionMethod;
 }Method;
 
 /*METHOD ARGUMENTS*/
