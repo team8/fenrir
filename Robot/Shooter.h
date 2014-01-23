@@ -12,12 +12,14 @@ typedef enum ShooterState {
 
 class Shooter {
 	private:
-  
 		Victor shooterVic1;
 		Victor shooterVic2;
 		Victor shooterVic3;
 		Victor shooterVic4;
+		Victor loaderVic1;
+		Victor loaderVic2;
 		ShooterState state;
+		void setAllVics(float speed);
 	public:
 		void shoot();
 		void update();

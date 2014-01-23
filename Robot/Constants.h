@@ -53,3 +53,4 @@
 #define DEFAULT_RETRACT_DIST -1
 
  //aiming also includes warming up the motors
+#define SHOOTER_TOP_SPEED 0.5

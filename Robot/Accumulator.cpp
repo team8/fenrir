@@ -7,10 +7,9 @@ Accumulator::Accumulator():
 	
 	enc1((uint32_t)PORT_ACCUMULATOR_ENC_1A, (uint32_t)PORT_ACCUMULATOR_ENC_1B),
 	enc2((uint32_t)PORT_ACCUMULATOR_ENC_2A, (uint32_t)PORT_ACCUMULATOR_ENC_2B)
-
-{
-		
+{	
 }
+
 void Accumulator::accumulate(){
 	state=ACCUMULATING;
 }

@@ -26,7 +26,8 @@ typedef enum AccumulatorMethod{
 
 // These are the methods available in the Shooter subsystem
 typedef enum ShooterMethod{
-    SHOOT
+    SHOOT,
+    WARM_UP,
 }ShooterMethod;
 
 typedef union Method{
