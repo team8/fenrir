@@ -39,7 +39,7 @@ void Fenrir::RobotInit(){
 }
 
 void Fenrir::AutonomousInit(){
- 
+
 }
 
 void Fenrir::AutonomousPeriodic(){

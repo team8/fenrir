@@ -16,7 +16,7 @@ typedef enum DriveMethod{
   DRIVEDIST,
   ROTATEANGLE,
   ROTATESPEED,
-  STOPROTATE
+  STOPVICTORS
 }DriveMethod;
 
 typedef enum AccumulatorMethod{
