@@ -63,9 +63,9 @@ float HumanController::getAccumulatorStick() {
 }
 
 bool HumanController::getAccumulatorButton() {
-    return operatorStick. // Get button to start accumulator from Operator stick
+    return operatorStick.GetRawButton((uint32_t)BUTTON_PORT); // Get button to start accumulator from Operator stick
 }
 
 bool HumanController::getShootButton() {
-    return operatorStick. // Get trigger button to shoot from Operator stick
+    return operatorStick.GetTrigger(); // Get trigger button to shoot from Operator stick
 }

@@ -10,23 +10,17 @@ Accumulator::Accumulator():
 {	
 }
 
-void Accumulator::accumulate(){
-	state=ACCUMULATING;
-}
-void Accumulator::stop(){
-	state=NOT_ACCUMULATING;
-}
-
 void Accumulator::runCommand(RobotCommand newCommand){
 	switch(newCommand.getMethod().accumulatorMethod){
 	case STOP:
-		stop();
+		state = NOT_ACCUMULATING;
 		break;
 	case ACCUMULATE:
-		accumulate();
+		state = ACCUMULATING;
 		break;
 	}
 }
+
 void Accumulator::update(){
 	switch(state){
 	case NOT_ACCUMULATING:

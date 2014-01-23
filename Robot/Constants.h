@@ -56,3 +56,6 @@
 
  //aiming also includes warming up the motors
 #define SHOOTER_TOP_SPEED 0.5
+
+//button number for operator stick trigger
+#define BUTTON_PORT 0
