@@ -7,8 +7,8 @@ Shooter::Shooter():
 	shooterVic3(PORT_SHOOTER_VIC_3),
 	shooterVic4(PORT_SHOOTER_VIC_4),
 
-	loaderVic1(),
-	loaderVic2()
+	loaderVic1(PORT_LOADER_VIC_1),
+	loaderVic2(PORT_LOADER_VIC_2)
 {
 
 }
