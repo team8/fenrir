@@ -8,7 +8,8 @@ typedef enum {
 	
 	DRIVE_DIST,
 	ROTATE_SPEED,
-	TURN_ANGLE
+	TURN_ANGLE,
+	STOP_VICTORS
 	
 	
 }driveState;

@@ -44,9 +44,9 @@ void DriveTrain::runCommand(RobotCommand command) {
     case ROTATESPEED:
       rotateS(args -> rotSpeed);
       break;
-   /* case STOPROTATE:
-      stopVictors(args -> speedValue);
-      break;*/
+    case STOPROTATE:
+      stopVictors();
+      break;
     }
     free(args);
 }
@@ -72,6 +72,12 @@ void DriveTrain::update() {
 			leftBackVic.Set(-(angleController.Get()));
 			rightFrontVic.Set(angleController.Get());
 			rightBackVic.Set(angleController.Get());
+		case STOP_VICTORS:
+			leftFrontVic.Set(0);
+			leftBackVic.Set(0);
+			rightFrontVic.Set(0);
+			rightBackVic.Set(0);
+			
 			break;
 	}
 }
@@ -123,8 +129,10 @@ void DriveTrain::rotateS(double speed) {
 }
 
 void DriveTrain::stopVictors(){
-	leftFrontVic.Set(0);
-	leftBackVic.Set(0);
-	rightFrontVic.Set(0);
-	rightBackVic.Set(0);
+	state = ROTATE_SPEED; 
+
+	//leftFrontVic.Set(0);
+	//leftBackVic.Set(0);
+	//rightFrontVic.Set(0);
+	//rightBackVic.Set(0);
 }
