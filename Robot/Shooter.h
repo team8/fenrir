@@ -19,11 +19,11 @@ class Shooter {
 		Victor loaderVic1;
 		Victor loaderVic2;
 		ShooterState state;
-		void setAllVics(float speed);
+		void stopAllVics();
 		void setShooterVics(float speed);
-		double setVicsSpeed;
+		double vicsSpeed;
 	public:
-		void shoot();
+		void shoot(float speed);
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);

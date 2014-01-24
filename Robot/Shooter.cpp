@@ -20,15 +20,16 @@ void Shooter::runCommand(RobotCommand command){
 	}
 	free(args);
 }
-void Shooter::shoot(){
-	loaderVic1.Set(LOAD_SPEED);
-	loaderVic2.Set(LOAD_SPEED);
-}
 
 void Shooter::update(){
 	switch(state) {
 		case IDLE:
-			setAllVics(0);
+			shooterVic1.Set(0);
+			shooterVic2.Set(0);
+			shooterVic3.Set(0);
+			shooterVic4.Set(0);
+			loaderVic1.Set(0);
+			loaderVic2.Set(0);
 			break;
 		case LOADED:
 			// Do we need this?
@@ -37,23 +38,29 @@ void Shooter::update(){
 			// Aim the shooter
 			break;
 		case SPINNING_UP:
-			setShooterVics(SHOOTER_TOP_SPEED);
+			shooterVic1.Set(vicsSpeed);
+			shooterVic2.Set(vicsSpeed);
+			shooterVic3.Set(vicsSpeed);
+			shooterVic4.Set(vicsSpeed);
 			break;
 		case SHOOTING:
-			shoot();
+			loaderVic1.Set(vicsSpeed);
+			loaderVic2.Set(vicsSpeed);
 			break;
 	}
 }
 
-void Shooter::setShooterVics(float speed){
-	shooterVic1.Set(speed);
-	shooterVic2.Set(speed);
-	shooterVic3.Set(speed);
-	shooterVic4.Set(speed);
+void Shooter::shoot(float speed){
+	vicsSpeed = speed;
+	state = SHOOTING;
 }
 
-void Shooter::setAllVics(float speed){
-	setShooterVics(0);
-	loaderVic1.Set(0);
-	loaderVic2.Set(0);
+void Shooter::setShooterVics(float speed){
+	vicsSpeed = speed;
+	state = SPINNING_UP;
+	
+}
+
+void Shooter::stopAllVics(){
+	state = IDLE;
 }
