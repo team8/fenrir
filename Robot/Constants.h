@@ -59,4 +59,5 @@
 #define LOAD_SPPED 0.5;
 
 //button number for operator stick trigger
-#define BUTTON_PORT 0
+#define ACCUMULATOR_BUTTON_PORT 0
+#define WARMUP_BUTTON_PORT 0
