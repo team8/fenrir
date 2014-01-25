@@ -83,3 +83,7 @@ bool HumanController::getShootButton() {
 bool HumanController::getWarmupButton() {
     return operatorStick.GetRawButton((uint32_t)WARMUP_BUTTON_PORT); // Get button to start shooter warmup from Operator stick
 }
+
+bool HumanControlloer::getPassButton() {
+	return operatorStick.GetRawButton((unint32_t)PASS_BUTTON_PORT);
+}

@@ -4,7 +4,8 @@
 
 typedef enum{
 	ACCUMULATING,
-	NOT_ACCUMULATING
+	NOT_ACCUMULATING,
+	PASS
 } AccumulatorState;
 
 class Accumulator{

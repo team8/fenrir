@@ -21,7 +21,8 @@ typedef enum DriveMethod{
 
 typedef enum AccumulatorMethod{
 	ACCUMULATE,
-	STOP
+	STOP,
+	PASS
 }AccumulatorMethod;
 typedef enum AccumulatorExtensionMethod{
 	FOWARD,

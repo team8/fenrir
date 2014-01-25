@@ -1,12 +1,7 @@
 #include "Accumulator.h"
 
 Accumulator::Accumulator():
-	leftVic(PORT_ACCUMULATOR_VIC_5),
-	rightVic(PORT_ACCUMULATOR_VIC_6),
-	accumulateVic(PORT_ACCUMULATOR_VIC_7),
-	
-	enc1((uint32_t)PORT_ACCUMULATOR_ENC_1A, (uint32_t)PORT_ACCUMULATOR_ENC_1B),
-	enc2((uint32_t)PORT_ACCUMULATOR_ENC_2A, (uint32_t)PORT_ACCUMULATOR_ENC_2B)
+	accumulateVic(PORT_ACCUMULATOR_VIC_7)
 {	
 }
 
@@ -18,17 +13,22 @@ void Accumulator::runCommand(RobotCommand newCommand){
 	case ACCUMULATE:
 		state = ACCUMULATING;
 		break;
+	case PASS:
+		state = PASS;
+		break;
 	}
 }
-
-void Accumulater::
 void Accumulator::update(){
 	switch(state){
 	case NOT_ACCUMULATING:
-		accumulateVic.Set(0);
+		accumulateVic.set(0);
 		break;
 	case ACCUMULATING:
 		accumulateVic.Set(1.0);
 		break;
+	case PASS:
+		accumulateVic.Set(-1.0);
+		break;
 	}
 }
+
