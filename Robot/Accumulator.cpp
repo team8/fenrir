@@ -24,10 +24,10 @@ void Accumulator::update(){
 		accumulateVic.set(0);
 		break;
 	case ACCUMULATING:
-		accumulateVic.Set(1.0);
+		accumulateVic.Set(0.1);
 		break;
 	case PASS:
-		accumulateVic.Set(-1.0);
+		accumulateVic.Set(-0.1);
 		break;
 	}
 }
