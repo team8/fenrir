@@ -30,14 +30,17 @@ typedef enum AccumulatorExtensionMethod{
 };
 
 // These are the methods available in the Shooter subsystem
-typedef enum ShooterMethod{
-    SHOOT,
-    WARM_UP,
-}ShooterMethod;
+typedef enum ShooterState{
+    IDLE,
+    LOADED,
+    AIMING,
+    SPINNING_UP,
+    SHOOTING
+}ShooterState;
 
 typedef union Method{
   DriveMethod driveMethod;
-  ShooterMethod shooterMethod;
+  ShooterState shooterState;
   AccumulatorMethod accumulatorMethod;
   AccumulatorExtensionMethod extensionMethod;
 }Method;
