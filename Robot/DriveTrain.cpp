@@ -13,6 +13,8 @@ DriveTrain::DriveTrain() :
         // Encoders
         leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B), 
         rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B), 
+        //leftEnc.SetPIDSourceParameter(kdistance),
+		//rightEnc.SetPIDSourceParameter(kdistance),
         
         // PIDControllers
 		leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
@@ -21,6 +23,7 @@ DriveTrain::DriveTrain() :
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
+
     leftEnc.Start();
     rightEnc.Start();
     rightController.SetOutputRange(-1,1);
@@ -53,7 +56,7 @@ void DriveTrain::runCommand(RobotCommand command) {
 
 void DriveTrain::update() {
 	
-	switch(state) {
+	switch(state){
 	
 		case ROTATE_SPEED:
 			leftFrontVic.Set(min(max(-(targetSpeed+rotateSpeed),-1),1));
@@ -72,7 +75,7 @@ void DriveTrain::update() {
 			leftBackVic.Set(-(angleController.Get()));
 			rightFrontVic.Set(angleController.Get());
 			rightBackVic.Set(angleController.Get());
-		case STOP_VICTORS:
+		case STOPVICTORS:
 			leftFrontVic.Set(0);
 			leftBackVic.Set(0);
 			rightFrontVic.Set(0);
@@ -89,7 +92,6 @@ void DriveTrain::driveD(float dist) {
 	state = DRIVE_DIST;
 	leftEnc.Reset();
 	rightEnc.Reset();
-	
 	leftController.SetSetpoint(dist);
 	rightController.SetSetpoint(dist);
 	leftController.Enable();
