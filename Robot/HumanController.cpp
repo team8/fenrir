@@ -46,13 +46,18 @@ void HumanController::update(){
     	}
     }
     
-    if(shootButtonPrev!=getShootButton()){
-    	if(getShootButton()){
-    		Method shoot;
-    		shoot.shooterMethod = SHOOT;
-    		RobotCommand command(SHOOTER, shoot, 0);
-    		robot -> setCommand(command);
-    	}
+    if(shootButtonPrev!=getShootButton() && getShootButton()){
+    	Method shoot;
+    	shoot.shooterMethod = SHOOT;
+    	RobotCommand command(SHOOTER, shoot, 0);
+    	robot -> setCommand(command);
+    }
+    
+    if(passButtonPrev != getPassButton() && getPassButton()) {
+    	Method accumulate;
+    	accumulate.accululatorMethod = PASS;
+    	RobotCommand command(ACCUMULATOR, accumulate, 0);
+    	robot -> setCommand(command);
     }
     accuButtonPrev=getAccumulatorButton();
     shootButtonPrev=getShootButton();
