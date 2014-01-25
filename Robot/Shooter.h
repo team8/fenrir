@@ -5,8 +5,7 @@
 typedef enum ShooterState {
 	IDLE,  
 	LOADED,
-	AIMING,
-	SPINNING_UP,
+	PREP,
 	SHOOTING
 }ShooterState;
 
@@ -16,15 +15,17 @@ class Shooter {
 		Victor shooterVic2;
 		Victor shooterVic3;
 		Victor shooterVic4;
+		
 		Victor loaderVic1;
 		Victor loaderVic2;
+		
 		ShooterState state;
-		void stopAllVics();
+		
+		void setAllVics();
 		void setShooterVics(float speed);
-		double vicsSpeed;
 	public:
-		void shoot(float speed);
-		void update();
+		void shoot();
+		void update(state);
 		Shooter();
 		void runCommand(RobotCommand command);
 };
