@@ -19,19 +19,9 @@ void Accumulator::runCommand(RobotCommand newCommand){
 		state = ACCUMULATING;
 		break;
 	}
-	switch(newCommand.getMethod().extensionMethod){
-	case FOWARD:
-		extensionState = EXTEND;
-		break;
-	case BACKWARD:
-		extensionState = RETRACT;
-		break;
-	case HALT:
-		extensionState = ACCUMULATORSTOP;
-		break;
-	}
 }
 
+void Accumulater::
 void Accumulator::update(){
 	switch(state){
 	case NOT_ACCUMULATING:
@@ -39,20 +29,6 @@ void Accumulator::update(){
 		break;
 	case ACCUMULATING:
 		accumulateVic.Set(1.0);
-		break;
-	}
-	switch(extensionState){
-	case EXTEND:
-		rightVic.Set(1.0);
-		leftVic.Set(-1.0);
-		break;
-	case RETRACT:
-		rightVic.Set(-1.0);
-		leftVic.Set(1.0);
-		break;
-	case ACCUMULATORSTOP:
-		rightVic.Set(0.0);
-		leftVic.Set(0.0);
 		break;
 	}
 }
