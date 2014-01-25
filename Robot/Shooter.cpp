@@ -12,27 +12,31 @@ Shooter::Shooter():
 }
 
 void Shooter::runCommand(RobotCommand command){
-	ShooterArgs * args = (ShooterArgs *) command.argPointer;
-	command.getMethod().shooterState;
+	ShooterArgs* args = (ShooterArgs*) command.argPointer;
+	switch(command.getMethod().shooterMethod) {
+		case PREP:
+			setShooterVics(SHOOTER_VICS_SPEED);
+			break;
+		case SHOOT:
+			shoot();
+			break;
+	}
 	free(args);
 }
 
-void Shooter::update(state){
+void Shooter::update(){
+	//for certain cases, will not automatically switch case, waits for user
 	switch(state) {
 		case IDLE:
 			setAllVics(0);
 			break;
 		case LOADED:
-			state = PREP;
 			break;
 		case PREP:
 			// Aim the shooter and start spinning up
-			setShooterVics(SHOOTER_VICS_SPEED);
-			state = SHOOTING;
 			break;
 		case SHOOTING:
 			shoot();
-			state = IDLE;
 		break;
 	}
 }
@@ -46,11 +50,14 @@ void Shooter::setShooterVics(float speed){
 
 void Shooter::setAllVics(float speed){
 	setShooterVics(speed);
-	loaderVic1.set(speed);
-	loaderVic2.set(speed);
+	loaderVic1.Set(speed);
+	loaderVic2.Set(speed);
 }
 
 void Shooter::shoot(){
-	loaderVic1.set(LOAD_SPEED);
-	loaderVic2.set(LOAD_SPEED);
+	time.Reset();
+	time.Start();
+	loaderVic1.Set(LOAD_SPEED);
+	loaderVic2.Set(LOAD_SPEED);
+	state = IDLE;
 }
