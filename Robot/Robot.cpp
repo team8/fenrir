@@ -19,3 +19,6 @@ void Robot::setCommand(RobotCommand command) {
             break;
     }
 }
+void Robot::update(){
+	accumulator.update();
+}

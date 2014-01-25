@@ -19,11 +19,6 @@ Shooter::Shooter():
 	encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
 	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 {
-	/*encShooter1.SetRatePerPulse;
-	 * encShooter2.SetRatePerPulse;
-	 * encShooter3.SetRatePerPulse;
-	 * encShooter4.SetRatePerPulse;
-	 */
 	encShooter1.Start();
 	encShooter2.Start();
 	encShooter3.Start();
@@ -59,6 +54,7 @@ void Shooter::update(){
 			if(true)state = PREPARING_TO_SHOOT;
 			break;
 		case PREPARING_TO_SHOOT:
+			//aim
 			shooterVic1.Set(encController1.Get());
 			shooterVic2.Set(encController2.Get());
 			shooterVic3.Set(encController3.Get());

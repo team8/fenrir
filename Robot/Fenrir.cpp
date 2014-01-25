@@ -44,6 +44,7 @@ void Fenrir::AutonomousInit(){
 
 void Fenrir::AutonomousPeriodic(){
 	autoController.update();
+	robot.update();
 }
 
 void Fenrir::AutonomousDisabled(){
@@ -64,6 +65,7 @@ void Fenrir::TeleopInit(){
 
 void Fenrir::TeleopPeriodic(){
 	humanController.update();
+	robot.update();
 }
 
 void Fenrir::TeleopDisabled(){

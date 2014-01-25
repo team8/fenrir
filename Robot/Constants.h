@@ -5,9 +5,9 @@
 
 //ports for drive train victors
 #define PORT_DRIVE_VIC_1 0
-#define PORT_DRIVE_VIC_2 0
+#define PORT_DRIVE_VIC_2 1
 #define PORT_DRIVE_VIC_3 0
-#define PORT_DRIVE_VIC_4 0
+#define PORT_DRIVE_VIC_4 2
 
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT_A 0
@@ -41,7 +41,7 @@
 //ports for accumulator victors
 #define PORT_ACCUMULATOR_VIC_5 0
 #define PORT_ACCUMULATOR_VIC_6 0
-#define PORT_ACCUMULATOR_VIC_7 0
+#define PORT_ACCUMULATOR_VIC_7 3
 
 //ports for accumulator encoders
 #define PORT_ACCUMULATOR_ENC_1A 0
