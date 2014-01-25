@@ -48,7 +48,7 @@ void HumanController::update(){
     if(shootButtonPrev!=getShootButton()){
     	if(getShootButton()){
     		Method shoot;
-    		shoot.shooterMethod = SHOOT;
+    		shoot.shooterMethod = SHOOTING;
     		RobotCommand command(SHOOTER, shoot, 0);
     		robot -> setCommand(command);
     	}
@@ -83,6 +83,6 @@ bool HumanController::getWarmupButton() {
     return operatorStick.GetRawButton((uint32_t)WARMUP_BUTTON_PORT); // Get button to start shooter warmup from Operator stick
 }
 
-bool HumanControlloer::getPassButton() {
-	return operatorStick.GetRawButton((unint32_t)PASS_BUTTON_PORT);
+bool HumanController::getPassButton() {
+	return operatorStick.GetRawButton((uint32_t)PASS_BUTTON_PORT);
 }

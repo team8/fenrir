@@ -14,19 +14,19 @@ void Accumulator::runCommand(RobotCommand newCommand){
 		state = ACCUMULATING;
 		break;
 	case PASS:
-		state = PASS;
+		state = PASSING;
 		break;
 	}
 }
 void Accumulator::update(){
 	switch(state){
 	case NOT_ACCUMULATING:
-		accumulateVic.set(0);
+		accumulateVic.Set(0);
 		break;
 	case ACCUMULATING:
 		accumulateVic.Set(0.1);
 		break;
-	case PASS:
+	case PASSING:
 		accumulateVic.Set(-0.1);
 		break;
 	}

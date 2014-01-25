@@ -3,10 +3,10 @@
 #include "RobotCommand.h"
 
 typedef enum ShooterState {
-	IDLE,  
+	NOT_SHOOTING, //see below
 	CHECK_LOADED,
 	PREP,
-	SHOOTING
+	FIRING//need a better name... only did this to resolve conflict w/ ShooterMethod in RobotCommand.h
 }ShooterState;
 
 class Shooter {
@@ -19,17 +19,17 @@ class Shooter {
 		Victor loaderVic1;
 		Victor loaderVic2;
 		
-		ShooterState state;
+		Encoder encShooter;
 		
-		void setAllVics();
-		void setShooterVics(float speed);
-		void shoot();
+		ShooterState state;
 		
 		Timer time;
 	public:
 		void shoot();
+		void setAllVics(float speed);
+		void setShooterVics(float speed);
+		void getShooterEncs(float encSpeed);
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);
 };
-

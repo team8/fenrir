@@ -56,7 +56,11 @@
 
 //Constants for the Vics for shooting
 #define SHOOTER_VICS_SPEED 1
-#define LOAD_SPEED 0.5;
+#define LOAD_SPEED 0.5
+
+//Encoder Ports
+#define PORT_SHOOTER_ENCODER_1A 0
+#define PORT_SHOOTER_ENCODER_1B 0
 
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 0

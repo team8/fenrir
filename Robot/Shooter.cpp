@@ -7,7 +7,9 @@ Shooter::Shooter():
 	shooterVic4(PORT_SHOOTER_VIC_4),
 	
 	loaderVic1(PORT_LOADER_VIC_1),
-	loaderVic2(PORT_LOADER_VIC_2)
+	loaderVic2(PORT_LOADER_VIC_2),
+	
+	encShooter((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B)
 {
 }
 
@@ -17,7 +19,7 @@ void Shooter::runCommand(RobotCommand command){
 		case PREP:
 			setShooterVics(SHOOTER_VICS_SPEED);
 			break;
-		case SHOOT:
+		case FIRING:
 			shoot();
 			break;
 	}
@@ -27,7 +29,7 @@ void Shooter::runCommand(RobotCommand command){
 void Shooter::update(){
 	//for certain cases, will not automatically switch case, waits for user
 	switch(state) {
-		case IDLE:
+		case NOT_SHOOTING:
 			setAllVics(0);
 			break;
 		case CHECK_LOADED:
@@ -35,21 +37,27 @@ void Shooter::update(){
 			if(true)state = PREP;
 			break;
 		case PREP:
-			setShooterVic(some default speed);
+			getShooterEncs(float encSpeed);
+			if(encSpeed>0){//minimum speed needed for shooting
+			state=FIRING;
+			}
 			break;
-		case SHOOTING:
+		case FIRING:
 			shoot();
 		break;
 	}
 }
 
-void Shooter::setShooterVics(float speed){z
+void Shooter::setShooterVics(float speed){
 	shooterVic1.Set(speed);
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
 }
 
+void Shooter::getShooterEncs(float encSpeed){
+	encSpeed = encShooter.Get();
+}
 void Shooter::setAllVics(float speed){
 	setShooterVics(speed);
 	loaderVic1.Set(speed);
@@ -61,5 +69,5 @@ void Shooter::shoot(){
 	time.Start();
 	loaderVic1.Set(LOAD_SPEED);
 	loaderVic2.Set(LOAD_SPEED);
-	state = IDLE;
+	state = NOT_SHOOTING;
 }
