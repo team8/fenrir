@@ -19,10 +19,10 @@
 #define PORT_GYRO 0
 
 //default speeds for DriveTrain
-
 #define DEFAULT_AUTO_ROTATE 0.5
 
 //ports for vision
+
 
 //ports for shooter encoders
 #define PORT_SHOOTER_ENCODER_1 0
@@ -54,9 +54,9 @@
 #define DEFAULT_DEPLOY_DIST 1
 #define DEFAULT_RETRACT_DIST -1
 
- //aiming also includes warming up the motors
-#define SHOOTER_TOP_SPEED 0.5
-#define LOAD_SPPED 0.5;
+//Constants for the Vics for shooting
+#define SHOOTER_VICS_SPEED 1
+#define LOAD_SPEED 0.5;
 
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 0
