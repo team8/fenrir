@@ -61,3 +61,4 @@
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 0
 #define WARMUP_BUTTON_PORT 0
+#define PASS_BUTTON_PORT 0
