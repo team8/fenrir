@@ -23,9 +23,11 @@ class Shooter {
 		
 		void setAllVics();
 		void setShooterVics(float speed);
+		
+		Timer time;
 	public:
 		void shoot();
-		void update(state);
+		void update();
 		Shooter();
 		void runCommand(RobotCommand command);
 };
