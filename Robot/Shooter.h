@@ -4,7 +4,7 @@
 
 typedef enum ShooterState {
 	IDLE,  
-	LOADED,
+	CHECK_LOADED,
 	PREP,
 	SHOOTING
 }ShooterState;
@@ -23,6 +23,7 @@ class Shooter {
 		
 		void setAllVics();
 		void setShooterVics(float speed);
+		void shoot();
 		
 		Timer time;
 	public:
