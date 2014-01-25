@@ -33,11 +33,13 @@ Shooter::Shooter():
 void Shooter::runCommand(RobotCommand command){
 	ShooterArgs* args = (ShooterArgs*) command.argPointer;
 	switch(command.getMethod().shooterMethod) {
-		case PREPARING_TO_SHOOT:
-			setShooterVics(SHOOTER_VICS_SPEED);
+		case PREP:
+			startShooterVics(SHOOTER_VICS_SPEED);
 			break;
-		case FIRING:
-			shoot();
+		//named it like this because I think this sounds more like a command and helps reduce confusion
+		case FIRE:
+			//once trigger is pulled, shoots
+			fire(/*Pointer to the trigger*/args->trigger);
 			break;
 	}
 	free(args);
@@ -46,22 +48,18 @@ void Shooter::runCommand(RobotCommand command){
 void Shooter::update(){
 	//for certain cases, will not automatically switch case, waits for user
 	switch(state) {
-		case NOT_SHOOTING:
+		case IDLE:
 			setAllVics(0);
 			break;
-		case CHECK_LOADED:
+/*		case CHECK_LOADED: //isn't this redundant??
 			//do something to check if there is a ball, then if true, start prepping 
-			if(true)state = PREPARING_TO_SHOOT;
-			break;
-		case PREPARING_TO_SHOOT:
-			//aim
+			if(true)state = PREP;
+			break; */
+		case PREP:
 			shooterVic1.Set(encController1.Get());
 			shooterVic2.Set(encController2.Get());
 			shooterVic3.Set(encController3.Get());
 			shooterVic4.Set(encController4.Get());
-			//if statement to check if ready to shoot
-			state=FIRING;
-			
 			break;
 		case FIRING:
 			shoot();
@@ -69,11 +67,12 @@ void Shooter::update(){
 	}
 }
 
-void Shooter::setShooterVics(float speed){
+void Shooter::startShooterVics(float speed){
 	shooterVic1.Set(speed);
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
+	state = PREP;
 }
 
 void Shooter::setAllVics(float speed){
@@ -87,5 +86,16 @@ void Shooter::shoot(){
 	time.Start();
 	loaderVic1.Set(LOAD_SPEED);
 	loaderVic2.Set(LOAD_SPEED);
-	state = NOT_SHOOTING;
+	//TODO once timer reaches certain constant, switch state
+	state = IDLE;
+}
+
+void Shooter::fire(*trigger){
+	//keeps checking pointer to see if trigger has been pushed?
+	if() {
+		state = FIRING;
+	}
+	else {
+		
+	}
 }
