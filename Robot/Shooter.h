@@ -5,7 +5,7 @@
 typedef enum ShooterState {
 	NOT_SHOOTING, //see below
 	CHECK_LOADED,
-	PREP,
+	PREPARING_TO_SHOOT,
 	FIRING//need a better name... only did this to resolve conflict w/ ShooterMethod in RobotCommand.h
 }ShooterState;
 
@@ -19,7 +19,15 @@ class Shooter {
 		Victor loaderVic1;
 		Victor loaderVic2;
 		
-		Encoder encShooter;
+		Encoder encShooter1;
+		Encoder encShooter2;
+		Encoder encShooter3;
+		Encoder encShooter4;
+		
+		PIDController encController1;
+		PIDController encController2;
+		PIDController encController3;
+		PIDController encController4;
 		
 		ShooterState state;
 		
@@ -28,7 +36,6 @@ class Shooter {
 		void shoot();
 		void setAllVics(float speed);
 		void setShooterVics(float speed);
-		void getShooterEncs(float encSpeed);
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);

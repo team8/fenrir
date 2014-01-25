@@ -59,8 +59,14 @@
 #define LOAD_SPEED 0.5
 
 //Encoder Ports
-#define PORT_SHOOTER_ENCODER_1A 0
+#define PORT_SHOOTER_ENCODER_1A 0//is this obselete with the other shooter encoders?
 #define PORT_SHOOTER_ENCODER_1B 0
+#define PORT_SHOOTER_ENCODER_2A 0
+#define PORT_SHOOTER_ENCODER_2B 0
+#define PORT_SHOOTER_ENCODER_3A 0
+#define PORT_SHOOTER_ENCODER_3B 0
+#define PORT_SHOOTER_ENCODER_4A 0
+#define PORT_SHOOTER_ENCODER_4B 0
 
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 0

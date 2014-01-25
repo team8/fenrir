@@ -33,10 +33,10 @@ typedef enum AccumulatorExtensionMethod{
 // These are the methods available in the Shooter subsystem
 typedef enum ShooterMethod{
     IDLE,
-    LOADED,
-    AIMING,
-    SPINNING_UP,
-    SHOOTING
+    LOAD,
+    AIM,
+    SPIN_UP,
+    SHOOT
 }ShooterMethod;
 
 typedef union Method{

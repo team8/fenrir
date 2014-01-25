@@ -48,7 +48,7 @@ void HumanController::update(){
     if(shootButtonPrev!=getShootButton()){
     	if(getShootButton()){
     		Method shoot;
-    		shoot.shooterMethod = SHOOTING;
+    		shoot.shooterMethod = SHOOT;
     		RobotCommand command(SHOOTER, shoot, 0);
     		robot -> setCommand(command);
     	}
