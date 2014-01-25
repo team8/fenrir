@@ -30,10 +30,12 @@ void Shooter::update(){
 		case IDLE:
 			setAllVics(0);
 			break;
-		case LOADED:
+		case CHECK_LOADED:
+			//do something to check if there is a ball, then if true, start prepping 
+			if(true)state = PREP;
 			break;
 		case PREP:
-			// Aim the shooter and start spinning up
+			setShooterVic(some default speed);
 			break;
 		case SHOOTING:
 			shoot();
@@ -41,7 +43,7 @@ void Shooter::update(){
 	}
 }
 
-void Shooter::setShooterVics(float speed){
+void Shooter::setShooterVics(float speed){z
 	shooterVic1.Set(speed);
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
