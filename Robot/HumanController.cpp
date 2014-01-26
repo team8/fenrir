@@ -27,7 +27,7 @@ void HumanController::update(){
 		
 		for(int i = 1; i<=12; i++)
 		{
-			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)1));
+			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)i));
 		}
 		printf("\n");
 	}

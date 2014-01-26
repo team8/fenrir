@@ -86,7 +86,6 @@ void Shooter::startShooterVics(float speed){
 }
 
 void Shooter::setAllVics(float speed){
-	setShooterVics(speed);
 	loaderVic1.Set(speed);
 	loaderVic2.Set(speed);
 }

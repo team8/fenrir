@@ -37,7 +37,6 @@ class Shooter {
 		void shoot();
 		void startShooterVics(float speed);
 		void setAllVics(float speed);
-		void setShooterVics(float speed);
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);

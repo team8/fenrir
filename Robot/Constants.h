@@ -1,7 +1,7 @@
 //ports for HumanController
-#define PORT_SPEED 0
-#define PORT_OPERATOR 0
-#define PORT_TURN 0
+#define PORT_SPEED 1
+#define PORT_TURN 2
+#define PORT_OPERATOR 3
 
 //ports for drive train victors
 #define PORT_DRIVE_VIC_1 0
