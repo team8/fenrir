@@ -23,12 +23,14 @@ void AutonomousController::drive(){
 }
 
 void AutonomousController::stop(){
-	void * argPointer = malloc(sizeof(DriveArgs));
+	/* void * argPointer = malloc(sizeof(DriveArgs));
 	((DriveArgs *) argPointer) -> driveSpeed = 0;
 	Method method;
 	method.driveMethod = SETSPEED;
 	RobotCommand command(DRIVE, method, argPointer);
 	robot -> setCommand(command);
+	*/
+	
 }
 
 void AutonomousController::update(){

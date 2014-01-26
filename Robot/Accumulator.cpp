@@ -7,13 +7,13 @@ Accumulator::Accumulator():
 
 void Accumulator::runCommand(RobotCommand newCommand){
 	switch(newCommand.getMethod().accumulatorMethod){
-	case STOP:
+	case RobotCommand::STOP:
 		state = NOT_ACCUMULATING;
 		break;
-	case ACCUMULATE:
+	case RobotCommand::ACCUMULATE:
 		state = ACCUMULATING;
 		break;
-	case PASS:
+	case RobotCommand::PASS:
 		state = PASSING;
 		break;
 	}

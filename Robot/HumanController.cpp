@@ -23,14 +23,7 @@ void HumanController::update(){
 
 	//Here call the appropriate function from drive train
 	
-	if(getAccumulatorButton()){
-		
-		for(int i = 1; i<=12; i++)
-		{
-			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)i));
-		}
-		printf("\n");
-	}
+
 
 	void * argPointer = malloc(sizeof(DriveArgs));
 
@@ -41,11 +34,17 @@ void HumanController::update(){
 	RobotCommand command(DRIVE,setSpeed, argPointer);
 	robot -> setCommand(command);
 
-	if(accuButtonPrev != getAccumulatorButton()){
+	if(accuButtonPrev != getAccumulatorButton()||getShootButton()!=passButtonPrev){
 		if(getAccumulatorButton()){
 			Method setAccumulator;
 			setAccumulator.accumulatorMethod = ACCUMULATE;
 			RobotCommand command(ACCUMULATOR, setAccumulator, 0);
+			robot -> setCommand(command);
+		}
+		else if(getShootButton()){
+			Method pass;
+			pass.accumulatorMethod = PASS;
+			RobotCommand command(ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
 		}
 		else{
@@ -70,14 +69,6 @@ void HumanController::update(){
 			Method prep;
 			prep.shooterMethod = PREP;
 			RobotCommand command(SHOOTER, prep, 0);
-			robot -> setCommand(command);
-		}
-	}
-	if(passButtonPrev!=getPassButton()){
-		if(getShootButton()){
-			Method pass;
-			pass.accumulatorMethod = PASS;
-			RobotCommand command(ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
 		}
 	}

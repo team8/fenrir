@@ -69,6 +69,6 @@
 #define PORT_SHOOTER_ENCODER_4B 0
 
 //button number for operator stick trigger
-#define ACCUMULATOR_BUTTON_PORT 0
+#define ACCUMULATOR_BUTTON_PORT 3
 #define WARMUP_BUTTON_PORT 0
-#define PASS_BUTTON_PORT 0
+#define PASS_BUTTON_PORT 4

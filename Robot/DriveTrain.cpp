@@ -32,21 +32,22 @@ DriveTrain::DriveTrain() :
 
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
-    DriveArgs* args = (DriveArgs*) command.argPointer;
+    
+	DriveArgs* args = (DriveArgs*) command.argPointer;
     switch (command.getMethod().driveMethod) {
-    case SETSPEED:
+    case RobotCommand::SETSPEED:
       setSpeed(args -> speedValue);
       break;
-    case DRIVEDIST:
+    case RobotCommand::DRIVEDIST:
       driveD(args -> driveDist);
       break;
-    case ROTATEANGLE:
+    case RobotCommand::ROTATEANGLE:
       rotateA(args -> rotAngle);
       break;
-    case ROTATESPEED:
+    case RobotCommand::ROTATESPEED:
       rotateS(args -> rotSpeed);
       break;
-    case STOPVICTORS:
+    case RobotCommand::STOPVICTORS:
       stopVictors();
       break;
     }
@@ -74,7 +75,7 @@ void DriveTrain::update() {
 			leftBackVic.Set(-(angleController.Get()));
 			rightFrontVic.Set(angleController.Get());
 			rightBackVic.Set(angleController.Get());
-		case STOPVICTORS:
+		case STOP_VICTORS:
 			leftFrontVic.Set(0);
 			leftBackVic.Set(0);
 			rightFrontVic.Set(0);
