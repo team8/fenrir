@@ -33,11 +33,11 @@ Shooter::Shooter():
 void Shooter::runCommand(RobotCommand command){
 	ShooterArgs* args = (ShooterArgs*) command.argPointer;
 	switch(command.getMethod().shooterMethod) {
-		case PREPARING_TO_SHOOT:
+		case PREP:
 			startShooterVics(SHOOTER_VICS_SPEED);
 			break;
 		//named it like this because I think this sounds more like a command and helps reduce confusion
-		case FIRING:
+		case FIRE:
 			//once trigger is pulled, shoots
 			//fire(/*Pointer to the trigger*/args->trigger); undefined function, suposedly not needed
 			break;
@@ -55,7 +55,7 @@ void Shooter::update(){
 			//do something to check if there is a ball, then if true, start prepping 
 			if(true)state = PREP;
 			break; */
-		case PREPARING_TO_SHOOT:
+		case PREP:
 			shooterVic1.Set(encController1.Get());
 			shooterVic2.Set(encController2.Get());
 			shooterVic3.Set(encController3.Get());
@@ -67,14 +67,13 @@ void Shooter::update(){
 			break;
 		case FIRING:
 			if(timer.Get()<0){
-			startShooterVics(SHOOTER_VICS_SPEED);
-		state=PREPARING_TO_SHOOT;
-			}else
-				if(timer.Get()>0){
+				startShooterVics(SHOOTER_VICS_SPEED);
+				state=PREP;
+			}
+			else if(timer.Get()>0){
 				shoot();
 			}
-		state=NOT_SHOOTING;
-		break;
+			break;
 	}
 }
 
@@ -83,7 +82,7 @@ void Shooter::startShooterVics(float speed){
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
-	state = PREPARING_TO_SHOOT;
+	state = PREP;
 }
 
 void Shooter::setAllVics(float speed){
@@ -98,5 +97,5 @@ void Shooter::shoot(){
 	loaderVic1.Set(LOAD_SPEED);
 	loaderVic2.Set(LOAD_SPEED);
 	//TODO once timer reaches certain constant, switch state
-	state = NOT_SHOOTING;
+	state = IDLE;
 }
