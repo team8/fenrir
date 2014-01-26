@@ -31,6 +31,7 @@ void HumanController::update(){
     setSpeed.driveMethod=SETSPEED;
     RobotCommand command(DRIVE,setSpeed, argPointer);
     robot -> setCommand(command);
+    
     if(accuButtonPrev!=getAccumulatorButton()){
     	if(getAccumulatorButton()){
     		Method setAccumulator;
@@ -45,16 +46,28 @@ void HumanController::update(){
     		robot -> setCommand(command);
     	}
     }
+    
     if(shootButtonPrev!=getShootButton()){
     	if(getShootButton()){
     		Method shoot;
-    		shoot.shooterMethod = SHOOT;
+    		shoot.shooterMethod = FIRE;
     		RobotCommand command(SHOOTER, shoot, 0);
     		robot -> setCommand(command);
     	}
     }
+    
+    if(warmupButtonPrev!=getWarmupButton()){
+        	if(getShootButton()){
+        		Method prep;
+        		prep.shooterMethod = PREP;
+        		RobotCommand command(SHOOTER, prep, 0);
+        		robot -> setCommand(command);
+        	}
+        }
     accuButtonPrev=getAccumulatorButton();
     shootButtonPrev=getShootButton();
+    warmupButtonPrev=getWarmupButton();
+    passButtonPrev=getPassButton();
 }
 
 float HumanController::getSpeedStick(){
