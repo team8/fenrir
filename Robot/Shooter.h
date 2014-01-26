@@ -23,6 +23,7 @@ class Shooter {
 		Encoder encShooter2;
 		Encoder encShooter3;
 		Encoder encShooter4;
+		Timer timer;
 		
 		PIDController encController1;
 		PIDController encController2;
@@ -34,9 +35,11 @@ class Shooter {
 		Timer time;
 	public:
 		void shoot();
+		void startShooterVics(float speed);
 		void setAllVics(float speed);
 		void setShooterVics(float speed);
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);
+		void fire(bool *trigger);
 };
