@@ -39,7 +39,7 @@ void Shooter::runCommand(RobotCommand command){
 		//named it like this because I think this sounds more like a command and helps reduce confusion
 		case FIRING:
 			//once trigger is pulled, shoots
-			fire(/*Pointer to the trigger*/args->trigger);
+			//fire(/*Pointer to the trigger*/args->trigger); undefined function, suposedly not needed
 			break;
 	}
 	free(args);
@@ -67,10 +67,10 @@ void Shooter::update(){
 			break;
 		case FIRING:
 			if(timer.Get()<0){
-				startShooterVics(speed);
+			startShooterVics(SHOOTER_VICS_SPEED);
 		state=PREPARING_TO_SHOOT;
 			}else
-				if(timer.Get>0){
+				if(timer.Get()>0){
 				shoot();
 			}
 		state=NOT_SHOOTING;
