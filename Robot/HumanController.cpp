@@ -50,7 +50,7 @@ void HumanController::update(){
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
 			Method shoot;
-			shoot.shooterMethod = FIRE;
+			shoot.shooterMethod = SHOOT;
 			RobotCommand command(SHOOTER, shoot, 0);
 			robot -> setCommand(command);
 		}
@@ -59,7 +59,7 @@ void HumanController::update(){
 	if(warmupButtonPrev!=getWarmupButton()){
 		if(getShootButton()){
 			Method prep;
-			prep.shooterMethod = PREP;
+			prep.shooterMethod = SPIN_UP;
 			RobotCommand command(SHOOTER, prep, 0);
 			robot -> setCommand(command);
 		}
@@ -67,7 +67,7 @@ void HumanController::update(){
 	if(passButtonPrev!=getPassButton()){
 		if(getShootButton()){
 			Method pass;
-			pass.shooterMethod = PASS;
+			pass.accumulatorMethod = PASS;
 			RobotCommand command(ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
 		}

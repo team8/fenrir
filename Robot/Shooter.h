@@ -41,5 +41,4 @@ class Shooter {
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);
-		void fire(bool *trigger);
 };

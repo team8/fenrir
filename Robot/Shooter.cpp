@@ -100,13 +100,3 @@ void Shooter::shoot(){
 	//TODO once timer reaches certain constant, switch state
 	state = NOT_SHOOTING;
 }
-
-void Shooter::fire(*trigger);{
-	//keeps checking pointer to see if trigger has been pushed?
-	if() {
-		state = FIRING;
-	}
-	else {
-		
-	}
-}

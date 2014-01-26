@@ -36,7 +36,7 @@ typedef enum ShooterMethod{
     LOAD,
     AIM,
     SPIN_UP,
-    SHOOT
+    SHOOT,
 }ShooterMethod;
 
 typedef union Method{
