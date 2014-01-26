@@ -103,12 +103,12 @@ float HumanController::getAccumulatorStick() {
 
 bool HumanController::getAccumulatorButton() {
 	//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-	return operatorStick.GetTrigger(); // For testing purposes
+	return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // For testing purposes
 }
 
 bool HumanController::getShootButton() {
 	//return operatorStick.GetTrigger(); // Get trigger button to shoot from Operator stick
-	return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // For testing purposes
+	return operatorStick.GetTrigger(); 
 }
 
 bool HumanController::getWarmupButton() {
