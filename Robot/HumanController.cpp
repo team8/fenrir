@@ -28,14 +28,14 @@ void HumanController::update(){
 	((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
 	((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
 	Method setSpeed;
-	setSpeed.driveMethod=SETSPEED;
+	setSpeed.driveMethod = SETSPEED;
 	RobotCommand command(DRIVE,setSpeed, argPointer);
 	robot -> setCommand(command);
 
-	if(accuButtonPrev!=getAccumulatorButton()){
+	if(accuButtonPrev != getAccumulatorButton()){
 		if(getAccumulatorButton()){
 			Method setAccumulator;
-			setAccumulator.accumulatorMethod=ACCUMULATE;
+			setAccumulator.accumulatorMethod = ACCUMULATE;
 			RobotCommand command(ACCUMULATOR, setAccumulator, 0);
 			robot -> setCommand(command);
 		}
@@ -72,10 +72,10 @@ void HumanController::update(){
 			robot -> setCommand(command);
 		}
 	}
-	accuButtonPrev=getAccumulatorButton();
-	shootButtonPrev=getShootButton();
-	warmupButtonPrev=getWarmupButton();
-	passButtonPrev=getPassButton();
+	accuButtonPrev = getAccumulatorButton();
+	shootButtonPrev = getShootButton();
+	warmupButtonPrev = getWarmupButton();
+	passButtonPrev = getPassButton();
 }
 
 float HumanController::getSpeedStick(){
