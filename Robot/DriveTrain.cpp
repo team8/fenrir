@@ -23,7 +23,6 @@ DriveTrain::DriveTrain() :
 {
     //leftEnc.SetDistancePerPulse(not known at the moment);
     //rightEnc.SetDistancePerPulse(not known at the moment);
-
     leftEnc.Start();
     rightEnc.Start();
     rightController.SetOutputRange(-1,1);
