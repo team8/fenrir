@@ -22,6 +22,15 @@ operatorStick(PORT_OPERATOR)
 void HumanController::update(){
 
 	//Here call the appropriate function from drive train
+	
+	if(getAccumulatorButton()){
+		
+		for(int i = 1; i<=12; i++)
+		{
+			printf("%d: %d", i, operatorStick.GetRawButton((uint32_t)1));
+		}
+		
+	}
 
 	void * argPointer = malloc(sizeof(DriveArgs));
 
@@ -50,7 +59,7 @@ void HumanController::update(){
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
 			Method shoot;
-			shoot.shooterMethod = SHOOT;
+			shoot.shooterMethod = FIRE;
 			RobotCommand command(SHOOTER, shoot, 0);
 			robot -> setCommand(command);
 		}
@@ -59,7 +68,7 @@ void HumanController::update(){
 	if(warmupButtonPrev!=getWarmupButton()){
 		if(getShootButton()){
 			Method prep;
-			prep.shooterMethod = SPIN_UP;
+			prep.shooterMethod = PREP;
 			RobotCommand command(SHOOTER, prep, 0);
 			robot -> setCommand(command);
 		}

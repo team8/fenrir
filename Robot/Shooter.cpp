@@ -48,14 +48,14 @@ void Shooter::runCommand(RobotCommand command){
 void Shooter::update(){
 	//for certain cases, will not automatically switch case, waits for user
 	switch(state) {
-		case IDLE:
+		case NOT_SHOOTING:
 			setAllVics(0);
 			break;
 /*		case CHECK_LOADED: //isn't this redundant??
 			//do something to check if there is a ball, then if true, start prepping 
 			if(true)state = PREP;
 			break; */
-		case PREP:
+		case PREPARING_TO_SHOOT:
 			shooterVic1.Set(encController1.Get());
 			shooterVic2.Set(encController2.Get());
 			shooterVic3.Set(encController3.Get());
@@ -68,7 +68,7 @@ void Shooter::update(){
 		case FIRING:
 			if(timer.Get()<0){
 				startShooterVics(SHOOTER_VICS_SPEED);
-				state=PREP;
+				state=PREPARING_TO_SHOOT;
 			}
 			else if(timer.Get()>0){
 				shoot();
@@ -82,7 +82,7 @@ void Shooter::startShooterVics(float speed){
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
-	state = PREP;
+	state = PREPARING_TO_SHOOT;
 }
 
 void Shooter::setAllVics(float speed){
@@ -97,5 +97,5 @@ void Shooter::shoot(){
 	loaderVic1.Set(LOAD_SPEED);
 	loaderVic2.Set(LOAD_SPEED);
 	//TODO once timer reaches certain constant, switch state
-	state = IDLE;
+	state = NOT_SHOOTING;
 }
