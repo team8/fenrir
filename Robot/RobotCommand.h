@@ -2,13 +2,6 @@
 #define COMMAND_H
 #include "Constants.h"
 
-typedef union Method{
-	DriveMethod driveMethod;
-	ShooterMethod shooterMethod;
-	AccumulatorMethod accumulatorMethod;
-	AccumulatorExtensionMethod extensionMethod;
-} Method;
-
 // Arguments used for Drivetrain methods
 typedef struct DriveArgs{
 	float driveDist;
@@ -19,12 +12,15 @@ typedef struct DriveArgs{
 	float turnValue;
 } DriveArgs;
 
+typedef union {
+	int a,b,c;
+} Method;
 
 /*COMMAND OBJECT*/
 class RobotCommand{
 public:
 	// These are the subsystems that you can send the Command to
-	typedef enum SubsystemType{
+	typedef enum /*SubsystemType*/{
 		DRIVE,
 		SHOOTER,
 		ACCUMULATOR
@@ -32,7 +28,7 @@ public:
 
 	/*SUBSYSTEM METHODS*/
 	// These are the methods used in the Drivetrain subsystem
-	typedef enum DriveMethod{
+	typedef enum /*DriveMethod*/{
 		SETSPEED,
 		DRIVEDIST,
 		ROTATEANGLE,
@@ -41,20 +37,20 @@ public:
 	} DriveMethod;
 
 	//Methods used for the Accumulator
-	typedef enum AccumulatorMethod{
+	typedef enum /*AccumulatorMethod*/{
 		ACCUMULATE,
 		STOP,
 		PASS
 	} AccumulatorMethod;
 
-	typedef enum AccumulatorExtensionMethod{
-		FOWARD,
-		BACKWARD,
-		HALT
-	};
+//	typedef enum AccumulatorExtensionMethod{
+//		FOWARD,
+//		BACKWARD,
+//		HALT
+//	};
 
 	// These are the methods available in the Shooter subsystem
-	typedef enum ShooterMethod{
+	typedef enum /*ShooterMethod*/{
 		PREP,
 		FIRE,
 	} ShooterMethod;
@@ -69,4 +65,12 @@ private:
 	SubsystemType subsystem; // Subsystem e command is to be sent to
 	Method method; // Method to be run in the subsystem
 };
+
+typedef union Method{
+	RobotCommand::DriveMethod driveMethod;
+	RobotCommand::ShooterMethod shooterMethod;
+	RobotCommand::AccumulatorMethod accumulatorMethod;
+
+} Method;
+
 #endif

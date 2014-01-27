@@ -23,7 +23,14 @@ void HumanController::update(){
 
 	//Here call the appropriate function from drive train
 	
-
+	if(getAccumulatorButton()){
+		
+		for(int i = 1; i<=12; i++)
+		{
+			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)i));
+		}
+		printf("\n");
+	}
 
 	void * argPointer = malloc(sizeof(DriveArgs));
 
@@ -34,17 +41,11 @@ void HumanController::update(){
 	RobotCommand command(DRIVE,setSpeed, argPointer);
 	robot -> setCommand(command);
 
-	if(accuButtonPrev != getAccumulatorButton()||getShootButton()!=passButtonPrev){
+	if(accuButtonPrev != getAccumulatorButton()){
 		if(getAccumulatorButton()){
 			Method setAccumulator;
 			setAccumulator.accumulatorMethod = ACCUMULATE;
 			RobotCommand command(ACCUMULATOR, setAccumulator, 0);
-			robot -> setCommand(command);
-		}
-		else if(getShootButton()){
-			Method pass;
-			pass.accumulatorMethod = PASS;
-			RobotCommand command(ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
 		}
 		else{
@@ -72,6 +73,14 @@ void HumanController::update(){
 			robot -> setCommand(command);
 		}
 	}
+	if(passButtonPrev!=getPassButton()){
+		if(getShootButton()){
+			Method pass;
+			pass.accumulatorMethod = PASS;
+			RobotCommand command(ACCUMULATOR, pass, 0);
+			robot -> setCommand(command);
+		}
+	}
 	accuButtonPrev = getAccumulatorButton();
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();
@@ -94,12 +103,12 @@ float HumanController::getAccumulatorStick() {
 
 bool HumanController::getAccumulatorButton() {
 	//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-	return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // For testing purposes
+	return operatorStick.GetTrigger(); // For testing purposes
 }
 
 bool HumanController::getShootButton() {
 	//return operatorStick.GetTrigger(); // Get trigger button to shoot from Operator stick
-	return operatorStick.GetTrigger(); 
+	return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // For testing purposes
 }
 
 bool HumanController::getWarmupButton() {
