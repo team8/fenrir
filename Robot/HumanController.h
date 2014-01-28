@@ -6,12 +6,6 @@
 #include "RobotCommand.h"
 #include <WPILib.h>
 
-// These are the methods for the Shooter subsystem
-typedef enum ShooterMethod {
-	PREP,
-	FIRE
-} ShooterMethod;
-
 class HumanController {
 
 	public:
