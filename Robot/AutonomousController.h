@@ -5,6 +5,12 @@
 #include "Robot.h"
 #include <WPILib.h>
 
+// These are the methods for the Shooter subsystem
+typedef enum ShooterMethod {
+	PREP,
+	FIRE
+} ShooterMethod;
+
 class AutonomousController {
 
 	public:
@@ -12,9 +18,7 @@ class AutonomousController {
 		void update();
 		void startTimer();
 		void rotateDegrees();
-	
 	private:
-	
 		Timer time; 
 		Robot* robot;
 		void drive();
