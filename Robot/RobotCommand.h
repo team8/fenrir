@@ -30,7 +30,26 @@ class RobotCommand{
 		} SubsystemType; 
 	
 		/*SUBSYSTEM METHODS*/
-		//These are the methods used in the Drivetrain subsystem
+		typedef enum {
+			SETSPEED,
+			DRIVEDIST,
+			ROTATEANGLE,
+			ROTATESPEED,
+			STOPVICTORS
+		} DriveMethod;
+		
+		typedef enum{
+		        ACCUMULATE,
+		        STOP,
+		        PASS
+		} AccumulatorMethod;
+		
+		typedef enum{
+		        FOWARD,
+		        BACKWARD,
+		        HALT
+		}ExtensionMethod;
+		
 		typedef enum ShooterMethod {
 			PREP,
 			FIRE
