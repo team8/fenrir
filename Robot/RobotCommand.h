@@ -32,13 +32,6 @@ public:
 
 	/*SUBSYSTEM METHODS*/
 	// These are the methods used in the Drivetrain subsystem
-	typedef enum /*DriveMethod*/{
-		SETSPEED,
-		DRIVEDIST,
-		ROTATEANGLE,
-		ROTATESPEED,
-		STOPVICTORS
-	} DriveMethod;
 
 	RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
 	SubsystemType getSubsystem();
