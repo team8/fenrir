@@ -75,6 +75,7 @@ void DriveTrain::update() {
 			leftBackVic.Set(-(angleController.Get()));
 			rightFrontVic.Set(angleController.Get());
 			rightBackVic.Set(angleController.Get());
+			break;
 		case STOP_VICTORS:
 			leftFrontVic.Set(0);
 			leftBackVic.Set(0);
