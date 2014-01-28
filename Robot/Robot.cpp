@@ -3,7 +3,9 @@
 
 Robot::Robot()
 {
-
+	shooter();
+	driveTrain();
+	accumulator();
 }
 
 void Robot::setCommand(RobotCommand command) {
