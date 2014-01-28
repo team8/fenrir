@@ -14,6 +14,14 @@ typedef enum {
 	
 }driveState;
 
+typedef enum /*DriveMethod*/{
+	SETSPEED,
+	DRIVEDIST,
+	ROTATEANGLE,
+	ROTATESPEED,
+	STOPVICTORS
+} DriveMethod;
+
 class DriveTrain {
     private:
     
