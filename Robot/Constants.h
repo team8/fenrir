@@ -72,3 +72,9 @@
 #define ACCUMULATOR_BUTTON_PORT 3
 #define WARMUP_BUTTON_PORT 0
 #define PASS_BUTTON_PORT 4
+
+// Ultrasonic ports
+#define ECHO_PULSE_OUT_1 // Left
+#define TRIGGER_PULSE_IN_1
+#define ECHO_PULSE_OUT_2 // Right
+#define TRIGGER_PULSE_IN_2
