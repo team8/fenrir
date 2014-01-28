@@ -21,5 +21,6 @@ class Robot {
 		//void rotateSpeed(float s);
 		void setCommand(RobotCommand newCommand);
 		void update();
+		void disable();
 };
 #endif
