@@ -48,7 +48,7 @@ void Fenrir::AutonomousPeriodic(){
 }
 
 void Fenrir::AutonomousDisabled(){
-
+	robot.disable();
 }
 
 void Fenrir::DisabledInit(){
@@ -69,7 +69,7 @@ void Fenrir::TeleopPeriodic(){
 }
 
 void Fenrir::TeleopDisabled(){
- 
+	robot.disable();
 }
 
 void Fenrir::TestInit(){
