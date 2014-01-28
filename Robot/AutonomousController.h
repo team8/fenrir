@@ -7,9 +7,10 @@
 class AutonomousController {
 
  public:
-  AutonomousController(Robot *robotPointer);
+  AutonomousController(Robot* robotPointer);
   void update();
   void startTimer();
+  double rotateDegrees();
 
  private:
  
