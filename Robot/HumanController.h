@@ -8,25 +8,25 @@
 
 class HumanController {
 
- public:
-  void update();
-  float getSpeedStick();
-  float getTurnStick();
-  float getAccumulatorStick();
-  bool getAccumulatorButton();
-  bool getShootButton();
-  bool getWarmupButton();
-  bool getPassButton();
-  HumanController(Robot *robotPointer);
+	public:
+		void update();
+		float getSpeedStick();
+		float getTurnStick();
+		float getAccumulatorStick();
+		bool getAccumulatorButton();
+		bool getShootButton();
+		bool getWarmupButton();
+		bool getPassButton();
+		HumanController(Robot *robotPointer);
 
- private:
-  Robot *robot;
-  Joystick speedStick;
-  Joystick turnStick;
-  Joystick operatorStick;
-  bool accuButtonPrev;
-  bool shootButtonPrev;
-  bool warmupButtonPrev;
-  bool passButtonPrev;
+	private:
+		Robot *robot;
+		Joystick speedStick;
+		Joystick turnStick;
+		Joystick operatorStick;
+		bool accuButtonPrev;
+		bool shootButtonPrev;
+		bool warmupButtonPrev;
+		bool passButtonPrev;
 };
 #endif
