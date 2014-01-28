@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 #include "Robot.h"
+#include <WPILib.h>
 
 class AutonomousController {
 
@@ -19,7 +20,8 @@ class AutonomousController {
   void drive();
   void stop();
   bool shoot();
-  
+  Ultrasonic ultraLeft(ECHO_PULSE_OUT_1, TRIGGER_PULSE_IN_1);
+  Ultrasonic ultraRight(ECHO_PULSE_OUT_2, TRIGGER_PULSE_IN_2);
   bool targetReached;
 };
 #endif
