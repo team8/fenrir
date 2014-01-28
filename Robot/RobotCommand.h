@@ -3,7 +3,7 @@
 #include "Constants.h"
 
 // Arguments used for Drivetrain methods
-typedef struct DriveArgs{
+typedef struct DriveArgs {
 	float driveDist;
 	double rotAngle;
 	double rotSpeed;
@@ -11,6 +11,10 @@ typedef struct DriveArgs{
 	float speedValue;
 	float turnValue;
 } DriveArgs;
+
+typedef struct ShooterArgs {
+	bool trigger;
+}
 
 typedef union {
 	int a,b,c;
