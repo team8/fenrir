@@ -35,11 +35,11 @@ Fenrir::Fenrir() :
 }
 
 void Fenrir::RobotInit(){
- 
+	robot();
 }
 
 void Fenrir::AutonomousInit(){
-
+	autoController(&robot);
 }
 
 void Fenrir::AutonomousPeriodic(){
@@ -48,7 +48,7 @@ void Fenrir::AutonomousPeriodic(){
 }
 
 void Fenrir::AutonomousDisabled(){
- 
+
 }
 
 void Fenrir::DisabledInit(){
@@ -60,7 +60,7 @@ void Fenrir::DisabledPeriodic(){
 }
 
 void Fenrir::TeleopInit(){
- 
+ 	humanController(&robot);
 }
 
 void Fenrir::TeleopPeriodic(){
