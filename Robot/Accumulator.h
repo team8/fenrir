@@ -7,7 +7,18 @@ typedef enum{
 	NOT_ACCUMULATING,
 	PASSING
 } AccumulatorState;
+//Methods used for the Accumulator
+typedef enum /*AccumulatorMethod*/{
+	ACCUMULATE,
+	STOP,
+	PASS
+} AccumulatorMethod;
 
+//	typedef enum AccumulatorExtensionMethod{
+//		FOWARD,
+//		BACKWARD,
+//		HALT
+//	};
 class Accumulator{
 private:
 	Victor accumulateVic;
