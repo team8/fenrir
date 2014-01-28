@@ -36,27 +36,6 @@ public:
 		STOPVICTORS
 	} DriveMethod;
 
-	//Methods used for the Accumulator
-	typedef enum /*AccumulatorMethod*/{
-		ACCUMULATE,
-		STOP,
-		PASS
-	} AccumulatorMethod;
-
-//	typedef enum AccumulatorExtensionMethod{
-//		FOWARD,
-//		BACKWARD,
-//		HALT
-//	};
-
-	// These are the methods available in the Shooter subsystem
-	typedef enum /*ShooterMethod*/{
-		PREP,
-		FIRE,
-	} ShooterMethod;
-
-
-
 	RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
 	SubsystemType getSubsystem();
 	Method getMethod();
