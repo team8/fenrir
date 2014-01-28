@@ -79,3 +79,5 @@
 #define ECHO_PULSE_OUT_2 0 // Right
 #define TRIGGER_PULSE_IN_2 0
 #define ULTRA_GAP 0 // Distance between the two ultrasonic sensors in inches
+
+#define SHOOT_DISTANCE 0 //The set distance we want it to shoot at
