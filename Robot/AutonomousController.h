@@ -11,7 +11,7 @@ class AutonomousController {
   AutonomousController(Robot* robotPointer);
   void update();
   void startTimer();
-  double rotateDegrees();
+  void rotateDegrees();
 
  private:
  
