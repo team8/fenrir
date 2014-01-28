@@ -74,7 +74,8 @@
 #define PASS_BUTTON_PORT 4
 
 // Ultrasonic ports
-#define ECHO_PULSE_OUT_1 // Left
-#define TRIGGER_PULSE_IN_1
-#define ECHO_PULSE_OUT_2 // Right
-#define TRIGGER_PULSE_IN_2
+#define ECHO_PULSE_OUT_1 0 // Left
+#define TRIGGER_PULSE_IN_1 0
+#define ECHO_PULSE_OUT_2 0 // Right
+#define TRIGGER_PULSE_IN_2 0
+#define ULTRA_GAP 0 // Distance between the two ultrasonic sensors in inches
