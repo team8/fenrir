@@ -25,6 +25,9 @@ class Accumulator{
 private:
 	Victor accumulateVic;
 	AccumulatorState state;
+	
+	Encoder encoder;
+	PIDController encController;
 public:
 	void accumulate();
 	void stop();
