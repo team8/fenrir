@@ -5,32 +5,6 @@
 #include "Robot.h"
 #include <WPILib.h>
 
-// These are the methods for the Shooter subsystem
-typedef enum ShooterMethod {
-	PREP,
-	FIRE
-} ShooterMethod;
-
-typedef enum {
-	SETSPEED,
-	DRIVEDIST,
-	ROTATEANGLE,
-	ROTATESPEED,
-	STOPVICTORS
-} DriveMethod;
-
-typedef enum{
-        ACCUMULATE,
-        STOP,
-        PASS
-} AccumulatorMethod;
-
-typedef enum{
-        FOWARD,
-        BACKWARD,
-        HALT
-}ExtensionMethod;
-
 class AutonomousController {
 
 	public:
