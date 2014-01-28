@@ -3,11 +3,7 @@
 #include "RobotCommand.h"
 
 //
-typedef enum ShooterState {
-	IDLE,
-	PREPARING,
-	FIRING
-} ShooterState;
+
 
 class Shooter {
 	private:
@@ -31,7 +27,11 @@ class Shooter {
 		PIDController encController4;
 		
 		ShooterState state;
-		
+		typedef enum ShooterState {
+			IDLE,
+			PREPARING,
+			FIRING
+		} ShooterState;
 		Timer time;
 	public:
 		void shoot();
