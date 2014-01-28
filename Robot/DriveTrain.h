@@ -4,17 +4,14 @@
 #include <WPILib.h>
 #include "RobotCommand.h"
 
-typedef enum {
-	
+typedef enum DriveState{
 	DRIVE_DIST,
 	ROTATE_SPEED,
 	TURN_ANGLE,
 	STOP_VICTORS
-	
-	
-}driveState;
+} DriveState;
 
-typedef enum /*DriveMethod*/{
+typedef enum DriveMethod {
 	SETSPEED,
 	DRIVEDIST,
 	ROTATEANGLE,
@@ -48,11 +45,10 @@ class DriveTrain {
     double rotateAngle;
     
     //state 
-    driveState state;
+    DriveState state;
     
     
     public:
-    
     DriveTrain();
     
     //Takes input of distance to destination
