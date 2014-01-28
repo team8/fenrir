@@ -11,6 +11,26 @@ typedef enum ShooterMethod {
 	FIRE
 } ShooterMethod;
 
+typedef enum {
+	SETSPEED,
+	DRIVEDIST,
+	ROTATEANGLE,
+	ROTATESPEED,
+	STOPVICTORS
+} DriveMethod;
+
+typedef enum{
+        ACCUMULATE,
+        STOP,
+        PASS
+} AccumulatorMethod;
+
+typedef enum{
+        FOWARD,
+        BACKWARD,
+        HALT
+}ExtensionMethod;
+
 class AutonomousController {
 
 	public:
