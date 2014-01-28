@@ -9,6 +9,13 @@ typedef enum ShooterState {
 	FIRING//need a better name... only did this to resolve conflict w/ ShooterMethod in RobotCommand.h
 }ShooterState;
 
+	// These are the methods available in the Shooter subsystem
+typedef enum ShooterMethod {
+	PREP,
+	FIRE,
+} ShooterMethod;
+
+
 class Shooter {
 	private:
 		Victor shooterVic1;
