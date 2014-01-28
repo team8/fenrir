@@ -13,17 +13,17 @@ class Fenrir : public IterativeRobot {
  public: //need to input stuff based on the names of stuff
         Fenrir();
  //make sure we call the methods like this.
-  void RobotInit();
-  void AutonomousInit();
-  void AutonomousPeriodic();
-  void AutonomousDisabled();
-  void DisabledInit();
-  void DisabledPeriodic();
-  void TeleopInit();
-  void TeleopPeriodic();
-  void TeleopDisabled();
-  void TestInit();
-  void TestPeriodic();
+	void RobotInit();
+	void AutonomousInit();
+	void AutonomousPeriodic();
+	void AutonomousDisabled();
+	void DisabledInit();
+	void DisabledPeriodic();
+	void TeleopInit();
+	void TeleopPeriodic();
+	void TeleopDisabled();
+	void TestInit();
+	void TestPeriodic();
 };
 
 Fenrir::Fenrir() :
