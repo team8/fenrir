@@ -9,19 +9,17 @@
 
 
 class Robot {
+	
+	private:
+		DriveTrain driveTrain;
+		Shooter shooter;
+		Accumulator accumulator;
     
-    private:
-    
-      DriveTrain driveTrain;
-      Shooter shooter;
-      Accumulator accumulator;
-    
-    public:
-    Robot();
- //   void setSpeed(float s);
-   // void rotateSpeed(float s);
-    void setCommand(RobotCommand newCommand);
-    void update();
-    
+	public:
+		Robot();
+		//void setSpeed(float s);
+		//void rotateSpeed(float s);
+		void setCommand(RobotCommand newCommand);
+		void update();
 };
 #endif
