@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
-//
+
 
 
 class Shooter {
@@ -29,6 +29,7 @@ class Shooter {
 		ShooterState state;
 		typedef enum ShooterState {
 			IDLE,
+			ALIGN,
 			PREPARING,
 			FIRING
 		} ShooterState;
