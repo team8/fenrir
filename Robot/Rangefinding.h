@@ -21,7 +21,7 @@ void rotateDegrees(Robot* robot) { // Returns the amount of degrees of rotation 
                         
                         // Sends Command
                         void * argPointer = malloc(sizeof(DriveArgs));
-                        ((DriveArgs *) argPointer) -> rotAngle = angle;
+                        ((DriveArgs*) argPointer) -> rotAngle = angle;
                         Method method;
                         method.driveMethod = ROTATEANGLE;
                         Command command(DRIVE, method, argPointer);
