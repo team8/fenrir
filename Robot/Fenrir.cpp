@@ -52,11 +52,13 @@ void Fenrir::AutonomousDisabled(){
 }
 
 void Fenrir::DisabledInit(){
- 
+	robot();
+	robot.disable();
 }
 
 void Fenrir::DisabledPeriodic(){
- 
+	robot.disable();
+	robot.update();
 }
 
 void Fenrir::TeleopInit(){
