@@ -22,31 +22,33 @@ typedef union {
 
 /*COMMAND OBJECT*/
 class RobotCommand{
-public:
-	// These are the subsystems that you can send the Command to
-	typedef enum /*SubsystemType*/{
-		DRIVE,
-		SHOOTER,
-		ACCUMULATOR
-	} SubsystemType; 
+	public:
+		typedef enum SubsystemType{
+			DRIVE,
+			SHOOTER,
+			ACCUMULATOR
+		} SubsystemType; 
+	
+		/*SUBSYSTEM METHODS*/
+		//These are the methods used in the Drivetrain subsystem
+		typedef enum ShooterMethod {
+			PREP,
+			FIRE
+		} ShooterMethod;
 
-	/*SUBSYSTEM METHODS*/
-	// These are the methods used in the Drivetrain subsystem
-
-	RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
-	SubsystemType getSubsystem();
-	Method getMethod();
-	void * argPointer; // Points to argument structure
-private:
-	SubsystemType subsystem; // Subsystem e command is to be sent to
-	Method method; // Method to be run in the subsystem
+		RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
+		SubsystemType getSubsystem();
+		Method getMethod();
+		void *argPointer; // Points to argument structure
+	private:
+		SubsystemType subsystem; // Subsystem e command is to be sent to
+		Method method; // Method to be run in the subsystem
 };
 
 typedef union Method{
 	RobotCommand::DriveMethod driveMethod;
 	RobotCommand::ShooterMethod shooterMethod;
 	RobotCommand::AccumulatorMethod accumulatorMethod;
-
 } Method;
 
 #endif
