@@ -34,3 +34,11 @@ void rotateDegrees(Robot* robot) { // Returns the amount of degrees of rotation 
         printf("Left Ultrasonic - Invalid range\n");
 }
 #endif
+
+double getDistance() {
+        ultraLeft.Ping();
+        int leftDist = ultraLeft.GetRangeInches();
+        ultraRight.Ping();
+        int rightDist = ultraRight.GetRangeInches();
+        return ((leftDist + rightDist) / 2);
+}
