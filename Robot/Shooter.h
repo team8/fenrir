@@ -2,19 +2,12 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
+//
 typedef enum ShooterState {
-	NOT_SHOOTING, //see below
-	CHECK_LOADED,
-	PREPARING_TO_SHOOT,
-	FIRING//need a better name... only did this to resolve conflict w/ ShooterMethod in RobotCommand.h
-}ShooterState;
-
-	// These are the methods available in the Shooter subsystem
-typedef enum ShooterMethod {
-	PREP,
-	FIRE,
-} ShooterMethod;
-
+	IDLE,
+	PREPARING,
+	FIRING
+} ShooterState;
 
 class Shooter {
 	private:
