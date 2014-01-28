@@ -21,4 +21,6 @@ void Robot::setCommand(RobotCommand command) {
 }
 void Robot::update(){
 	accumulator.update();
+	driveTrain.update();
+	shooter.update();
 }
