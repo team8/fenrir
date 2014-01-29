@@ -30,7 +30,7 @@ class RobotCommand{
 		} SubsystemType; 
 	
 		/*SUBSYSTEM METHODS*/
-		typedef enum {
+		typedef enum DriveMethod{
 			SETSPEED,
 			DRIVEDIST,
 			ROTATEANGLE,
@@ -38,17 +38,17 @@ class RobotCommand{
 			STOPVICTORS
 		} DriveMethod;
 		
-		typedef enum{
-		        ACCUMULATE,
-		        STOP,
-		        PASS
+		typedef enum AccumulatorMethod{
+			ACCUMULATE,
+			STOP,
+			PASS
 		} AccumulatorMethod;
 		
-		typedef enum{
-		        FOWARD,
-		        BACKWARD,
-		        HALT
-		}ExtensionMethod;
+		typedef enum ExtensionMethod{
+			FOWARD,
+			BACKWARD,
+			HALT
+		} ExtensionMethod;
 		
 		typedef enum ShooterMethod {
 			PREP,
@@ -58,10 +58,10 @@ class RobotCommand{
 		RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
 		SubsystemType getSubsystem();
 		Method getMethod();
-		void *argPointer; // Points to argument structure
+		void *argPointer;
 	private:
-		SubsystemType subsystem; // Subsystem e command is to be sent to
-		Method method; // Method to be run in the subsystem
+		SubsystemType subsystem;
+		Method method;
 };
 
 typedef union Method{
