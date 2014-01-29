@@ -1,5 +1,6 @@
 #include "Shooter.h"
 
+
 Shooter::Shooter(): 
 	shooterVic1(PORT_SHOOTER_VIC_1),
 	shooterVic2(PORT_SHOOTER_VIC_2),
@@ -33,13 +34,12 @@ Shooter::Shooter():
 void Shooter::runCommand(RobotCommand command){
 	ShooterArgs* args = (ShooterArgs*) command.argPointer;
 	switch(command.getMethod().shooterMethod) {
-		case PREP:
-			startShooterVics(SHOOTER_VICS_SPEED);
-			break;
-		//named it like this because I think this sounds more like a command and helps reduce confusion
+		// case PREP:
+		// 	startShooterVics(SHOOTER_VICS_SPEED);
+		// 	break;
+		// //named it like this because I think this sounds more like a command and helps reduce confusion
 		case FIRE:
-			//once trigger is pulled, shoots
-			//fire(/*Pointer to the trigger*/args->trigger); undefined function, suposedly not needed
+			state = ALIGN;
 			break;
 	}
 	free(args);
@@ -50,6 +50,8 @@ void Shooter::update(){
 	switch(state) {
 		case IDLE:
 			setAllVics(0);
+			// is stop a thing?
+			time.stop();
 			break;
 		case PREPARING:
 			shooterVic1.Set(encController1.Get());
@@ -57,18 +59,41 @@ void Shooter::update(){
 			shooterVic3.Set(encController3.Get());
 			shooterVic4.Set(encController4.Get());
 			if(encController1.GetError()<0.01&&encController2.GetError()<0.01&&encController3.GetError()<0.01&&encController4.GetError()<0.01){
-				timer.Start();
+				state = FIRING;
 			}
 			state = FIRING;
 			break;
+		case ALIGN:
+			Rangefind.rotateDegrees();
+			double dist =  Rangefinding.getDistance();
+			while(dist != SHOOT_DISTANCE){
+				void * argPointer = malloc(sizeof(DriveArgs));
+				((DriveArgs*) argPointer) -> driveDist = SHOOT_DISTANCE-dist;
+				Method method;
+				method.driveMethod = DRIVE_DIST;
+				Command command(DRIVE, method, argPointer);
+				robot -> setCommand(command);
+				dist = Rangefinding.getDistance();
+			}
+			state = PREPARING;
 		case FIRING:
-			if(timer.Get()<0){
-				startShooterVics(SHOOTER_VICS_SPEED);
-				state=PREPARING;
+			
+			time.Reset();
+			time.Start();
+			while(time.get()<=5000){
+			loaderVic1.Set(LOAD_SPEED);
+			loaderVic2.Set(LOAD_SPEED);
 			}
-			else if(timer.Get()>0){
-				shoot();
-			}
+	//TODO once timer reaches certain constant, switch state
+			state = IDLE;
+			shoot();
+			// if(timer.Get()<0){
+			// 	startShooterVics(SHOOTER_VICS_SPEED);
+			// 	state=PREPARING;
+			// }
+			// else if(timer.Get()>0){
+			// 	shoot();
+			// }
 			break;
 	}
 }
@@ -87,8 +112,8 @@ void Shooter::setAllVics(float speed){
 }
 
 void Shooter::shoot(){
-	time.Reset();
-	time.Start();
+	// time.Reset();
+	// time.Start();
 	loaderVic1.Set(LOAD_SPEED);
 	loaderVic2.Set(LOAD_SPEED);
 	//TODO once timer reaches certain constant, switch state
