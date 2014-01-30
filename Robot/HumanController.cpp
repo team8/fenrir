@@ -36,48 +36,48 @@ void HumanController::update(){
 
 	((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
 	((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
-	Method setSpeed;
-	setSpeed.driveMethod = SETSPEED;
-	RobotCommand command(DRIVE,setSpeed, argPointer);
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
 
 	if(accuButtonPrev != getAccumulatorButton()){
 		if(getAccumulatorButton()){
-			Method setAccumulator;
-			setAccumulator.accumulatorMethod = ACCUMULATE;
-			RobotCommand command(ACCUMULATOR, setAccumulator, 0);
+			RobotCommand::Method setAccumulator;
+			setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
+			RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 			robot -> setCommand(command);
 		}
 		else{
-			Method stopAccumulator;
-			stopAccumulator.accumulatorMethod=STOP;
-			RobotCommand command(ACCUMULATOR, stopAccumulator, 0);
+			RobotCommand::Method stopAccumulator;
+			stopAccumulator.accumulatorMethod = RobotCommand::STOP;
+			RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 			robot -> setCommand(command);
 		}
 	}
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
-			Method shoot;
-			shoot.shooterMethod = FIRE;
-			RobotCommand command(SHOOTER, shoot, 0);
+			RobotCommand::Method shoot;
+			shoot.shooterMethod = RobotCommand::FIRE;
+			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
 			robot -> setCommand(command);
 		}
 	}
 
 	if(warmupButtonPrev!=getWarmupButton()){
 		if(getShootButton()){
-			Method prep;
-			prep.shooterMethod = PREP;
-			RobotCommand command(SHOOTER, prep, 0);
+			RobotCommand::Method prep;
+			prep.shooterMethod = RobotCommand::PREP;
+			RobotCommand command(RobotCommand::SHOOTER, prep, 0);
 			robot -> setCommand(command);
 		}
 	}
 	if(passButtonPrev!=getPassButton()){
 		if(getShootButton()){
-			Method pass;
-			pass.accumulatorMethod = PASS;
-			RobotCommand command(ACCUMULATOR, pass, 0);
+			RobotCommand::Method pass;
+			pass.accumulatorMethod = RobotCommand::PASS;
+			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
 		}
 	}

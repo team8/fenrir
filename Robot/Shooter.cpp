@@ -18,7 +18,9 @@ Shooter::Shooter():
 	encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 	encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),
 	encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
-	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
+	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4),
+	
+	rangefinder(robot)
 {
 	encShooter1.Start();
 	encShooter2.Start();
@@ -38,7 +40,7 @@ void Shooter::runCommand(RobotCommand command){
 		// 	startShooterVics(SHOOTER_VICS_SPEED);
 		// 	break;
 		// //named it like this because I think this sounds more like a command and helps reduce confusion
-		case FIRE:
+		case RobotCommand::FIRE:
 			state = ALIGN;
 			break;
 	}
@@ -51,7 +53,7 @@ void Shooter::update(){
 		case IDLE:
 			setAllVics(0);
 			// is stop a thing?
-			time.stop();
+			time.Stop();
 			break;
 		case PREPARING:
 			shooterVic1.Set(encController1.Get());
@@ -64,18 +66,19 @@ void Shooter::update(){
 			state = FIRING;
 			break;
 		case ALIGN:
-			Rangefind.rotateDegrees();
+			Rangefinder.rotateDegrees();
 			double dist =  Rangefinding.getDistance();
 			while(dist != SHOOT_DISTANCE){
 				void * argPointer = malloc(sizeof(DriveArgs));
 				((DriveArgs*) argPointer) -> driveDist = SHOOT_DISTANCE-dist;
-				Method method;
-				method.driveMethod = DRIVE_DIST;
-				Command command(DRIVE, method, argPointer);
+				RobotCommand::Method method;
+				method.driveMethod = RobotCommand::DRIVEDIST;
+				RobotCommand command(RobotCommand::DRIVE, method, argPointer);
 				robot -> setCommand(command);
 				dist = Rangefinding.getDistance();
 			}
 			state = PREPARING;
+			break;
 		case FIRING:
 			
 			time.Reset();

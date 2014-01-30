@@ -12,13 +12,9 @@ typedef struct DriveArgs {
 	float turnValue;
 } DriveArgs;
 
-typedef struct ShooterArgs {
+typedef struct{
 	bool trigger;
-}
-
-typedef union {
-	int a,b,c;
-} Method;
+} ShooterArgs;
 
 /*COMMAND OBJECT*/
 class RobotCommand{
@@ -54,8 +50,15 @@ class RobotCommand{
 			PREP,
 			FIRE
 		} ShooterMethod;
+		
+		typedef union {
+			DriveMethod driveMethod;
+			AccumulatorMethod accumulatorMethod;
+			ShooterMethod shooterMethod;
+			ExtensionMethod extensionMethod;
+		} Method;
 
-		RobotCommand(SubsystemType subsystemType, Method methodType, void * args);
+		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void * args);
 		SubsystemType getSubsystem();
 		Method getMethod();
 		void *argPointer;

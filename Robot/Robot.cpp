@@ -1,21 +1,22 @@
 #include "Robot.h"
 
-Robot::Robot()
+Robot::Robot() :
+	shooter(),
+	driveTrain(),
+	accumulator()
 {
-	shooter();
-	driveTrain();
-	accumulator();
+	
 }
 
 void Robot::setCommand(RobotCommand command) {
     switch (command.getSubsystem()) {
-        case DRIVE:
+        case RobotCommand::DRIVE:
             driveTrain.runCommand(command);
             break;
-        case SHOOTER:
+        case RobotCommand::SHOOTER:
             shooter.runCommand(command);
             break;
-        case ACCUMULATOR:
+        case RobotCommand::ACCUMULATOR:
             accumulator.runCommand(command);
             break;
     }

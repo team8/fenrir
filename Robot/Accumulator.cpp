@@ -2,7 +2,7 @@
 
 Accumulator::Accumulator():
 	accumulateVic(PORT_ACCUMULATOR_VIC_7),
-	//encoder((uint32_t) port, (uint32_t) port),
+	encoder((uint32_t) PORT_ACCUMULATOR_ENC_1A, (uint32_t) PORT_ACCUMULATOR_ENC_1B),
 	encController(0.1, 0.1, 0.1, &encoder, &accumulateVic)
 {
 	encoder.Start();
@@ -22,6 +22,13 @@ void Accumulator::runCommand(RobotCommand newCommand){
 		break;
 	}
 }
+
+void Accumulator::notAccumulating(){
+	encoder.Reset();
+	encController.SetSetpoint(0);
+	encController.Enable();
+}
+
 void Accumulator::update(){
 	switch(state){
 	case NOT_ACCUMULATING:
@@ -35,11 +42,5 @@ void Accumulator::update(){
 		accumulateVic.Set(-0.5);
 		break;
 	}
-}
-
-void notAccumulating(){
-	encoder.Reset();
-	encController.SetSetPoint(0);
-	encController.Enable();
 }
 

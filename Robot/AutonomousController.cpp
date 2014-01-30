@@ -5,8 +5,6 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 //instance variables go here
 {
 	this -> robot = robotPointer;
-	ultraLeft.SetAutomaticMode(false); // Prevents sensors from automatically going off
-	ultraRight.SetAutomaticMode(false);
 }  
 
 void AutonomousController::startTimer(){

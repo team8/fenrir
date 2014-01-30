@@ -9,11 +9,11 @@
 	argPointer = args;
 }
 
-SubsystemType RobotCommand::getSubsystem() {
+RobotCommand::SubsystemType RobotCommand::getSubsystem() {
 	return subsystem;
 }
 
-Method RobotCommand::getMethod() {
+RobotCommand::Method RobotCommand::getMethod() {
 	return method;
 }
 

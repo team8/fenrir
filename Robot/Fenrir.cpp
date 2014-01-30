@@ -5,9 +5,9 @@
 
 class Fenrir : public IterativeRobot {
 	private:
+		Robot robot;
 		HumanController humanController;
 		AutonomousController autoController;
-		Robot robot;
 
 	public:
 		Fenrir();
@@ -25,19 +25,19 @@ class Fenrir : public IterativeRobot {
 };
 
 Fenrir::Fenrir():
+	robot(),
 	humanController(&robot),
-	autoController(&robot),
-	robot()
+	autoController(&robot)
 {
 
 }
 
 void Fenrir::RobotInit(){
-	robot();
+
 }
 
 void Fenrir::AutonomousInit(){
-	autoController(&robot);
+
 }
 
 void Fenrir::AutonomousPeriodic(){
@@ -50,7 +50,6 @@ void Fenrir::AutonomousDisabled(){
 }
 
 void Fenrir::DisabledInit(){
-	robot();
 	robot.disable();
 }
 
@@ -60,7 +59,7 @@ void Fenrir::DisabledPeriodic(){
 }
 
 void Fenrir::TeleopInit(){
- 	humanController(&robot);
+
 }
 
 void Fenrir::TeleopPeriodic(){

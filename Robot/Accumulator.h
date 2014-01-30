@@ -30,6 +30,7 @@ private:
 	PIDController encController;
 public:
 	void accumulate();
+	void notAccumulating();
 	void stop();
 	void update();
 	Accumulator();

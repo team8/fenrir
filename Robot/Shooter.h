@@ -1,7 +1,7 @@
 #include <WPILib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
-#include "Rangefindind.h"
+#include "Rangefinding.h"
 
 
 
@@ -27,13 +27,16 @@ class Shooter {
 		PIDController encController3;
 		PIDController encController4;
 		
-		ShooterState state;
+		Rangefinding rangefinder;
+		
 		typedef enum ShooterState {
 			IDLE,
 			ALIGN,
 			PREPARING,
 			FIRING
 		} ShooterState;
+		ShooterState state;
+		
 		Timer time;
 	public:
 		void shoot();

@@ -28,13 +28,13 @@ class DriveTrain {
 		double rotateAngle;
     
 		//state 
-		DriveState state;
 		typedef enum DriveState{
 			DRIVE_DIST,
 			ROTATE_SPEED,
 			TURN_ANGLE,
 			STOP_VICTORS
 		} DriveState;
+		DriveState state;
 
 	
 	public:
