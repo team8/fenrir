@@ -2,28 +2,16 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
-typedef enum{
-	ACCUMULATING,
-	NOT_ACCUMULATING,
-	PASSING
-} AccumulatorState;
 
-//Methods used for the Command
-typedef enum{
-	ACCUMULATE,
-	STOP,
-	PASS
-} AccumulatorMethod;
-
-typedef enum{
-	FOWARD,
-	BACKWARD,
-	HALT
-}ExtensionMethod;
 	
 class Accumulator{
 private:
 	Victor accumulateVic;
+	typedef enum{
+		ACCUMULATING,
+		NOT_ACCUMULATING,
+		PASSING
+	} AccumulatorState;
 	AccumulatorState state;
 	
 	Encoder encoder;

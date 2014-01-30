@@ -12,7 +12,7 @@ typedef struct DriveArgs {
 	float turnValue;
 } DriveArgs;
 
-typedef struct{
+typedef struct ShooterArgs {
 	bool trigger;
 } ShooterArgs;
 
@@ -26,7 +26,7 @@ class RobotCommand{
 		} SubsystemType; 
 	
 		/*SUBSYSTEM METHODS*/
-		typedef enum DriveMethod{
+		typedef enum DriveMethod {
 			SETSPEED,
 			DRIVEDIST,
 			ROTATEANGLE,
@@ -34,13 +34,13 @@ class RobotCommand{
 			STOPVICTORS
 		} DriveMethod;
 		
-		typedef enum AccumulatorMethod{
+		typedef enum AccumulatorMethod {
 			ACCUMULATE,
 			STOP,
 			PASS
 		} AccumulatorMethod;
 		
-		typedef enum ExtensionMethod{
+		typedef enum ExtensionMethod {
 			FOWARD,
 			BACKWARD,
 			HALT
@@ -58,7 +58,7 @@ class RobotCommand{
 			ExtensionMethod extensionMethod;
 		} Method;
 
-		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void * args);
+		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void *args);
 		SubsystemType getSubsystem();
 		Method getMethod();
 		void *argPointer;
@@ -67,7 +67,7 @@ class RobotCommand{
 		Method method;
 };
 
-typedef union Method{
+typedef union Method {
 	RobotCommand::DriveMethod driveMethod;
 	RobotCommand::ShooterMethod shooterMethod;
 	RobotCommand::AccumulatorMethod accumulatorMethod;
