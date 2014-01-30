@@ -6,25 +6,17 @@
  */
 
 HumanController::HumanController(Robot *robotPointer):
-
-speedStick(PORT_SPEED),
-turnStick(PORT_TURN),
-operatorStick(PORT_OPERATOR)
-
-
+	speedStick(PORT_SPEED),
+	turnStick(PORT_TURN),
+	operatorStick(PORT_OPERATOR)
 {  
 	this-> robot = robotPointer;
 } 
 
-
-
-//This is the part that loops repeatedly, issuing commands
 void HumanController::update(){
-
 	//Here call the appropriate function from drive train
 	
 	if(getAccumulatorButton()){
-		
 		for(int i = 1; i<=12; i++)
 		{
 			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)i));
