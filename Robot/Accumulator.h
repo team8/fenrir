@@ -1,3 +1,5 @@
+#ifndef ACCUMULATOR_H
+#define ACCUMULATOR_H
 #include <WPILib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
@@ -25,3 +27,4 @@ public:
 	void runCommand(RobotCommand newCommand);
 };
 
+#endif
