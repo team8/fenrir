@@ -1,7 +1,7 @@
 #include "Shooter.h"
 
 
-Shooter::Shooter(): 
+Shooter::Shooter(Robot *robotPointer): 
 	shooterVic1(PORT_SHOOTER_VIC_1),
 	shooterVic2(PORT_SHOOTER_VIC_2),
 	shooterVic3(PORT_SHOOTER_VIC_3),
@@ -20,8 +20,10 @@ Shooter::Shooter():
 	encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
 	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4),
 	
-	rangefinder(robot)
+	rangefinder(robotPointer)
 {
+	this -> robot = robotPointer;
+	
 	encShooter1.Start();
 	encShooter2.Start();
 	encShooter3.Start();

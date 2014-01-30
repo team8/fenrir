@@ -5,10 +5,13 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
+class Robot;
 class Rangefinding;
 
 class Shooter {
 	private:
+	
+		Robot* robot;
 		Victor shooterVic1;
 		Victor shooterVic2;
 		Victor shooterVic3;
@@ -44,7 +47,7 @@ class Shooter {
 		void startShooterVics(float speed);
 		void setAllVics(float speed);
 		void update();
-		Shooter();
+		Shooter(Robot *robotPointer);
 		void runCommand(RobotCommand command);
 };
 
