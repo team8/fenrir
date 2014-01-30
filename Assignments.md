@@ -1,5 +1,3 @@
 Stuff to do:
--Keep checking for errors
-======
-More stuff to do:
--Find Ports from Build Team
+Keep checking for errors
+Find Ports from Build Team
