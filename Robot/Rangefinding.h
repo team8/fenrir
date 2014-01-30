@@ -6,7 +6,9 @@
 #include "Robot.h"
 #include "Constants.h"
 #include <WPILib.h>
-#include <math.h>  
+#include <math.h>
+
+class Robot;
 
 class Rangefinding {
 	private:
