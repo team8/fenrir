@@ -1,10 +1,11 @@
+#ifndef SHOOTER_H
+#define SHOOTER_H
 #include <WPILib.h>
+#include "Rangefinding.h"
 #include "Constants.h"
 #include "RobotCommand.h"
-#include "Rangefinding.h"
 
-
-
+class Rangefinding;
 
 class Shooter {
 	private:
@@ -46,3 +47,5 @@ class Shooter {
 		Shooter();
 		void runCommand(RobotCommand command);
 };
+
+#endif

@@ -5,7 +5,7 @@ Robot::Robot() :
 	driveTrain(),
 	accumulator()
 {
-	
+	return;
 }
 
 void Robot::setCommand(RobotCommand command) {
