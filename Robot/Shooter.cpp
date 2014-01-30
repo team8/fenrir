@@ -10,10 +10,10 @@ Shooter::Shooter(Robot *robotPointer):
 	loaderVic1(PORT_LOADER_VIC_1),
 	loaderVic2(PORT_LOADER_VIC_2),
 	
-	encShooter1((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B),
-	encShooter2((uint32_t)PORT_SHOOTER_ENCODER_2A, (uint32_t)PORT_SHOOTER_ENCODER_2B),
-	encShooter3((uint32_t)PORT_SHOOTER_ENCODER_3A, (uint32_t)PORT_SHOOTER_ENCODER_3B),
-	encShooter4((uint32_t)PORT_SHOOTER_ENCODER_4A, (uint32_t)PORT_SHOOTER_ENCODER_4B),
+	encShooter1((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B, true, k4X),
+	encShooter2((uint32_t)PORT_SHOOTER_ENCODER_2A, (uint32_t)PORT_SHOOTER_ENCODER_2B, true, k4X),
+	encShooter3((uint32_t)PORT_SHOOTER_ENCODER_3A, (uint32_t)PORT_SHOOTER_ENCODER_3B, true, k4X),
+	encShooter4((uint32_t)PORT_SHOOTER_ENCODER_4A, (uint32_t)PORT_SHOOTER_ENCODER_4B, true, k4X),
 	
 	encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 	encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),

@@ -6,19 +6,17 @@
 #include "Robot.h"
 #include "Constants.h"
 #include <WPILib.h>
-#include <math.h>
-
-class Robot;
+#include <math.h>  
 
 class Rangefinding {
 	private:
 		Ultrasonic ultraLeft;
 		Ultrasonic ultraRight;
-		Robot *robot;
+		Robot* robot;
 
 	public:
 		void rotateDegrees(); // Returns the amount of degrees of rotation needed to be perpendicular to the wall
 		double getDistance();
-		Rangefinding(Robot *robotPointer);
+		Rangefinding(Robot* robotPointer);
 };
 #endif
