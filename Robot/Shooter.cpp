@@ -42,6 +42,7 @@ void Shooter::runCommand(RobotCommand command){
 		// 	break;
 		// //named it like this because I think this sounds more like a command and helps reduce confusion
 		case RobotCommand::FIRE:
+			time.Start();
 			state = ALIGN;
 			break;
 	}
@@ -57,14 +58,25 @@ void Shooter::update(){
 			time.Stop();
 			break;
 		case PREPARING:
-			shooterVic1.Set(encController1.Get());
-			shooterVic2.Set(encController2.Get());
-			shooterVic3.Set(encController3.Get());
-			shooterVic4.Set(encController4.Get());
-			if(encController1.GetError()<0.01&&encController2.GetError()<0.01&&encController3.GetError()<0.01&&encController4.GetError()<0.01){
+			if(time.Get()<=5000){
+				shooterVic1.Set(0.5);
+				shooterVic2.Set(0.5);
+				shooterVic3.Set(0.5);
+				shooterVic4.Set(0.5);
+			}
+			else {
+				time.Reset();
 				state = FIRING;
 			}
-			state = FIRING;
+			
+		//	shooterVic1.Set(encController1.Get());
+		//	shooterVic2.Set(encController2.Get());
+		//	shooterVic3.Set(encController3.Get());
+		//	shooterVic4.Set(encController4.Get());
+		//	if(encController1.GetError()<0.01&&encController2.GetError()<0.01&&encController3.GetError()<0.01&&encController4.GetError()<0.01){
+		//		state = FIRING;
+		//	}
+		//	state = FIRING;
 			break;
 		case ALIGN:
 
@@ -73,14 +85,13 @@ void Shooter::update(){
 		case FIRING:
 			
 			time.Reset();
-			time.Start();
+		//	time.Start();
 			while(time.Get()<=5000){
 			loaderVic1.Set(LOAD_SPEED);
 			loaderVic2.Set(LOAD_SPEED);
 			}
 	//TODO once timer reaches certain constant, switch state
 			state = IDLE;
-			shoot();
 			// if(timer.Get()<0){
 			// 	startShooterVics(SHOOTER_VICS_SPEED);
 			// 	state=PREPARING;
@@ -101,6 +112,10 @@ void Shooter::startShooterVics(float speed){
 }
 
 void Shooter::setAllVics(float speed){
+	shooterVic1.Set(speed);
+	shooterVic2.Set(speed);
+	shooterVic3.Set(speed);
+	shooterVic4.Set(speed);
 	loaderVic1.Set(speed);
 	loaderVic2.Set(speed);
 }
