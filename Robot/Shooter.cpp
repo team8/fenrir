@@ -1,7 +1,7 @@
 #include "Shooter.h"
 
 
-Shooter::Shooter(Robot *robotPointer): 
+Shooter::Shooter(Rangefinding *rangepointer): 
 	shooterVic1(PORT_SHOOTER_VIC_1),
 	shooterVic2(PORT_SHOOTER_VIC_2),
 	shooterVic3(PORT_SHOOTER_VIC_3),
@@ -18,11 +18,10 @@ Shooter::Shooter(Robot *robotPointer):
 	encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 	encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),
 	encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
-	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4),
+	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)Rangefinder
 	
-	rangefinder(robotPointer)
 {
-	this -> robot = robotPointer;
+	this -> rangefinder = rangepointer;
 	
 	encShooter1.Start();
 	encShooter2.Start();
@@ -69,7 +68,7 @@ void Shooter::update(){
 			break;
 		case ALIGN:
 			Rangefinder.rotateDegrees();
-			double dist =  Rangefinding.getDistance();
+			double dist =  Rangefinder.getDistance();
 			while(dist != SHOOT_DISTANCE){
 				void * argPointer = malloc(sizeof(DriveArgs));
 				((DriveArgs*) argPointer) -> driveDist = SHOOT_DISTANCE-dist;
@@ -77,7 +76,7 @@ void Shooter::update(){
 				method.driveMethod = RobotCommand::DRIVEDIST;
 				RobotCommand command(RobotCommand::DRIVE, method, argPointer);
 				robot -> setCommand(command);
-				dist = Rangefinding.getDistance();
+				dist = Rangefinder.getDistance();
 			}
 			state = PREPARING;
 			break;

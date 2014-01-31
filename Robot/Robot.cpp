@@ -1,7 +1,8 @@
 #include "Robot.h"
 
 Robot::Robot() :
-	shooter(this),
+	rangefinder(this),
+	shooter(rangefinder),
 	driveTrain(),
 	accumulator()
 {

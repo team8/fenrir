@@ -6,6 +6,7 @@
 #include "Shooter.h"
 #include "RobotCommand.h"
 #include "Accumulator.h"
+#include "Rangefinding.h"
 
 
 class Robot {
@@ -14,6 +15,7 @@ class Robot {
 		DriveTrain driveTrain;
 		Shooter shooter;
 		Accumulator accumulator;
+		Rangefinding rangefinder;
     
 	public:
 		Robot();
