@@ -1,7 +1,7 @@
 #include "Shooter.h"
 
 
-Shooter::Shooter(Rangefinding *rangepointer): 
+Shooter::Shooter(): 
 	shooterVic1(PORT_SHOOTER_VIC_1),
 	shooterVic2(PORT_SHOOTER_VIC_2),
 	shooterVic3(PORT_SHOOTER_VIC_3),
@@ -10,18 +10,18 @@ Shooter::Shooter(Rangefinding *rangepointer):
 	loaderVic1(PORT_LOADER_VIC_1),
 	loaderVic2(PORT_LOADER_VIC_2),
 	
-	encShooter1((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B, true, k4X),
-	encShooter2((uint32_t)PORT_SHOOTER_ENCODER_2A, (uint32_t)PORT_SHOOTER_ENCODER_2B, true, k4X),
-	encShooter3((uint32_t)PORT_SHOOTER_ENCODER_3A, (uint32_t)PORT_SHOOTER_ENCODER_3B, true, k4X),
-	encShooter4((uint32_t)PORT_SHOOTER_ENCODER_4A, (uint32_t)PORT_SHOOTER_ENCODER_4B, true, k4X),
+	encShooter1((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B, true),
+	encShooter2((uint32_t)PORT_SHOOTER_ENCODER_2A, (uint32_t)PORT_SHOOTER_ENCODER_2B, true),
+	encShooter3((uint32_t)PORT_SHOOTER_ENCODER_3A, (uint32_t)PORT_SHOOTER_ENCODER_3B, true),
+	encShooter4((uint32_t)PORT_SHOOTER_ENCODER_4A, (uint32_t)PORT_SHOOTER_ENCODER_4B, true),
 	
 	encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 	encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),
 	encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
-	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)Rangefinder
+	encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 	
 {
-	this -> rangefinder = rangepointer;
+
 	
 	encShooter1.Start();
 	encShooter2.Start();
@@ -67,24 +67,14 @@ void Shooter::update(){
 			state = FIRING;
 			break;
 		case ALIGN:
-			Rangefinder.rotateDegrees();
-			double dist =  Rangefinder.getDistance();
-			while(dist != SHOOT_DISTANCE){
-				void * argPointer = malloc(sizeof(DriveArgs));
-				((DriveArgs*) argPointer) -> driveDist = SHOOT_DISTANCE-dist;
-				RobotCommand::Method method;
-				method.driveMethod = RobotCommand::DRIVEDIST;
-				RobotCommand command(RobotCommand::DRIVE, method, argPointer);
-				robot -> setCommand(command);
-				dist = Rangefinder.getDistance();
-			}
+
 			state = PREPARING;
 			break;
 		case FIRING:
 			
 			time.Reset();
 			time.Start();
-			while(time.get()<=5000){
+			while(time.Get()<=5000){
 			loaderVic1.Set(LOAD_SPEED);
 			loaderVic2.Set(LOAD_SPEED);
 			}

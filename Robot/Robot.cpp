@@ -1,12 +1,11 @@
 #include "Robot.h"
 
 Robot::Robot() :
-	rangefinder(this),
-	shooter(rangefinder),
-	driveTrain(),
+	driveTrain(),	
+	shooter(),
 	accumulator()
 {
-	return;
+
 }
 
 void Robot::setCommand(RobotCommand command) {

@@ -11,8 +11,8 @@ DriveTrain::DriveTrain() :
         gyroscope((uint32_t)PORT_GYRO),
         
         // Encoders
-        leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B, true, k4X), 
-        rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B, true, k4X), 
+        leftEnc((uint32_t)PORT_ENCODER_LEFT_A, (uint32_t)PORT_ENCODER_LEFT_B, true), 
+        rightEnc((uint32_t)PORT_ENCODER_RIGHT_A, (uint32_t)PORT_ENCODER_RIGHT_B, true), 
         //leftEnc.SetPIDSourceParameter(kdistance),
 		//rightEnc.SetPIDSourceParameter(kdistance),
         

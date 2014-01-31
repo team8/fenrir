@@ -3,10 +3,9 @@
 #include <WPILib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
-#include "Rangefinding.h"
 
 class Robot;
-class Rangefinding;
+
 
 class Shooter {
 	private:
@@ -31,7 +30,6 @@ class Shooter {
 		PIDController encController3;
 		PIDController encController4;
 		
-		Rangefinding* rangefinder;
 		
 		typedef enum ShooterState {
 			IDLE,
@@ -47,7 +45,7 @@ class Shooter {
 		void startShooterVics(float speed);
 		void setAllVics(float speed);
 		void update();
-		Shooter(Rangefinding *rangepointer);
+		Shooter();
 		void runCommand(RobotCommand command);
 };
 
