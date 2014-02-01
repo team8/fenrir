@@ -32,50 +32,50 @@ Fenrir::Fenrir():
 
 }
 
-void Fenrir::RobotInit(){
+void Fenrir::RobotInit() {
 
 }
 
-void Fenrir::AutonomousInit(){
+void Fenrir::AutonomousInit() {
 
 }
 
-void Fenrir::AutonomousPeriodic(){
+void Fenrir::AutonomousPeriodic() {
 	autoController.update();
 	robot.update();
 }
 
-void Fenrir::AutonomousDisabled(){
+void Fenrir::AutonomousDisabled() {
 	robot.disable();
 }
 
-void Fenrir::DisabledInit(){
+void Fenrir::DisabledInit() {
 	robot.disable();
 }
 
-void Fenrir::DisabledPeriodic(){
+void Fenrir::DisabledPeriodic() {
 	robot.disable();
 	robot.update();
 }
 
-void Fenrir::TeleopInit(){
+void Fenrir::TeleopInit() {
 
 }
 
-void Fenrir::TeleopPeriodic(){
+void Fenrir::TeleopPeriodic() {
 	humanController.update();
 	robot.update();
 }
 
-void Fenrir::TeleopDisabled(){
+void Fenrir::TeleopDisabled() {
 	robot.disable();
 }
 
-void Fenrir::TestInit(){
+void Fenrir::TestInit() {
 	
 }
 
-void Fenrir::TestPeriodic(){
+void Fenrir::TestPeriodic() {
 	
 }
 
