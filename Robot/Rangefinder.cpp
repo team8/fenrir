@@ -19,11 +19,24 @@ void Rangefinder::rotateDegrees() {
 			double angle = atan((leftDist - rightDist) / ULTRA_GAP);
 			
 			void* argPointer = malloc(sizeOf(RobotCommand::DriveArgs);
-			
+			((DriveArgs*) argPointer) -> rotAngle = angle;
+			RobotCommand::Method method;
+			method.driveMethod = RobotCommand::ROTATEANGLE;
+			RobotCommand command(RobotCommand::DRIVE, method, argPointer);
+			robot -> setCommand(command);
 		}
 	}
 }
 
 int Rangefinder::wallDist() {
-
+	ultraLeft.Ping();
+	if (ultraLeft.IsRangeValid()) {
+		int leftDist = ultraLeft.GetRangeInches();
+		ultraRight.Ping();
+		if (ultraRight.IsRangeValid()) {
+			int rightDist = ultraRight.GetRangeInches();
+			return ((leftDist + rightDist) / 2);
+		}
+	}
+	return 0; // If there is an invalid range
 }
