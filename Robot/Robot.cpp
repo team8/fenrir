@@ -28,6 +28,5 @@ void Robot::update(){
 }
 void Robot::disable(){
 	driveTrain.setSpeed(0);
-	accumulator.stop();
 	shooter.setAllVics(0);
 }

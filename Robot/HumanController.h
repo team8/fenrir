@@ -5,6 +5,7 @@
 #include "Robot.h"
 #include "RobotCommand.h"
 #include <WPILib.h>
+#include <stdlib.h>
 
 class HumanController {
 

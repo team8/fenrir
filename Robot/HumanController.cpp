@@ -15,14 +15,6 @@ HumanController::HumanController(Robot *robotPointer):
 
 void HumanController::update(){
 	//Here call the appropriate function from drive train
-	
-	if(getAccumulatorButton()){
-		for(int i = 1; i<=12; i++)
-		{
-			printf("%d: %d\t", i, operatorStick.GetRawButton((uint32_t)i));
-		}
-		printf("\n");
-	}
 
 	void * argPointer = malloc(sizeof(DriveArgs));
 
@@ -35,6 +27,7 @@ void HumanController::update(){
 
 	if(accuButtonPrev != getAccumulatorButton()){
 		if(getAccumulatorButton()){
+			
 			RobotCommand::Method setAccumulator;
 			setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 			RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
