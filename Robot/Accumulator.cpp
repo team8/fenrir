@@ -7,9 +7,8 @@ Accumulator::Accumulator():
 
 }
 
-void Accumulator::runCommand(RobotCommand newCommand){
-	
-	switch(newCommand.getMethod().accumulatorMethod){
+void Accumulator::runCommand(RobotCommand newCommand) {
+	switch(newCommand.getMethod().accumulatorMethod) {
 	case RobotCommand::STOP:
 		state = NOT_ACCUMULATING;
 		break;
@@ -22,12 +21,12 @@ void Accumulator::runCommand(RobotCommand newCommand){
 	}
 }
 
-void Accumulator::notAccumulating(){
+void Accumulator::notAccumulating() {
 
 }
 
-void Accumulator::update(){
-	switch(state){
+void Accumulator::update() {
+	switch(state) {
 	case NOT_ACCUMULATING:
 		accumulateVic.Set(0);
 		break;
