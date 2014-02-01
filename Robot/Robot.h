@@ -9,13 +9,11 @@
 
 
 class Robot {
-	
 	private:
 		DriveTrain driveTrain;
 		Shooter shooter;
 		Accumulator accumulator;
 
-    
 	public:
 		Robot();
 		//void setSpeed(float s);
