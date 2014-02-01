@@ -10,13 +10,6 @@
 class Accumulator{
 private:
 	Victor accumulateVic;
-	Victor accumulateVic2;
-	Victor accumulateVic3;
-	Victor accumulateVic4;
-	Victor accumulateVic5;
-	Victor accumulateVic6;
-	Victor accumulateVic7;
-
 	
 	typedef enum{
 		ACCUMULATING,
