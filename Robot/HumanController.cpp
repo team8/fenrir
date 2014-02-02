@@ -1,4 +1,5 @@
 #include "HumanController.h"
+#include <stdlib.h>
 /* Command example - How to issue commands
   void * argPointer = malloc(sizeof(DriveArgs)); //this lets you access the drive args stored in command
   argPointer -> variable in DriveArgs = Enter parameter here; //this lets you set a variable to what you want
@@ -18,8 +19,8 @@ void HumanController::update(){
 
 	void * argPointer = malloc(sizeof(DriveArgs));
 
-	((DriveArgs*)argPointer) -> speedValue = speedStick.GetY();
-	((DriveArgs*)argPointer) -> turnValue = turnStick.GetX();
+	((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
+	((DriveArgs*)argPointer) -> turnValue = getTurnStick();
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::SETSPEED;
 	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -74,11 +75,13 @@ void HumanController::update(){
 
 float HumanController::getSpeedStick(){
 	float speed = speedStick.GetY(); 
+	if (speed > 0.2 || speed < - 0.2) std::printf("Neelay Y U no...\n");
 	return speed;
 }
 
 float HumanController::getTurnStick() {
 	float turn = turnStick.GetX();
+	if (turn > 0.2 || turn < - 0.2) std::printf("Neelay is XX\n");
 	return turn;
 }
 

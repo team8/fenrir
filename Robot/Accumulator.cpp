@@ -1,8 +1,7 @@
 #include "Accumulator.h"
 
 Accumulator::Accumulator():
-	//accumulateVic((uint32_t)PORT_ACCUMULATOR_VIC_7)
-	accumulateVic((uint32_t) 3)
+	accumulateVic((uint32_t)PORT_ACCUMULATOR_VIC_7)
 {
 
 }

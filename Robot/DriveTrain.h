@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include <WPILib.h>
 #include "RobotCommand.h"
+#include <stdlib.h>
 
 class DriveTrain {
 	private:

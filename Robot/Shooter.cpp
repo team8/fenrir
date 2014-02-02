@@ -2,13 +2,13 @@
 
 
 Shooter::Shooter(): 
-	shooterVic1(PORT_SHOOTER_VIC_1),
-	shooterVic2(PORT_SHOOTER_VIC_2),
-	shooterVic3(PORT_SHOOTER_VIC_3),
-	shooterVic4(PORT_SHOOTER_VIC_4),
+	shooterVic1((uint32_t)PORT_SHOOTER_VIC_1),
+	shooterVic2((uint32_t)PORT_SHOOTER_VIC_2),
+	shooterVic3((uint32_t)PORT_SHOOTER_VIC_3),
+	shooterVic4((uint32_t)PORT_SHOOTER_VIC_4),
 	
-	loaderVic1(PORT_LOADER_VIC_1),
-	loaderVic2(PORT_LOADER_VIC_2),
+	loaderVic1((uint32_t)PORT_LOADER_VIC_1),
+	loaderVic2((uint32_t)PORT_LOADER_VIC_2),
 	
 	encShooter1((uint32_t)PORT_SHOOTER_ENCODER_1A, (uint32_t)PORT_SHOOTER_ENCODER_1B, true),
 	encShooter2((uint32_t)PORT_SHOOTER_ENCODER_2A, (uint32_t)PORT_SHOOTER_ENCODER_2B, true),
