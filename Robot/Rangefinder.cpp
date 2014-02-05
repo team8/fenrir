@@ -31,10 +31,10 @@ void Rangefinder::rotateDegrees() {
 int Rangefinder::wallDist() {
 	ultraLeft.Ping();
 	if (ultraLeft.IsRangeValid()) {
-		int leftDist = ultraLeft.GetRangeInches();
+		double leftDist = ultraLeft.GetRangeInches();
 		ultraRight.Ping();
 		if (ultraRight.IsRangeValid()) {
-			int rightDist = ultraRight.GetRangeInches();
+			double rightDist = ultraRight.GetRangeInches();
 			return ((leftDist + rightDist) / 2);
 		}
 	}

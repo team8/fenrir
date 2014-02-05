@@ -18,29 +18,46 @@ void HumanController::update(){
 	//Here call the appropriate function from drive train
 
 	void * argPointer = malloc(sizeof(DriveArgs));
-
-	((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
-	((DriveArgs*)argPointer) -> turnValue = getTurnStick();
+	
+	//Using input from joystick to set values
+	
+	//Makes joystick less sensitive on lower end
+	if(getSpeedStick()<0.75) {
+		((DriveArgs*)argPointer) -> speedValue= getSpeedStick()*SPEED_SENSITIVITY;
+	}
+	else {
+		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
+	}
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(command);
+	RobotCommand command1(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(command1);
+	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+	RobotCommand::Method rotSpeed;
+	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+	RobotCommand command2(RobotCommand::DRIVE, rotSpeed, argPointer);
+	robot -> setCommand(command2);
 
-	if(accuButtonPrev != getAccumulatorButton()){
-		if(getAccumulatorButton()){
-			
-			RobotCommand::Method setAccumulator;
-			setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
-			RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
+	if(getAccumulator()<-0.2){
+		RobotCommand::Method setAccumulator;
+		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
+		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
+		robot -> setCommand(command);
+	}		
+	else if(getAccumulator()>0.2){
+			RobotCommand::Method pass;
+			pass.accumulatorMethod = RobotCommand::PASS;
+			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
-		}
-		else{
-			RobotCommand::Method stopAccumulator;
-			stopAccumulator.accumulatorMethod = RobotCommand::STOP;
-			RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
-			robot -> setCommand(command);
-		}
 	}
+
+	else{
+		RobotCommand::Method stopAccumulator;
+		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
+		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
+		robot -> setCommand(command);
+	}
+	
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
@@ -59,29 +76,24 @@ void HumanController::update(){
 			robot -> setCommand(command);
 		}
 	}
-	if(passButtonPrev!=getPassButton()){
-		if(getShootButton()){
+	if(getAccumulator()>0){
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
-		}
 	}
-	accuButtonPrev = getAccumulatorButton();
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();
-	passButtonPrev = getPassButton();
+
 }
 
 float HumanController::getSpeedStick(){
 	float speed = speedStick.GetY(); 
-	if (speed > 0.2 || speed < - 0.2) std::printf("Neelay Y U no...\n");
 	return speed;
 }
 
 float HumanController::getTurnStick() {
 	float turn = turnStick.GetX();
-	if (turn > 0.2 || turn < - 0.2) std::printf("Neelay is XX\n");
 	return turn;
 }
 
@@ -89,9 +101,9 @@ float HumanController::getAccumulatorStick() {
 	return operatorStick.GetY(); // For adjusting the accumulator with Operator stick
 }
 
-bool HumanController::getAccumulatorButton() {
+float HumanController::getAccumulator() {
 	//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-	return operatorStick.GetTrigger(); // For testing purposes
+	return operatorStick.GetY(); // For testing purposes
 }
 
 bool HumanController::getShootButton() {
@@ -103,6 +115,3 @@ bool HumanController::getWarmupButton() {
 	return operatorStick.GetRawButton((uint32_t)WARMUP_BUTTON_PORT); // Get button to start shooter warmup from Operator stick
 }
 
-bool HumanController::getPassButton() {
-	return operatorStick.GetRawButton((uint32_t)PASS_BUTTON_PORT);
-}

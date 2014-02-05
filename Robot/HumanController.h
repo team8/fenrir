@@ -14,10 +14,10 @@ class HumanController {
 		float getSpeedStick();
 		float getTurnStick();
 		float getAccumulatorStick();
-		bool getAccumulatorButton();
+		float getAccumulator();
 		bool getShootButton();
 		bool getWarmupButton();
-		bool getPassButton();
+
 		HumanController(Robot *robotPointer);
 
 	private:

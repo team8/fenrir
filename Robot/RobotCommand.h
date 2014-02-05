@@ -9,7 +9,6 @@ typedef struct DriveArgs {
 	double rotSpeed;
 	double driveSpeed;
 	float speedValue;
-	float turnValue;
 } DriveArgs;
 
 typedef struct ShooterArgs {
@@ -17,9 +16,9 @@ typedef struct ShooterArgs {
 } ShooterArgs;
 
 /*COMMAND OBJECT*/
-class RobotCommand{
+class RobotCommand {
 	public:
-		typedef enum SubsystemType{
+		typedef enum SubsystemType {
 			DRIVE,
 			SHOOTER,
 			ACCUMULATOR

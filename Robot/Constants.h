@@ -3,6 +3,9 @@
 #define PORT_TURN 2
 #define PORT_OPERATOR 3
 
+//Helps refine sensitivity of joystiks
+#define SPEED_SENSITIVITY 0.5
+#define ROTATE_SENSITIVITY
 //ports for drive train victors
 #define PORT_DRIVE_VIC_1 0
 #define PORT_DRIVE_VIC_2 1
@@ -71,7 +74,7 @@
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 3
 #define WARMUP_BUTTON_PORT 0
-#define PASS_BUTTON_PORT 4
+#define PASS_BUTTON_PORT 2
 
 // Ultrasonic ports
 #define ECHO_PULSE_OUT_1 0 // Left
