@@ -13,10 +13,10 @@
 #define PORT_DRIVE_VIC_4 2
 
 //ports for drive train encoders
-#define PORT_ENCODER_RIGHT_A 0
-#define PORT_ENCODER_RIGHT_B 0
-#define PORT_ENCODER_LEFT_A 0
-#define PORT_ENCODER_LEFT_B 0
+#define PORT_ENCODER_RIGHT_A 1
+#define PORT_ENCODER_RIGHT_B 1
+#define PORT_ENCODER_LEFT_A 2
+#define PORT_ENCODER_LEFT_B 2
 
 //ports for drive train gyroscopes
 #define PORT_GYRO 0

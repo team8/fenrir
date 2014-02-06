@@ -23,6 +23,9 @@ DriveTrain::DriveTrain() :			// Victors
 	//leftEnc.SetPIDSourceParameter(kdistance),
 	//rightEnc.SetPIDSourceParameter(kdistance),leftEnc.Start();
 	rightEnc.Start();
+	leftEnc.Start();
+	leftEnc.PIDSource();
+	rightEnc.PIDSource();
 	rightController.SetOutputRange(-1, 1);
 	leftController.SetOutputRange(-1, 1);
 	angleController.SetOutputRange(-1, 1);
