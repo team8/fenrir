@@ -13,7 +13,7 @@ class Robot {
 		DriveTrain driveTrain;
 		Shooter shooter;
 		Accumulator accumulator;
-
+		Rangefinder rangeFinder;
 	public:
 		Robot();
 		//void setSpeed(float s);

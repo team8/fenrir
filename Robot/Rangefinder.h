@@ -11,7 +11,6 @@ class Rangefinder {
 	private:
 		Ultrasonic ultraLeft;
 		Ultrasonic ultraRight;
-		
 		Robot* robot;
 
 	public:

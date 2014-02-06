@@ -1,7 +1,6 @@
 #ifndef HUMANCONTROLLER_H
 #define HUMANCONTROLLER_H
 #include "Constants.h"
-
 #include "Robot.h"
 #include "RobotCommand.h"
 #include <WPILib.h>
