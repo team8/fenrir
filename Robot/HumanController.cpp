@@ -37,8 +37,17 @@ void HumanController::update(){
 	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
 	RobotCommand command2(RobotCommand::DRIVE, rotSpeed, argPointer);
 	robot -> setCommand(command2);
+	
+	if(autoTester!=speedStick.GetTrigger()) {
+		((DriveArgs*)argPointer) -> driveDist = 1.0;
+		RobotCommand::Method driveDist;
+		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
+		robot -> setCommand(command);
+		std::printf("%b \n", autoTester);
+	}
 
-	if(getAccumulator()<-0.2){
+	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
@@ -84,7 +93,7 @@ void HumanController::update(){
 	}
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();
-
+	autoTester = speedStick.GetTrigger();
 }
 
 float HumanController::getSpeedStick(){

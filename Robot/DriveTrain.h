@@ -44,7 +44,7 @@ class DriveTrain {
 		/*Takes input of distance to destination
 		//Will use PID or PIDControllers to calculate input for victors. 
 		//Uses encoders as input for distance from destination*/
-		void driveD(float dist);
+		void driveD(double dist);
 	
 		//Takes input of -1 to 1 and sets speed of victors. 
     	//Only drives straight

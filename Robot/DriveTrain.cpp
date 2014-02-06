@@ -24,8 +24,10 @@ DriveTrain::DriveTrain() :			// Victors
 	//rightEnc.SetPIDSourceParameter(kdistance),leftEnc.Start();
 	rightEnc.Start();
 	leftEnc.Start();
-	leftEnc.PIDSource();
-	rightEnc.PIDSource();
+	rightEnc.SetDistancePerPulse(1);
+	leftEnc.SetDistancePerPulse(1);
+	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	rightController.SetOutputRange(-1, 1);
 	leftController.SetOutputRange(-1, 1);
 	angleController.SetOutputRange(-1, 1);
@@ -66,11 +68,6 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
 		rightBackVic.Set(rightSpeed);
-		std::printf("targetSpeed:%f \n", targetSpeed);
-		std::printf("rotateSpeed:%f \n", rotateSpeed);
-		std::printf("leftSpeed =%f \n", leftSpeed);
-		std::printf("riteSpeed =%f \n", rightSpeed);
-		std::printf("rotateSpeed: %f\n", DriveTrain::rotateSpeed);
 		break;
 
 	case DRIVE_DIST:
@@ -98,7 +95,7 @@ void DriveTrain::update() {
 //Drives robot certain distance
 //Will use PID to determine output for victors
 //Uses encoders
-void DriveTrain::driveD(float dist) {
+void DriveTrain::driveD(double dist) {
 	leftEnc.Reset();
 	rightEnc.Reset();
 	leftController.SetSetpoint(dist);
