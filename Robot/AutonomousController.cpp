@@ -12,15 +12,9 @@ void AutonomousController::startTimer(){
 }
 
 void AutonomousController::drive(){
-	
-	/* Needs to take variables, this is just an example
-	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> speedValue = 23;
-	Method method;
-	method.driveMethod = SETSPEED;
-	Command command(DRIVE, method, argPointer);
+	DriveArgs* argPointer -> speedValue = 23;
+	Command command(DRIVE, SETSPEED, argPointer);
 	robot -> setCommand(command);
-	*/
 }
 
 void AutonomousController::stop(){
