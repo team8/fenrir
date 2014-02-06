@@ -1,10 +1,10 @@
 #include "Robot.h"
 
 Robot::Robot() :
-	driveTrain(),	
+	driveTrain(),
 	shooter(),
-	accumulator()
-	rangeFinder(this);
+	accumulator(),
+	rangeFinder(this)
 {
 
 }
