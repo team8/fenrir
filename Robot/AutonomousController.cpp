@@ -5,13 +5,14 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 //instance variables go here
 {
 	this -> robot = robotPointer;
-}  
+}
 
 void AutonomousController::startTimer(){
 	time.Start();
 }
 
 void AutonomousController::drive(){
+	
 	/* Needs to take variables, this is just an example
 	void * argPointer = malloc(sizeof(DriveArgs));
 	((DriveArgs *) argPointer) -> speedValue = 23;

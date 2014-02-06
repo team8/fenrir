@@ -12,7 +12,7 @@ class AutonomousController {
 		void update();
 		void startTimer();
 	private:
-		Timer time; 
+		Timer time;
 		Robot* robot;
 		void drive();
 		void stop();
