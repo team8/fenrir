@@ -31,5 +31,11 @@ void AutonomousController::stop() {
 
 void AutonomousController::update() {
 	//Runs all methods according to time
-	
+	if(time.Get()<=5) {
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
+		RobotCommand::Method driveDist;
+		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
+	}
 }
