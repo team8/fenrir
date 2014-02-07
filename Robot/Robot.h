@@ -14,6 +14,7 @@ class Robot {
 		Shooter shooter;
 		Accumulator accumulator;
 		Rangefinder rangeFinder;
+		
 	public:
 		Robot();
 		//void setSpeed(float s);
@@ -21,5 +22,6 @@ class Robot {
 		void setCommand(RobotCommand newCommand);
 		void update();
 		void disable();
+		void runCommand(RobotCommand command);
 };
 #endif

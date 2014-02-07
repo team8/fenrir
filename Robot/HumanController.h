@@ -28,6 +28,5 @@ class HumanController {
 		bool shootButtonPrev;
 		bool warmupButtonPrev;
 		bool passButtonPrev;
-		bool autoTester;
 };
 #endif

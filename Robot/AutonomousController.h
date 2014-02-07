@@ -14,7 +14,7 @@ class AutonomousController {
 	private:
 		Timer time;
 		Robot* robot;
-		void drive();
+		void drive(float v = 0.7);
 		void stop();
 		bool shoot();
 		bool targetReached;

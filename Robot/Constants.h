@@ -17,7 +17,7 @@
 #define PORT_ENCODER_RIGHT_B 1
 #define PORT_ENCODER_LEFT_A 2
 #define PORT_ENCODER_LEFT_B 2
-
+#define DISTANCE_PER_ROT 6*atan(1)*4 //6 pi for prototype
 //ports for drive train gyroscopes
 #define PORT_GYRO 0
 
@@ -76,11 +76,12 @@
 #define WARMUP_BUTTON_PORT 0
 #define PASS_BUTTON_PORT 2
 
+
 // Ultrasonic ports
-#define ECHO_PULSE_OUT_1 0 // Left
-#define TRIGGER_PULSE_IN_1 0
-#define ECHO_PULSE_OUT_2 0 // Right
-#define TRIGGER_PULSE_IN_2 0
+#define ULTRASONIC_ECHO_PULSE_OUTPUT_1 0 // Left
+#define ULTRASONIC_TRIGGER_PULSE_INPUT_1 0
+#define ULTRASONIC_ECHO_PULSE_OUTPUT_2 0 // Right
+#define ULTRASONIC_TRIGGER_PULSE_INPUT_2 0
 #define ULTRA_GAP 0 // Distance between the two ultrasonic sensors in inches
 
 #define SHOOT_DISTANCE 0 //The set distance we want it to shoot at

@@ -28,24 +28,16 @@ void HumanController::update(){
 	else {
 		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
 	}
-//	RobotCommand::Method setSpeed;
-//	setSpeed.driveMethod = RobotCommand::SETSPEED;
-//	RobotCommand command1(RobotCommand::DRIVE, setSpeed, argPointer);
-//	robot -> setCommand(command1);
-//	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
-//	RobotCommand::Method rotSpeed;
-//	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-//	RobotCommand command2(RobotCommand::DRIVE, rotSpeed, argPointer);
-//	robot -> setCommand(command2);
-
-	if(autoTester!=speedStick.GetTrigger()) {
-		std::printf("Sending command \n");
-		((DriveArgs*)argPointer) -> driveDist = 1000.0;
-		RobotCommand::Method driveDist;
-		driveDist.driveMethod = RobotCommand::DRIVEDIST;
-		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
-		robot -> setCommand(command);
-	}
+	
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command1(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(command1);
+	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+	RobotCommand::Method rotSpeed;
+	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+	RobotCommand command2(RobotCommand::DRIVE, rotSpeed, argPointer);
+	robot -> setCommand(command2);
 
 	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
@@ -60,7 +52,7 @@ void HumanController::update(){
 			robot -> setCommand(command);
 	}
 
-	else{
+	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
@@ -93,7 +85,6 @@ void HumanController::update(){
 	}
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();
-	autoTester = speedStick.GetTrigger();
 }
 
 float HumanController::getSpeedStick(){

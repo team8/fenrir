@@ -9,13 +9,16 @@
 
 class Rangefinder {
 	private:
+		//constructors for left ultrasonic rangefinders	
 		Ultrasonic ultraLeft;
 		Ultrasonic ultraRight;
 		Robot* robot;
 
 	public:
+		double measureAngle(); 
 		void rotateDegrees();
-		int wallDist();
+		float wallDist();
+		void runCommand(RobotCommand command);
 		Rangefinder(Robot* robotPointer);
 };
 

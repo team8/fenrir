@@ -2,9 +2,9 @@
 
 Accumulator::Accumulator():
 	accumulateVic((uint32_t)PORT_ACCUMULATOR_VIC_7)
-{
+	{
 
-}
+	}
 
 void Accumulator::runCommand(RobotCommand newCommand) {
 	switch(newCommand.getMethod().accumulatorMethod) {
@@ -23,6 +23,14 @@ void Accumulator::runCommand(RobotCommand newCommand) {
 void Accumulator::notAccumulating() {
 
 }
+
+/*bool getHeld() {
+	return ballHeld;
+}
+
+void setHeld(bool b){
+	ballHeld = b;
+}*/
 
 void Accumulator::update() {
 	switch(state) {

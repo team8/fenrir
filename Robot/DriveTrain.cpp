@@ -95,7 +95,10 @@ void DriveTrain::update() {
 //Will use PID to determine output for victors
 //Uses encoders
 void DriveTrain::driveD(double dist) {
+<<<<<<< HEAD
 	std::printf("dist: %g\n", dist);
+=======
+>>>>>>> 77754578a5a4d564f6777ece8c0e6a7ab6c691fe
 	leftEnc.Reset();
 	rightEnc.Reset();
 	leftController.SetSetpoint(dist);

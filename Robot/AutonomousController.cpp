@@ -7,33 +7,39 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 	this -> robot = robotPointer;
 }  
 
-void AutonomousController::startTimer(){
+void AutonomousController::startTimer() {
 	time.Start();
 }
 
-void AutonomousController::drive(){
-	/* Needs to take variables, this is just an example
+void AutonomousController::drive(float v) {
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> speedValue = 23;
-	Method method;
-	method.driveMethod = SETSPEED;
-	Command command(DRIVE, method, argPointer);
+	((DriveArgs *) argPointer) -> driveSpeed = v;
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
-	*/
 }
 
-void AutonomousController::stop(){
-	/* void * argPointer = malloc(sizeof(DriveArgs));
+void AutonomousController::stop() {
+	void * argPointer = malloc(sizeof(DriveArgs));
 	((DriveArgs *) argPointer) -> driveSpeed = 0;
-	Method method;
-	method.driveMethod = SETSPEED;
-	RobotCommand command(DRIVE, method, argPointer);
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
-	*/
+}
+
+bool AutonomousController::shoot() {
 	
 }
 
-void AutonomousController::update(){
+void AutonomousController::update() {
 	//Runs all methods according to time
-	
+	if(time.Get() <= 5) { // modify time value
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
+		RobotCommand::Method driveDist;
+		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
+	}
 }

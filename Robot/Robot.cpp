@@ -20,6 +20,12 @@ void Robot::setCommand(RobotCommand command) {
         case RobotCommand::ACCUMULATOR:
             accumulator.runCommand(command);
             break;
+        case RobotCommand::RANGEFINDER:
+        	rangeFinder.runCommand(command);
+        	break;
+        case RobotCommand::ROBOT:
+        	runCommand(command);
+        	break;
     }
 }
 void Robot::update(){
@@ -30,4 +36,12 @@ void Robot::update(){
 void Robot::disable(){
 	driveTrain.setSpeed(0);
 	shooter.setAllVics(0);
+}
+
+void Robot::runCommand(RobotCommand command)
+{
+	switch(command.getMethod().robotMethod)
+	{
+		case ALIGN_THEN_SHOOT:
+	}
 }
