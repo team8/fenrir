@@ -7,20 +7,20 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 	this -> robot = robotPointer;
 }
 
-void AutonomousController::startTimer(){
+void AutonomousController::startTimer() {
 	time.Start();
 }
 
-void AutonomousController::drive(){
+void AutonomousController::drive(float v) {
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveSpeed = 24; // add some speed value
+	((DriveArgs *) argPointer) -> driveSpeed = v; // add some speed value
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::SETSPEED;
 	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
 }
 
-void AutonomousController::stop(){
+void AutonomousController::stop() {
 	void * argPointer = malloc(sizeof(DriveArgs));
 	((DriveArgs *) argPointer) -> driveSpeed = 0;
 	RobotCommand::Method setSpeed;
@@ -29,7 +29,7 @@ void AutonomousController::stop(){
 	robot -> setCommand(command);
 }
 
-void AutonomousController::update(){
+void AutonomousController::update() {
 	//Runs all methods according to time
 	
 }
