@@ -9,6 +9,7 @@ class Robot;
 
 class Shooter {
 	private:
+		bool aligned;
 	
 		Robot* robot;
 		Victor shooterVic1;
@@ -30,6 +31,7 @@ class Shooter {
 		PIDController encController3;
 		PIDController encController4;
 		
+		double loadSpeed;
 		
 		typedef enum ShooterState {
 			IDLE,
