@@ -41,3 +41,14 @@ int Rangefinder::wallDist() {
 	}
 	return 0; // If there is an invalid range
 }
+
+void runCommand(RobotCommand command);
+{
+	switch(command.method.rangeFinderMethod)
+	{
+		case RobotCommand::ANGLE:
+			break;
+		case RobotCommand::SET_DIST:
+			break;
+	}
+}

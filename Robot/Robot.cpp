@@ -20,6 +20,9 @@ void Robot::setCommand(RobotCommand command) {
         case RobotCommand::ACCUMULATOR:
             accumulator.runCommand(command);
             break;
+        case RobotCommand::RANGEFINDER:
+        	rangeFinder.runCommand(command);
+        	break;
     }
 }
 void Robot::update(){
