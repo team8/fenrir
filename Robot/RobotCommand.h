@@ -22,7 +22,8 @@ class RobotCommand {
 			DRIVE,
 			SHOOTER,
 			ACCUMULATOR,
-			RANGEFINDER
+			RANGEFINDER.
+			ROBOT
 		} SubsystemType; 
 	
 		/*SUBSYSTEM METHODS*/
@@ -56,12 +57,17 @@ class RobotCommand {
 			SET_DIST
 		};
 		
+		typedef enum RobotMethod {
+			ALIGN_THEN_SHOOT
+		};
+		
 		typedef union {
 			DriveMethod driveMethod;
 			AccumulatorMethod accumulatorMethod;
 			ShooterMethod shooterMethod;
 			ExtensionMethod extensionMethod;
 			RangeFinderMethod rangefinderMethod;
+			RobotMethod robotMethod
 		} Method;
 
 		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void *args);
