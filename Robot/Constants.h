@@ -59,7 +59,6 @@
 
 //Constants for the Vics for shooting
 #define SHOOTER_VICS_SPEED 1
-#define LOAD_SPEED 0.5
 
 //Encoder Ports
 #define PORT_SHOOTER_ENCODER_1A 0//is this obselete with the other shooter encoders?

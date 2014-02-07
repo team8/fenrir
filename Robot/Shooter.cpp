@@ -103,8 +103,6 @@ void Shooter::prepare(float speed) {
 }
 
 void Shooter::shoot(){
-	// time.Reset();
-	// time.Start();
 	loaderVic1.Set(loadSpeed);
 	loaderVic2.Set(loadSpeed);
 	//TODO once timer reaches certain constant, switch state
