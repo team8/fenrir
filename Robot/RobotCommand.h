@@ -21,7 +21,8 @@ class RobotCommand {
 		typedef enum SubsystemType {
 			DRIVE,
 			SHOOTER,
-			ACCUMULATOR
+			ACCUMULATOR,
+			RANGEFINDER
 		} SubsystemType; 
 	
 		/*SUBSYSTEM METHODS*/
@@ -50,11 +51,17 @@ class RobotCommand {
 			FIRE
 		} ShooterMethod;
 		
+		typedef enum RangeFinderMethod {
+			ANGLE,
+			SET_DIST
+		};
+		
 		typedef union {
 			DriveMethod driveMethod;
 			AccumulatorMethod accumulatorMethod;
 			ShooterMethod shooterMethod;
 			ExtensionMethod extensionMethod;
+			RangeFinderMethod rangefinderMethod;
 		} Method;
 
 		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void *args);
