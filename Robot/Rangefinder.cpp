@@ -29,7 +29,7 @@ void Rangefinder::rotateDegrees() {
 	}
 }
 
-int Rangefinder::wallDist() {
+float Rangefinder::wallDist() {
 	ultraLeft.Ping();
 	if (ultraLeft.IsRangeValid()) {
 		double leftDist = ultraLeft.GetRangeInches();
@@ -42,13 +42,24 @@ int Rangefinder::wallDist() {
 	return 0; // If there is an invalid range
 }
 
-void runCommand(RobotCommand command);
+void setDistToWall(float dist) {
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs*) argPointer) -> driveDist = wallDist() - dist;
+	RobotCommand::Method method;
+	method.driveMethod = RobotCommand::DRIVEDIST;
+	RobotCommand command(RobotCommand::DRIVE, method, argPointer);
+	robot -> setCommand(command);
+}
+
+void runCommand(RobotCommand command)
 {
-	switch(command.method.rangeFinderMethod)
+	switch(command.getMethod().rangeFinderMethod)
 	{
 		case RobotCommand::ANGLE:
+			rotateDegrees();
 			break;
 		case RobotCommand::SET_DIST:
+			setDistToWall(command.argPointer);
 			break;
 	}
 }
