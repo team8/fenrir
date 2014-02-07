@@ -14,10 +14,7 @@ class Robot {
 		Shooter shooter;
 		Accumulator accumulator;
 		Rangefinder rangeFinder;
-<<<<<<< HEAD
-=======
-
->>>>>>> Range finder edits
+		
 	public:
 		Robot();
 		//void setSpeed(float s);
