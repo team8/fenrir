@@ -16,7 +16,6 @@ private:
 		PASSING
 	} AccumulatorState;
 	AccumulatorState state;
-	bool ballHeld;
 public:
 	void accumulate();
 	void notAccumulating();
@@ -25,6 +24,7 @@ public:
 	void setHeld();
 	Accumulator();
 	void runCommand(RobotCommand newCommand);
+	bool ballHeld;
 };
 
 #endif
