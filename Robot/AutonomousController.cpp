@@ -5,22 +5,32 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 //instance variables go here
 {
 	this -> robot = robotPointer;
-}
+}  
 
 void AutonomousController::startTimer(){
 	time.Start();
 }
 
 void AutonomousController::drive(){
-	DriveArgs* argPointer -> speedValue = ; // add some speed value
-	RobotCommand command(DRIVE, SETSPEED, argPointer);
+	/* Needs to take variables, this is just an example
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> speedValue = 23;
+	Method method;
+	method.driveMethod = SETSPEED;
+	Command command(DRIVE, method, argPointer);
 	robot -> setCommand(command);
+	*/
 }
 
 void AutonomousController::stop(){
-	DriveArgs * argPointer -> driveSpeed = 0;
-	RobotCommand command(DRIVE, SETSPEED, argPointer);
+	/* void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> driveSpeed = 0;
+	Method method;
+	method.driveMethod = SETSPEED;
+	RobotCommand command(DRIVE, method, argPointer);
 	robot -> setCommand(command);
+	*/
+	
 }
 
 void AutonomousController::update(){

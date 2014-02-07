@@ -3,8 +3,8 @@
 Robot::Robot() :
 	driveTrain(),
 	shooter(),
-	accumulator(),
-	rangeFinder(this)
+	accumulator()
+	//rangeFinder(this)
 {
 
 }

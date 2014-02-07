@@ -18,14 +18,12 @@ DriveTrain::DriveTrain() :			// Victors
 	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic),
 	angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
-	//leftEnc.SetDistancePerPulse(not known at the moment);
-	//rightEnc.SetDistancePerPulse(not known at the moment);
-	//leftEnc.SetPIDSourceParameter(kdistance),
-	//rightEnc.SetPIDSourceParameter(kdistance),leftEnc.Start();
 	rightEnc.Start();
 	leftEnc.Start();
-	leftEnc.PIDSource();
-	rightEnc.PIDSource();
+	rightEnc.SetDistancePerPulse(1);
+	leftEnc.SetDistancePerPulse(1);
+	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	rightController.SetOutputRange(-1, 1);
 	leftController.SetOutputRange(-1, 1);
 	angleController.SetOutputRange(-1, 1);
@@ -40,7 +38,6 @@ void DriveTrain::runCommand(RobotCommand command) {
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
-		std::printf("DriveDist\n");
 		driveD(args -> driveDist);
 		break;
 	case RobotCommand::ROTATEANGLE:
@@ -66,11 +63,6 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
 		rightBackVic.Set(rightSpeed);
-		std::printf("targetSpeed:%f \n", targetSpeed);
-		std::printf("rotateSpeed:%f \n", rotateSpeed);
-		std::printf("leftSpeed =%f \n", leftSpeed);
-		std::printf("riteSpeed =%f \n", rightSpeed);
-		std::printf("rotateSpeed: %f\n", DriveTrain::rotateSpeed);
 		break;
 
 	case DRIVE_DIST:
@@ -78,6 +70,9 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftController.Get());
 		rightFrontVic.Set(-(rightController.Get()));
 		rightBackVic.Set(-(rightController.Get()));
+		std::printf("left: %g\n", leftController.Get());
+		std::printf("right: %g\n", rightController.Get());
+		
 		break;
 
 	case TURN_ANGLE:
@@ -87,6 +82,7 @@ void DriveTrain::update() {
 		rightBackVic.Set(angleController.Get());
 		break;
 
+		
 	case STOP_VICTORS:
 		leftFrontVic.Set(0);
 		leftBackVic.Set(0);
@@ -98,7 +94,8 @@ void DriveTrain::update() {
 //Drives robot certain distance
 //Will use PID to determine output for victors
 //Uses encoders
-void DriveTrain::driveD(float dist) {
+void DriveTrain::driveD(double dist) {
+	std::printf("dist: %g\n", dist);
 	leftEnc.Reset();
 	rightEnc.Reset();
 	leftController.SetSetpoint(dist);
