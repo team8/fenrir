@@ -24,13 +24,13 @@ void Accumulator::notAccumulating() {
 
 }
 
-bool getHeld() {
+/*bool getHeld() {
 	return ballHeld;
 }
 
 void setHeld(bool b){
 	ballHeld = b;
-}
+}*/
 
 void Accumulator::update() {
 	switch(state) {
