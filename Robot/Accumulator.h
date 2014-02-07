@@ -17,7 +17,6 @@ private:
 	} AccumulatorState;
 	AccumulatorState state;
 	bool ballHeld;
-	
 public:
 	void accumulate();
 	void notAccumulating();
