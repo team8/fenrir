@@ -12,14 +12,20 @@ void AutonomousController::startTimer(){
 }
 
 void AutonomousController::drive(){
-	DriveArgs* argPointer -> speedValue = ; // add some speed value
-	RobotCommand command(DRIVE, SETSPEED, argPointer);
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> driveSpeed = 24; // add some speed value
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
 }
 
 void AutonomousController::stop(){
-	DriveArgs * argPointer -> driveSpeed = 0;
-	RobotCommand command(DRIVE, SETSPEED, argPointer);
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> driveSpeed = 0;
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(command);
 }
 
