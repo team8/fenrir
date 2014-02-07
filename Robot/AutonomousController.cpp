@@ -13,7 +13,7 @@ void AutonomousController::startTimer() {
 
 void AutonomousController::drive(float v) {
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveSpeed = v; // add some speed value
+	((DriveArgs *) argPointer) -> driveSpeed = v;
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::SETSPEED;
 	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -29,9 +29,13 @@ void AutonomousController::stop() {
 	robot -> setCommand(command);
 }
 
+bool AutonomousController::shoot() {
+	
+}
+
 void AutonomousController::update() {
 	//Runs all methods according to time
-	if(time.Get()<=5) {
+	if(time.Get() <= 5) { // modify time value
 		void * argPointer = malloc(sizeof(DriveArgs));
 		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
 		RobotCommand::Method driveDist;
