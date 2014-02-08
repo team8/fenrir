@@ -65,15 +65,13 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
 		rightBackVic.Set(rightSpeed);
-		std::printf("left: %g\n",(double) rightEnc.GetDistance());
-		std::printf("right: %g\n", (double) leftEnc.GetDistance());
 		break;
 
 	case DRIVE_DIST:
-		leftFrontVic.Set(leftController.Get());
-		leftBackVic.Set(leftController.Get());
-		rightFrontVic.Set(-(rightController.Get()));
-		rightBackVic.Set(-(rightController.Get()));
+		leftFrontVic.Set(leftEnc.PIDGet());
+		leftBackVic.Set(leftEnc.PIDGet());
+		rightFrontVic.Set(-(rightEnc.PIDGet()));
+		rightBackVic.Set(-(rightEnc.PIDGet()));
 		break;
 
 	case TURN_ANGLE:

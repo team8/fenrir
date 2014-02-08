@@ -38,6 +38,7 @@ void Shooter::runCommand(RobotCommand command){
 	switch(command.getMethod().shooterMethod) {
 	case RobotCommand::FIRE:
 		time.Reset();
+		std::printf("Wow, such lag, printf sucks\n");
 		state = PREPARING;
 		break;
 	}
@@ -49,63 +50,52 @@ void Shooter::update(){
 	switch(state) {
 	case IDLE:
 		setAllVics(0);
-		time.Stop();
+		//time.();
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		prepare();
+		if(!time.HasPeriodPassed(1)) {
+			startShooterVics(0.5);
+		}
+		else /*if (aligned == true)*/{
+			std::printf("Firing\n");
+			state = FIRING;
+		}
 		break;
 
 	case FIRING:
-		while(time.Get()<=5000){
+		if(!time.HasPeriodPassed(6)){
 			loaderVic1.Set(LOAD_SPEED);
 			loaderVic2.Set(LOAD_SPEED);
 		}
 		//TODO once timer reaches certain constant, switch state
-		state = IDLE;
-		if(timer.Get()<0){
-			startShooterVics(SHOOTER_VICS_SPEED);
-			state=PREPARING;
+		else {
+			std::printf("Idling\n");
+			state = IDLE;
 		}
-		else if(timer.Get()>0){
-			shoot();
-		}
+//		if(timer.Get()<0){
+//			startShooterVics(SHOOTER_VICS_SPEED);
+//			state=PREPARING;
+//		}
+//		else if(timer.Get()>0){
+//			shoot();
+//		}
 		break;
 	}
 }
 
-void Shooter::startShooterVics(float speed) {
+void Shooter::startShooterVics(double speed) {
 	shooterVic1.Set(speed);
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
 }
 
-void Shooter::setAllVics(float speed) {
+void Shooter::setAllVics(double speed) {
 	shooterVic1.Set(speed);
 	shooterVic2.Set(speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
 	loaderVic1.Set(speed);
 	loaderVic2.Set(speed);
-}
-
-void Shooter::prepare() {
-
-	//align using rangefinders and drive train
-	
-	if(time.Get()<=5000) {
-		startShooterVics(0.5);
-	}
-	else if(aligned==true) {
-		time.Reset();
-		state = FIRING;
-	}
-}
-
-void Shooter::shoot(){
-	loaderVic1.Set(loadSpeed);
-	loaderVic2.Set(loadSpeed);
-	//TODO once timer reaches certain constant, switch state
-	state = IDLE;
 }

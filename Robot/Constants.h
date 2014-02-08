@@ -34,15 +34,15 @@
 #define PORT_SHOOTER_ENCODER_4 0
 
 //ports for shooter victors
-#define PORT_SHOOTER_VIC_1 4
-#define PORT_SHOOTER_VIC_2 5
+#define PORT_SHOOTER_VIC_1 0
+#define PORT_SHOOTER_VIC_2 0
 #define PORT_SHOOTER_VIC_3 6
 #define PORT_SHOOTER_VIC_4 7
-#define PORT_LOADER_VIC_1 0
-#define PORT_LOADER_VIC_2 0
+#define PORT_LOADER_VIC_1 4
+#define PORT_LOADER_VIC_2 5
 
 //default speed for loaders 
-#define LOAD_SPEED 0
+#define LOAD_SPEED .5
 
 //ports for accumulator victors
 //#define PORT_ACCUMULATOR_VIC_5 0
