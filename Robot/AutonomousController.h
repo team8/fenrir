@@ -4,6 +4,7 @@
 #include "RobotCommand.h"
 #include "Robot.h"
 #include <WPILib.h>
+#include <math.h>
 
 class AutonomousController {
 

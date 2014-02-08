@@ -37,6 +37,7 @@ void AutonomousController::update() {
 	//Runs all methods according to time
 	if(time.Get() <= 5) { // modify time value
 		void * argPointer = malloc(sizeof(DriveArgs));
+		//shootDist= will add more stuff later(the purpose of this is to find the distance until the robot is at the right distance to shoot using the angle of shot and height of goal)
 		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
 		RobotCommand::Method driveDist;
 		driveDist.driveMethod = RobotCommand::DRIVEDIST;
