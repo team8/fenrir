@@ -13,7 +13,7 @@ class Robot {
 		DriveTrain driveTrain;
 		Shooter shooter;
 		Accumulator accumulator;
-		Rangefinder rangeFinder;
+		//Rangefinder rangeFinder;
 		
 	public:
 		Robot();

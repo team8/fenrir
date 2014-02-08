@@ -4,11 +4,11 @@
 
 // Arguments used for Drivetrain methods
 typedef struct DriveArgs {
-	float driveDist;
+	double driveDist;
 	double rotAngle;
 	double rotSpeed;
 	double driveSpeed;
-	float speedValue;
+	double speedValue;
 } DriveArgs;
 
 typedef struct ShooterArgs {

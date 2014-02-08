@@ -90,7 +90,8 @@ void Shooter::setAllVics(float speed) {
 	loaderVic2.Set(speed);
 }
 
-void Shooter::prepare(float speed) {
+void Shooter::prepare() {
+
 	//align using rangefinders and drive train
 	
 	if(time.Get()<=5000) {

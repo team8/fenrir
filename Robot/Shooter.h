@@ -40,6 +40,7 @@ class Shooter {
 			FIRING
 		} ShooterState;
 		ShooterState state;
+		void prepare();
 		
 		Timer time;
 	public:

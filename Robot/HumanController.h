@@ -10,10 +10,10 @@ class HumanController {
 
 	public:
 		void update();
-		float getSpeedStick();
-		float getTurnStick();
-		float getAccumulatorStick();
-		float getAccumulator();
+		double getSpeedStick();
+		double getTurnStick();
+		double getAccumulatorStick();
+		double getAccumulator();
 		bool getShootButton();
 		bool getWarmupButton();
 
@@ -28,5 +28,6 @@ class HumanController {
 		bool shootButtonPrev;
 		bool warmupButtonPrev;
 		bool passButtonPrev;
+		bool autoTester;
 };
 #endif

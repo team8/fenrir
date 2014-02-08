@@ -9,8 +9,10 @@ DriveTrain::DriveTrain() :			// Victors
 	gyroscope((uint32_t) PORT_GYRO),
 
 			// Encoders
-	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, true),
+	//this is a temporary thing, do not be alarmed
+	leftEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
 	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
+
 
 
 	// PIDControllers
@@ -57,12 +59,14 @@ void DriveTrain::update() {
 	switch (state) {
 
 	case ROTATE_SPEED:
-		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
-		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		double rightSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
+		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
 		rightBackVic.Set(rightSpeed);
+		std::printf("left: %g\n",(double) rightEnc.GetDistance());
+		std::printf("right: %g\n", (double) leftEnc.GetDistance());
 		break;
 
 	case DRIVE_DIST:
@@ -70,9 +74,6 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftController.Get());
 		rightFrontVic.Set(-(rightController.Get()));
 		rightBackVic.Set(-(rightController.Get()));
-		std::printf("left: %g\n", leftController.Get());
-		std::printf("right: %g\n", rightController.Get());
-		
 		break;
 
 	case TURN_ANGLE:
@@ -95,10 +96,7 @@ void DriveTrain::update() {
 //Will use PID to determine output for victors
 //Uses encoders
 void DriveTrain::driveD(double dist) {
-<<<<<<< HEAD
-	std::printf("dist: %g\n", dist);
-=======
->>>>>>> 77754578a5a4d564f6777ece8c0e6a7ab6c691fe
+	//std::printf("dist: %g\n", dist);
 	leftEnc.Reset();
 	rightEnc.Reset();
 	leftController.SetSetpoint(dist);

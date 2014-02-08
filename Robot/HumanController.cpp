@@ -23,7 +23,7 @@ void HumanController::update(){
 	
 	//Makes joystick less sensitive on lower end
 	if(getSpeedStick()<0.75) {
-		((DriveArgs*)argPointer) -> speedValue= getSpeedStick()*SPEED_SENSITIVITY;
+		((DriveArgs*)argPointer) -> speedValue = getSpeedStick()*SPEED_SENSITIVITY;
 	}
 	else {
 		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
@@ -31,20 +31,31 @@ void HumanController::update(){
 	
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand command1(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(command1);
+	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(speedCommand);
+	
 	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
 	RobotCommand::Method rotSpeed;
 	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-	RobotCommand command2(RobotCommand::DRIVE, rotSpeed, argPointer);
-	robot -> setCommand(command2);
+	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+	robot -> setCommand(rotateCommand);
+	
+//	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
+//		
+//		((DriveArgs*)argPointer) -> driveDist = 1000.0;
+//		RobotCommand::Method driveDist;
+//		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+//		RobotCommand autoCommand(RobotCommand::DRIVE, driveDist, argPointer);
+//		robot -> setCommand(autoCommand);
+//		
+//	}
 
 	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot -> setCommand(command);
-	}		
+	}
 	else if(getAccumulator()>0.2){
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
@@ -85,23 +96,24 @@ void HumanController::update(){
 	}
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();
+	autoTester = speedStick.GetTrigger();
 }
 
-float HumanController::getSpeedStick(){
-	float speed = speedStick.GetY(); 
+double HumanController::getSpeedStick(){
+	double speed = speedStick.GetY(); 
 	return speed;
 }
 
-float HumanController::getTurnStick() {
-	float turn = turnStick.GetX();
+double HumanController::getTurnStick() {
+	double turn = turnStick.GetX();
 	return turn;
 }
 
-float HumanController::getAccumulatorStick() {
+double HumanController::getAccumulatorStick() {
 	return operatorStick.GetY(); // For adjusting the accumulator with Operator stick
 }
 
-float HumanController::getAccumulator() {
+double HumanController::getAccumulator() {
 	//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
 	return operatorStick.GetY(); // For testing purposes
 }

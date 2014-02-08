@@ -14,7 +14,7 @@
 
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT_A 1
-#define PORT_ENCODER_RIGHT_B 1
+#define PORT_ENCODER_RIGHT_B 7
 #define PORT_ENCODER_LEFT_A 2
 #define PORT_ENCODER_LEFT_B 2
 #define DISTANCE_PER_ROT 6*atan(1)*4 //6 pi for prototype
@@ -40,6 +40,9 @@
 #define PORT_SHOOTER_VIC_4 7
 #define PORT_LOADER_VIC_1 0
 #define PORT_LOADER_VIC_2 0
+
+//default speed for loaders 
+#define LOAD_SPEED 0
 
 //ports for accumulator victors
 //#define PORT_ACCUMULATOR_VIC_5 0
