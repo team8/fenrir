@@ -80,14 +80,6 @@ void HumanController::update(){
 		}
 	}
 
-	if(warmupButtonPrev!=getWarmupButton()){
-		if(getShootButton()){
-			RobotCommand::Method prep;
-			prep.shooterMethod = RobotCommand::PREP;
-			RobotCommand command(RobotCommand::SHOOTER, prep, 0);
-			robot -> setCommand(command);
-		}
-	}
 	if(getAccumulator()>0){
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;

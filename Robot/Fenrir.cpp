@@ -8,7 +8,7 @@ class Fenrir : public IterativeRobot {
 		Robot robot;
 		HumanController humanController;
 		AutonomousController autoController;
-
+		Timer time;
 	public:
 		Fenrir();
 		void RobotInit();
@@ -37,12 +37,14 @@ void Fenrir::RobotInit() {
 }
 
 void Fenrir::AutonomousInit() {
+	time.Start();
 
 }
 
 void Fenrir::AutonomousPeriodic() {
 	autoController.update();
 	robot.update();
+	std::printf("Time: %g\n", time.Get());
 }
 
 void Fenrir::AutonomousDisabled() {
@@ -59,6 +61,7 @@ void Fenrir::DisabledPeriodic() {
 }
 
 void Fenrir::TeleopInit() {
+
 
 }
 

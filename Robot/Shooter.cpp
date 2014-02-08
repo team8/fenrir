@@ -21,7 +21,6 @@ encController3(0.1, 0.1, 0.1, &encShooter3, &shooterVic3),
 encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 
 {
-	time.Start();
 	encShooter1.Start();
 	encShooter2.Start();
 	encShooter3.Start();
@@ -37,8 +36,9 @@ void Shooter::runCommand(RobotCommand command){
 	ShooterArgs* args = (ShooterArgs*) command.argPointer;
 	switch(command.getMethod().shooterMethod) {
 	case RobotCommand::FIRE:
-		time.Reset();
-		std::printf("Wow, such lag, printf sucks\n");
+		shootTimer.Reset();
+		shootTimer.Start();
+		std::printf("This is working\n");
 		state = PREPARING;
 		break;
 	}
@@ -50,36 +50,31 @@ void Shooter::update(){
 	switch(state) {
 	case IDLE:
 		setAllVics(0);
-		//time.();
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		if(!time.HasPeriodPassed(1)) {
+		std::printf("Current Time: %f \n", shootTimer.Get());
+		break;
+		if(!shootTimer.HasPeriodPassed(1.0)) {
 			startShooterVics(0.5);
+			std::printf("%f \n", shootTimer.Get());
 		}
 		else /*if (aligned == true)*/{
 			std::printf("Firing\n");
+			std::printf("%f \n", shootTimer.Get());
 			state = FIRING;
 		}
 		break;
 
 	case FIRING:
-		if(!time.HasPeriodPassed(6)){
+		if(!shootTimer.HasPeriodPassed(6.0)){
 			loaderVic1.Set(LOAD_SPEED);
 			loaderVic2.Set(LOAD_SPEED);
 		}
-		//TODO once timer reaches certain constant, switch state
 		else {
-			std::printf("Idling\n");
+			//std::printf("Idling\n");
 			state = IDLE;
 		}
-//		if(timer.Get()<0){
-//			startShooterVics(SHOOTER_VICS_SPEED);
-//			state=PREPARING;
-//		}
-//		else if(timer.Get()>0){
-//			shoot();
-//		}
 		break;
 	}
 }

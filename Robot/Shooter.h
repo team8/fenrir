@@ -34,13 +34,12 @@ class Shooter {
 		
 		typedef enum ShooterState {
 			IDLE,
-			ALIGN,
 			PREPARING,
 			FIRING
 		} ShooterState;
 		ShooterState state;
 		
-		Timer time;
+		Timer shootTimer;
 	public:
 		void startShooterVics(double speed);
 		void setAllVics(double speed);

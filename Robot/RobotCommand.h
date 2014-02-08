@@ -48,7 +48,6 @@ class RobotCommand {
 		} ExtensionMethod;
 		
 		typedef enum ShooterMethod {
-			PREP,
 			FIRE
 		} ShooterMethod;
 		
