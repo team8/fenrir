@@ -38,13 +38,14 @@ void Fenrir::RobotInit() {
 
 void Fenrir::AutonomousInit() {
 	time.Start();
-
+	std::printf("Autonomous INITTED \n");
 }
 
 void Fenrir::AutonomousPeriodic() {
 	autoController.update();
 	robot.update();
-	std::printf("Time: %g\n", time.Get());
+	//std::printf("Time: %f\n", time.Get());
+	std::printf("%f\n", time.GetFPGATimestamp());
 }
 
 void Fenrir::AutonomousDisabled() {
