@@ -27,7 +27,8 @@ class Fenrir : public IterativeRobot {
 Fenrir::Fenrir():
 	robot(),
 	humanController(&robot),
-	autoController(&robot)
+	autoController(&robot),
+	time()
 {
 
 }
@@ -38,7 +39,7 @@ void Fenrir::RobotInit() {
 
 void Fenrir::AutonomousInit() {
 	time.Start();
-	std::printf("Autonomous INITTED \n");
+	std::printf("Autonomous initialized \n");
 }
 
 void Fenrir::AutonomousPeriodic() {
