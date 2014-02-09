@@ -45,7 +45,7 @@ void Fenrir::AutonomousPeriodic() {
 	autoController.update();
 	robot.update();
 	//std::printf("Time: %f\n", time.Get());
-	std::printf("%f\n", time.GetFPGATimestamp());
+	std::printf("%f\n", time.Get());
 }
 
 void Fenrir::AutonomousDisabled() {
