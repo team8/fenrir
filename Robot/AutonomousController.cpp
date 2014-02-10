@@ -2,7 +2,6 @@
 #include "Constants.h"
 
 AutonomousController::AutonomousController(Robot *robotPointer)
-//instance variables go here
 {
 	this -> robot = robotPointer;
 }  
@@ -10,6 +9,7 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 void AutonomousController::startTimer() {
 	time.Start();
 }
+
 
 void AutonomousController::drive(float v) {
 	void * argPointer = malloc(sizeof(DriveArgs));

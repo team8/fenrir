@@ -3,7 +3,7 @@
 #include "Constants.h"
 
 // Arguments used for Drivetrain methods
-typedef struct DriveArgs {
+typedef union DriveArgs {
 	double driveDist;
 	double rotAngle;
 	double rotSpeed;

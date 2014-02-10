@@ -7,7 +7,7 @@
 
 class DriveTrain {
 	private:
-	 // Victors 
+		// Victors 
 		Victor leftFrontVic;
 		Victor leftBackVic;
 		Victor rightFrontVic;
@@ -27,6 +27,10 @@ class DriveTrain {
 		double targetSpeed;
 		double rotateSpeed;
 		double rotateAngle;
+		
+		// For testing
+		double prevLeftDist;
+		double prevRightDist;
     
 		//state 
 		typedef enum DriveState{

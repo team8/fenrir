@@ -22,8 +22,8 @@ DriveTrain::DriveTrain() :			// Victors
 {
 	rightEnc.Start();
 	leftEnc.Start();
-	rightEnc.SetDistancePerPulse(1);
-	leftEnc.SetDistancePerPulse(1);
+	rightEnc.SetDistancePerPulse(0.5);
+	leftEnc.SetDistancePerPulse(0.5);
 	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	rightController.SetOutputRange(-1, 1);
@@ -56,6 +56,14 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
+	if (leftEnc.Get() != prevLeftDist) {
+		prevLeftDist = leftEnc.Get();
+		printf("Left Encoder: %f\n", prevLeftDist);
+	}
+	if (rightEnc.Get() != prevRightDist) {
+		prevRightDist = rightEnc.Get();
+		printf("Right Encoder: %f\n", prevRightDist);
+	}
 	switch (state) {
 
 	case ROTATE_SPEED:
@@ -94,7 +102,6 @@ void DriveTrain::update() {
 //Will use PID to determine output for victors
 //Uses encoders
 void DriveTrain::driveD(double dist) {
-	//std::printf("dist: %g\n", dist);
 	leftEnc.Reset();
 	rightEnc.Reset();
 	leftController.SetSetpoint(dist);
@@ -104,7 +111,7 @@ void DriveTrain::driveD(double dist) {
 	state = DRIVE_DIST;
 }
 
-//sets the spd of all vics to the specified amount b/w 1.0 and -1.0
+//sets the spd of all vics to the specified amount between 1.0 and -1.0
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
 	targetSpeed = spd;

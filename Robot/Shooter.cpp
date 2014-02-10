@@ -41,7 +41,6 @@ void Shooter::runCommand(RobotCommand command) {
 	case RobotCommand::FIRE:
 		shootTimer.Reset();
 		shootTimer.Start();
-		std::printf("This is working\n");
 		state = PREPARING;
 		break;
 	}
@@ -56,23 +55,17 @@ void Shooter::update() {
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		std::printf("Current Time: %f \n", shootTimer.Get());
-		break;
-		if (!shootTimer.HasPeriodPassed(1.0)) {
-			startShooterVics(0.5);
-			std::printf("%f \n", shootTimer.Get());
+		if (!shootTimer.HasPeriodPassed(3.0)) {
+			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
-			std::printf("Firing\n");
-			std::printf("%f \n", shootTimer.Get());
 			state = FIRING;
 		}
 		break;
 	case FIRING:
-		if (!shootTimer.HasPeriodPassed(6.0)) {
-			loaderVic1.Set(LOAD_SPEED);
-			loaderVic2.Set(LOAD_SPEED);
+		if (!shootTimer.HasPeriodPassed(4.5)) {
+			loaderVic1.Set(-LOAD_SPEED);
+			loaderVic2.Set(-LOAD_SPEED);
 		} else {
-			//std::printf("Idling\n");
 			state = IDLE;
 		}
 		break;
@@ -81,16 +74,16 @@ void Shooter::update() {
 
 void Shooter::startShooterVics(double speed) {
 	shooterVic1.Set(speed);
-	shooterVic2.Set(speed);
+	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
-	shooterVic4.Set(speed);
+	shooterVic4.Set(-speed);
 }
 
 void Shooter::setAllVics(double speed) {
 	shooterVic1.Set(speed);
-	shooterVic2.Set(speed);
+	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
-	shooterVic4.Set(speed);
+	shooterVic4.Set(-speed);
 	loaderVic1.Set(speed);
-	loaderVic2.Set(speed);
+	loaderVic2.Set(-speed);
 }
