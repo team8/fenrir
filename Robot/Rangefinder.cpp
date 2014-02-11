@@ -51,7 +51,7 @@ void Rangefinder::setDistToWall(float dist) {
 }
 
 /*void Rangefinder::runCommand(RobotCommand command) {
-	switch(command.getMethod().rangeFinderMethod) {
+	switch(command.getMethod().rangefinderMethod) {
 		case RobotCommand::ANGLE:
 			rotateDegrees();
 			break;

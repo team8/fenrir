@@ -2,10 +2,10 @@
 #define RANGEFINDER_H
 #include <WPILib.h>
 #include <math.h>
-#include "Robot.h"
 #include "Constants.h"
 #include "RobotCommand.h"
-#include "Drivetrain.h"
+#include "Robot.h"
+
 
 class Rangefinder {
 	private:
@@ -15,12 +15,12 @@ class Rangefinder {
 		Robot* robot;
 
 	public:
+		Rangefinder(Robot* robotPointer);
 		double measureAngle(); 
 		void rotateDegrees();
 		float wallDist();
 		void setDistToWall(float dist);
 		void runCommand(RobotCommand command);
-		Rangefinder(Robot* robotPointer);
 };
 
 #endif
