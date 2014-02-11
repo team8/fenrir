@@ -18,6 +18,7 @@ class Rangefinder {
 		double measureAngle(); 
 		void rotateDegrees();
 		float wallDist();
+		void setDistToWall(float dist);
 		void runCommand(RobotCommand command);
 		Rangefinder(Robot* robotPointer);
 };
