@@ -15,8 +15,8 @@
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT_A 1
 #define PORT_ENCODER_RIGHT_B 7
-#define PORT_ENCODER_LEFT_A 13
-#define PORT_ENCODER_LEFT_B 14
+#define PORT_ENCODER_LEFT_A 12
+#define PORT_ENCODER_LEFT_B 13
 #define DISTANCE_PER_ROT 6*atan(1)*4 //6 pi for prototype
 //ports for drive train gyroscopes
 #define PORT_GYRO 0

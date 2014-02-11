@@ -45,3 +45,7 @@ void Robot::runCommand(RobotCommand command)
 		//case ALIGN_THEN_SHOOT:
 	//}
 }
+
+void Robot::init() {
+	driveTrain.init();
+}
