@@ -59,7 +59,7 @@ void Fenrir::DisabledPeriodic() {
 }
 
 void Fenrir::TeleopInit() {
-
+	robot.init();
 
 }
 

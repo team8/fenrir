@@ -10,25 +10,26 @@ DriveTrain::DriveTrain() :			// Victors
 
 			// Encoders
 	//this is a temporary thing, do not be alarmed
-	leftEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
+	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, true),
 	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
-
-
 
 	// PIDControllers
 	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
 	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic),
 	angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
-	rightEnc.Start();
-	leftEnc.Start();
-	rightEnc.SetDistancePerPulse(0.5);
-	leftEnc.SetDistancePerPulse(0.5);
-	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	//gyroscope.Start();
 	rightController.SetOutputRange(-1, 1);
-	leftController.SetOutputRange(-1, 1);
-	angleController.SetOutputRange(-1, 1);
+    	angleController.SetOutputRange(-1, 1);
+}
+
+void DriveTrain::init() {
+		rightEnc.Start();
+		leftEnc.Start();
+		rightEnc.SetDistancePerPulse(0.5);
+		leftEnc.SetDistancePerPulse(0.5);
+		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
 }
 
 //runs method according to what newCommand is received
@@ -37,6 +38,13 @@ void DriveTrain::runCommand(RobotCommand command) {
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
 	case RobotCommand::SETSPEED:
+
+		std::printf("%d\n", (int)leftEnc.Get());
+		std::printf("%d\n", (int)rightEnc.Get());
+		std::printf("%d\n", leftEnc.CheckPWMChannel((uint32_t)1));
+		std::printf("%d\n", leftEnc.CheckPWMChannel((uint32_t)7));
+		std::printf("%d\n", leftEnc.CheckPWMChannel((uint32_t)12));
+		std::printf("%d\n", leftEnc.CheckPWMChannel((uint32_t)13));
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
@@ -56,14 +64,14 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	if (leftEnc.Get() != prevLeftDist) {
+	//if (leftEnc.Get() != prevLeftDist) {
 		prevLeftDist = leftEnc.Get();
 		printf("Left Encoder: %f\n", prevLeftDist);
-	}
-	if (rightEnc.Get() != prevRightDist) {
+	//}
+	//if (rightEnc.Get() != prevRightDist) {
 		prevRightDist = rightEnc.Get();
-		printf("Right Encoder: %f\n", prevRightDist);
-	}
+		std::printf("Right Encoder: %f\n", prevRightDist);
+	//}
 	switch (state) {
 
 	case ROTATE_SPEED:
@@ -121,10 +129,8 @@ void DriveTrain::setSpeed(double spd) {
 //lets you rotate in place
 void DriveTrain::rotateA(double angle) {
 	gyroscope.Reset();
-
 	angleController.SetSetpoint(angle);
 	angleController.Enable();
-
 	rotateAngle = angle;
 	state = TURN_ANGLE;
 }

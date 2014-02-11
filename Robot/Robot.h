@@ -23,5 +23,6 @@ class Robot {
 		void update();
 		void disable();
 		void runCommand(RobotCommand command);
+		void init();
 };
 #endif
