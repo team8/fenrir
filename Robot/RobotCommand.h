@@ -15,6 +15,10 @@ typedef struct ShooterArgs {
 	bool trigger;
 } ShooterArgs;
 
+typedef struct RangefinderArgs {
+	float target;
+} RangefinderArgs;
+
 /*COMMAND OBJECT*/
 class RobotCommand {
 	public:

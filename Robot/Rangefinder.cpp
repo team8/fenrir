@@ -50,13 +50,14 @@ void Rangefinder::setDistToWall(float dist) {
 	robot -> setCommand(command);
 }
 
-/*void Rangefinder::runCommand(RobotCommand command) {
+void Rangefinder::runCommand(RobotCommand command) {
+	RangefinderArgs* args = (RangefinderArgs*) command.argPointer;
 	switch(command.getMethod().rangefinderMethod) {
 		case RobotCommand::ANGLE:
 			rotateDegrees();
 			break;
 		case RobotCommand::SET_DIST:
-			setDistToWall(command.argPointer);
+			setDistToWall(args -> target);
 			break;
 	}
-}*/
+}
