@@ -1,0 +1,29 @@
+dilateElementSize: 5
+HSVThresholdMin: 200
+HSVThresholdMax: 255
+CannyThreshold1: 50
+CannyThreshold2: 200
+CannyAperatureSize: 3
+MinRectangleArea: 1000
+MaxRectangleCosine: 0.3
+PolyEpsilonFactor: 0.02
+RectangleColor: [0, 0, 255]
+TargetColor: [0, 255, 255]
+RectangleThickness: 3
+TargetWidth: 137.16
+
+# these values need to be calibrated for each camera
+PixelToCM: 1.791451063459854
+DistanceAtFull: 30
+
+# DistanceAtFull is the distance (in centimeters) that the camera
+# is from the target when the target takes up the whole frame
+# (width wise, not height wise)
+
+# How PixelToCM is calculated:
+# let a be the distance between the camera and the target (in centimeters)
+# let b be the width of the target in pixels from the camera
+# let c be the width of the image from the camera
+# let e be DistanceAtFull (see above)
+# d = b/c
+# PixelToCM = log(e/a)/log(d)
