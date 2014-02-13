@@ -1,5 +1,6 @@
 #include "HumanController.h"
 #include <stdlib.h>
+#include <cmath>
 /* Command example - How to issue commands
   void * argPointer = malloc(sizeof(DriveArgs)); //this lets you access the drive args stored in command
   argPointer -> variable in DriveArgs = Enter parameter here; //this lets you set a variable to what you want
@@ -23,24 +24,39 @@ void HumanController::update(){
 	//Using input from joystick to set values
 	
 	//Makes joystick less sensitive on lower end
-	if(getSpeedStick()<0.75) {
-		((DriveArgs*)argPointer) -> speedValue = getSpeedStick()*SPEED_SENSITIVITY;
-	}
-	else {
+//	if(getSpeedStick()<0.75) {
+	//	((DriveArgs*)argPointer) -> speedValue = getSpeedStick()*SPEED_SENSITIVITY;
+	//}
+//	else {
 		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
+	//}
+	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
+		((DriveArgs*)argPointer)->speedValue = 0;
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(speedCommand);
+		((DriveArgs*)argPointer) -> rotSpeed = 0;
+		RobotCommand::Method rotSpeed;
+		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+		robot -> setCommand(rotateCommand);
 	}
-	
-//	RobotCommand::Method setSpeed;
-//	setSpeed.driveMethod = RobotCommand::SETSPEED;
-//	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-//	robot -> setCommand(speedCommand);
-//	
-//	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
-//	RobotCommand::Method rotSpeed;
-//	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-//	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-//	robot -> setCommand(rotateCommand);
-	
+	if(abs(speedStick.GetY())>0.01){
+	((DriveArgs*)argPointer)->speedValue = getSpeedStick();
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(speedCommand);
+	}
+
+	if(abs(turnStick.GetX())>0.01){
+	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+	RobotCommand::Method rotSpeed;
+	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+	robot -> setCommand(rotateCommand);
+	}
 	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
 		
 		((DriveArgs*)argPointer) -> driveDist = 1.0;
