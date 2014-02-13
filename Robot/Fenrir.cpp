@@ -49,7 +49,7 @@ void Fenrir::AutonomousDisabled() {
 	
 }
 
-void Fenrir::DisabledInit() {
+void Fenrir::DisabledInit() {      
 	robot.disable();
 }
 

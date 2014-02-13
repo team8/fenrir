@@ -29,26 +29,26 @@ void HumanController::update(){
 		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
 	}
 	
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(speedCommand);
+//	RobotCommand::Method setSpeed;
+//	setSpeed.driveMethod = RobotCommand::SETSPEED;
+//	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//	robot -> setCommand(speedCommand);
+//	
+//	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+//	RobotCommand::Method rotSpeed;
+//	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+//	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+//	robot -> setCommand(rotateCommand);
 	
-	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
-	RobotCommand::Method rotSpeed;
-	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-	robot -> setCommand(rotateCommand);
-	
-//	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
-//		
-//		((DriveArgs*)argPointer) -> driveDist = 1000.0;
-//		RobotCommand::Method driveDist;
-//		driveDist.driveMethod = RobotCommand::DRIVEDIST;
-//		RobotCommand autoCommand(RobotCommand::DRIVE, driveDist, argPointer);
-//		robot -> setCommand(autoCommand);
-//		
-//	}
+	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
+		
+		((DriveArgs*)argPointer) -> driveDist = 1000.0;
+		RobotCommand::Method driveDist;
+		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+		RobotCommand autoCommand(RobotCommand::DRIVE, driveDist, argPointer);
+		robot -> setCommand(autoCommand);
+		
+	}
 
 	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
