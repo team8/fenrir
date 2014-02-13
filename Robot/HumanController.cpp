@@ -11,6 +11,7 @@ HumanController::HumanController(Robot *robotPointer):
 	turnStick(PORT_TURN),
 	operatorStick(PORT_OPERATOR)
 {  
+	std::printf("Human controller constructor\n");
 	this-> robot = robotPointer;
 } 
 
@@ -42,7 +43,7 @@ void HumanController::update(){
 	
 	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
 		
-		((DriveArgs*)argPointer) -> driveDist = 1000.0;
+		((DriveArgs*)argPointer) -> driveDist = 1.0;
 		RobotCommand::Method driveDist;
 		driveDist.driveMethod = RobotCommand::DRIVEDIST;
 		RobotCommand autoCommand(RobotCommand::DRIVE, driveDist, argPointer);

@@ -24,6 +24,8 @@ Shooter::Shooter() :
 			encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 
 {
+	std::printf("Shooter constructor\n");
+
 	encShooter1.Start();
 	encShooter2.Start();
 	encShooter3.Start();

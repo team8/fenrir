@@ -6,7 +6,7 @@ Robot::Robot() :
 	accumulator()
 	//rangeFinder(this)
 {
-
+	std::printf("Robot constructor\n");
 }
 
 void Robot::setCommand(RobotCommand command) {

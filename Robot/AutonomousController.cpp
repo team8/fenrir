@@ -3,6 +3,8 @@
 
 AutonomousController::AutonomousController(Robot *robotPointer)
 {
+	std::printf("Autonomous controller"
+			" constructor\n");
 	this -> robot = robotPointer;
 }  
 
@@ -30,7 +32,7 @@ void AutonomousController::stop() {
 }
 
 bool AutonomousController::shoot() {
-	
+	return false;
 }
 
 void AutonomousController::update() {

@@ -7,28 +7,24 @@ DriveTrain::DriveTrain() :
 	rightFrontVic((uint32_t) PORT_DRIVE_VIC_3),
 	rightBackVic((uint32_t) PORT_DRIVE_VIC_4),
 
-	gyroscope((uint32_t) PORT_GYRO),
+//	gyroscope((uint32_t) PORT_GYRO),
 
 	// Encoders
-	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, true),
-	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
+	leftEnc((uint32_t) 0,(uint32_t) 0, true),
+	rightEnc((uint32_t) 0,(uint32_t) 0, true)
 
 	// PIDControllers
-	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
+//	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+	//rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
 	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
+	std::printf("Drive train constructor\n");
 	//gyroscope.Start();
-	rightController.SetOutputRange(-1, 1);
+	//rightController.SetOutputRange(-1, 1);
     //angleController.SetOutputRange(-1, 1);
 }
 
 void DriveTrain::init() {
-		std::printf("leftEnc: %i\n", (int)&leftEnc);
-		std::printf("rightEnc: %i\n", (int)&rightEnc);
-		std::printf("leftBackVic: %i\n", (int)&leftBackVic);
-		std::printf("rightBackVic: %i\n", (int)&rightBackVic);
-		
 		rightEnc.Start();
 		leftEnc.Start();
 		std::printf("Initialized\n");
@@ -36,6 +32,7 @@ void DriveTrain::init() {
 		leftEnc.SetDistancePerPulse(1.0);
 		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
 		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+		state = STOP_VICTORS;
 }
 
 //runs method according to what newCommand is received
@@ -44,19 +41,19 @@ void DriveTrain::runCommand(RobotCommand command) {
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
 	case RobotCommand::SETSPEED:
-
-		std::printf("leftEnc: %f\n", leftEnc.GetDistance());
-		std::printf("rightEnc: %f\n", rightEnc.GetDistance());
-		std::printf("SETSPEED is running\n");
+		std::printf("setspeed\n");
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
+		std::printf("driveDist\n");
 		driveD(args -> driveDist);
 		break;
 	case RobotCommand::ROTATEANGLE:
+		std::printf("rotateangle\n");
 		rotateA(args -> rotAngle);
 		break;
 	case RobotCommand::ROTATESPEED:
+		std::printf("rotatespeed\n");
 		rotateS(args -> rotSpeed);
 		break;
 	case RobotCommand::STOPVICTORS:
@@ -68,20 +65,16 @@ void DriveTrain::runCommand(RobotCommand command) {
 
 void DriveTrain::update() {
 	
-	std::printf("rightbackvic: %i\n", (int)rightBackVic.CheckDigitalChannel(2));
-	std::printf("leftBackVic: %i\n", (int)leftBackVic.CheckDigitalChannel(1));
-	
 	switch (state) {
 
 	case ROTATE_SPEED:
 		double rightSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
 		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		std::printf("rotate\n");
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
 		rightBackVic.Set(rightSpeed);
-		std::printf("leftSpeed: %f\n", leftSpeed);
-		std::printf("rightSpeed: %f\n", rightSpeed);
 		break;
 
 	case DRIVE_DIST:
@@ -89,12 +82,11 @@ void DriveTrain::update() {
 		leftBackVic.Set(leftEnc.PIDGet());
 		rightFrontVic.Set(-(rightEnc.PIDGet()));
 		rightBackVic.Set(-(rightEnc.PIDGet()));
-		std::printf("leftEncPIDGet: %f\n", leftEnc.PIDGet());
-		std::printf("rightEncPIDGet: %f\n", rightEnc.PIDGet());
-		std::printf("leftpidctrl.Get: %f\n", leftController.Get());
+		std::printf("dd\n");
 		break;
 
 	case TURN_ANGLE:
+		std::printf("this was commented out what....");
 //		leftFrontVic.Set(-(angleController.Get()));
 //		leftBackVic.Set(-(angleController.Get()));
 //		rightFrontVic.Set(angleController.Get());
@@ -116,11 +108,10 @@ void DriveTrain::update() {
 void DriveTrain::driveD(double dist) {
 	leftEnc.Reset();
 	rightEnc.Reset();
-	leftController.SetSetpoint(dist);
-	rightController.SetSetpoint(dist);
-	leftController.Enable();
-	rightController.Enable();
-	std::printf("DriveTrain::driveD. encoders reset\n");
+	//leftController.SetSetpoint(dist);
+	//rightController.SetSetpoint(dist);
+	//leftController.Enable();
+	//rightController.Enable();
 	state = DRIVE_DIST;
 }
 

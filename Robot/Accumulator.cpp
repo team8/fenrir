@@ -2,9 +2,9 @@
 
 Accumulator::Accumulator():
 	accumulateVic((uint32_t)PORT_ACCUMULATOR_VIC_7)
-	{
-
-	}
+{
+	std::printf("Accumulator constructor\n");
+}
 
 void Accumulator::runCommand(RobotCommand newCommand) {
 	switch(newCommand.getMethod().accumulatorMethod) {

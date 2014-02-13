@@ -27,16 +27,17 @@ class Fenrir : public IterativeRobot {
 Fenrir::Fenrir():
 	robot(),
 	humanController(&robot),
-	autoController(&robot),
-	time()
+	autoController(&robot)
 {
-
+	std::printf("Fenrir constructor\n");
 }
 
 void Fenrir::RobotInit() {
+	std::printf("Robot init\n");
 }
 
 void Fenrir::AutonomousInit() {
+	std::printf("auto init\n");
 	time.Start();
 }
 
@@ -46,10 +47,11 @@ void Fenrir::AutonomousPeriodic() {
 }
 
 void Fenrir::AutonomousDisabled() {
-	
+	std::printf("auto disabled\n");
 }
 
-void Fenrir::DisabledInit() {      
+void Fenrir::DisabledInit() {
+	std::printf("disabled init\n");
 	robot.disable();
 }
 
@@ -59,6 +61,7 @@ void Fenrir::DisabledPeriodic() {
 }
 
 void Fenrir::TeleopInit() {
+	std::printf("teleop init\n");
 	robot.init();
 
 }
@@ -69,11 +72,11 @@ void Fenrir::TeleopPeriodic() {
 }
 
 void Fenrir::TeleopDisabled() {
-	
+	std::printf("teleop disabled\n");
 }
 
 void Fenrir::TestInit() {
-	
+	std::printf("test init\n");
 }
 
 void Fenrir::TestPeriodic() {
