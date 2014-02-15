@@ -7,10 +7,10 @@
 #define SPEED_SENSITIVITY 0.5
 #define ROTATE_SENSITIVITY
 //ports for drive train victors
-#define PORT_DRIVE_VIC_1 0
-#define PORT_DRIVE_VIC_2 1
-#define PORT_DRIVE_VIC_3 0
-#define PORT_DRIVE_VIC_4 2
+#define PORT_DRIVE_VIC_LEFT_FRONT 5
+#define PORT_DRIVE_VIC_LEFT_BACK 6
+#define PORT_DRIVE_VIC_RIGHT_FRONT 1
+#define PORT_DRIVE_VIC_RIGHT_BACK 2
 
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT_A 1
@@ -34,12 +34,12 @@
 #define PORT_SHOOTER_ENCODER_4 0
 
 //ports for shooter victors
-#define PORT_SHOOTER_VIC_1 0
-#define PORT_SHOOTER_VIC_2 0
-#define PORT_SHOOTER_VIC_3 6
+#define PORT_SHOOTER_VIC_1 3
+#define PORT_SHOOTER_VIC_2 4
+#define PORT_SHOOTER_VIC_3 8
 #define PORT_SHOOTER_VIC_4 7
-#define PORT_LOADER_VIC_1 4
-#define PORT_LOADER_VIC_2 5
+#define PORT_LOADER_VIC_1 9
+#define PORT_LOADER_VIC_2 0
 
 //default speed for loaders 
 #define LOAD_SPEED .5
@@ -47,7 +47,7 @@
 //ports for accumulator victors
 //#define PORT_ACCUMULATOR_VIC_5 0
 //#define PORT_ACCUMULATOR_VIC_6 0
-#define PORT_ACCUMULATOR_VIC_7 3
+#define PORT_ACCUMULATOR_VIC_7 10
 
 //ports for accumulator encoders
 #define PORT_ACCUMULATOR_ENC_1A 0
@@ -74,7 +74,7 @@
 #define PORT_SHOOTER_ENCODER_4B 0
 
 //button number for operator stick trigger
-#define ACCUMULATOR_BUTTON_PORT 3
+#define ACCUMULATOR_BUTTON_PORT 10
 #define WARMUP_BUTTON_PORT 0
 #define PASS_BUTTON_PORT 2
 

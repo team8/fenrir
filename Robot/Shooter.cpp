@@ -58,8 +58,10 @@ void Shooter::update() {
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
 		if (!shootTimer.HasPeriodPassed(3.0)) {
+			std::printf("timer: %f\n", shootTimer.Get());
 			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
+			std::printf("fire\n");
 			state = FIRING;
 		}
 		break;

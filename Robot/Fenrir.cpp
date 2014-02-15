@@ -29,7 +29,7 @@ Fenrir::Fenrir():
 	humanController(&robot),
 	autoController(&robot)
 {
-	std::printf("Fenrir constructor\n");
+	std::printf("Fenrir constructor new robot\n");
 }
 
 void Fenrir::RobotInit() {

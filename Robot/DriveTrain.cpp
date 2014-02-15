@@ -2,10 +2,10 @@
 
 DriveTrain::DriveTrain() :		
 	// Victors
-	leftFrontVic((uint32_t) PORT_DRIVE_VIC_1),
-	leftBackVic((uint32_t) PORT_DRIVE_VIC_2),
-	rightFrontVic((uint32_t) PORT_DRIVE_VIC_3),
-	rightBackVic((uint32_t) PORT_DRIVE_VIC_4),
+	leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
+	leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
+	rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
+	rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
 	//gyroscope((uint32_t) PORT_GYRO),
 
@@ -31,20 +31,28 @@ void DriveTrain::init() {
 		std::printf("Initialized\n");
 		rightEnc.SetDistancePerPulse(10.0);
 		leftEnc.SetDistancePerPulse(10.0);
-		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+		rightEnc.SetPIDSourceParameter(PIDSource::kRate);
+		leftEnc.SetPIDSourceParameter(PIDSource::kRate);
 		state = STOP_VICTORS;
 }
 
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
-	
-	std::printf("Right Encoder: %f\n", rightEnc.GetDistance());
-	std::printf("Left Encoder: %f\n", leftEnc.GetDistance());
+
+//	std::printf("Left Distance: %f\n", leftEnc.GetDistance());
+//	std::printf("Right Distance: %f\n", rightEnc.GetDistance());
+//	std::printf("Left Rate: %f\n", leftEnc.GetRate());
+//	std::printf("Right Rate: %f\n", rightEnc.GetRate());
+//	std::printf("Left Stopped: %i\n", (int)leftEnc.GetStopped());
+//	std::printf("Right Stopped: %i\n", (int)rightEnc.GetStopped());
+//	std::printf("Right Get: %d\n", (int)rightEnc.Get());
+//	std::printf("Left Get: %d\n", (int)leftEnc.Get());
+//	std::printf("Right Raw: %i\n", (int)rightEnc.GetRaw());
+//	std::printf("Left Raw: %i\n", (int)leftEnc.GetRaw());
 
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
-	case RobotCommand::SETSPEED:
+	case RobotCommand::SETSPEED:                                                               
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
@@ -68,8 +76,10 @@ void DriveTrain::update() {
 	switch (state) {
 
 	case ROTATE_SPEED:
-		double rightSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
-		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
+		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+//		std::printf("Left Distance: %f\n", rightSpeed);
+//		std::printf("Right Distance: %f\n", leftSpeed);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);

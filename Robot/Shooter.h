@@ -3,6 +3,7 @@
 #include <WPILib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
+#include <stdlib.h>
 
 class Robot;
 

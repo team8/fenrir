@@ -3,8 +3,7 @@
 
 AutonomousController::AutonomousController(Robot *robotPointer)
 {
-	std::printf("Autonomous controller"
-			" constructor\n");
+	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
 }  
 
@@ -35,14 +34,29 @@ bool AutonomousController::shoot() {
 	return false;
 }
 
+// chris wanted us to add in premade paths, in here, create commands and then call them in the update method to 
+//execute commands :D
+void pathOne(){
+	
+	
+}
+
+void pathTwo() {
+	
+}
+
+void pathThree() {
+	
+}
+
 void AutonomousController::update() {
 	//Runs all methods according to time
-	if(time.Get() <= 5) { // modify time value
-		void * argPointer = malloc(sizeof(DriveArgs));
-		//shootDist= will add more stuff later(the purpose of this is to find the distance until the robot is at the right distance to shoot using the angle of shot and height of goal)
-		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
-		RobotCommand::Method driveDist;
-		driveDist.driveMethod = RobotCommand::DRIVEDIST;
-		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
-	}
+//	if(time.HasPeriodPassed(5)) { // modify time value
+//		void * argPointer = malloc(sizeof(DriveArgs));
+//		//shootDist= will add more stuff later(the purpose of this is to find the distance until the robot is at the right distance to shoot using the angle of shot and height of goal)
+//		((DriveArgs *) argPointer) -> driveDist = 5; //how far to go to get into zone
+//		RobotCommand::Method driveDist;
+//		driveDist.driveMethod = RobotCommand::DRIVEDIST;
+//		RobotCommand command(RobotCommand::DRIVE, driveDist, argPointer);
+//	}
 }
