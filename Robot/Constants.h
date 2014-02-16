@@ -80,10 +80,8 @@
 
 
 // Ultrasonic ports
-#define ULTRASONIC_ECHO_PULSE_OUTPUT_1 0 // Left
-#define ULTRASONIC_TRIGGER_PULSE_INPUT_1 0
-#define ULTRASONIC_ECHO_PULSE_OUTPUT_2 0 // Right
-#define ULTRASONIC_TRIGGER_PULSE_INPUT_2 0
-#define ULTRA_GAP 1 // Distance between the two ultrasonic sensors in inches, 1 to avoid division by 0
+#define ULTRASONIC_CHANNEL_LEFT 0
+#define ULTRASONIC_CHANNEL_RIGHT 0
+#define ULTRA_GAP 1 // Distance between the two ultrasonic sensors in inches
 
 #define SHOOT_DISTANCE 0 //The set distance we want it to shoot at

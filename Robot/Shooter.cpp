@@ -58,7 +58,6 @@ void Shooter::update() {
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
 		if (!shootTimer.HasPeriodPassed(3.0)) {
-			std::printf("timer: %f\n", shootTimer.Get());
 			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
 			std::printf("fire\n");
@@ -77,17 +76,17 @@ void Shooter::update() {
 }
 
 void Shooter::startShooterVics(double speed) {
-	shooterVic1.Set(speed);
+	shooterVic1.Set(-speed);
 	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
-	shooterVic4.Set(-speed);
+	shooterVic4.Set(speed);
 }
 
 void Shooter::setAllVics(double speed) {
-	shooterVic1.Set(speed);
+	shooterVic1.Set(-speed);
 	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
-	shooterVic4.Set(-speed);
+	shooterVic4.Set(speed);
 	loaderVic1.Set(speed);
 	loaderVic2.Set(-speed);
 }

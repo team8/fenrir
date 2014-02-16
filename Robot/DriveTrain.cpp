@@ -39,17 +39,6 @@ void DriveTrain::init() {
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
 
-//	std::printf("Left Distance: %f\n", leftEnc.GetDistance());
-//	std::printf("Right Distance: %f\n", rightEnc.GetDistance());
-//	std::printf("Left Rate: %f\n", leftEnc.GetRate());
-//	std::printf("Right Rate: %f\n", rightEnc.GetRate());
-//	std::printf("Left Stopped: %i\n", (int)leftEnc.GetStopped());
-//	std::printf("Right Stopped: %i\n", (int)rightEnc.GetStopped());
-//	std::printf("Right Get: %d\n", (int)rightEnc.Get());
-//	std::printf("Left Get: %d\n", (int)leftEnc.Get());
-//	std::printf("Right Raw: %i\n", (int)rightEnc.GetRaw());
-//	std::printf("Left Raw: %i\n", (int)leftEnc.GetRaw());
-
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
 	case RobotCommand::SETSPEED:                                                               
@@ -72,14 +61,12 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	
+	std::printf("Left, Right: %f, %f\n",leftEnc.Get(), rightEnc.Get());
 	switch (state) {
 
 	case ROTATE_SPEED:
 		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
 		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-//		std::printf("Left Distance: %f\n", rightSpeed);
-//		std::printf("Right Distance: %f\n", leftSpeed);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(rightSpeed);
@@ -94,7 +81,6 @@ void DriveTrain::update() {
 		break;
 
 	case TURN_ANGLE:
-		std::printf("this was commented out what....");
 //		leftFrontVic.Set(-(angleController.Get()));
 //		leftBackVic.Set(-(angleController.Get()));
 //		rightFrontVic.Set(angleController.Get());

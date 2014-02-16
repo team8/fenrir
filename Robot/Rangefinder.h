@@ -9,15 +9,16 @@
 
 class Rangefinder {
 	private:
-		//constructors for left ultrasonic rangefinders	
-		Ultrasonic ultraLeft;
-		Ultrasonic ultraRight;
+		//constructors for ultrasonic rangefinders
+		// Our Ultrasonic sensors are analog, so we can't use the ultrasonic object provided by WPILib
+		AnalogChannel ultraLeft;
+		AnalogChannel ultraRight;
 		Robot* robot;
 
 	public:
 		Rangefinder(Robot* robotPointer);
 		double measureAngle(); 
-		void rotateDegrees();
+		void rotateToWall();
 		float wallDist();
 		void setDistToWall(float dist);
 		void runCommand(RobotCommand command);
