@@ -52,12 +52,15 @@ class RobotCommand {
 		} ExtensionMethod;
 		
 		typedef enum ShooterMethod {
-			FIRE
+			FIRE,
+			EJECT,
+			IDLE
 		} ShooterMethod;
 		
 		typedef enum RangeFinderMethod {
 			ANGLE,
-			SET_DIST
+			SET_DIST,
+			WALL_DIST
 		};
 		
 		typedef enum RobotMethod {

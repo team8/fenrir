@@ -67,24 +67,33 @@ void HumanController::update(){
 		
 	}
 
+
 	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot -> setCommand(command);
 	}
+	
 	else if(getAccumulator()>0.2){
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 			robot -> setCommand(command);
+			RobotCommand::Method eject;
+			eject.shooterMethod = RobotCommand::EJECT;
+			RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
+			robot -> setCommand(ejectCommand);
 	}
-
 	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
+		RobotCommand::Method idle;
+		idle.shooterMethod = RobotCommand::IDLE;
+		RobotCommand idleCommand(RobotCommand::SHOOTER, idle, 0);
+		robot -> setCommand(idleCommand);
 	}
 	
 
@@ -96,7 +105,6 @@ void HumanController::update(){
 			robot -> setCommand(command);
 		}
 	}
-
 	if(getAccumulator()>0){
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
@@ -135,4 +143,3 @@ bool HumanController::getShootButton() {
 bool HumanController::getWarmupButton() {
 	return operatorStick.GetRawButton((uint32_t)WARMUP_BUTTON_PORT); // Get button to start shooter warmup from Operator stick
 }
-

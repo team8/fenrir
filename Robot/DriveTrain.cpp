@@ -10,8 +10,8 @@ DriveTrain::DriveTrain() :
 	//gyroscope((uint32_t) PORT_GYRO),
 
 	// Encoders
-	leftEnc((uint32_t) 1,(uint32_t) 7, true),
-	rightEnc((uint32_t) 12,(uint32_t) 13, true)
+	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, true),
+	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true)
 
 	// PIDControllers
 	//	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
@@ -31,8 +31,8 @@ void DriveTrain::init() {
 		std::printf("Initialized\n");
 		rightEnc.SetDistancePerPulse(10.0);
 		leftEnc.SetDistancePerPulse(10.0);
-		rightEnc.SetPIDSourceParameter(PIDSource::kRate);
-		leftEnc.SetPIDSourceParameter(PIDSource::kRate);
+		//rightEnc.SetPIDSourceParameter(PIDSource::kRate);
+		//leftEnc.SetPIDSourceParameter(PIDSource::kRate);
 		state = STOP_VICTORS;
 }
 
@@ -61,10 +61,13 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	//std::printf("Left, Right: %f, %f\n",leftEnc.Get(), rightEnc.Get());
+	//std::printf("Left: %f",leftEnc.Get());
+	//std::printf(" Right: %f\n", rightEnc.Get());
 	switch (state) {
 
 	case ROTATE_SPEED:
+		std::printf("Left: %f",leftEnc.Get());
+		std::printf(" Right: %f\n", rightEnc.Get());
 		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
 		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);

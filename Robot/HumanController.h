@@ -16,7 +16,7 @@ class HumanController {
 		double getAccumulator();
 		bool getShootButton();
 		bool getWarmupButton();
-
+		
 		HumanController(Robot *robotPointer);
 
 	private:

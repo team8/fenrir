@@ -35,7 +35,8 @@ class Shooter {
 		typedef enum ShooterState {
 			IDLE,
 			PREPARING,
-			FIRING
+			FIRING,
+			EJECT
 		} ShooterState;
 		ShooterState state;
 		
@@ -46,6 +47,7 @@ class Shooter {
 		void update();
 		Shooter();
 		void runCommand(RobotCommand command);
+		void eject();
 };
 
 #endif

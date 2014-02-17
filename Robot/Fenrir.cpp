@@ -72,7 +72,7 @@ void Fenrir::TeleopInit() {
 void Fenrir::TeleopPeriodic() {
 	humanController.update();
 	robot.update();
-	rangefinder.wallDist();
+	//rangefinder.wallDist();
 }
 
 void Fenrir::TeleopDisabled() {

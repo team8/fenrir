@@ -14,9 +14,9 @@
 
 //ports for drive train encoders
 #define PORT_ENCODER_RIGHT_A 1
-#define PORT_ENCODER_RIGHT_B 7
-#define PORT_ENCODER_LEFT_A 12
-#define PORT_ENCODER_LEFT_B 13
+#define PORT_ENCODER_RIGHT_B 2
+#define PORT_ENCODER_LEFT_A 5
+#define PORT_ENCODER_LEFT_B 6
 #define DISTANCE_PER_ROT 6*atan(1)*4 //6 pi for prototype
 //ports for drive train gyroscopes
 #define PORT_GYRO 0
@@ -41,7 +41,7 @@
 #define PORT_LOADER_VIC 9
 
 //default speed for loaders 
-#define LOAD_SPEED 0.5
+#define LOAD_SPEED -0.5
 
 //ports for accumulator victors
 //#define PORT_ACCUMULATOR_VIC_5 0

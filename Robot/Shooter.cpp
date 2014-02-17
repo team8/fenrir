@@ -44,6 +44,12 @@ void Shooter::runCommand(RobotCommand command) {
 		shootTimer.Start();
 		state = PREPARING;
 		break;
+	case RobotCommand::EJECT:
+		state = EJECT;
+		break;
+	case RobotCommand::IDLE:
+		if (state == EJECT) state = IDLE;
+		break;
 	}
 	free(args);
 }
@@ -71,6 +77,9 @@ void Shooter::update() {
 			state = IDLE;
 		}
 		break;
+	case EJECT:
+		eject();
+		break;
 	}
 }
 
@@ -87,4 +96,8 @@ void Shooter::setAllVics(double speed) {
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
 	loaderVic.Set(speed);
+}
+
+void Shooter::eject() {
+	loaderVic.Set(0.5);
 }
