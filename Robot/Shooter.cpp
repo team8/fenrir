@@ -6,8 +6,7 @@ Shooter::Shooter() :
 			shooterVic3((uint32_t) PORT_SHOOTER_VIC_3),
 			shooterVic4((uint32_t) PORT_SHOOTER_VIC_4),
 
-			loaderVic1((uint32_t) PORT_LOADER_VIC_1),
-			loaderVic2((uint32_t) PORT_LOADER_VIC_2),
+			loaderVic((uint32_t) PORT_LOADER_VIC),
 
 			encShooter1((uint32_t) PORT_SHOOTER_ENCODER_1A,
 					(uint32_t) PORT_SHOOTER_ENCODER_1B, true),
@@ -57,17 +56,17 @@ void Shooter::update() {
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		if (!shootTimer.HasPeriodPassed(3.0)) {
+		if (!shootTimer.HasPeriodPassed(10.0)) {
 			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
 			std::printf("fire\n");
 			state = FIRING;
+			shootTimer.Reset();
 		}
 		break;
 	case FIRING:
-		if (!shootTimer.HasPeriodPassed(4.5)) {
-			loaderVic1.Set(-LOAD_SPEED);
-			loaderVic2.Set(-LOAD_SPEED);
+		if (!shootTimer.HasPeriodPassed(3.0)) {
+			loaderVic.Set(LOAD_SPEED);
 		} else {
 			state = IDLE;
 		}
@@ -87,6 +86,5 @@ void Shooter::setAllVics(double speed) {
 	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
-	loaderVic1.Set(speed);
-	loaderVic2.Set(-speed);
+	loaderVic.Set(speed);
 }

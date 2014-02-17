@@ -2,6 +2,7 @@
 #define RANGEFINDER_H
 #include <WPILib.h>
 #include <math.h>
+#include <stdlib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
 #include "Robot.h"

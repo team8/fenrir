@@ -20,8 +20,10 @@ void Rangefinder::rotateToWall() {
 }
 
 float Rangefinder::wallDist() {
-	double leftDist = ultraLeft.GetVoltage(); // This might be wrong, it might be GetValue()
-	double rightDist = ultraRight.GetVoltage();
+	double leftDist = ultraLeft.GetVoltage() * 104; // This might be wrong, it might be GetValue()
+	std::printf("Left: %f\n", leftDist);
+	double rightDist = ultraRight.GetVoltage() * 104;
+	std::printf("Right: %f\n\n", rightDist);
 	return ((leftDist + rightDist) / 2); // The distance to the wall from the middle of the robot
 }
 

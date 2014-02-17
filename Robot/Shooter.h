@@ -18,8 +18,7 @@ class Shooter {
 		Victor shooterVic3;
 		Victor shooterVic4;
 		
-		Victor loaderVic1;
-		Victor loaderVic2;
+		Victor loaderVic;
 		
 		Encoder encShooter1;
 		Encoder encShooter2;
