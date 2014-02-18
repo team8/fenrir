@@ -17,19 +17,14 @@ HumanController::HumanController(Robot *robotPointer):
 } 
 
 void HumanController::update(){
-	//Here call the appropriate function from drive train
-
 	void * argPointer = malloc(sizeof(DriveArgs));
 	
-	//Using input from joystick to set values
-	
-	//Makes joystick less sensitive on lower end
-//	if(getSpeedStick()<0.75) {
-	//	((DriveArgs*)argPointer) -> speedValue = getSpeedStick()*SPEED_SENSITIVITY;
-	//}
-//	else {
-		((DriveArgs*)argPointer) -> speedValue = getSpeedStick();
-	//}
+	if (speedStick.GetTrigger() == true) {
+		RobotCommand::Method findRange;
+		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
+		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
+		robot -> setCommand(command);
+	}
 	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
 		((DriveArgs*)argPointer)->speedValue = 0;
 		RobotCommand::Method setSpeed;
@@ -104,12 +99,6 @@ void HumanController::update(){
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
 			robot -> setCommand(command);
 		}
-	}
-	if(getAccumulator()>0){
-			RobotCommand::Method pass;
-			pass.accumulatorMethod = RobotCommand::PASS;
-			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
-			robot -> setCommand(command);
 	}
 	shootButtonPrev = getShootButton();
 	warmupButtonPrev = getWarmupButton();

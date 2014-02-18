@@ -3,8 +3,8 @@
 Robot::Robot() :
 	driveTrain(),
 	shooter(),
-	accumulator()
-	//rangeFinder(this)
+	accumulator(),
+	rangefinder()
 {
 	std::printf("Robot constructor\n");
 }
@@ -21,7 +21,7 @@ void Robot::setCommand(RobotCommand command) {
             accumulator.runCommand(command);
             break;
         case RobotCommand::RANGEFINDER:
-        	//rangeFinder.runCommand(command);
+        	rangefinder.runCommand(command);
         	break;
         case RobotCommand::ROBOT:
         	runCommand(command);
@@ -32,6 +32,7 @@ void Robot::update(){
 	accumulator.update();
 	driveTrain.update();
 	shooter.update();
+	rangefinder.update();
 }
 void Robot::disable(){
 	driveTrain.setSpeed(0);

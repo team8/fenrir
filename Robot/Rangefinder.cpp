@@ -1,10 +1,17 @@
 #include "Rangefinder.h"
 
-Rangefinder::Rangefinder(Robot* robotPointer) :
+Rangefinder::Rangefinder() :
 	ultraLeft((uint32_t)ULTRASONIC_CHANNEL_LEFT), // We need to figure out what channels are and give it a value
-	ultraRight((uint32_t)ULTRASONIC_CHANNEL_RIGHT)
+	rxLeft((uint32_t)ULTRASONIC_RX_LEFT),
+	ultraRight((uint32_t)ULTRASONIC_CHANNEL_RIGHT),
+	rxRight((uint32_t)ULTRASONIC_RX_RIGHT)
 {
-	this -> robot = robotPointer;
+	state = IDLE;
+	distInch = 0;
+	leftAvg = 0;
+	rightAvg = 0;
+	leftTotal = 0;
+	rightTotal = 0;
 }
 
 void Rangefinder::rotateToWall() {
@@ -16,14 +23,16 @@ void Rangefinder::rotateToWall() {
 	RobotCommand::Method method;
 	method.driveMethod = RobotCommand::ROTATEANGLE;
 	RobotCommand command(RobotCommand::DRIVE, method, argPointer);
-	robot -> setCommand(command);
+	//robot -> setCommand(command);
 }
 
 float Rangefinder::wallDist() {
-	double leftDist = ultraLeft.GetVoltage() * 104; // This might be wrong, it might be GetValue()
-	//std::printf("Ultrasonic: %f\n", leftDist);
+	double leftDist = ultraLeft.GetVoltage() * 104;
+	leftAvg += leftDist;
+	//std::printf("Left Ultrasonic: %f\n", leftDist);
 	double rightDist = ultraRight.GetVoltage() * 104;
-	//std::printf("Right: %f\n\n", rightDist);
+	rightAvg += rightDist;
+	//std::printf("Right Ultrasonic: %f\n\n", rightDist);
 	return ((leftDist + rightDist) / 2); // The distance to the wall from the middle of the robot
 }
 
@@ -33,7 +42,7 @@ void Rangefinder::setDistToWall(float dist) {
 	RobotCommand::Method method;
 	method.driveMethod = RobotCommand::DRIVEDIST;
 	RobotCommand command(RobotCommand::DRIVE, method, argPointer);
-	robot -> setCommand(command);
+	//robot -> setCommand(command);
 }
 
 void Rangefinder::runCommand(RobotCommand command) {
@@ -45,8 +54,68 @@ void Rangefinder::runCommand(RobotCommand command) {
 		case RobotCommand::SET_DIST:
 			setDistToWall(args -> target);
 			break;
+		case RobotCommand::LEFT_ON:
+			rxLeft.Set(HIGH);
+			break;
+		case RobotCommand::RIGHT_ON:
+			rxRight.Set(HIGH);
+			break;
 		case RobotCommand::WALL_DIST:
-			wallDist();
+			distInch = 0;
+			state = LEFT;
+			break;
+	}
+}
+
+void Rangefinder::update() {
+	switch(state) {
+		case IDLE:
+			rxLeft.Set(LOW);
+			rxRight.Set(LOW);
+			break;
+		case LEFT:
+			rxLeft.Set(HIGH);
+			rxRight.Set(LOW);
+			if (leftTotal < 10) {
+				leftAvg += ultraLeft.GetVoltage() * 104;
+				leftTotal++;
+			}
+			else {
+				leftAvg /= leftTotal;
+				state = PRUNE_LEFT;
+			}
+			break;
+		case PRUNE_LEFT:
+			
+			state = RIGHT;
+			break;
+		case RIGHT:
+			rxRight.Set(HIGH);
+			rxLeft.Set(LOW);
+			if (rightTotal < 10) {
+				rightAvg += ultraRight.GetVoltage() * 104;
+				rightTotal++;
+			}
+			else {
+				rightAvg /= rightTotal;
+				state = PRUNE_RIGHT;
+			}
+			break;
+		case PRUNE_RIGHT:
+			state = FINISHED;
+			break;
+		case FINISHED:
+			rxLeft.Set(LOW);
+			rxRight.Set(LOW);
+			state = IDLE;
+			
+			distInch = (rightAvg + leftAvg) / 2;
+			std::printf("%f\n", distInch);
+			
+			leftAvg = 0;
+			rightAvg = 0;
+			leftTotal = 0;
+			rightTotal = 0;
 			break;
 	}
 }

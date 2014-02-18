@@ -41,7 +41,7 @@
 #define PORT_LOADER_VIC 9
 
 //default speed for loaders 
-#define LOAD_SPEED -0.5
+#define LOAD_SPEED -1
 
 //ports for accumulator victors
 //#define PORT_ACCUMULATOR_VIC_5 0
@@ -80,7 +80,11 @@
 
 // Ultrasonic ports
 #define ULTRASONIC_CHANNEL_LEFT 1
+#define ULTRASONIC_RX_LEFT 13
 #define ULTRASONIC_CHANNEL_RIGHT 2
+#define ULTRASONIC_RX_RIGHT 14
+#define HIGH 1
+#define LOW 0
 #define ULTRA_GAP 1 // Distance between the two ultrasonic sensors in inches
 
 #define SHOOT_DISTANCE 0 //The set distance we want it to shoot at

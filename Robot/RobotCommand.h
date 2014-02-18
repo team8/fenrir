@@ -57,9 +57,11 @@ class RobotCommand {
 			IDLE
 		} ShooterMethod;
 		
-		typedef enum RangeFinderMethod {
+		typedef enum RangefinderMethod {
 			ANGLE,
 			SET_DIST,
+			LEFT_ON,
+			RIGHT_ON,
 			WALL_DIST
 		};
 		
@@ -72,7 +74,7 @@ class RobotCommand {
 			AccumulatorMethod accumulatorMethod;
 			ShooterMethod shooterMethod;
 			ExtensionMethod extensionMethod;
-			RangeFinderMethod rangefinderMethod;
+			RangefinderMethod rangefinderMethod;
 			RobotMethod robotMethod;
 		} Method;
 

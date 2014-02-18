@@ -5,24 +5,41 @@
 #include <stdlib.h>
 #include "Constants.h"
 #include "RobotCommand.h"
-#include "Robot.h"
 
 
 class Rangefinder {
 	private:
 		//constructors for ultrasonic rangefinders
-		// Our Ultrasonic sensors are analog, so we can't use the ultrasonic object provided by WPILib
 		AnalogChannel ultraLeft;
+		DigitalOutput rxLeft;
 		AnalogChannel ultraRight;
-		Robot* robot;
+		DigitalOutput rxRight;
+		
+		typedef enum PingState {
+			IDLE,
+			LEFT,
+			PRUNE_LEFT,
+			RIGHT,
+			PRUNE_RIGHT,
+			FINISHED
+		} pingState;
+		
+		PingState state;
+		
+		double distInch;
+		double leftAvg;
+		double rightAvg;
+		int leftTotal;
+		int rightTotal;
 
 	public:
-		Rangefinder(Robot* robotPointer);
+		Rangefinder();
 		double measureAngle(); 
 		void rotateToWall();
 		float wallDist();
 		void setDistToWall(float dist);
 		void runCommand(RobotCommand command);
+		void update();
 };
 
 #endif

@@ -66,8 +66,6 @@ void DriveTrain::update() {
 	switch (state) {
 
 	case ROTATE_SPEED:
-		std::printf("Left: %f",leftEnc.Get());
-		std::printf(" Right: %f\n", rightEnc.Get());
 		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
 		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);

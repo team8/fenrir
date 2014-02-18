@@ -1,12 +1,12 @@
 #ifndef ROBOT_H
 #define ROBOT_H
+#include "Rangefinder.h"
 #include <WPILib.h>
 #include "Constants.h"
 #include "DriveTrain.h"
 #include "Shooter.h"
 #include "RobotCommand.h"
 #include "Accumulator.h"
-#include "Rangefinder.h"
 
 
 class Robot {
@@ -14,7 +14,7 @@ class Robot {
 		DriveTrain driveTrain;
 		Shooter shooter;
 		Accumulator accumulator;
-		//Rangefinder rangeFinder;
+		Rangefinder rangefinder;
 
 	public:
 		Robot();

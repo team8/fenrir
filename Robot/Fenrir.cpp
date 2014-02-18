@@ -10,7 +10,6 @@ class Fenrir : public IterativeRobot {
 		HumanController humanController;
 		AutonomousController autoController;
 		Timer time;
-		Rangefinder rangefinder;
 	public:
 		Fenrir();
 		void RobotInit();
@@ -29,8 +28,7 @@ class Fenrir : public IterativeRobot {
 Fenrir::Fenrir():
 	robot(),
 	humanController(&robot),
-	autoController(&robot),
-	rangefinder(&robot)
+	autoController(&robot)
 {
 	std::printf("Fenrir constructor new robot\n");
 }
@@ -72,7 +70,6 @@ void Fenrir::TeleopInit() {
 void Fenrir::TeleopPeriodic() {
 	humanController.update();
 	robot.update();
-	//rangefinder.wallDist();
 }
 
 void Fenrir::TeleopDisabled() {
