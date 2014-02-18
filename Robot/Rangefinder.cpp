@@ -70,14 +70,16 @@ void Rangefinder::runCommand(RobotCommand command) {
 void Rangefinder::update() {
 	switch(state) {
 		case IDLE:
-			rxLeft.Set(LOW);
-			rxRight.Set(LOW);
+			rxLeft.Set(HIGH);
+			rxRight.Set(HIGH);
 			break;
 		case LEFT:
 			rxLeft.Set(HIGH);
 			rxRight.Set(LOW);
 			if (leftTotal < 10) {
-				leftAvg += ultraLeft.GetVoltage() * 104;
+				double dist = ultraLeft.GetVoltage() * 104;
+				std::printf("Left: %f\n", dist);
+				leftAvg += dist;
 				leftTotal++;
 			}
 			else {
@@ -86,14 +88,16 @@ void Rangefinder::update() {
 			}
 			break;
 		case PRUNE_LEFT:
-			
+			std::printf("\n");
 			state = RIGHT;
 			break;
 		case RIGHT:
 			rxRight.Set(HIGH);
 			rxLeft.Set(LOW);
 			if (rightTotal < 10) {
-				rightAvg += ultraRight.GetVoltage() * 104;
+				double dist = ultraRight.GetVoltage() * 104;
+				std::printf("Right: %f\n", dist);
+				rightAvg += dist;
 				rightTotal++;
 			}
 			else {
@@ -102,6 +106,7 @@ void Rangefinder::update() {
 			}
 			break;
 		case PRUNE_RIGHT:
+			std::printf("\n");
 			state = FINISHED;
 			break;
 		case FINISHED:
@@ -110,7 +115,7 @@ void Rangefinder::update() {
 			state = IDLE;
 			
 			distInch = (rightAvg + leftAvg) / 2;
-			std::printf("%f\n", distInch);
+			std::printf("Average: %f\n\n", leftAvg);
 			
 			leftAvg = 0;
 			rightAvg = 0;
