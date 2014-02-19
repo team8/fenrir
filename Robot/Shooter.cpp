@@ -45,13 +45,13 @@ void Shooter::runCommand(RobotCommand command) {
 		state = PREPARING;
 		break;
 	case RobotCommand::EJECT:
-		state = EJECT;
+		if(state !=PREPARING && state !=FIRING)state = EJECT;
 		break;
 	case RobotCommand::IDLE:
-		if (state == EJECT) state = IDLE;
+		if(state !=PREPARING && state !=FIRING)state = IDLE;
 		break;
 	case RobotCommand::FLUSH:
-		state = FLUSH;
+		if(state !=PREPARING && state !=FIRING)state = FLUSH;
 		break;
 	}
 	free(args);

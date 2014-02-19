@@ -17,16 +17,17 @@ HumanController::HumanController(Robot *robotPointer):
 } 
 
 void HumanController::update(){
-	void * argPointer = malloc(sizeof(DriveArgs));
 	
-	if (speedStick.GetTrigger() == true) {
-		RobotCommand::Method findRange;
-		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
-		robot -> setCommand(command);
-	}
+	void * argPointer = malloc(sizeof(DriveArgs));
+//	
+//	((DriveArgs*)argPointer)->driveDist = 10;
+//	RobotCommand::Method driveDist;
+//	driveDist.driveMethod = RobotCommand::SETSPEED;
+//	RobotCommand speedCommand(RobotCommand::DRIVE, driveDist, argPointer);
+//	robot -> setCommand(speedCommand);
+	
 	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
-		((DriveArgs*)argPointer)->speedValue = 0;
+		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -52,15 +53,6 @@ void HumanController::update(){
 	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 	robot -> setCommand(rotateCommand);
 	}
-	if(autoTester!=speedStick.GetTrigger() && speedStick.GetTrigger() == true) {
-		
-		((DriveArgs*)argPointer) -> driveDist = 1.0;
-		RobotCommand::Method driveDist;
-		driveDist.driveMethod = RobotCommand::DRIVEDIST;
-		RobotCommand autoCommand(RobotCommand::DRIVE, driveDist, argPointer);
-		robot -> setCommand(autoCommand);
-		
-	}
 	if(getAccumulator()<-0.2) {
 		std::printf("accumulating\n");
 		RobotCommand::Method setAccumulator;
@@ -69,7 +61,6 @@ void HumanController::update(){
 		robot -> setCommand(command);
 	}
 	else if(getAccumulator()>0.2) {
-			std::printf("Passing\n");
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
@@ -84,50 +75,49 @@ void HumanController::update(){
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
-		RobotCommand::Method idle;
-		idle.shooterMethod = RobotCommand::IDLE;
-		RobotCommand idleCommand(RobotCommand::SHOOTER, idle, 0);
-		robot -> setCommand(idleCommand);
+		if(!getFlushTrigger()){
+			RobotCommand::Method idle;
+			idle.shooterMethod = RobotCommand::IDLE;
+			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+			robot -> setCommand(command);
+		}
 	}
 	
-	if (getFlushTrigger() == true) {
-	
-		RobotCommand::Method accumuFlush;
-		accumuFlush.accumulatorMethod = RobotCommand::PASS;
-		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
-		robot -> setCommand(accuFlushCommand);
+		if (getFlushTrigger()&& !autoTester) {
 		
-		RobotCommand::Method shooterFlush;
-		shooterFlush.shooterMethod = RobotCommand::FLUSH;
-		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
-		robot -> setCommand(shooterFlushCommand);
-	}
-	else {
-		RobotCommand::Method idle;
-		idle.shooterMethod = RobotCommand::IDLE;
-		RobotCommand command(RobotCommand::SHOOTER, idle, 0);
-		robot -> setCommand(command);
-	}
+			RobotCommand::Method accumuFlush;
+			accumuFlush.accumulatorMethod = RobotCommand::PASS;
+			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
+			robot -> setCommand(accuFlushCommand);
+			
+			RobotCommand::Method shooterFlush;
+			shooterFlush.shooterMethod = RobotCommand::FLUSH;
+			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
+			robot -> setCommand(shooterFlushCommand);
+		}
+		else if (!getFlushTrigger() && autoTester) {
+			RobotCommand::Method idle;
+			idle.shooterMethod = RobotCommand::IDLE;
+			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+			robot -> setCommand(command);
+		}
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
 			((DriveArgs*)argPointer)->driveDist = 10;
-			RobotCommand::Method setSpeed;
-			setSpeed.driveMethod = RobotCommand::DRIVEDIST;
-			RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-			robot -> setCommand(speedCommand);
-//			RobotCommand::Method align;
-//			align.rangefinderMethod = RobotCommand::SET_DIST;
-//			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
-//			robot -> setCommand(alignCommand);
-//			RobotCommand::Method shoot;
-//			shoot.shooterMethod = RobotCommand::FIRE;
-//			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-//			robot -> setCommand(command);
+
+			RobotCommand::Method align;
+			align.rangefinderMethod = RobotCommand::SET_DIST;
+			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
+			robot -> setCommand(alignCommand);
+			RobotCommand::Method shoot;
+			shoot.shooterMethod = RobotCommand::FIRE;
+			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
+			robot -> setCommand(command);
 		}
 	}
 	shootButtonPrev = getShootButton();
-	autoTester = speedStick.GetTrigger();
+	autoTester = getFlushTrigger();
 }
 
 double HumanController::getSpeedStick(){
