@@ -23,7 +23,7 @@ Shooter::Shooter() :
 			encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 
 {
-	std::printf("Shooter constructor\n");
+	std::printf("Shooter constructor(James so stoopid)\n");
 
 	encShooter1.Start();
 	encShooter2.Start();
@@ -49,6 +49,9 @@ void Shooter::runCommand(RobotCommand command) {
 		break;
 	case RobotCommand::IDLE:
 		if (state == EJECT) state = IDLE;
+		break;
+	case RobotCommand::FLUSH:
+		state = FLUSH;
 		break;
 	}
 	free(args);
@@ -79,6 +82,9 @@ void Shooter::update() {
 		break;
 	case EJECT:
 		eject();
+		break;
+	case FLUSH:
+		setAllVics(-.3);
 		break;
 	}
 }

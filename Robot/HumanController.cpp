@@ -61,16 +61,15 @@ void HumanController::update(){
 		robot -> setCommand(autoCommand);
 		
 	}
-
-
 	if(getAccumulator()<-0.2) {
+		std::printf("accumulating\n");
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot -> setCommand(command);
 	}
-	
-	else if(getAccumulator()>0.2){
+	else if(getAccumulator()>0.2) {
+			std::printf("Passing\n");
 			RobotCommand::Method pass;
 			pass.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
@@ -91,6 +90,18 @@ void HumanController::update(){
 		robot -> setCommand(idleCommand);
 	}
 	
+	if (getFlushTrigger() == true) {
+		std::printf("Flushing\n");
+		RobotCommand::Method accumuFlush;
+		accumuFlush.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
+		robot -> setCommand(accuFlushCommand);
+		
+		RobotCommand::Method shooterFlush;
+		shooterFlush.shooterMethod = RobotCommand::FLUSH;
+		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
+		robot -> setCommand(shooterFlushCommand);
+	}
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
@@ -101,7 +112,6 @@ void HumanController::update(){
 		}
 	}
 	shootButtonPrev = getShootButton();
-	warmupButtonPrev = getWarmupButton();
 	autoTester = speedStick.GetTrigger();
 }
 
@@ -129,6 +139,7 @@ bool HumanController::getShootButton() {
 	return operatorStick.GetTrigger();
 }
 
-bool HumanController::getWarmupButton() {
-	return operatorStick.GetRawButton((uint32_t)WARMUP_BUTTON_PORT); // Get button to start shooter warmup from Operator stick
+bool HumanController::getFlushTrigger() {
+	//anti-accumulate
+	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 }

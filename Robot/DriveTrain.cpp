@@ -1,6 +1,6 @@
 #include "DriveTrain.h"
 
-DriveTrain::DriveTrain() :		
+DriveTrain::DriveTrain() :
 	// Victors
 	leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
 	leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
@@ -28,9 +28,10 @@ DriveTrain::DriveTrain() :
 void DriveTrain::init() {
 		rightEnc.Start();
 		leftEnc.Start();
-		std::printf("Initialized\n");
-		rightEnc.SetDistancePerPulse(10.0);
-		leftEnc.SetDistancePerPulse(10.0);
+		std::printf("Initialized new Code :D\n");
+		//circumference = 19 inches
+		rightEnc.SetDistancePerPulse(.075);
+		leftEnc.SetDistancePerPulse(.075);
 		//rightEnc.SetPIDSourceParameter(PIDSource::kRate);
 		//leftEnc.SetPIDSourceParameter(PIDSource::kRate);
 		state = STOP_VICTORS;
@@ -61,8 +62,8 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	//std::printf("Left: %f",leftEnc.Get());
-	//std::printf(" Right: %f\n", rightEnc.Get());
+	std::printf("Left distance: %f",leftEnc.GetDistance());
+	std::printf(" Right distance: %f\n", rightEnc.GetDistance());
 	switch (state) {
 
 	case ROTATE_SPEED:

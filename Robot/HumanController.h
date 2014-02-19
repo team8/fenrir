@@ -16,6 +16,7 @@ class HumanController {
 		double getAccumulator();
 		bool getShootButton();
 		bool getWarmupButton();
+		bool getFlushTrigger();
 		
 		HumanController(Robot *robotPointer);
 

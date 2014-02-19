@@ -54,7 +54,8 @@ class RobotCommand {
 		typedef enum ShooterMethod {
 			FIRE,
 			EJECT,
-			IDLE
+			IDLE,
+			FLUSH
 		} ShooterMethod;
 		
 		typedef enum RangefinderMethod {

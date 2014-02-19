@@ -36,7 +36,8 @@ class Shooter {
 			IDLE,
 			PREPARING,
 			FIRING,
-			EJECT
+			EJECT,
+			FLUSH
 		} ShooterState;
 		ShooterState state;
 		

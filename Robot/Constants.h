@@ -74,9 +74,7 @@
 
 //button number for operator stick trigger
 #define ACCUMULATOR_BUTTON_PORT 10
-#define WARMUP_BUTTON_PORT 0
-#define PASS_BUTTON_PORT 2
-
+#define FLUSH_TRIGGER 2
 
 // Ultrasonic ports
 #define ULTRASONIC_CHANNEL_LEFT 1
@@ -86,5 +84,6 @@
 #define HIGH 1
 #define LOW 0
 #define ULTRA_GAP 1 // Distance between the two ultrasonic sensors in inches
+
 
 #define SHOOT_DISTANCE 0 //The set distance we want it to shoot at
