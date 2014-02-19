@@ -10,12 +10,12 @@ DriveTrain::DriveTrain() :
 	//gyroscope((uint32_t) PORT_GYRO),
 
 	// Encoders
-	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, true),
-	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true)
+	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, false),
+	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 	// PIDControllers
-	//	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-	//rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
+	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic) 
 	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	rotateSpeed=0;
@@ -30,10 +30,10 @@ void DriveTrain::init() {
 		leftEnc.Start();
 		std::printf("Initialized new Code :D\n");
 		//circumference = 19 inches
-		rightEnc.SetDistancePerPulse(.0799);
-		leftEnc.SetDistancePerPulse(.0799);
-		//rightEnc.SetPIDSourceParameter(PIDSource::kRate);
-		//leftEnc.SetPIDSourceParameter(PIDSource::kRate);
+		rightEnc.SetDistancePerPulse(.0782);//(.07734);
+		leftEnc.SetDistancePerPulse(.0813);//(.07849);
+		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
 		state = STOP_VICTORS;
 }
 //runs method according to what newCommand is received
@@ -75,10 +75,10 @@ void DriveTrain::update() {
 		break;
 
 	case DRIVE_DIST:
-		leftFrontVic.Set(leftEnc.PIDGet());
-		leftBackVic.Set(leftEnc.PIDGet());
-		rightFrontVic.Set(-(rightEnc.PIDGet()));
-		rightBackVic.Set(-(rightEnc.PIDGet()));
+		leftFrontVic.Set(leftController.Get());
+		leftBackVic.Set(leftController.Get());
+		rightFrontVic.Set(-(rightController.Get()));
+		rightBackVic.Set(-(rightController.Get()));
 		break;
 
 	case TURN_ANGLE:
@@ -103,10 +103,10 @@ void DriveTrain::update() {
 void DriveTrain::driveD(double dist) {
 	leftEnc.Reset();
 	rightEnc.Reset();
-	//leftController.SetSetpoint(dist);
-	//rightController.SetSetpoint(dist);
-	//leftController.Enable();
-	//rightController.Enable();
+	leftController.SetSetpoint(dist);
+	rightController.SetSetpoint(dist);
+	leftController.Enable();
+	rightController.Enable();
 	state = DRIVE_DIST;
 }
 

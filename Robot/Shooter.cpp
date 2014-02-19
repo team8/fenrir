@@ -65,6 +65,8 @@ void Shooter::update() {
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
+		
+		
 		if (!shootTimer.HasPeriodPassed(10.0)) {
 			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
@@ -101,7 +103,7 @@ void Shooter::setAllVics(double speed) {
 	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
 	shooterVic4.Set(speed);
-	loaderVic.Set(speed);
+	loaderVic.Set(-speed);
 }
 
 void Shooter::eject() {

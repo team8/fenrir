@@ -91,7 +91,7 @@ void HumanController::update(){
 	}
 	
 	if (getFlushTrigger() == true) {
-		std::printf("Flushing\n");
+	
 		RobotCommand::Method accumuFlush;
 		accumuFlush.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
@@ -102,13 +102,28 @@ void HumanController::update(){
 		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
 		robot -> setCommand(shooterFlushCommand);
 	}
+	else {
+		RobotCommand::Method idle;
+		idle.shooterMethod = RobotCommand::IDLE;
+		RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+		robot -> setCommand(command);
+	}
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
-			RobotCommand::Method shoot;
-			shoot.shooterMethod = RobotCommand::FIRE;
-			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-			robot -> setCommand(command);
+			((DriveArgs*)argPointer)->driveDist = 10;
+			RobotCommand::Method setSpeed;
+			setSpeed.driveMethod = RobotCommand::DRIVEDIST;
+			RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+			robot -> setCommand(speedCommand);
+//			RobotCommand::Method align;
+//			align.rangefinderMethod = RobotCommand::SET_DIST;
+//			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
+//			robot -> setCommand(alignCommand);
+//			RobotCommand::Method shoot;
+//			shoot.shooterMethod = RobotCommand::FIRE;
+//			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
+//			robot -> setCommand(command);
 		}
 	}
 	shootButtonPrev = getShootButton();
