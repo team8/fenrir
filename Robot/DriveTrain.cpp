@@ -30,13 +30,12 @@ void DriveTrain::init() {
 		leftEnc.Start();
 		std::printf("Initialized new Code :D\n");
 		//circumference = 19 inches
-		rightEnc.SetDistancePerPulse(.075);
-		leftEnc.SetDistancePerPulse(.075);
+		rightEnc.SetDistancePerPulse(.0799);
+		leftEnc.SetDistancePerPulse(.0799);
 		//rightEnc.SetPIDSourceParameter(PIDSource::kRate);
 		//leftEnc.SetPIDSourceParameter(PIDSource::kRate);
 		state = STOP_VICTORS;
 }
-
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
 
