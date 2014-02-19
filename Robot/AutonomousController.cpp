@@ -49,12 +49,6 @@ void AutonomousController::pathOne(){
 	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
 	robot -> setCommand(alignCommand);
-	
-	//Shoot
-	RobotCommand::Method shoot;
-	shoot.shooterMethod = RobotCommand::FIRE;
-	RobotCommand shootCommand(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-	robot -> setCommand(shootCommand);
 }
 
 void AutonomousController::pathTwo() {
@@ -73,12 +67,6 @@ void AutonomousController::pathTwo() {
 	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
 	robot -> setCommand(alignCommand);
-	
-	//Shoot
-	RobotCommand::Method shoot;
-	shoot.shooterMethod = RobotCommand::FIRE;
-	RobotCommand shootCommand(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-	robot -> setCommand(shootCommand);
 }
 
 void AutonomousController::pathThree() {
@@ -97,12 +85,6 @@ void AutonomousController::pathThree() {
 	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
 	robot -> setCommand(alignCommand);
-	
-	//Shoot
-	RobotCommand::Method shoot;
-	shoot.shooterMethod = RobotCommand::FIRE;
-	RobotCommand shootCommand(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-	robot -> setCommand(shootCommand);
 }
 
 void AutonomousController::update() {
