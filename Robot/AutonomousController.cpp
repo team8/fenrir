@@ -1,8 +1,7 @@
 #include "AutonomousController.h"
 #include "Constants.h"
 
-AutonomousController::AutonomousController(Robot *robotPointer)
-{
+AutonomousController::AutonomousController(Robot *robotPointer) {
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
 }  
@@ -10,7 +9,6 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 void AutonomousController::startTimer() {
 	time.Start();
 }
-
 
 void AutonomousController::drive(float v) {
 	void * argPointer = malloc(sizeof(DriveArgs));
