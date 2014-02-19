@@ -35,11 +35,11 @@ bool AutonomousController::shoot() {
 /*Premade paths depending on where we start left-to-right*/
 void AutonomousController::pathOne(){
 	//PLS NOTE: NOT CORRECT: Use the correct commands as appropriate
-	
+
 	//Drive into position
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = 10;
-	RobotCommand::Method setSpeed;
+	((DriveArgs *) argPointer) -> driveDist = 10; //This value is not confirmed
+	RobotCommand::Method setSpeed; 
 	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
 	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(positionCommand);
@@ -106,7 +106,7 @@ void AutonomousController::pathThree() {
 }
 
 void AutonomousController::update() {
-	//Runs all methods according to time
+//	Runs all methods according to time
 //	if(time.HasPeriodPassed(5)) { // modify time value
 //		void * argPointer = malloc(sizeof(DriveArgs));
 //		//shootDist= will add more stuff later(the purpose of this is to find the distance until the robot is at the right distance to shoot using the angle of shot and height of goal)
