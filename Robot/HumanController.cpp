@@ -106,10 +106,11 @@ void HumanController::update(){
 		if(getShootButton()){
 			((DriveArgs*)argPointer)->driveDist = 10;
 
-			RobotCommand::Method align;
-			align.rangefinderMethod = RobotCommand::SET_DIST;
-			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
+			RobotCommand::Method findRange;
+			findRange.rangefinderMethod = RobotCommand::WALL_DIST;
+			RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
 			robot -> setCommand(alignCommand);
+			
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::FIRE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
