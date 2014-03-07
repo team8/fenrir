@@ -25,6 +25,7 @@ Shooter::Shooter() :
 {
 	std::printf("Shooter constructor(James so stoopid)\n");
 
+	isShooting = false;
 	encShooter1.Start();
 	encShooter2.Start();
 	encShooter3.Start();
@@ -65,11 +66,10 @@ void Shooter::update() {
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		
-		
 		if (!shootTimer.HasPeriodPassed(5.0)) {
 			startShooterVics(1.0);
-		} else /*if (aligned == true)*/{
+		}
+		else {
 			std::printf("fire\n");
 			state = FIRING;
 			shootTimer.Reset();
@@ -78,7 +78,8 @@ void Shooter::update() {
 	case FIRING:
 		if (!shootTimer.HasPeriodPassed(3.0)) {
 			loaderVic.Set(LOAD_SPEED);
-		} else {
+		}
+		else {
 			state = IDLE;
 		}
 		break;

@@ -61,30 +61,24 @@ void HumanController::update(){
 		robot -> setCommand(command);
 	}
 	else if(getAccumulator()>0.2) {
-			RobotCommand::Method pass;
-			pass.accumulatorMethod = RobotCommand::PASS;
-			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
-			robot -> setCommand(command);
-			RobotCommand::Method eject;
-			eject.shooterMethod = RobotCommand::EJECT;
-			RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
-			robot -> setCommand(ejectCommand);
+		RobotCommand::Method eject;
+		eject.shooterMethod = RobotCommand::EJECT;
+		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
+		robot -> setCommand(ejectCommand);
+		
+		RobotCommand::Method pass;
+		pass.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
+		robot -> setCommand(command);
 	}
 	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
-		if(!getFlushTrigger()){
-			RobotCommand::Method idle;
-			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
-			robot -> setCommand(command);
-		}
 	}
 	
-		if (getFlushTrigger()&& !autoTester) {
-		
+		if (getFlushTrigger()) {
 			RobotCommand::Method accumuFlush;
 			accumuFlush.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
@@ -94,12 +88,22 @@ void HumanController::update(){
 			shooterFlush.shooterMethod = RobotCommand::FLUSH;
 			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
 			robot -> setCommand(shooterFlushCommand);
+			
+			lastFlushTrigger = true;
 		}
-		else if (!getFlushTrigger() && autoTester) {
-			RobotCommand::Method idle;
-			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+		else if (!getFlushTrigger() && lastFlushTrigger) {
+			RobotCommand::Method accumuStop;
+			accumuStop.accumulatorMethod = RobotCommand::STOP;
+			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuStop, 0);
+			robot -> setCommand(accuFlushCommand);
+			
+			//stop shooter as well
+			RobotCommand::Method shootStop;
+			shootStop.shooterMethod = RobotCommand::IDLE;
+			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shootStop, 0);
 			robot -> setCommand(command);
+			
+			lastFlushTrigger = false;
 		}
 
 	if(shootButtonPrev!=getShootButton()){
@@ -118,7 +122,7 @@ void HumanController::update(){
 		}
 	}
 	shootButtonPrev = getShootButton();
-	autoTester = getFlushTrigger();
+	lastFlushTrigger = getFlushTrigger();
 }
 
 double HumanController::getSpeedStick(){
@@ -141,11 +145,11 @@ double HumanController::getAccumulator() {
 }
 
 bool HumanController::getShootButton() {
-	//return operatorStick.GetTrigger(); // Get trigger button to shoot from Operator stick
+	// Get trigger button to shoot from Operator stick
 	return operatorStick.GetTrigger();
 }
 
 bool HumanController::getFlushTrigger() {
-	//anti-accumulate
+	//flush out the ball
 	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 }

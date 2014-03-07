@@ -10,7 +10,7 @@ class Robot;
 
 class Shooter {
 	private:
-		bool aligned;
+		bool isShooting;
 	
 		Robot* robot;
 		Victor shooterVic1;
