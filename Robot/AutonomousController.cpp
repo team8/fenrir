@@ -4,8 +4,8 @@
 AutonomousController::AutonomousController(Robot *robotPointer){
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
-	shootDist = 0;
-	spawnDist = 0;
+	shootDist = 50;
+	spawnDist = 200;
 }  
 
 void AutonomousController::startTimer() {
@@ -36,6 +36,7 @@ bool AutonomousController::shoot() {
 
 /*Premade paths depending on where we start left-to-right*/
 void AutonomousController::path(){
+	//TODO:find the distances, and see if shoot can run simultaneously
 	
 	//Drive into position
 	void * argPointer = malloc(sizeof(DriveArgs));
@@ -45,6 +46,10 @@ void AutonomousController::path(){
 	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(positionCommand);
 	
+	RobotCommand::Method shoot;
+	shoot.shooterMethod = RobotCommand::FIRE;
+	RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
+	robot -> setCommand(command);
 }
 
 void AutonomousController::update() {

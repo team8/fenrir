@@ -67,7 +67,7 @@ void Shooter::update() {
 	case PREPARING:
 		
 		
-		if (!shootTimer.HasPeriodPassed(10.0)) {
+		if (!shootTimer.HasPeriodPassed(5.0)) {
 			startShooterVics(1.0);
 		} else /*if (aligned == true)*/{
 			std::printf("fire\n");
