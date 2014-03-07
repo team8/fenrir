@@ -16,7 +16,7 @@ HumanController::HumanController(Robot *robotPointer):
 	this-> robot = robotPointer;
 } 
 
-void HumanController::update(){
+void HumanController::update() {
 	
 	void * argPointer = malloc(sizeof(DriveArgs));
 //	
@@ -26,7 +26,7 @@ void HumanController::update(){
 //	RobotCommand speedCommand(RobotCommand::DRIVE, driveDist, argPointer);
 //	robot -> setCommand(speedCommand);
 	
-	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
+	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1) {
 		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
@@ -38,20 +38,20 @@ void HumanController::update(){
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot -> setCommand(rotateCommand);
 	}
-	if(abs(speedStick.GetY())>0.01){
-	((DriveArgs*)argPointer)->speedValue = getSpeedStick();
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(speedCommand);
+	if(abs(speedStick.GetY())>0.01) {
+		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(speedCommand);
 	}
 
-	if(abs(turnStick.GetX())>0.01){
-	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
-	RobotCommand::Method rotSpeed;
-	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-	robot -> setCommand(rotateCommand);
+	if(abs(turnStick.GetX())>0.01) {
+		((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+		RobotCommand::Method rotSpeed;
+		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+		robot -> setCommand(rotateCommand);
 	}
 	if(getAccumulator()<-0.2) {
 		std::printf("accumulating\n");
@@ -78,33 +78,33 @@ void HumanController::update(){
 		robot -> setCommand(command);
 	}
 	
-		if (getFlushTrigger()) {
-			RobotCommand::Method accumuFlush;
-			accumuFlush.accumulatorMethod = RobotCommand::PASS;
-			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
-			robot -> setCommand(accuFlushCommand);
+	if (getFlushTrigger()) {
+		RobotCommand::Method accumuFlush;
+		accumuFlush.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
+		robot -> setCommand(accuFlushCommand);
 			
-			RobotCommand::Method shooterFlush;
-			shooterFlush.shooterMethod = RobotCommand::FLUSH;
-			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
-			robot -> setCommand(shooterFlushCommand);
+		RobotCommand::Method shooterFlush;
+		shooterFlush.shooterMethod = RobotCommand::FLUSH;
+		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
+		robot -> setCommand(shooterFlushCommand);
 			
-			lastFlushTrigger = true;
-		}
-		else if (!getFlushTrigger() && lastFlushTrigger) {
-			RobotCommand::Method accumuStop;
-			accumuStop.accumulatorMethod = RobotCommand::STOP;
-			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuStop, 0);
-			robot -> setCommand(accuFlushCommand);
+		lastFlushTrigger = true;
+	}
+	else if (!getFlushTrigger() && lastFlushTrigger) {
+		RobotCommand::Method accumuStop;
+		accumuStop.accumulatorMethod = RobotCommand::STOP;
+		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuStop, 0);
+		robot -> setCommand(accuFlushCommand);
 			
-			//stop shooter as well
-			RobotCommand::Method shootStop;
-			shootStop.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shootStop, 0);
-			robot -> setCommand(command);
+		//stop shooter as well
+		RobotCommand::Method shootStop;
+		shootStop.shooterMethod = RobotCommand::IDLE;
+		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shootStop, 0);
+		robot -> setCommand(command);
 			
-			lastFlushTrigger = false;
-		}
+		lastFlushTrigger = false;
+	}
 
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){

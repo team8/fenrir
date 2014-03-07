@@ -1,19 +1,19 @@
 #include "AutonomousController.h"
 #include "Constants.h"
 
-AutonomousController::AutonomousController(Robot *robotPointer){
+AutonomousController::AutonomousController(Robot *robotPointer) {
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
 	//we shoot from about 10 feet, will modify as needed
 	shootDist = 120;
-	spawnDist = 200;
+	spawnDist = 218;
 }
 
 void AutonomousController::startTimer() {
 	time.Start();
 }
 
-void AutonomousController::path(){
+void AutonomousController::path() {
 	//TODO:find the distances, and see if shoot can run simultaneously
 	
 	//Drive into position

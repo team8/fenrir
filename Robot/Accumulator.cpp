@@ -1,13 +1,12 @@
 #include "Accumulator.h"
 
 Accumulator::Accumulator():
-	accumulateVic((uint32_t)PORT_ACCUMULATOR_VIC_7)
-{
+accumulateVic((uint32_t) PORT_ACCUMULATOR_VIC_7) {
 	std::printf("Accumulator constructor\n");
 }
 
 void Accumulator::runCommand(RobotCommand newCommand) {
-	switch(newCommand.getMethod().accumulatorMethod) {
+	switch (newCommand.getMethod().accumulatorMethod) {
 	case RobotCommand::STOP:
 		state = NOT_ACCUMULATING;
 		break;
@@ -25,15 +24,15 @@ void Accumulator::notAccumulating() {
 }
 
 /*bool getHeld() {
-	return ballHeld;
-}
+ return ballHeld;
+ }
 
-void setHeld(bool b){
-	ballHeld = b;
-}*/
+ void setHeld(bool b){
+ ballHeld = b;
+ }*/
 
 void Accumulator::update() {
-	switch(state) {
+	switch (state) {
 	case NOT_ACCUMULATING:
 		accumulateVic.Set(0);
 		break;
