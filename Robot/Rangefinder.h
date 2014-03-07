@@ -18,9 +18,7 @@ class Rangefinder {
 		typedef enum PingState {
 			IDLE,
 			LEFT,
-			PRUNE_LEFT,
 			RIGHT,
-			PRUNE_RIGHT,
 			FINISHED
 		} pingState;
 		

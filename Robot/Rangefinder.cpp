@@ -89,12 +89,8 @@ void Rangefinder::update() {
 			}
 			else {
 				leftAvg /= leftTotal;
-				state = PRUNE_LEFT;
+				state = RIGHT;
 			}
-			break;
-		case PRUNE_LEFT:
-			std::printf("\n");
-			state = RIGHT;
 			break;
 		case RIGHT:
 			rxRight.Set(HIGH);
@@ -107,12 +103,8 @@ void Rangefinder::update() {
 			}
 			else {
 				rightAvg /= rightTotal;
-				state = PRUNE_RIGHT;
+				state = FINISHED;
 			}
-			break;
-		case PRUNE_RIGHT:
-			std::printf("\n");
-			state = FINISHED;
 			break;
 		case FINISHED:
 			rxLeft.Set(LOW);

@@ -4,15 +4,37 @@
 AutonomousController::AutonomousController(Robot *robotPointer){
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
-	//we shoot from about 10 feet, will modify as needed
-	shootDist = 120;
+	shootDist = 50;
 	spawnDist = 200;
-}
+}  
 
 void AutonomousController::startTimer() {
 	time.Start();
 }
 
+void AutonomousController::drive(float v) {
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> driveSpeed = v;
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand command(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(command);
+}
+
+void AutonomousController::stop() {
+	void * argPointer = malloc(sizeof(DriveArgs));
+	((DriveArgs *) argPointer) -> driveSpeed = 0;
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::SETSPEED;
+	RobotCommand stopCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(stopCommand);
+}
+
+bool AutonomousController::shoot() {
+	return false;
+}
+
+/*Premade paths depending on where we start left-to-right*/
 void AutonomousController::path(){
 	//TODO:find the distances, and see if shoot can run simultaneously
 	
