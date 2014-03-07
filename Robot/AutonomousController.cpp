@@ -1,9 +1,11 @@
 #include "AutonomousController.h"
 #include "Constants.h"
 
-AutonomousController::AutonomousController(Robot *robotPointer) {
+AutonomousController::AutonomousController(Robot *robotPointer){
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
+	shootDist = 0;
+	spawnDist = 0;
 }  
 
 void AutonomousController::startTimer() {
@@ -33,58 +35,16 @@ bool AutonomousController::shoot() {
 }
 
 /*Premade paths depending on where we start left-to-right*/
-void AutonomousController::pathOne(){
-	//PLS NOTE: NOT CORRECT: Use the correct commands as appropriate
-
-	//Drive into position
-	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = 10; //This value is not confirmed
-	RobotCommand::Method setSpeed; 
-	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
-	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(positionCommand);
-	
-	//Use rangefinders to calibrate exactly
-	RobotCommand::Method findRange;
-	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
-	robot -> setCommand(alignCommand);
-}
-
-void AutonomousController::pathTwo() {
-	//PLS NOTE: NOT CORRECT: Use the correct commands as appropriate
+void AutonomousController::path(){
 	
 	//Drive into position
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = 10;
+	((DriveArgs *) argPointer) -> driveDist = spawnDist - shootDist; //This value is not confirmed
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
 	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(positionCommand);
 	
-	//Use rangefinders to calibrate exactly
-	RobotCommand::Method findRange;
-	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
-	robot -> setCommand(alignCommand);
-}
-
-void AutonomousController::pathThree() {
-	//PLS NOTE: NOT CORRECT: Use the correct commands as appropriate
-	
-	//Drive into position
-	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = 10;
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
-	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(positionCommand);
-	
-	//Use rangefinders to calibrate exactly
-	RobotCommand::Method findRange;
-	findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-	RobotCommand alignCommand(RobotCommand::RANGEFINDER, findRange, 0);
-	robot -> setCommand(alignCommand);
 }
 
 void AutonomousController::update() {

@@ -19,8 +19,8 @@ class AutonomousController {
 		void stop();
 		bool shoot();
 		bool targetReached;
-		void pathOne();
-		void pathTwo();
-		void pathThree();
+		void path();
+		double shootDist;
+		double spawnDist;
 };
 #endif
