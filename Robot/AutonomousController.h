@@ -7,17 +7,17 @@
 #include <math.h>
 
 class AutonomousController {
-
-	public:
-		AutonomousController(Robot* robotPointer);
-		void update();
-		void startTimer();
-	private:
-		Timer time;
-		Robot* robot;
-		bool targetReached;
-		void path();
-		double shootDist;
-		double spawnDist;
+public:
+	AutonomousController(Robot* robotPointer);
+	void update();
+	void startTimer();
+private:
+	Timer time;
+	Robot* robot;
+	bool targetReached;
+	void path();
+	double shootDist;
+	double spawnDist;
+	bool pathCalled;
 };
 #endif

@@ -1,47 +1,50 @@
 #include "DriveTrain.h"
 
 DriveTrain::DriveTrain() :
-	// Victors
-	leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
-	leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
-	rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
-	rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
+// Victors
+leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
+leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
+rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
+rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
-	//gyroscope((uint32_t) PORT_GYRO),
+//gyroscope((uint32_t) PORT_GYRO),
 
-	// Encoders
-	leftEnc((uint32_t) PORT_ENCODER_LEFT_A,(uint32_t) PORT_ENCODER_LEFT_B, false),
-	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
+// Encoders
+leftEnc((uint32_t) PORT_ENCODER_LEFT_A,
+		(uint32_t) PORT_ENCODER_LEFT_B, false),
+rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,
+		(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
-	// PIDControllers
-	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic) 
-	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
+// PIDControllers
+leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
+//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic)
+
 {
-	rotateSpeed=0;
+	rotateSpeed = 0;
 	std::printf("Drive train constructor\n");
 	//gyroscope.Start();
 	//rightController.SetOutputRange(-1, 1);
-    //angleController.SetOutputRange(-1, 1);
+	//angleController.SetOutputRange(-1, 1);
 }
 
 void DriveTrain::init() {
-		rightEnc.Start();
-		leftEnc.Start();
-		std::printf("Initialized new Code :D\n");
-		//circumference = 19 inches
-		rightEnc.SetDistancePerPulse(.0782);//(.07734);
-		leftEnc.SetDistancePerPulse(.0813);//(.07849);
-		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
-		state = STOP_VICTORS;
+	rightEnc.Start();
+	leftEnc.Start();
+	std::printf("Initialized new Code :D\n");
+	//circumference = 19 inches
+	rightEnc.SetDistancePerPulse(.0782);//(.07734);
+	leftEnc.SetDistancePerPulse(.0813);//(.07849);
+	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	state = STOP_VICTORS;
 }
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
 
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
-	case RobotCommand::SETSPEED:                                                               
+	case RobotCommand::SETSPEED:
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
@@ -61,7 +64,7 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	std::printf("Left distance: %f",leftEnc.GetDistance());
+	std::printf("Left distance: %f", leftEnc.GetDistance());
 	std::printf(" Right distance: %f\n", rightEnc.GetDistance());
 	switch (state) {
 
@@ -82,13 +85,12 @@ void DriveTrain::update() {
 		break;
 
 	case TURN_ANGLE:
-//		leftFrontVic.Set(-(angleController.Get()));
-//		leftBackVic.Set(-(angleController.Get()));
-//		rightFrontVic.Set(angleController.Get());
-//		rightBackVic.Set(angleController.Get());
+		//		leftFrontVic.Set(-(angleController.Get()));
+		//		leftBackVic.Set(-(angleController.Get()));
+		//		rightFrontVic.Set(angleController.Get());
+		//		rightBackVic.Set(angleController.Get());
 		break;
 
-		
 	case STOP_VICTORS:
 		leftFrontVic.Set(0);
 		leftBackVic.Set(0);
@@ -119,10 +121,10 @@ void DriveTrain::setSpeed(double spd) {
 
 //lets you rotate in place
 void DriveTrain::rotateA(double angle) {
-//	gyroscope.Reset();
-//	angleController.SetSetpoint(angle);
-//	angleController.Enable();
-//	rotateAngle = angle;
+	//	gyroscope.Reset();
+	//	angleController.SetSetpoint(angle);
+	//	angleController.Enable();
+	//	rotateAngle = angle;
 	state = TURN_ANGLE;
 }
 

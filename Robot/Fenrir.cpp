@@ -4,32 +4,31 @@
 #include "AutonomousController.h"
 #include "Rangefinder.h"
 
-class Fenrir : public IterativeRobot {
-	private:
-		Robot robot;
-		HumanController humanController;
-		AutonomousController autoController;
-		Timer time;
-	public:
-		Fenrir();
-		void RobotInit();
-		void AutonomousInit();
-		void AutonomousPeriodic();
-		void AutonomousDisabled();
-		void DisabledInit();
-		void DisabledPeriodic();
-		void TeleopInit();
-		void TeleopPeriodic();
-		void TeleopDisabled();
-		void TestInit();
-		void TestPeriodic();
+class Fenrir: public IterativeRobot {
+private:
+	Robot robot;
+	HumanController humanController;
+	AutonomousController autoController;
+	Timer time;
+public:
+	Fenrir();
+
+	//All the Robot phases
+	void RobotInit();
+	void AutonomousInit();
+	void AutonomousPeriodic();
+	void AutonomousDisabled();
+	void DisabledInit();
+	void DisabledPeriodic();
+	void TeleopInit();
+	void TeleopPeriodic();
+	void TeleopDisabled();
+	void TestInit();
+	void TestPeriodic();
 };
 
-Fenrir::Fenrir():
-	robot(),
-	humanController(&robot),
-	autoController(&robot)
-{
+Fenrir::Fenrir() :
+	robot(), humanController(&robot), autoController(&robot) {
 	std::printf("Fenrir constructor new robot\n");
 }
 
@@ -38,7 +37,7 @@ void Fenrir::RobotInit() {
 }
 
 void Fenrir::AutonomousInit() {
-	std::printf("auto init\n");
+	std::printf("Autonomous initted\n");
 	time.Start();
 }
 
@@ -48,11 +47,11 @@ void Fenrir::AutonomousPeriodic() {
 }
 
 void Fenrir::AutonomousDisabled() {
-	std::printf("auto disabled\n");
+	std::printf("Autonomous disabled\n");
 }
 
 void Fenrir::DisabledInit() {
-	std::printf("disabled init\n");
+	std::printf("Disabled initted\n");
 	robot.disable();
 }
 
@@ -62,7 +61,7 @@ void Fenrir::DisabledPeriodic() {
 }
 
 void Fenrir::TeleopInit() {
-	std::printf("teleop init\n");
+	std::printf("Teleop initialized\n");
 	robot.init();
 
 }
@@ -73,15 +72,13 @@ void Fenrir::TeleopPeriodic() {
 }
 
 void Fenrir::TeleopDisabled() {
-	std::printf("teleop disabled\n");
+	std::printf("Teleop disabled\n");
 }
 
 void Fenrir::TestInit() {
-	std::printf("test init\n");
 }
 
 void Fenrir::TestPeriodic() {
-	
 }
 
 START_ROBOT_CLASS(Fenrir);

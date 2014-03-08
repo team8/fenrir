@@ -7,28 +7,30 @@
 #include <stdlib.h>
 
 class HumanController {
+public:
+	void update();
+	HumanController(Robot *robotPointer);
 
-	public:
-		void update();
-		double getSpeedStick();
-		double getTurnStick();
-		double getAccumulatorStick();
-		double getAccumulator();
-		bool getShootButton();
-		bool getWarmupButton();
-		bool getFlushTrigger();
-		
-		HumanController(Robot *robotPointer);
+private:
+	Robot *robot;
+	Joystick speedStick;
+	Joystick turnStick;
+	Joystick operatorStick;
 
-	private:
-		Robot *robot;
-		Joystick speedStick;
-		Joystick turnStick;
-		Joystick operatorStick;
-		bool accuButtonPrev;
-		bool shootButtonPrev;
-		bool warmupButtonPrev;
-		bool passButtonPrev;
-		bool lastFlushTrigger;
+	//All methods we use in controller scheme logic
+	double getAbsSpeedStick();
+	double getAbsTurnStick();
+	double getAccumulatorStick();
+	double getAccumulator();
+	bool getShootButton();
+	bool getWarmupButton();
+	bool getFlushTrigger();
+
+	//booleans used to make sure we don't reissue same command
+	bool accuButtonPrev;
+	bool shootButtonPrev;
+	bool warmupButtonPrev;
+	bool passButtonPrev;
+	bool lastFlushTrigger;
 };
 #endif

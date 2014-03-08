@@ -1,7 +1,7 @@
 #include "Accumulator.h"
 
-Accumulator::Accumulator():
-accumulateVic((uint32_t) PORT_ACCUMULATOR_VIC_7) {
+Accumulator::Accumulator() :
+	accumulateVic((uint32_t) PORT_ACCUMULATOR_VIC_7) {
 	std::printf("Accumulator constructor\n");
 }
 
