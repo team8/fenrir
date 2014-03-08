@@ -25,6 +25,7 @@ private:
 	bool getShootButton();
 	bool getWarmupButton();
 	bool getFlushTrigger();
+	double getOperatorZ();
 
 	//booleans used to make sure we don't reissue same command
 	bool accuButtonPrev;
@@ -32,5 +33,7 @@ private:
 	bool warmupButtonPrev;
 	bool passButtonPrev;
 	bool lastFlushTrigger;
+	bool prevStop;
+	bool prevZ;
 };
 #endif

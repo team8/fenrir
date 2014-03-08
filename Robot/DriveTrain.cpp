@@ -31,7 +31,6 @@ rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
 void DriveTrain::init() {
 	rightEnc.Start();
 	leftEnc.Start();
-	std::printf("Initialized new Code :D\n");
 	//circumference = 19 inches
 	rightEnc.SetDistancePerPulse(.0782);//(.07734);
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
@@ -64,8 +63,6 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	std::printf("Left distance: %f", leftEnc.GetDistance());
-	std::printf(" Right distance: %f\n", rightEnc.GetDistance());
 	switch (state) {
 
 	case ROTATE_SPEED:

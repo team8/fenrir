@@ -37,7 +37,9 @@ class Shooter {
 			PREPARING,
 			FIRING,
 			EJECT,
-			FLUSH
+			FLUSH,
+			M_LOAD,
+			M_FIRE
 		} ShooterState;
 		ShooterState state;
 		

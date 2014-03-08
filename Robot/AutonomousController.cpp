@@ -25,10 +25,10 @@ void AutonomousController::path() {
 	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(positionCommand);
 
-	RobotCommand::Method shoot;
-	shoot.shooterMethod = RobotCommand::FIRE;
-	RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-	robot -> setCommand(command);
+	//RobotCommand::Method shoot;
+	//shoot.shooterMethod = RobotCommand::FIRE;
+	//RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
+	//robot -> setCommand(command);
 }
 
 void AutonomousController::update() {

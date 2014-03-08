@@ -55,7 +55,9 @@ class RobotCommand {
 			FIRE,
 			EJECT,
 			IDLE,
-			FLUSH
+			FLUSH,
+			MANUAL_FIRE,
+			MANUAL_LOAD
 		} ShooterMethod;
 		
 		typedef enum RangefinderMethod {
