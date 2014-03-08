@@ -19,12 +19,18 @@ void AutonomousController::path() {
 
 	//Drive into position
 	void * argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = spawnDist - shootDist; //This value is confirmed
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
-	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	//((DriveArgs *) argPointer) -> speedValue = -0.3; //This value is confirmed
+	((DriveArgs *) argPointer) -> driveDist = 45;
+	RobotCommand::Method driveDist;
+	driveDist.driveMethod = RobotCommand::DRIVEDIST;
+	RobotCommand positionCommand(RobotCommand::DRIVE, driveDist, argPointer);
 	robot -> setCommand(positionCommand);
-
+	
+//	RobotCommand::Method setSpeed;
+//	setSpeed.driveMethod = RobotCommand::SETSPEED;
+//	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//	robot -> setCommand(positionCommand);
+//	
 	//RobotCommand::Method shoot;
 	//shoot.shooterMethod = RobotCommand::FIRE;
 	//RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
@@ -32,9 +38,26 @@ void AutonomousController::path() {
 }
 
 void AutonomousController::update() {
-	//TODO: fix logic
-	if (!pathCalled) {
-		path();
-		pathCalled = true;
+//	if (!pathCalled) {
+//		path();
+//		pathCalled = true;
+//	}
+	/*BACKUP CODE*/
+	startTimer();
+	if(time.Get() < 1) {
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> speedValue = -0.3;
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(positionCommand);
+	}
+	else {
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> speedValue = 0;
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(positionCommand);	
 	}
 }

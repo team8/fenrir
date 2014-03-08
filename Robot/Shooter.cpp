@@ -19,7 +19,7 @@ Shooter::Shooter() :
 			encController4(0.1, 0.1, 0.1, &encShooter4, &shooterVic4)
 
 {
-	std::printf("Shooter constructor(James so stoopid)\n");
+	std::printf("Shooter constructor\n");
 
 	isShooting = false;
 	encShooter1.Start();
@@ -117,5 +117,5 @@ void Shooter::setAllVics(double speed) {
 }
 
 void Shooter::eject() {
-	loaderVic.Set(0.5);
+	loaderVic.Set(1);
 }

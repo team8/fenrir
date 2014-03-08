@@ -24,7 +24,7 @@ rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
 	rotateSpeed = 0;
 	std::printf("Drive train constructor\n");
 	//gyroscope.Start();
-	//rightController.SetOutputRange(-1, 1);
+//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
 }
 
@@ -32,6 +32,8 @@ void DriveTrain::init() {
 	rightEnc.Start();
 	leftEnc.Start();
 	//circumference = 19 inches
+	rightController.SetOutputRange(-0.3, 0.3);
+	leftController.SetOutputRange(-0.3, 0.3);
 	rightEnc.SetDistancePerPulse(.0782);//(.07734);
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
 	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);

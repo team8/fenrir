@@ -120,6 +120,7 @@ void HumanController::update() {
 			robot -> setCommand(command);
 		}
 		else if (!prevZ) {
+			std::printf("shut off manual\n");
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
