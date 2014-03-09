@@ -8,10 +8,8 @@ AutonomousController::AutonomousController(Robot *robotPointer) {
 	//we shoot from about 10 feet, will modify as needed
 	shootDist = 120;
 	spawnDist = 218;
-}
-
-void AutonomousController::startTimer() {
-	time.Start();
+	time.Stop();
+	time.Reset();
 }
 
 void AutonomousController::path() {
@@ -43,8 +41,8 @@ void AutonomousController::update() {
 //		pathCalled = true;
 //	}
 	/*BACKUP CODE*/
-	startTimer();
-	if(time.Get() < 1) {
+	time.Start();
+	if(time.Get() < 3) {
 		void * argPointer = malloc(sizeof(DriveArgs));
 		((DriveArgs *) argPointer) -> speedValue = -0.3;
 		RobotCommand::Method setSpeed;

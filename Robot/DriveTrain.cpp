@@ -65,6 +65,10 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
+	
+	std::printf("Left Enc: %f    Leftctr: %f\n",leftEnc.GetDistance(), leftController.Get()); 
+	std::printf("Right Enc: %f      RtCtr: %f\n",rightEnc.GetDistance(), rightController.Get());
+	
 	switch (state) {
 
 	case ROTATE_SPEED:
