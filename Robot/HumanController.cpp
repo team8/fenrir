@@ -168,8 +168,8 @@ double HumanController::getAccumulator() {
 
 bool HumanController::getShootButton() {
 	// Get trigger button to shoot from Operator stick
-	return false;
-	//return operatorStick.GetRawButton((uint_t)3);
+//	return false;
+	return operatorStick.GetRawButton((uint_t)3);
 }
 
 bool HumanController::getFlushTrigger() {

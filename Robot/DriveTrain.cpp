@@ -142,3 +142,11 @@ void DriveTrain::rotateS(double speed) {
 void DriveTrain::stopVictors() {
 	state = STOP_VICTORS;
 }
+
+double DriveTrain::getRightEnc() {
+	return rightEnc.GetDistance();
+}
+
+double DriveTrain::getLeftEnc() {
+	return leftEnc.GetDistance();
+}

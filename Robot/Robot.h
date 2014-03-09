@@ -25,5 +25,7 @@ class Robot {
 		void disable();
 		void runCommand(RobotCommand command);
 		void init();
+		double getRightEnc();
+		double getLeftEnc();
 };
 #endif

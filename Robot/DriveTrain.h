@@ -59,5 +59,7 @@ public:
 	void stopVictors();
 	void update();
 	void runCommand(RobotCommand command);
+	double getRightEnc();
+	double getLeftEnc();
 };
 #endif

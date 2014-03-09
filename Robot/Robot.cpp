@@ -50,3 +50,11 @@ void Robot::runCommand(RobotCommand command)
 void Robot::init() {
 	driveTrain.init();
 }
+
+double Robot::getRightEnc() {
+	return driveTrain.getRightEnc();
+}
+
+double Robot::getLeftEnc() {
+	return driveTrain.getLeftEnc();
+}
