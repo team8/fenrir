@@ -1,9 +1,7 @@
 Stuff to do:        
 
-Find Ports from Build Team
+Write code that would implement rangefinders if we manage to install them
 
-Remake the Rangefinder class
+Push code written during the competition to GitHub.
 
-Test code on robot to make sure things work
-
-Write the autonomous update program
+D-accumulator (Note for Nihar)
