@@ -14,9 +14,13 @@ RobotCommand(.h mostly). RobotCommand has all the enums and structs that name al
 AutonomousController and HumanController. AutonomousController issues commands in a particular order based on time, and is hard-coded in what it will do. HumanController issues commands according to Joystick input that we receive from the drivers(humans). Thanks to the command class, these controllers are able to issue commands to various subsytems without having to directly access the methods of each subsystem, allowing us to minimize the number of global variables/methods and to keep the code modular. These commands are then run by...
 
 Accumulator, which is our subsytem for picking up(accumulating) the ball, and for passing it.
+
 DriveTrain, which is our drivetrain that allows our robot to move...most of the time :sweat_smile: :thumbsup:
+
 Rangefinder, which we are supposed to use(:open_mouth:) to try to make our shooter and autonomous more precise by aligning the robot and moving to appropriate distances
+
 Robot, which is technically a subsytem of itself :thumbs_up:
+
 Shooter, which we use to shoot the ball
 
 Finally, Constants.h is where we store almost all of our constants(excludes our debug ones) including but not limited to, port numbers, default victor(speed controller) speeds, and joystick button/trigger numbers.
