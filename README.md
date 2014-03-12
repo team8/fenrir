@@ -19,8 +19,8 @@ DriveTrain, which is our drivetrain that allows our robot to move...most of the 
 
 Rangefinder, which we are supposed to use(:open_mouth:) to try to make our shooter and autonomous more precise by aligning the robot and moving to appropriate distances
 
-Robot, which is technically a subsytem of itself :thumbs_up:
+Robot, which is technically a subsytem of itself :thumbsup:
 
-Shooter, which we use to shoot the ball
+Shooter, which we use to shoot the ball :anguished:
 
 Finally, Constants.h is where we store almost all of our constants(excludes our debug ones) including but not limited to, port numbers, default victor(speed controller) speeds, and joystick button/trigger numbers.
