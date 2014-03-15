@@ -16,15 +16,15 @@ void AutonomousController::path() {
 	//TODO:find the distances, and see if shoot can run simultaneously
 	void * argPointer = malloc(sizeof(DriveArgs));
 
-	if(robot->getLeftEnc()!= 45 && robot->getRightEnc() != 45) {
-		double average = (robot->getLeftEnc() + robot->getRightEnc())/2;
+	//if(robot->getLeftEnc()!= 45 && robot->getRightEnc() != 45) {
+	//	double average = (robot->getLeftEnc() + robot->getRightEnc())/2;
 		
-		((DriveArgs*)argPointer)->speedValue = -(0.3 -(1-(average/45)));
-		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED;
-		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-		robot -> setCommand(speedCommand);
-	}
+	((DriveArgs*)argPointer) -> driveDist = 20;
+	RobotCommand::Method setSpeed;
+	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
+	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	robot -> setCommand(speedCommand);
+	
 
 	//Drive into position
 //	void * argPointer = malloc(sizeof(DriveArgs));
@@ -47,28 +47,29 @@ void AutonomousController::path() {
 }
 
 void AutonomousController::update() {
-//	if (!pathCalled) {
-//		path();
-//		pathCalled = true;
-//	}
+	if (!pathCalled) {
+		path();
+		pathCalled = true;
+	}
 	/*BACKUP CODE*/
-	time.Start();
-	if(time.Get() < 3) {
-		void * argPointer = malloc(sizeof(DriveArgs));
-		((DriveArgs *) argPointer) -> speedValue = -0.3;
-		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED;
-		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-		robot -> setCommand(positionCommand);
-	}
-	else {
-		void * argPointer = malloc(sizeof(DriveArgs));
-		((DriveArgs *) argPointer) -> speedValue = 0;
-		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED;
-		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-		robot -> setCommand(positionCommand);
-		std::printf("Right: %f Left: %f \n", robot->getRightEnc(), robot->getLeftEnc());
-	}
+//	time.Start();
+//	if(time.Get() < 3) {
+//		void * argPointer = malloc(sizeof(DriveArgs));
+//		((DriveArgs *) argPointer) -> speedValue = -0.3;
+//		RobotCommand::Method setSpeed;
+//		setSpeed.driveMethod = RobotCommand::SETSPEED;
+//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//		robot -> setCommand(positionCommand);
+//	}
+//	else {
+//		void * argPointer = malloc(sizeof(DriveArgs));
+//		((DriveArgs *) argPointer) -> speedValue = 0;
+//		RobotCommand::Method setSpeed;
+//		setSpeed.driveMethod = RobotCommand::SETSPEED;
+//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//		robot -> setCommand(positionCommand);
+		
+	//	std::printf("Right: %f Left: %f \n", robot->getRightEnc(), robot->getLeftEnc());
+//	}
 
 }

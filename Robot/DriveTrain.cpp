@@ -16,8 +16,10 @@ rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,
 		(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 // PIDControllers
-leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
+leftBackController(0.1, 0.01, 0.1, &leftEnc, &leftBackVic),
+rightBackController(0.1, 0.01, 0.1, &rightEnc, &rightBackVic),
+leftFrontController(0.1, 0.01, 0.1, &leftEnc, &leftFrontVic),
+rightFrontController(0.1, 0.01, 0.1, &rightEnc, &rightFrontVic)
 //angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic)
 
 {
@@ -29,11 +31,15 @@ rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic)
 }
 
 void DriveTrain::init() {
+	rightEnc.Reset();
+	leftEnc.Reset();
 	rightEnc.Start();
 	leftEnc.Start();
 	//circumference = 19 inches
-	rightController.SetOutputRange(-0.3, 0.3);
-	leftController.SetOutputRange(-0.3, 0.3);
+	rightFrontController.SetOutputRange(-1, 1);
+	leftFrontController.SetOutputRange(-1, 1);
+	rightBackController.SetOutputRange(-1, 1);
+	leftBackController.SetOutputRange(-1, 1);
 	rightEnc.SetDistancePerPulse(.0782);//(.07734);
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
 	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
@@ -66,8 +72,8 @@ void DriveTrain::runCommand(RobotCommand command) {
 
 void DriveTrain::update() {
 	
-	std::printf("Left Enc: %f    Leftctr: %f\n",leftEnc.GetDistance(), leftController.Get()); 
-	std::printf("Right Enc: %f      RtCtr: %f\n",rightEnc.GetDistance(), rightController.Get());
+	//std::printf("Left Enc: %f\n",leftEnc.GetDistance()); 
+	//std::printf("Right Enc: %f\n",rightEnc.GetDistance());
 	
 	switch (state) {
 
@@ -81,18 +87,26 @@ void DriveTrain::update() {
 		break;
 
 	case DRIVE_DIST:
-		leftFrontVic.Set(leftController.Get());
-		leftBackVic.Set(leftController.Get());
-		rightFrontVic.Set(-(rightController.Get()));
-		rightBackVic.Set(-(rightController.Get()));
-		break;
+	//	double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
+//		if(rightEnc.GetDistance() < abs(targetDist)){
+//			std::printf("getting called right");
+//			rightFrontVic.Set(0.3);
+//			rightBackVic.Set(0.3);
+//		}
+//		if(leftEnc.GetDistance() < abs(targetDist)){
+//			std::printf("getting called left");
+//			leftFrontVic.Set(-0.3);
+//			leftBackVic.Set(-0.3);
+//		}
+
+	break;
 
 	case TURN_ANGLE:
 		//		leftFrontVic.Set(-(angleController.Get()));
 		//		leftBackVic.Set(-(angleController.Get()));
 		//		rightFrontVic.Set(angleController.Get());
 		//		rightBackVic.Set(angleController.Get());
-		break;
+	break;
 
 	case STOP_VICTORS:
 		leftFrontVic.Set(0);
@@ -108,10 +122,15 @@ void DriveTrain::update() {
 void DriveTrain::driveD(double dist) {
 	leftEnc.Reset();
 	rightEnc.Reset();
-	leftController.SetSetpoint(dist);
-	rightController.SetSetpoint(dist);
-	leftController.Enable();
-	rightController.Enable();
+	leftFrontController.SetSetpoint(dist);
+	rightFrontController.SetSetpoint(dist);
+	leftBackController.SetSetpoint(dist);
+	rightBackController.SetSetpoint(dist);
+	leftFrontController.Enable();
+	rightFrontController.Enable();
+	leftBackController.Enable();
+	rightBackController.Enable();
+	targetDist = dist; 
 	state = DRIVE_DIST;
 }
 
@@ -150,3 +169,4 @@ double DriveTrain::getRightEnc() {
 double DriveTrain::getLeftEnc() {
 	return leftEnc.GetDistance();
 }
+

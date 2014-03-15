@@ -18,14 +18,17 @@ private:
 	Encoder leftEnc;
 	Encoder rightEnc;
 
-	PIDController leftController;
-	PIDController rightController;
+	PIDController leftFrontController;
+	PIDController rightFrontController;
+	PIDController leftBackController;
+	PIDController rightBackController;
 	//PIDController angleController;
 
 	//target speeds 
 	double targetSpeed;
 	double rotateSpeed;
 	double rotateAngle;
+	double targetDist;
 
 	// For testing
 	double prevLeftDist;

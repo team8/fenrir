@@ -112,6 +112,7 @@ void HumanController::update() {
 	/*SHOOTER*/
 	if(getOperatorZ() < 0.5) {
 		if(shootButtonPrev!=getShootButton() && getShootButton()){
+			
 			((DriveArgs*) argPointer)->driveDist = 10;
 
 			RobotCommand::Method shoot;
@@ -129,6 +130,7 @@ void HumanController::update() {
 		prevZ = true;
 	}
 	else if(getOperatorZ() > 0.5) {
+		std::printf("is in manual\n");
 		RobotCommand::Method shoot;
 		shoot.shooterMethod = RobotCommand::MANUAL_FIRE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
@@ -142,9 +144,16 @@ void HumanController::update() {
 		}
 		prevZ = false;
 	}
+	if(!prevRangeButton && getRangeButton()){
+		RobotCommand::Method rangefind;
+		rangefind.rangefinderMethod = RobotCommand::WALL_DIST;
+		RobotCommand rangeCommand(RobotCommand::RobotCommand::RANGEFINDER, rangefind, 0);
+		robot -> setCommand(rangeCommand);
+	}	
 	
 	shootButtonPrev = getShootButton();
 	lastFlushTrigger = getFlushTrigger();
+	prevRangeButton = getRangeButton(); 
 }
 
 double HumanController::getAbsSpeedStick(){
@@ -177,6 +186,11 @@ bool HumanController::getFlushTrigger() {
 	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 }
 double HumanController::getOperatorZ() {
-	return operatorStick.GetZ();
+	return operatorStick.GetThrottle();
 }
+bool HumanController::getRangeButton() {
+	return operatorStick.GetRawButton((uint32_t)4);
+}	
+
+
 

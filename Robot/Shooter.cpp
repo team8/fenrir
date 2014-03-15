@@ -75,7 +75,7 @@ void Shooter::update() {
 		break;
 		//Prepares AND Aligns simultaneously
 	case PREPARING:
-		if (!shootTimer.HasPeriodPassed(5.0)) {
+		if (!shootTimer.HasPeriodPassed(3.0)) {
 			startShooterVics(1.0);
 		}
 		else {
