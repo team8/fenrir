@@ -29,17 +29,16 @@ public:
 
 Fenrir::Fenrir():
 	robot(), humanController(&robot), autoController(&robot) {
-	std::printf("Fenrir constructor new robot\n");
 }
 
 void Fenrir::RobotInit() {
-	std::printf("initializing robot correctly\n");
 	robot.init();
 }
 
 void Fenrir::AutonomousInit() {
 	time.Start();
 	robot.init();
+	autoController.init();
 }
 
 void Fenrir::AutonomousPeriodic() {
@@ -48,11 +47,9 @@ void Fenrir::AutonomousPeriodic() {
 }
 
 void Fenrir::AutonomousDisabled() {
-	std::printf("Autonomous disabled\n");
 }
 
 void Fenrir::DisabledInit() {
-	std::printf("Disabled initted\n");
 	robot.disable();
 }
 
@@ -62,7 +59,6 @@ void Fenrir::DisabledPeriodic() {
 }
 
 void Fenrir::TeleopInit() {
-	std::printf("Teleop initialized\n");
 	robot.init();
 }
 
@@ -72,7 +68,6 @@ void Fenrir::TeleopPeriodic() {
 }
 
 void Fenrir::TeleopDisabled() {
-	std::printf("Teleop disabled\n");
 }
 
 void Fenrir::TestInit() {

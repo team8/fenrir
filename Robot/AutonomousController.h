@@ -10,6 +10,7 @@ class AutonomousController {
 public:
 	AutonomousController(Robot* robotPointer);
 	void update();
+	void init();
 private:
 	Timer time;
 	Robot* robot;
@@ -17,6 +18,5 @@ private:
 	void path();
 	double shootDist;
 	double spawnDist;
-	bool pathCalled;
 };
 #endif

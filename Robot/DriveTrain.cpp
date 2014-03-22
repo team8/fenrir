@@ -16,10 +16,10 @@ rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,
 		(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 // PIDControllers
-leftBackController(0.1, 0.01, 0.1, &leftEnc, &leftBackVic),
-rightBackController(0.1, 0.01, 0.1, &rightEnc, &rightBackVic),
-leftFrontController(0.1, 0.01, 0.1, &leftEnc, &leftFrontVic),
-rightFrontController(0.1, 0.01, 0.1, &rightEnc, &rightFrontVic)
+leftBackController(0.1, 0.001, 0.1, &leftEnc, &leftBackVic),
+rightBackController(0.1, 0.001, 0.1, &rightEnc, &rightBackVic),
+leftFrontController(0.1, 0.001, 0.1, &leftEnc, &leftFrontVic),
+rightFrontController(0.1, 0.001, 0.1, &rightEnc, &rightFrontVic)
 //angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic)
 
 {
