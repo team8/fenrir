@@ -23,6 +23,10 @@ void Accumulator::notAccumulating() {
 
 }
 
+void Accumulator::disable() {
+	accumulateVic.set(0);
+}
+
 /*bool getHeld() {
  return ballHeld;
  }
