@@ -18,6 +18,7 @@ public:
 	void accumulate();
 	void notAccumulating();
 	void update();
+	void disable();
 	bool getHeld();
 	void setHeld();
 	Accumulator();
