@@ -61,17 +61,18 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	std::printf("Left distance: %f",leftEnc.GetDistance());
-	std::printf(" Right distance: %f\n", rightEnc.GetDistance());
+	//std::printf("Left distance: %f",leftEnc.GetDistance());
+	//std::printf(" Right distance: %f\n", rightEnc.GetDistance());
 	switch (state) {
 
 	case ROTATE_SPEED:
-		double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
-		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		double rightSpeed = min(max(-targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
-		rightFrontVic.Set(rightSpeed);
-		rightBackVic.Set(rightSpeed);
+		//change later for new robot it will go it circles haha.
+		rightFrontVic.Set(-rightSpeed);
+		rightBackVic.Set(-leftSpeed);
 		break;
 
 	case DRIVE_DIST:

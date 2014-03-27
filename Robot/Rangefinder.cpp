@@ -15,7 +15,7 @@ Rangefinder::Rangefinder() :
 }
 
 void Rangefinder::rotateToWall() {
-	double leftDist = ultraLeft.GetVoltage(); // This might be wrong, it might be GetValue()
+	double leftDist = ultraLeft.GetVoltage();
 	double rightDist = ultraRight.GetVoltage();
 	double angle = atan((leftDist - rightDist) / ULTRA_GAP);
 	
@@ -71,7 +71,7 @@ void Rangefinder::runCommand(RobotCommand command) {
 void Rangefinder::update() {
 	switch(state) {
 		case IDLE:
-			rxLeft.Set(LOW);
+			rxLeft.Set(HIGH);
 			rxRight.Set(LOW);
 			break;
 		case LEFT:
@@ -86,11 +86,17 @@ void Rangefinder::update() {
 			else {
 				leftAvg /= leftTotal;
 				state = PRUNE_LEFT;
+				std::printf("Left Avg: %f\n", leftAvg);
 			}
 			break;
 		case PRUNE_LEFT:
-			std::printf("\n");
-			state = RIGHT;
+			if (leftTotal < 160) {
+				leftTotal++;
+				rxRight.Set(HIGH);
+				rxLeft.Set(LOW);
+			} else {
+				state = RIGHT;
+			}
 			break;
 		case RIGHT:
 			rxRight.Set(HIGH);
@@ -104,10 +110,10 @@ void Rangefinder::update() {
 			else {
 				rightAvg /= rightTotal;
 				state = PRUNE_RIGHT;
+				std::printf("Right Avg: %f\n", rightAvg);
 			}
 			break;
 		case PRUNE_RIGHT:
-			std::printf("\n");
 			state = FINISHED;
 			break;
 		case FINISHED:
@@ -116,7 +122,7 @@ void Rangefinder::update() {
 			state = IDLE;
 			 
 			distInch = (rightAvg + leftAvg) / 2;
-			std::printf("Average: %f\n\n", leftAvg);
+			std::printf("Average: %f\n\n", distInch);
 			
 			leftAvg = 0;
 			rightAvg = 0;

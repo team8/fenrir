@@ -25,6 +25,13 @@ void HumanController::update(){
 //	driveDist.driveMethod = RobotCommand::SETSPEED;
 //	RobotCommand speedCommand(RobotCommand::DRIVE, driveDist, argPointer);
 //	robot -> setCommand(speedCommand);
+	if (speedStick.GetTrigger()) {
+		RobotCommand::Method findRange;
+		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
+		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
+		robot -> setCommand(command);
+	}
+
 	
 	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
 		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();

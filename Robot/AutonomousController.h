@@ -13,6 +13,7 @@ class AutonomousController {
 		void update();
 		void startTimer();
 	private:
+		bool firstCommand;
 		Timer time;
 		Robot* robot;
 		void drive(float v = 0.7);
