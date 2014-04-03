@@ -18,5 +18,6 @@ private:
 	double shootDist;
 	double spawnDist;
 	bool pathCalled;
+	bool hasShot;
 };
 #endif

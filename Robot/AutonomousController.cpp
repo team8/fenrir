@@ -3,6 +3,7 @@
 
 AutonomousController::AutonomousController(Robot *robotPointer) {
 	pathCalled = false;
+	hasShot = false;
 	std::printf("Autonomous controller constructor\n");
 	this -> robot = robotPointer;
 	//we shoot from about 10 feet, will modify as needed
