@@ -48,29 +48,36 @@ void AutonomousController::path() {
 }
 
 void AutonomousController::update() {
-	if (!pathCalled) {
-		path();
-		pathCalled = true;
-	}
-	/*BACKUP CODE*/
-//	time.Start();
-//	if(time.Get() < 3) {
-//		void * argPointer = malloc(sizeof(DriveArgs));
-//		((DriveArgs *) argPointer) -> speedValue = -0.3;
-//		RobotCommand::Method setSpeed;
-//		setSpeed.driveMethod = RobotCommand::SETSPEED;
-//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-//		robot -> setCommand(positionCommand);
+//	if (!pathCalled) {
+//		path();
+//		pathCalled = true;
 //	}
-//	else {
-//		void * argPointer = malloc(sizeof(DriveArgs));
-//		((DriveArgs *) argPointer) -> speedValue = 0;
-//		RobotCommand::Method setSpeed;
-//		setSpeed.driveMethod = RobotCommand::SETSPEED;
-//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-//		robot -> setCommand(positionCommand);
+	/*BACKUP CODE*/
+	time.Start();
+	if(time.Get() < 3) {
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> speedValue = -0.3;
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(positionCommand);
+	}
+	else {
+		void * argPointer = malloc(sizeof(DriveArgs));
+		((DriveArgs *) argPointer) -> speedValue = 0;
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(positionCommand);
+		if(!hasShot){
+			RobotCommand::Method fire;
+			fire.shooterMethod = RobotCommand::FIRE;
+			RobotCommand fireCommand(RobotCommand::SHOOTER, fire, 0);
+			robot -> setCommand(fireCommand);
+			hasShot = true;
+		}
 		
 	//	std::printf("Right: %f Left: %f \n", robot->getRightEnc(), robot->getLeftEnc());
-//	}
+	}
 
 }
