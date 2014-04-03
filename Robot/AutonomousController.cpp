@@ -53,22 +53,28 @@ void AutonomousController::update() {
 //		pathCalled = true;
 //	}
 	/*BACKUP CODE*/
+	void * argPointer = malloc(sizeof(DriveArgs));
+	
 	time.Start();
 	if(time.Get() < 3) {
-		void * argPointer = malloc(sizeof(DriveArgs));
 		((DriveArgs *) argPointer) -> speedValue = -0.3;
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot -> setCommand(positionCommand);
-	}
+	} 
 	else {
-		void * argPointer = malloc(sizeof(DriveArgs));
 		((DriveArgs *) argPointer) -> speedValue = 0;
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot -> setCommand(positionCommand);
+		
+		RobotCommand::Method accumulate;
+		accumulate.accumulatorMethod = RobotCommand::ACCUMULATE;
+		RobotCommand accumCommand(RobotCommand::ACCUMULATOR, accumulate, 0);
+		robot -> setCommand(accumCommand);
+		
 		if(!hasShot){
 			RobotCommand::Method fire;
 			fire.shooterMethod = RobotCommand::FIRE;
