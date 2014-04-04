@@ -38,11 +38,11 @@ void Accumulator::update() {
 		break;
 	case ACCUMULATING:
 		accumulateVic.Set(-1);
-		std::printf("case Accumulating \n");
+		//std::printf("case Accumulating \n");
 		break;
 	case PASSING:
 		accumulateVic.Set(1);
-		std::printf("passing \n");
+		//std::printf("passing \n");
 		break;
 	}
 }

@@ -11,13 +11,10 @@ public:
 	AutonomousController(Robot* robotPointer);
 	void update();
 private:
-	Timer time;
 	Robot* robot;
-	bool targetReached;
-	void path();
 	double shootDist;
 	double spawnDist;
+	void path();
 	bool pathCalled;
-	bool hasShot;
 };
 #endif

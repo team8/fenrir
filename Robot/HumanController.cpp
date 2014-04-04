@@ -52,7 +52,6 @@ void HumanController::update() {
 	
 	/*ACCUMULATOR*/
 	if(getAccumulator()<-0.2) {
-		std::printf("accumulating\n");
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
@@ -64,6 +63,7 @@ void HumanController::update() {
 		eject.shooterMethod = RobotCommand::EJECT;
 		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
 		robot -> setCommand(ejectCommand);
+		std::printf("Ejecting\n");
 		
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
@@ -77,6 +77,7 @@ void HumanController::update() {
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
 		if(!prevStop) {
+			std::printf("idling after accumulator\n");
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
@@ -91,7 +92,7 @@ void HumanController::update() {
 		accumuFlush.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
 		robot -> setCommand(accuFlushCommand);
-		
+		std::printf("flushing\n");
 		RobotCommand::Method shooterFlush;
 		shooterFlush.shooterMethod = RobotCommand::FLUSH;
 		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
@@ -102,7 +103,7 @@ void HumanController::update() {
 		accumuStop.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuStop, 0);
 		robot -> setCommand(accuFlushCommand);
-
+		std::printf("idling in flush\n");
 		RobotCommand::Method shootStop;
 		shootStop.shooterMethod = RobotCommand::IDLE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shootStop, 0);
@@ -112,9 +113,7 @@ void HumanController::update() {
 	/*SHOOTER*/
 	if(getOperatorZ() < 0.5) {
 		if(shootButtonPrev!=getShootButton() && getShootButton()){
-			
-			((DriveArgs*) argPointer)->driveDist = 10;
-
+			std::printf("firing\n");
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::FIRE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
@@ -137,6 +136,7 @@ void HumanController::update() {
 		robot -> setCommand(command);
 		
 		if(getShootButton()) {
+			std::printf("manual shooting");
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
@@ -144,6 +144,7 @@ void HumanController::update() {
 		}
 		prevZ = false;
 	}
+	
 	if(!prevRangeButton && getRangeButton()){
 		RobotCommand::Method rangefind;
 		rangefind.rangefinderMethod = RobotCommand::WALL_DIST;
