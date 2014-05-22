@@ -1,7 +1,8 @@
 #include "Accumulator.h"
 
 Accumulator::Accumulator() :
-	accumulateVic((uint32_t) PORT_ACCUMULATOR_VIC_7) {
+	accumulateVic((uint32_t) PORT_ACCUMULATOR_VIC_7) 
+{
 	std::printf("Accumulator constructor\n");
 }
 
@@ -19,17 +20,11 @@ void Accumulator::runCommand(RobotCommand newCommand) {
 	}
 }
 
-void Accumulator::notAccumulating() {
 
+void Accumulator::disable() {
+	accumulateVic.set(0);
 }
 
-/*bool getHeld() {
- return ballHeld;
- }
-
- void setHeld(bool b){
- ballHeld = b;
- }*/
 
 void Accumulator::update() {
 	switch (state) {

@@ -31,3 +31,30 @@ void AutonomousController::update() {
 		pathCalled = true;
 	}
 }
+
+void AutonomousController::init() {
+	path();
+}
+
+void AutonomousController::update() {
+	/*BACKUP CODE*/
+//	time.Start();
+//	if(time.Get() < 3) {
+//		void * argPointer = malloc(sizeof(DriveArgs));
+//		((DriveArgs *) argPointer) -> speedValue = -0.3;
+//		RobotCommand::Method setSpeed;
+//		setSpeed.driveMethod = RobotCommand::SETSPEED;
+//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//		robot -> setCommand(positionCommand);
+//	}
+//	else {
+//		void * argPointer = malloc(sizeof(DriveArgs));
+//		((DriveArgs *) argPointer) -> speedValue = 0;
+//		RobotCommand::Method setSpeed;
+//		setSpeed.driveMethod = RobotCommand::SETSPEED;
+//		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+//		robot -> setCommand(positionCommand);
+		
+	//	std::printf("Right: %f Left: %f \n", robot->getRightEnc(), robot->getLeftEnc());
+//	}
+}

@@ -37,6 +37,7 @@ void Robot::update(){
 void Robot::disable(){
 	driveTrain.setSpeed(0);
 	shooter.setAllVics(0);
+	accumulator.disable();
 }
 
 void Robot::runCommand(RobotCommand command)

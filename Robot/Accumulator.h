@@ -8,18 +8,14 @@
 class Accumulator {
 private:
 	Victor accumulateVic;
+
 	typedef enum {
 		ACCUMULATING, NOT_ACCUMULATING, PASSING
-	} AccumulatorState;
-	AccumulatorState state;
-	bool ballHeld;
+	} state;
 
 public:
-	void accumulate();
-	void notAccumulating();
 	void update();
-	bool getHeld();
-	void setHeld();
+	void disable();
 	Accumulator();
 	void runCommand(RobotCommand newCommand);
 };
