@@ -15,7 +15,7 @@ AutonomousController and HumanController. AutonomousController issues commands i
 
 Accumulator, which is our subsytem for picking up(accumulating) the ball, and for passing it.
 
-DriveTrain, which is our drivetrain that allows our robot to move...most of the time :sweat_smile: :thumbsup:
+DriveTrain, which turns our otherwise-would-be primitive sessile object into an awesome ...non-sessile object :thumbsup:
 
 Rangefinder, which we are supposed to use(:open_mouth:) to try to make our shooter and autonomous more precise by aligning the robot and moving to appropriate distances
 
