@@ -8,7 +8,8 @@ Accumulator::Accumulator() :
 
 void Accumulator::runCommand(RobotCommand newCommand) {
 	switch (newCommand.getMethod().accumulatorMethod) {
-	case RobotCommand::STOP:
+	case RobotCommand::STOP:ya hax
+	
 		state = NOT_ACCUMULATING;
 		break;
 	case RobotCommand::ACCUMULATE:
