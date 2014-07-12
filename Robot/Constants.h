@@ -37,7 +37,7 @@
 #define PORT_SHOOTER_VIC_1 3
 #define PORT_SHOOTER_VIC_2 4
 #define PORT_SHOOTER_VIC_3 8
-#define PORT_SHOOTER_VIC_4 7
+#define PORT_SHOOTER_VIC_4 7 //this one (previously 7)
 #define PORT_LOADER_VIC 9
 
 //default speed for loaders 

@@ -3,8 +3,8 @@
 DriveTrain::DriveTrain() :
 	// Victors
 	leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
-	leftBackVic((uint32_t) 1),
-	rightFrontVic((uint32_t) 7),
+	leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
+	rightFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
 	rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
 	//gyroscope((uint32_t) PORT_GYRO),
@@ -14,8 +14,10 @@ DriveTrain::DriveTrain() :
 	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 	// PIDControllers
-	leftController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic) 
+	leftFrontController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
+	rightFrontController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic),
+	leftBackController(0.1, .1, .1, &leftEnc, &leftFrontVic),
+	rightBackController(.1, .1, .1, &rightEnc, &rightBackVic )
 	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	rotateSpeed = 0;
@@ -90,7 +92,7 @@ void DriveTrain::update() {
 	case DRIVE_DIST:
 			rightFrontVic.Set(-rightFrontController.Get());
 			rightBackVic.Set(-rightBackController.Get());
-			
+
 			leftFrontVic.Set(leftFrontController.Get());
 			leftBackVic.Set(leftBackController.Get());
 
@@ -168,4 +170,3 @@ double DriveTrain::getRightEnc() {
 double DriveTrain::getLeftEnc() {
 	return leftEnc.GetDistance();
 }
-

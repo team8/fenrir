@@ -7,20 +7,7 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 	std::printf("Autonomous controller constructor\n");
 
 	this -> robot = robotPointer;
-	shootDist = 120; // Distance from the goal we should shoot
-	spawnDist = 218; // Distance we start from the goal
-	pathCalled = false;
-}
 
-void AutonomousController::path() {
-	void * argPointer = malloc(sizeof(DriveArgs));
-		
-	// Drive
-	((DriveArgs*)argPointer) -> driveDist = spawnDist - shootDist;
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand stopCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(stopCommand);
 }
 
 bool AutonomousController::shoot() {
@@ -38,7 +25,7 @@ void AutonomousController::pathOne(){
 	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
 	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 	robot -> setCommand(positionCommand);
-	
+
 	//Use rangefinders to calibrate exactly
 //	RobotCommand::Method findRange;
 //	findRange.rangefinderMhggethod = RobotCommand::WALL_DIST;
@@ -46,16 +33,8 @@ void AutonomousController::pathOne(){
 //	robot -> setCommand(alignCommand);
 }
 
-void AutonomousController::update() {
-	if (!pathCalled) {
-		path();
-		pathCalled = true;
-	}
-}
 
-void AutonomousController::init() {
-	path();
-}
+
 
 void AutonomousController::update() {
 	if(firstCommand){
@@ -70,7 +49,7 @@ void AutonomousController::update() {
 //		setSpeed.driveMethod = RobotCommand::SETSPEED;
 //		RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 //		robot -> setCommand(positionCommand);
-		
+
 	//	std::printf("Right: %f Left: %f \n", robot->getRightEnc(), robot->getLeftEnc());
 //	}
 }

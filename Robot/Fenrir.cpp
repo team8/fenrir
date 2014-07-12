@@ -38,7 +38,6 @@ void Fenrir::RobotInit() {
 void Fenrir::AutonomousInit() {
 	time.Start();
 	robot.init();
-	autoController.init();
 }
 
 void Fenrir::AutonomousPeriodic() {

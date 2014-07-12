@@ -18,8 +18,8 @@ private:
 	Joystick operatorStick;
 
 	//All methods we use in controller scheme logic
-	double getAbsSpeedStick();
-	double getAbsTurnStick();
+	double getSpeedStick();
+	double getTurnStick();
 	double getAccumulatorStick();
 	double getAccumulator();
 	bool getShootButton();

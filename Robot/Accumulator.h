@@ -9,7 +9,7 @@ class Accumulator {
 private:
 	Victor accumulateVic;
 
-	typedef enum {
+	enum {
 		ACCUMULATING, NOT_ACCUMULATING, PASSING
 	} state;
 

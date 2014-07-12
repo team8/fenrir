@@ -22,7 +22,7 @@ void Accumulator::runCommand(RobotCommand newCommand) {
 
 
 void Accumulator::disable() {
-	accumulateVic.set(0);
+	accumulateVic.Set(0);
 }
 
 

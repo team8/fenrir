@@ -19,14 +19,14 @@ HumanController::HumanController(Robot *robotPointer):
 
 void HumanController::update() {
 	void * argPointer = malloc(sizeof(DriveArgs));
-	
+
 	if (speedStick.GetTrigger()) {
 		RobotCommand::Method findRange;
 		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
 		robot -> setCommand(command);
 	}
-	
+
 	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
 		//TODO: ask ahmed if he want to be able to move forward but not turn at small speeds
 		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();
@@ -34,7 +34,7 @@ void HumanController::update() {
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot -> setCommand(speedCommand);
-		
+
 		((DriveArgs*)argPointer) -> rotSpeed = 0;
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
@@ -56,7 +56,7 @@ void HumanController::update() {
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot -> setCommand(rotateCommand);
 	}
-	
+
 	/*ACCUMULATOR*/
 	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
@@ -90,13 +90,13 @@ void HumanController::update() {
 		}
 		prevStop = true;
 	}
-	
-		if (getFlushTrigger()&& !autoTester) {
+
+		if (getFlushTrigger()) {
 			RobotCommand::Method accumuFlush;
 			accumuFlush.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
 			robot -> setCommand(accuFlushCommand);
-			
+
 			RobotCommand::Method shooterFlush;
 			shooterFlush.shooterMethod = RobotCommand::FLUSH;
 			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
@@ -125,26 +125,26 @@ void HumanController::update() {
 		}
 		prevZ = false;
 	}
-	
+
 	if(!prevRangeButton && getRangeButton()){
 		RobotCommand::Method rangefind;
 		rangefind.rangefinderMethod = RobotCommand::WALL_DIST;
 		RobotCommand rangeCommand(RobotCommand::RobotCommand::RANGEFINDER, rangefind, 0);
 		robot -> setCommand(rangeCommand);
 	}	
-	
+
 	shootButtonPrev = getShootButton();
 	lastFlushTrigger = getFlushTrigger();
 	prevRangeButton = getRangeButton(); 
 }
 
-double HumanController::getAbsSpeedStick(){
-	double speed = abs(speedStick.GetY());
+double HumanController::getSpeedStick(){
+	double speed = (speedStick.GetY());
 	return speed;
 }
 
-double HumanController::getAbsTurnStick() {
-	double turn = abs(turnStick.GetX());
+double HumanController::getTurnStick() {
+	double turn = (turnStick.GetX());
 	return turn;
 }
 
@@ -173,6 +173,3 @@ double HumanController::getOperatorZ() {
 bool HumanController::getRangeButton() {
 	return operatorStick.GetRawButton((uint32_t)4);
 }	
-
-
-
