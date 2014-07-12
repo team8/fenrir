@@ -3,8 +3,8 @@
 DriveTrain::DriveTrain() :
 	// Victors
 	leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
-	leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
-	rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
+	leftBackVic((uint32_t) 1),
+	rightFrontVic((uint32_t) 7),
 	rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
 	//gyroscope((uint32_t) PORT_GYRO),
@@ -61,18 +61,23 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-	//std::printf("Left distance: %f",leftEnc.GetDistance());
-	//std::printf(" Right distance: %f\n", rightEnc.GetDistance());
+	std::printf("Left encoder: %d",leftEnc.Get());
+	std::printf(" Right encoder: %d\n", rightEnc.Get());
 	switch (state) {
-
 	case ROTATE_SPEED:
-		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-		double rightSpeed = min(max(-targetSpeed - rotateSpeed, -1), 1);
+		/*
+		 *Logic: Take speed you want to generally go at (targetSpeed)
+		 *Logic: leftVic goes positive, rightVic goes negative
+		 *Logic: Vics are restricted to -1,1, so min-max to that range
+		 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
+		 *Logic: Right victor is negative because we are turning
+		*/
+		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
-		//change later for new robot it will go it circles haha.
 		rightFrontVic.Set(-rightSpeed);
-		rightBackVic.Set(-leftSpeed);
+		rightBackVic.Set(-rightSpeed);
 		break;
 
 	case DRIVE_DIST:

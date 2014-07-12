@@ -19,21 +19,16 @@ HumanController::HumanController(Robot *robotPointer):
 void HumanController::update(){
 	
 	void * argPointer = malloc(sizeof(DriveArgs));
-//	
-//	((DriveArgs*)argPointer)->driveDist = 10;
-//	RobotCommand::Method driveDist;
-//	driveDist.driveMethod = RobotCommand::SETSPEED;
-//	RobotCommand speedCommand(RobotCommand::DRIVE, driveDist, argPointer);
-//	robot -> setCommand(speedCommand);
+	
 	if (speedStick.GetTrigger()) {
 		RobotCommand::Method findRange;
 		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
 		robot -> setCommand(command);
 	}
-
 	
 	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
+		//TODO: ask ahmed if he want to be able to move forward but not turn at small speeds
 		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
@@ -45,20 +40,20 @@ void HumanController::update(){
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot -> setCommand(rotateCommand);
 	}
-	if(abs(speedStick.GetY())>0.01){
-	((DriveArgs*)argPointer)->speedValue = getSpeedStick();
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::SETSPEED;
-	RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-	robot -> setCommand(speedCommand);
+	if(abs(speedStick.GetY())>0.1){
+		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
+		RobotCommand::Method setSpeed;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
+		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+		robot -> setCommand(speedCommand);
 	}
 
-	if(abs(turnStick.GetX())>0.01){
-	((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
-	RobotCommand::Method rotSpeed;
-	rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
-	RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-	robot -> setCommand(rotateCommand);
+	if(abs(turnStick.GetX())>0.1){
+		((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+		RobotCommand::Method rotSpeed;
+		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
+		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
+		robot -> setCommand(rotateCommand);
 	}
 	if(getAccumulator()<-0.2) {
 		std::printf("accumulating\n");
@@ -68,14 +63,14 @@ void HumanController::update(){
 		robot -> setCommand(command);
 	}
 	else if(getAccumulator()>0.2) {
-			RobotCommand::Method pass;
-			pass.accumulatorMethod = RobotCommand::PASS;
-			RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
-			robot -> setCommand(command);
-			RobotCommand::Method eject;
-			eject.shooterMethod = RobotCommand::EJECT;
-			RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
-			robot -> setCommand(ejectCommand);
+		RobotCommand::Method pass;
+		pass.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
+		robot -> setCommand(command);
+		RobotCommand::Method eject;
+		eject.shooterMethod = RobotCommand::EJECT;
+		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
+		robot -> setCommand(ejectCommand);
 	}
 	else {
 		RobotCommand::Method stopAccumulator;
@@ -91,7 +86,6 @@ void HumanController::update(){
 	}
 	
 		if (getFlushTrigger()&& !autoTester) {
-		
 			RobotCommand::Method accumuFlush;
 			accumuFlush.accumulatorMethod = RobotCommand::PASS;
 			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
@@ -112,7 +106,6 @@ void HumanController::update(){
 	if(shootButtonPrev!=getShootButton()){
 		if(getShootButton()){
 			((DriveArgs*)argPointer)->driveDist = 10;
-
 			RobotCommand::Method align;
 			align.rangefinderMethod = RobotCommand::SET_DIST;
 			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
