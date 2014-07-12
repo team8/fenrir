@@ -7,7 +7,6 @@
 #include <math.h>
 
 class AutonomousController {
-
 	public:
 		AutonomousController(Robot* robotPointer);
 		void update();

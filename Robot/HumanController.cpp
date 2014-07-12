@@ -12,12 +12,12 @@ HumanController::HumanController(Robot *robotPointer):
 	turnStick(PORT_TURN),
 	operatorStick(PORT_OPERATOR)
 {  
-	std::printf("Human controller constructor\n");
+	prevStop = false;
+	prevZ = false;
 	this-> robot = robotPointer;
 } 
 
-void HumanController::update(){
-	
+void HumanController::update() {
 	void * argPointer = malloc(sizeof(DriveArgs));
 	
 	if (speedStick.GetTrigger()) {
@@ -34,6 +34,7 @@ void HumanController::update(){
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot -> setCommand(speedCommand);
+		
 		((DriveArgs*)argPointer) -> rotSpeed = 0;
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
@@ -55,12 +56,14 @@ void HumanController::update(){
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot -> setCommand(rotateCommand);
 	}
+	
+	/*ACCUMULATOR*/
 	if(getAccumulator()<-0.2) {
-		std::printf("accumulating\n");
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot -> setCommand(command);
+		prevStop = false;
 	}
 	else if(getAccumulator()>0.2) {
 		RobotCommand::Method pass;
@@ -71,18 +74,21 @@ void HumanController::update(){
 		eject.shooterMethod = RobotCommand::EJECT;
 		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
 		robot -> setCommand(ejectCommand);
+
 	}
 	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
-		if(!getFlushTrigger()){
+		if(!prevStop) {
+			std::printf("idling after accumulator\n");
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
 			robot -> setCommand(command);
 		}
+		prevStop = true;
 	}
 	
 		if (getFlushTrigger()&& !autoTester) {
@@ -95,11 +101,13 @@ void HumanController::update(){
 			shooterFlush.shooterMethod = RobotCommand::FLUSH;
 			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
 			robot -> setCommand(shooterFlushCommand);
+
 		}
-		else if (!getFlushTrigger() && autoTester) {
+		else if (!prevZ) {
+			std::printf("shut off manual\n");
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::SHOOTER, idle, 0);
+			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
 			robot -> setCommand(command);
 		}
 
@@ -111,22 +119,32 @@ void HumanController::update(){
 			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
 			robot -> setCommand(alignCommand);
 			RobotCommand::Method shoot;
-			shoot.shooterMethod = RobotCommand::FIRE;
+			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
 			robot -> setCommand(command);
 		}
+		prevZ = false;
 	}
+	
+	if(!prevRangeButton && getRangeButton()){
+		RobotCommand::Method rangefind;
+		rangefind.rangefinderMethod = RobotCommand::WALL_DIST;
+		RobotCommand rangeCommand(RobotCommand::RobotCommand::RANGEFINDER, rangefind, 0);
+		robot -> setCommand(rangeCommand);
+	}	
+	
 	shootButtonPrev = getShootButton();
-	autoTester = getFlushTrigger();
+	lastFlushTrigger = getFlushTrigger();
+	prevRangeButton = getRangeButton(); 
 }
 
-double HumanController::getSpeedStick(){
-	double speed = speedStick.GetY(); 
+double HumanController::getAbsSpeedStick(){
+	double speed = abs(speedStick.GetY());
 	return speed;
 }
 
-double HumanController::getTurnStick() {
-	double turn = turnStick.GetX();
+double HumanController::getAbsTurnStick() {
+	double turn = abs(turnStick.GetX());
 	return turn;
 }
 
@@ -140,11 +158,21 @@ double HumanController::getAccumulator() {
 }
 
 bool HumanController::getShootButton() {
-	//return operatorStick.GetTrigger(); // Get trigger button to shoot from Operator stick
-	return operatorStick.GetTrigger();
+	// Get trigger button to shoot from Operator stick
+//	return false;
+	return operatorStick.GetRawButton((uint_t)3);
 }
 
 bool HumanController::getFlushTrigger() {
-	//anti-accumulate
+	//flush out the ball
 	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 }
+double HumanController::getOperatorZ() {
+	return operatorStick.GetThrottle();
+}
+bool HumanController::getRangeButton() {
+	return operatorStick.GetRawButton((uint32_t)4);
+}	
+
+
+

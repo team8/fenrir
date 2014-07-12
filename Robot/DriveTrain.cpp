@@ -18,30 +18,35 @@ DriveTrain::DriveTrain() :
 	rightController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic) 
 	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
-	rotateSpeed=0;
+	rotateSpeed = 0;
 	std::printf("Drive train constructor\n");
 	//gyroscope.Start();
-	//rightController.SetOutputRange(-1, 1);
-    //angleController.SetOutputRange(-1, 1);
+//	rightController.SetOutputRange(-1, 1);
+	//angleController.SetOutputRange(-1, 1);
 }
 
 void DriveTrain::init() {
-		rightEnc.Start();
-		leftEnc.Start();
-		std::printf("Initialized new Code :D\n");
-		//circumference = 19 inches
-		rightEnc.SetDistancePerPulse(.0782);//(.07734);
-		leftEnc.SetDistancePerPulse(.0813);//(.07849);
-		rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-		leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
-		state = STOP_VICTORS;
+	rightEnc.Reset();
+	leftEnc.Reset();
+	rightEnc.Start();
+	leftEnc.Start();
+	//circumference = 19 inches
+	rightFrontController.SetOutputRange(-1, 1);
+	leftFrontController.SetOutputRange(-1, 1);
+	rightBackController.SetOutputRange(-1, 1);
+	leftBackController.SetOutputRange(-1, 1);
+	rightEnc.SetDistancePerPulse(.0782);//(.07734);
+	leftEnc.SetDistancePerPulse(.0813);//(.07849);
+	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	state = STOP_VICTORS;
 }
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
 
 	DriveArgs* args = (DriveArgs*) command.argPointer;
 	switch (command.getMethod().driveMethod) {
-	case RobotCommand::SETSPEED:                                                               
+	case RobotCommand::SETSPEED:
 		setSpeed(args -> speedValue);
 		break;
 	case RobotCommand::DRIVEDIST:
@@ -61,10 +66,12 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
+
 	std::printf("Left encoder: %d",leftEnc.Get());
 	std::printf(" Right encoder: %d\n", rightEnc.Get());
 	switch (state) {
 	case ROTATE_SPEED:
+
 		/*
 		 *Logic: Take speed you want to generally go at (targetSpeed)
 		 *Logic: leftVic goes positive, rightVic goes negative
@@ -81,20 +88,21 @@ void DriveTrain::update() {
 		break;
 
 	case DRIVE_DIST:
-		leftFrontVic.Set(leftController.Get());
-		leftBackVic.Set(leftController.Get());
-		rightFrontVic.Set(-(rightController.Get()));
-		rightBackVic.Set(-(rightController.Get()));
-		break;
+			rightFrontVic.Set(-rightFrontController.Get());
+			rightBackVic.Set(-rightBackController.Get());
+			
+			leftFrontVic.Set(leftFrontController.Get());
+			leftBackVic.Set(leftBackController.Get());
+
+	break;
 
 	case TURN_ANGLE:
-//		leftFrontVic.Set(-(angleController.Get()));
-//		leftBackVic.Set(-(angleController.Get()));
-//		rightFrontVic.Set(angleController.Get());
-//		rightBackVic.Set(angleController.Get());
-		break;
+		//		leftFrontVic.Set(-(angleController.Get()));
+		//		leftBackVic.Set(-(angleController.Get()));
+		//		rightFrontVic.Set(angleController.Get());
+		//		rightBackVic.Set(angleController.Get());
+	break;
 
-		
 	case STOP_VICTORS:
 		leftFrontVic.Set(0);
 		leftBackVic.Set(0);
@@ -109,10 +117,19 @@ void DriveTrain::update() {
 void DriveTrain::driveD(double dist) {
 	leftEnc.Reset();
 	rightEnc.Reset();
-	leftController.SetSetpoint(dist);
-	rightController.SetSetpoint(dist);
-	leftController.Enable();
-	rightController.Enable();
+	leftFrontController.Reset();
+	leftBackController.Reset();
+	rightFrontController.Reset();
+	rightBackController.Reset();
+	leftFrontController.SetSetpoint(dist);
+	rightFrontController.SetSetpoint(dist);
+	leftBackController.SetSetpoint(dist);
+	rightBackController.SetSetpoint(dist);
+	leftFrontController.Enable();
+	rightFrontController.Enable();
+	leftBackController.Enable();
+	rightBackController.Enable();
+	targetDist = dist; 
 	state = DRIVE_DIST;
 }
 
@@ -125,10 +142,10 @@ void DriveTrain::setSpeed(double spd) {
 
 //lets you rotate in place
 void DriveTrain::rotateA(double angle) {
-//	gyroscope.Reset();
-//	angleController.SetSetpoint(angle);
-//	angleController.Enable();
-//	rotateAngle = angle;
+	//	gyroscope.Reset();
+	//	angleController.SetSetpoint(angle);
+	//	angleController.Enable();
+	//	rotateAngle = angle;
 	state = TURN_ANGLE;
 }
 
@@ -143,3 +160,12 @@ void DriveTrain::rotateS(double speed) {
 void DriveTrain::stopVictors() {
 	state = STOP_VICTORS;
 }
+
+double DriveTrain::getRightEnc() {
+	return rightEnc.GetDistance();
+}
+
+double DriveTrain::getLeftEnc() {
+	return leftEnc.GetDistance();
+}
+

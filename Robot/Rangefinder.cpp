@@ -46,6 +46,10 @@ void Rangefinder::setDistToWall(float dist) {
 	//robot -> setCommand(command);
 }
 
+double Rangefinder::getDist() {
+	return distInch;
+}
+
 void Rangefinder::runCommand(RobotCommand command) {
 	RangefinderArgs* args = (RangefinderArgs*) command.argPointer;
 	switch(command.getMethod().rangefinderMethod) {

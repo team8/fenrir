@@ -10,7 +10,7 @@ class Robot;
 
 class Shooter {
 	private:
-		bool aligned;
+		bool isShooting;
 	
 		Robot* robot;
 		Victor shooterVic1;
@@ -37,7 +37,9 @@ class Shooter {
 			PREPARING,
 			FIRING,
 			EJECT,
-			FLUSH
+			FLUSH,
+			M_LOAD,
+			M_FIRE
 		} ShooterState;
 		ShooterState state;
 		

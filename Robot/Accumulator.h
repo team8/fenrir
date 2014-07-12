@@ -5,25 +5,19 @@
 #include "RobotCommand.h"
 #include <stdlib.h>
 
-class Accumulator{
-	private:
-		Victor accumulateVic;
-		typedef enum{
-			ACCUMULATING,
-			NOT_ACCUMULATING,
-			PASSING
-		} AccumulatorState;
-		AccumulatorState state;
-		bool ballHeld;
+class Accumulator {
+private:
+	Victor accumulateVic;
 
-	public:
-		void accumulate();
-		void notAccumulating();
-		void update();
-		bool getHeld();
-		void setHeld();
-		Accumulator();
-		void runCommand(RobotCommand newCommand);
+	typedef enum {
+		ACCUMULATING, NOT_ACCUMULATING, PASSING
+	} state;
+
+public:
+	void update();
+	void disable();
+	Accumulator();
+	void runCommand(RobotCommand newCommand);
 };
 
 #endif

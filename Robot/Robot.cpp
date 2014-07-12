@@ -37,6 +37,7 @@ void Robot::update(){
 void Robot::disable(){
 	driveTrain.setSpeed(0);
 	shooter.setAllVics(0);
+	accumulator.disable();
 }
 
 void Robot::runCommand(RobotCommand command)
@@ -49,4 +50,12 @@ void Robot::runCommand(RobotCommand command)
 
 void Robot::init() {
 	driveTrain.init();
+}
+
+double Robot::getRightEnc() {
+	return driveTrain.getRightEnc();
+}
+
+double Robot::getLeftEnc() {
+	return driveTrain.getLeftEnc();
 }
