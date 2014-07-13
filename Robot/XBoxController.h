@@ -14,13 +14,17 @@ class XBoxController : public Joystick {
     double getRightX() { return GetRawAxis(4); }
     double getRightY() { return GetRawAxis(5); }
     
-    /*Letter Buttons*/
+    /*Joystick Triggers*/
+    double getTrigger() { return GetRawAxis(3);}
+
+    /*Buttons*/
     bool getButtonX() { return GetRawButton(3); }
     bool getButtonY() { return GetRawButton(4); }
     bool getButtonB() { return GetRawButton(2); }
     bool getButtonA() { return GetRawButton(1); }
+    bool getButtonLB() { return GetRawButton(5);}
+    bool getButtonRB() { return GetRawButton(6);}
 
-    /*Arrow-Key Pad*/
     
 };
 

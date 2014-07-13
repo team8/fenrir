@@ -14,7 +14,6 @@ HumanController::HumanController(Robot *robotPointer):
 	xbox((uint32_t)PORT_SPEED)
 {  
 	prevStop = false;
-	prevZ = false;
 	this-> robot = robotPointer;
 	joystick = false;
 } 
@@ -60,7 +59,7 @@ void HumanController::update() {
 	}
 
 	/*ACCUMULATOR*/
-	if(getAccumulator()<-0.2) {
+/*	if(getAccumulator()<-0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
@@ -84,60 +83,59 @@ void HumanController::update() {
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot -> setCommand(command);
 		if(!prevStop) {
-			std::printf("idling after accumulator\n");
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
 			robot -> setCommand(command);
 		}
 		prevStop = true;
+	}*/
+	if(xbox.getButtonLB() && !xbox.getButtonRB()) {
+		RobotCommand::Method pass;
+		pass.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
+		robot -> setCommand(command);
 	}
-
-		if (getFlushTrigger()) {
-			RobotCommand::Method accumuFlush;
-			accumuFlush.accumulatorMethod = RobotCommand::PASS;
-			RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accumuFlush, 0);
-			robot -> setCommand(accuFlushCommand);
-
-			RobotCommand::Method shooterFlush;
-			shooterFlush.shooterMethod = RobotCommand::FLUSH;
-			RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
-			robot -> setCommand(shooterFlushCommand);
-
-		}
-		else if (!prevZ) {
-			std::printf("shut off manual\n");
-			RobotCommand::Method idle;
-			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
-			robot -> setCommand(command);
-		}
-
-	if(shootButtonPrev!=getShootButton()){
-		if(getShootButton()){
-			((DriveArgs*)argPointer)->driveDist = 10;
-			RobotCommand::Method align;
-			align.rangefinderMethod = RobotCommand::SET_DIST;
-			RobotCommand alignCommand(RobotCommand::RobotCommand::RANGEFINDER, align, 0);
-			robot -> setCommand(alignCommand);
-			RobotCommand::Method shoot;
-			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
-			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, shoot, 0);
-			robot -> setCommand(command);
-		}
-		prevZ = false;
+	else if(!xbox.getButtonLB() && xbox.getButtonRB()) {
+		RobotCommand::Method setAccumulator;
+		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
+		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
+		robot -> setCommand(command);
 	}
-
-	if(!prevRangeButton && getRangeButton()){
-		RobotCommand::Method rangefind;
-		rangefind.rangefinderMethod = RobotCommand::WALL_DIST;
-		RobotCommand rangeCommand(RobotCommand::RobotCommand::RANGEFINDER, rangefind, 0);
-		robot -> setCommand(rangeCommand);
-	}	
+	else {
+		RobotCommand::Method stopAccumulator;
+		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
+		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
+		robot -> setCommand(command);
+	}
+	
+	/*SHOOTER*/
+	if (getShootButton() == 1) {
+		RobotCommand::Method shooterFlush;
+		shooterFlush.shooterMethod = RobotCommand::FLUSH;
+		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
+		robot -> setCommand(shooterFlushCommand);
+		prevShoot = true;
+	}
+	else if (getShootButton() == -1) {
+		RobotCommand::Method fireCommand;
+		fireCommand.shooterMethod = RobotCommand::FIRE;
+		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, fireCommand, 0);
+		robot -> setCommand(command);
+		prevShoot = false;
+	}
+	else if(prevShoot && getShootButton() == 0) {
+		RobotCommand::Method idle;
+		idle.shooterMethod = RobotCommand::IDLE;
+		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
+		robot -> setCommand(command);
+	}
+	
 
 	shootButtonPrev = getShootButton();
 	lastFlushTrigger = getFlushTrigger();
 	prevRangeButton = getRangeButton(); 
+	
 }
 
 double HumanController::getSpeedStick(){
@@ -152,7 +150,7 @@ double HumanController::getTurnStick() {
 	if (joystick) {
 		return turnStick.GetX();
 	} else {
-		return xbox.getRightX();
+		return xbox.getRightX(); 
 	}
 }
 
@@ -160,15 +158,18 @@ double HumanController::getAccumulatorStick() {
 	return operatorStick.GetY(); // For adjusting the accumulator with Operator stick
 }
 
-double HumanController::getAccumulator() {
-	//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-	return operatorStick.GetY(); // For testing purposes
-}
-
-bool HumanController::getShootButton() {
+int HumanController::getShootButton() {
 	// Get trigger button to shoot from Operator stick
-//	return false;
-	return operatorStick.GetRawButton((uint_t)3);
+	if (joystick) {
+		return (int)operatorStick.GetTrigger();
+	} else if (xbox.getTrigger() > 0.5) {
+		return 1;
+	} else if (xbox.getTrigger() < -0.5) {
+		return -1;
+	} else {
+		return 0;
+	}
+	
 }
 
 bool HumanController::getFlushTrigger() {

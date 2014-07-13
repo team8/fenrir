@@ -26,7 +26,7 @@ private:
 	double getTurnStick();
 	double getAccumulatorStick();
 	double getAccumulator();
-	bool getShootButton();
+	int getShootButton();
 	bool getWarmupButton();
 	bool getFlushTrigger();
 	double getOperatorZ();
@@ -40,7 +40,7 @@ private:
 	bool lastFlushTrigger;
 	bool prevRangeButton;
 	bool prevStop;
-	bool prevZ;
 	bool joystick;
+	bool prevShoot;
 };
 #endif
