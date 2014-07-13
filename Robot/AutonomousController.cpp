@@ -6,7 +6,7 @@ AutonomousController::AutonomousController(Robot *robotPointer)
 	firstCommand = true;
 	std::printf("Autonomous controller constructor\n");
 
-	this -> robot = robotPointer;
+	this->robot = robotPointer;
 
 }
 
@@ -19,7 +19,7 @@ void AutonomousController::pathOne(){
 	//PLS NOTE: NOT CORRECT: Use the correct commands as appropriate
 
 	//Drive into position
-	void * argPointer = malloc(sizeof(DriveArgs));
+	void *argPointer = malloc(sizeof(DriveArgs));
 	((DriveArgs *) argPointer) -> driveDist = 10; //This value is not confirmed
 	RobotCommand::Method setSpeed;
 	setSpeed.driveMethod = RobotCommand::DRIVEDIST;

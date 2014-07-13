@@ -96,7 +96,7 @@ void Shooter::update() {
 		eject();
 		break;
 	case FLUSH:
-		setAllVics(-.3);
+		setAllVics(-.85);
 		break;
 	}
 }

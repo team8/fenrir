@@ -5,7 +5,7 @@
 
 class XBoxController : public Joystick {
   public:
-    XBoxController(uint32_t port) : Joysitck(port) {}
+    XBoxController(uint32_t port) : Joystick(port) {}
     virtual ~XBoxController() {}
     
     /*Joystick Axes*/

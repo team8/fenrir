@@ -10,11 +10,13 @@
 HumanController::HumanController(Robot *robotPointer):
 	speedStick(PORT_SPEED),
 	turnStick(PORT_TURN),
-	operatorStick(PORT_OPERATOR)
+	operatorStick(PORT_OPERATOR),
+	xbox((uint32_t)PORT_SPEED)
 {  
 	prevStop = false;
 	prevZ = false;
 	this-> robot = robotPointer;
+	joystick = false;
 } 
 
 void HumanController::update() {
@@ -27,9 +29,9 @@ void HumanController::update() {
 		robot -> setCommand(command);
 	}
 
-	if(abs(turnStick.GetX())<=.1 && abs(speedStick.GetY())<=.1){
+	if(abs(getTurnStick())<=.1 && abs(getSpeedStick())<=.1) {
 		//TODO: ask ahmed if he want to be able to move forward but not turn at small speeds
-		((DriveArgs*)argPointer)->speedValue = speedStick.GetY();
+		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -41,7 +43,7 @@ void HumanController::update() {
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot -> setCommand(rotateCommand);
 	}
-	if(abs(speedStick.GetY())>0.1){
+	if(abs(getSpeedStick())>0.1){
 		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
@@ -49,7 +51,7 @@ void HumanController::update() {
 		robot -> setCommand(speedCommand);
 	}
 
-	if(abs(turnStick.GetX())>0.1){
+	if(abs(getTurnStick())>0.1){
 		((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
@@ -139,13 +141,19 @@ void HumanController::update() {
 }
 
 double HumanController::getSpeedStick(){
-	double speed = (speedStick.GetY());
-	return speed;
+	if (joystick) {
+		return (speedStick.GetY());
+	} else {
+		return xbox.getLeftY();
+	}
 }
 
 double HumanController::getTurnStick() {
-	double turn = (turnStick.GetX());
-	return turn;
+	if (joystick) {
+		return turnStick.GetX();
+	} else {
+		return xbox.getRightX();
+	}
 }
 
 double HumanController::getAccumulatorStick() {

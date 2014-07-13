@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "Robot.h"
 #include "RobotCommand.h"
+#include "XBoxController.h"
 #include <WPILib.h>
 #include <stdlib.h>
 
@@ -13,9 +14,12 @@ public:
 
 private:
 	Robot *robot;
+	
 	Joystick speedStick;
 	Joystick turnStick;
 	Joystick operatorStick;
+	XBoxController xbox;
+	
 
 	//All methods we use in controller scheme logic
 	double getSpeedStick();
@@ -37,5 +41,6 @@ private:
 	bool prevRangeButton;
 	bool prevStop;
 	bool prevZ;
+	bool joystick;
 };
 #endif
