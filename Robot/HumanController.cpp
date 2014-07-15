@@ -119,9 +119,10 @@ void HumanController::update() {
 	}
 #endif
 	
-	/*SHOOTER*/
+	/*SHOOTER Joystick Controls*/
 #if defined JOYSTICK_CONTROLS
-
+	//accidentaly temporarily deleted
+	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
 	if (getShootButton() == 1) {
 		RobotCommand::Method shooterFlush;
@@ -152,27 +153,21 @@ void HumanController::update() {
 	shootButtonPrev = getShootButton();
 }
 
-#if defined JOYSTICK_CONTROLS
 double HumanController::getSpeedStick() {
+#if defined JOYSTICK_CONTROLS
 	return speedStick.GetY();
-}
-
 #elif defined XBOX_CONTROLS
-double HumanController::getSpeedStick() {
 	return xbox.getLeftY();
-}
 #endif
+}
 
+double HumanController::getTurnStick() {
 #if defined JOYSTICK_CONTROLS
-double HumanController::getTurnStick() {
 	return turnStick.GetX();
-}
-
 #elif defined XBOX_CONTROLS
-double HumanController::getTurnStick() {
 	return xbox.getRightX();
-}
 #endif
+}
 
 #ifdef JOYSTICK_CONTROLS
 double HumanController::getAccumulatorStick() {
