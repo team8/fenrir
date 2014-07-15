@@ -7,7 +7,8 @@
 #include <WPILib.h>
 #include <stdlib.h>
 
-//#define JOYSTICK_CONTROLS /***########*******Only one of these should be defined at a time*******#######***/
+/***########*******Only one of these should be defined at a time*******#######***/
+//#define JOYSTICK_CONTROLS 
 #define XBOX_CONTROLS
 
 class HumanController {
