@@ -25,7 +25,6 @@ class XBoxController : public Joystick {
     bool getButtonLB() { return GetRawButton(5);}
     bool getButtonRB() { return GetRawButton(6);}
 
-    
 };
 
 #endif
