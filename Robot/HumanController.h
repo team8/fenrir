@@ -38,10 +38,11 @@ private:
 	int getShootButton();
 #endif
 	bool getWarmupButton();
+#ifdef JOYSTICK_CONTROLS
 	bool getFlushTrigger();
 	double getOperatorZ();
 	bool getRangeButton();
-
+#endif
 	//booleans used to make sure we don't reissue same command
 	bool accuButtonPrev;
 #if defined JOYSTICK_CONTROLS

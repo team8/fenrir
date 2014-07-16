@@ -17,18 +17,18 @@ HumanController::HumanController(Robot *robotPointer):
 #endif
 {  
 	prevStop = false;
-	this-> robot = robotPointer;
+	this->robot = robotPointer;
 } 
 
 void HumanController::update() {
-	void * argPointer = malloc(sizeof(DriveArgs));
+	void *argPointer = malloc(sizeof(DriveArgs));
 
 #ifdef JOYSTICK_CONTROLS
 	if (speedStick.GetTrigger()) {
 		RobotCommand::Method findRange;
 		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
 		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 	}
 #endif
 
@@ -38,20 +38,20 @@ void HumanController::update() {
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-		robot -> setCommand(speedCommand);
+		robot->setCommand(speedCommand);
 
 		((DriveArgs*)argPointer) -> rotSpeed = 0;
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-		robot -> setCommand(rotateCommand);
+		robot->setCommand(rotateCommand);
 	}
 	if(abs(getSpeedStick())>0.1){
 		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
-		robot -> setCommand(speedCommand);
+		robot->setCommand(speedCommand);
 	}
 
 	if(abs(getTurnStick())>0.1){
@@ -59,7 +59,7 @@ void HumanController::update() {
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
-		robot -> setCommand(rotateCommand);
+		robot->setCommand(rotateCommand);
 	}
 
 	/*ACCUMULATOR Joystick Controls*/
@@ -68,31 +68,31 @@ void HumanController::update() {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 		prevStop = false;
 	}
 	else if(getAccumulator()>0.2) {
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 		RobotCommand::Method eject;
 		eject.shooterMethod = RobotCommand::EJECT;
 		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
-		robot -> setCommand(ejectCommand);
+		robot->setCommand(ejectCommand);
 
 	}
 	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 		if(!prevStop) {
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
-			robot -> setCommand(command);
-		}
+			robot->setCommand(command);
+		
 		prevStop = true;
 	}
 #endif
@@ -103,22 +103,53 @@ void HumanController::update() {
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 	}
 	else if(!xbox.getButtonLB() && xbox.getButtonRB()) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 	}
 	else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 	}
 #endif
 	
+	/*FLUSH Joystick Controls*/
+#ifdef JOYSTICK_CONTROLS
+	if (getFlushTrigger()) {
+
+		/*ACCUMULATOR_FLUSH/PASS Joystick Controls*/
+		RobotCommand::Method accuFlush;
+		accuFlush.accumulatorMethod = RobotCommand::PASS;
+		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accuFlush, 0);
+		robot->setCommand(accuFlushCommand);
+
+		/*SHOOTER_FLUSH Joystick Controls*/
+		RobotCommand::Method shooterFlush;
+		shooterFlush.shooterMethod = RobotCommand::FLUSH;
+		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
+		robot->setCommand(shooterFlushCommand);
+
+	} else if (!getFlushTrigger()) { //Idle 
+
+		RobotCommand::Method shooterIdle;
+		shooterIdle.shooterMethod = RobotCommand::IDLE;
+		RobotCommand shooterIdleCommand(RobotCommand::SHOOTER, shooterIdle, 0);
+		robot->setCommand(shooterIdleCommand);
+
+		RobotCommand::Method accuStop;
+		accuStop.accumulatorMethod = RobotCommand::STOP;
+		RobotCommand accuStopCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
+		robot->setCommand(accuStopCommand);
+
+	}
+#endif
+
 	/*SHOOTER Joystick Controls*/
 #if defined JOYSTICK_CONTROLS
 	//accidentaly temporarily deleted
@@ -128,21 +159,21 @@ void HumanController::update() {
 		RobotCommand::Method shooterFlush;
 		shooterFlush.shooterMethod = RobotCommand::FLUSH;
 		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
-		robot -> setCommand(shooterFlushCommand);
+		robot->setCommand(shooterFlushCommand);
 		prevShoot = true;
 	}
 	else if (getShootButton() == -1) {
 		RobotCommand::Method fireCommand;
 		fireCommand.shooterMethod = RobotCommand::FIRE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, fireCommand, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 		prevShoot = false;
 	}
 	else if(prevShoot && getShootButton() == 0) {
 		RobotCommand::Method idle;
 		idle.shooterMethod = RobotCommand::IDLE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
-		robot -> setCommand(command);
+		robot->setCommand(command);
 	}
 #endif
 
