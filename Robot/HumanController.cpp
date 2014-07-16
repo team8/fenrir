@@ -142,17 +142,27 @@ void HumanController::update() {
 		RobotCommand shooterIdleCommand(RobotCommand::SHOOTER, shooterIdle, 0);
 		robot->setCommand(shooterIdleCommand);
 
-		RobotCommand::Method accuStop;
-		accuStop.accumulatorMethod = RobotCommand::STOP;
-		RobotCommand accuStopCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
-		robot->setCommand(accuStopCommand);
-
+		if (abs(getAccumulator()) < 0.2) {
+			RobotCommand::Method accuStop;
+			accuStop.accumulatorMethod = RobotCommand::STOP;
+			RobotCommand accuStopCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
+			robot->setCommand(accuStopCommand);
+		}
 	}
 #endif
 
 	/*SHOOTER Joystick Controls*/
 #if defined JOYSTICK_CONTROLS
-	//accidentaly temporarily deleted
+	if (shootButtonPrev != getShootButton()) {
+		if (getShootButton()) {
+			RobotCommand::Method shoot;
+			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
+			RobotCommand shootCommand(RobotCommand::SHOOTER, shoot, 0);
+			robot->setCommand(shootCommand);
+		}
+	}
+#endif
+
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
 	if (getShootButton() == 1) {
