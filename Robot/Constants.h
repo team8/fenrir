@@ -1,7 +1,17 @@
-//ports for HumanController
+
+/***########*******Only one of these should be defined at a time*******#######***/
+//#define JOYSTICK_CONTROLS 
+#define XBOX_CONTROLS
+
+/*Joystick and XBox Ports*/
+#if defined JOYSTICK_CONTROLS
 #define PORT_SPEED 1
 #define PORT_TURN 2
 #define PORT_OPERATOR 3
+#elif defined XBOX_CONTROLS
+#define PORT_XBOX 1
+#endif
+
 
 //Helps refine sensitivity of joystiks
 #define SPEED_SENSITIVITY 0.5

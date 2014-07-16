@@ -13,7 +13,7 @@ HumanController::HumanController(Robot *robotPointer):
 	turnStick(PORT_TURN),
 	operatorStick(PORT_OPERATOR)
 #elif defined XBOX_CONTROLS
-	xbox((uint32_t)PORT_SPEED)
+	xbox((uint32_t)PORT_XBOX)
 #endif
 {  
 	prevStop = false;
@@ -33,7 +33,7 @@ void HumanController::update() {
 #endif
 
 	if(abs(getTurnStick())<=.1 && abs(getSpeedStick())<=.1) {
-		//TODO: ask ahmed if he want to be able to move forward but not turn at small speeds
+
 		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
@@ -99,19 +99,17 @@ void HumanController::update() {
 
 	/*ACCUMULATOR XBox Controls*/
 #if defined XBOX_CONTROLS
-	if(xbox.getButtonLB() && !xbox.getButtonRB()) {
+	if(xbox.getButtonLB() && !xbox.getButtonRB()) { //FLUSH/PASS
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 		robot->setCommand(command);
-	}
-	else if(!xbox.getButtonLB() && xbox.getButtonRB()) {
+	} else if(xbox.getButtonRB() && !xbox.getButtonLB()) { //ACCUMULATE
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot->setCommand(command);
-	}
-	else {
+	} else { //IDLE
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
@@ -152,9 +150,9 @@ void HumanController::update() {
 #endif
 
 	/*SHOOTER Joystick Controls*/
-#if defined JOYSTICK_CONTROLS
+#ifdef JOYSTICK_CONTROLS
 	if (shootButtonPrev != getShootButton()) {
-		if (getShootButton()) {
+		if (getShootButton()) { //SHOOT
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
 			RobotCommand shootCommand(RobotCommand::SHOOTER, shoot, 0);
@@ -165,21 +163,21 @@ void HumanController::update() {
 
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
-	if (getShootButton() == 1) {
+	if (getShootButton() == 1) { //FLUSH
 		RobotCommand::Method shooterFlush;
 		shooterFlush.shooterMethod = RobotCommand::FLUSH;
 		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
 		robot->setCommand(shooterFlushCommand);
 		prevShoot = true;
 	}
-	else if (getShootButton() == -1) {
+	else if (getShootButton() == -1) { //SHOOT
 		RobotCommand::Method fireCommand;
 		fireCommand.shooterMethod = RobotCommand::FIRE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, fireCommand, 0);
 		robot->setCommand(command);
 		prevShoot = false;
 	}
-	else if(prevShoot && getShootButton() == 0) {
+	else if(prevShoot && getShootButton() == 0) { //IDLE
 		RobotCommand::Method idle;
 		idle.shooterMethod = RobotCommand::IDLE;
 		RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
@@ -235,12 +233,13 @@ int HumanController::getShootButton() {
 
 #ifdef JOYSTICK_CONTROLS
 bool HumanController::getFlushTrigger() {
-	//flush out the ball
 	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 }
+
 double HumanController::getOperatorZ() {
 	return operatorStick.GetThrottle();
 }
+
 bool HumanController::getRangeButton() {
 	return operatorStick.GetRawButton((uint32_t)4);
 }	

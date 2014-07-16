@@ -7,14 +7,10 @@
 #include <WPILib.h>
 #include <stdlib.h>
 
-/***########*******Only one of these should be defined at a time*******#######***/
-//#define JOYSTICK_CONTROLS 
-#define XBOX_CONTROLS
-
 class HumanController {
 public:
-	void update();
 	HumanController(Robot *robotPointer);
+	void update();
 
 private:
 	Robot *robot;
@@ -25,9 +21,7 @@ private:
 #elif defined XBOX_CONTROLS
 	XBoxController xbox;
 #endif
-	
 
-	//All methods we use in controller scheme logic
 	double getSpeedStick();
 	double getTurnStick();
 	double getAccumulatorStick();
@@ -52,8 +46,10 @@ private:
 #endif
 	bool warmupButtonPrev;
 	bool passButtonPrev;
+#ifdef JOYSTICK_CONTROLS
 	bool lastFlushTrigger;
 	bool prevRangeButton;
+#endif
 	bool prevStop;
 	bool prevShoot;
 };
