@@ -91,6 +91,8 @@ void DriveTrain::update() {
 		/*NORMAL*/
 //		std::printf("leftSpeed: %g \n", leftSpeed);
 //		std::printf("rightSpeed: %g \n", rightSpeed);
+		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(-rightSpeed);
