@@ -39,8 +39,16 @@ void DriveTrain::init() {
 	leftBackController.SetOutputRange(-1, 1);
 	rightEnc.SetDistancePerPulse(.0782);//(.07734);
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
-	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
-	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
+	rightEnc.SetPIDSourceParameter(PIDSource::kRate);
+	leftEnc.SetPIDSourceParameter(PIDSource::kRate);
+	leftFrontController.Reset();
+	leftBackController.Reset();
+	rightFrontController.Reset();
+	rightBackController.Reset();
+	leftFrontController.Enable();
+	rightFrontController.Enable();
+	leftBackController.Enable();
+	rightBackController.Enable();
 	state = STOP_VICTORS;
 }
 //runs method according to what newCommand is received
@@ -79,12 +87,23 @@ void DriveTrain::update() {
 		 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 		 *Logic: Right victor is negative because we are turning
 		*/
-		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+		
+		/*NORMAL*/
+//		std::printf("leftSpeed: %g \n", leftSpeed);
+//		std::printf("rightSpeed: %g \n", rightSpeed);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(-rightSpeed);
 		rightBackVic.Set(-rightSpeed);
+		/*ByRate*/
+		std::printf("leftRate: %g \t \n" , leftEnc.GetRate());
+		std::printf("rightRate: %g \t \n" , rightEnc.GetRate());		
+		
+//		rightFrontVic.Set(-rightFrontController.Get());
+//		rightBackVic.Set(-rightBackController.Get());
+//
+//		leftFrontVic.Set(leftFrontController.Get());
+//		leftBackVic.Set(leftBackController.Get());
 		break;
 
 	case DRIVE_DIST:
@@ -115,20 +134,11 @@ void DriveTrain::update() {
 //Will use PID to determine output for victors
 //Uses encoders
 void DriveTrain::driveD(double dist) {
-	leftEnc.Reset();
-	rightEnc.Reset();
-	leftFrontController.Reset();
-	leftBackController.Reset();
-	rightFrontController.Reset();
-	rightBackController.Reset();
+
 	leftFrontController.SetSetpoint(dist);
 	rightFrontController.SetSetpoint(dist);
 	leftBackController.SetSetpoint(dist);
 	rightBackController.SetSetpoint(dist);
-	leftFrontController.Enable();
-	rightFrontController.Enable();
-	leftBackController.Enable();
-	rightBackController.Enable();
 	targetDist = dist; 
 	state = DRIVE_DIST;
 }
@@ -136,6 +146,13 @@ void DriveTrain::driveD(double dist) {
 //sets the spd of all vics to the specified amount between 1.0 and -1.0
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
+
+	//if(spd > 0.5) spd = 5;
+	//else{ spd = 0;}
+	leftFrontController.SetSetpoint(spd);
+	rightFrontController.SetSetpoint(spd);
+	leftBackController.SetSetpoint(spd);
+	rightBackController.SetSetpoint(spd);
 	targetSpeed = spd;
 	state = ROTATE_SPEED;
 }
