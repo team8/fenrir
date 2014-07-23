@@ -9,14 +9,17 @@
 
 HumanController::HumanController(Robot *robotPointer):
 #if defined JOYSTICK_CONTROLS
-	speedStick(PORT_SPEED),
-	turnStick(PORT_TURN),
-	operatorStick(PORT_OPERATOR)
+	speedStick((uint32_t)PORT_SPEED),
+	turnStick((uint32_t)PORT_TURN),
+	operatorStick((uint32_t)PORT_OPERATOR)
 #elif defined XBOX_CONTROLS
 	xbox((uint32_t)PORT_XBOX)
 #endif
 {  
+#ifdef JOYSTICK_CONTROLS
+	prevZ = false;
 	prevStop = false;
+#endif
 	this->robot = robotPointer;
 } 
 
@@ -70,19 +73,19 @@ void HumanController::update() {
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot->setCommand(command);
 		prevStop = false;
-	}
-	else if(getAccumulatorStick()>0.2) {
+	} else if(getAccumulatorStick()>0.2) {
+		
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 		robot->setCommand(command);
+		
 		RobotCommand::Method eject;
 		eject.shooterMethod = RobotCommand::EJECT;
 		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
 		robot->setCommand(ejectCommand);
 
-	}
-	else {
+	} else {
 		RobotCommand::Method stopAccumulator;
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
@@ -133,31 +136,49 @@ void HumanController::update() {
 		RobotCommand shooterFlushCommand(RobotCommand::SHOOTER, shooterFlush, 0);
 		robot->setCommand(shooterFlushCommand);
 
-	} else if (!getFlushTrigger()) { //Idle 
+	} else if (!getFlushTrigger() && lastFlushTrigger) { //Idle 
 
+		RobotCommand::Method accuStop;
+		accuStop.accumulatorMethod = RobotCommand::STOP;
+		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
+		robot->setCommand(accuFlushCommand);
+		
 		RobotCommand::Method shooterIdle;
 		shooterIdle.shooterMethod = RobotCommand::IDLE;
 		RobotCommand shooterIdleCommand(RobotCommand::SHOOTER, shooterIdle, 0);
 		robot->setCommand(shooterIdleCommand);
 
-		if (abs(getAccumulatorStick()) < 0.2) {
-			RobotCommand::Method accuStop;
-			accuStop.accumulatorMethod = RobotCommand::STOP;
-			RobotCommand accuStopCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
-			robot->setCommand(accuStopCommand);
-		}
 	}
 #endif
 
 	/*SHOOTER Joystick Controls*/
 #ifdef JOYSTICK_CONTROLS
-	if (shootButtonPrev != getShootButton()) {
-		if (getShootButton()) { //SHOOT
+	if (getOperatorZ() < 0.5) {
+		if (shootButtonPrev != getShootButton() && getShootButton()) {
 			RobotCommand::Method shoot;
-			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
+			shoot.shooterMethod = RobotCommand::FIRE;
 			RobotCommand shootCommand(RobotCommand::SHOOTER, shoot, 0);
 			robot->setCommand(shootCommand);
+		} else if (!prevZ) {
+			RobotCommand::Method idle;
+			idle.shooterMethod = RobotCommand::IDLE;
+			RobotCommand idleCommand(RobotCommand::SHOOTER, idle, 0);
+			robot->setCommand(idleCommand);
 		}
+		prevZ = true;
+	} else if (getOperatorZ() > 0.5) {
+		RobotCommand::Method shoot;
+		shoot.shooterMethod = RobotCommand::MANUAL_FIRE;
+		RobotCommand command(RobotCommand::SHOOTER, shoot, 0);
+		robot->setCommand(command);
+		
+		if (getShootButton()) {
+			RobotCommand::Method shoot;
+			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
+			RobotCommand command(RobotCommand::SHOOTER, shoot, 0);
+			robot->setCommand(command);
+		}
+		prevZ = false;
 	}
 
 	/*SHOOTER XBox Controls*/
@@ -185,7 +206,7 @@ void HumanController::update() {
 #endif
 
 #ifdef JOYSTICK_CONTROLS
-	//lastFlushTrigger = getFlushTrigger();
+	lastFlushTrigger = getFlushTrigger();
 	//prevRangeButton = getRangeButton(); 
 #endif
 	shootButtonPrev = getShootButton();

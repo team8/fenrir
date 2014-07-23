@@ -18,8 +18,9 @@ private:
 	Joystick speedStick;
 	Joystick turnStick;
 	Joystick operatorStick;
-	//bool lastFlushTrigger;
+	bool lastFlushTrigger;
 	//bool prevRangeButton;
+	bool prevZ;
 	bool shootButtonPrev;
 	bool getShootButton();
 	bool getFlushTrigger();

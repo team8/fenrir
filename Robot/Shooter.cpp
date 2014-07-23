@@ -77,8 +77,7 @@ void Shooter::update() {
 	case PREPARING:
 		if (!shootTimer.HasPeriodPassed(3.0)) {
 			startShooterVics(1.0);
-		}
-		else {
+		} else {
 			std::printf("fire\n");
 			state = FIRING;
 			shootTimer.Reset();
@@ -87,8 +86,7 @@ void Shooter::update() {
 	case FIRING:
 		if (!shootTimer.HasPeriodPassed(3.0)) {
 			loaderVic.Set(LOAD_SPEED);
-		}
-		else {
+		} else {
 			state = IDLE;
 		}
 		break;
@@ -96,7 +94,7 @@ void Shooter::update() {
 		eject();
 		break;
 	case FLUSH:
-		setAllVics(-.85);
+		setAllVics(-1.0);
 		break;
 	}
 }
@@ -117,5 +115,5 @@ void Shooter::setAllVics(double speed) {
 }
 
 void Shooter::eject() {
-	loaderVic.Set(1);
+	loaderVic.Set(1.0);
 }
