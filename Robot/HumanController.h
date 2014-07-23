@@ -14,42 +14,28 @@ public:
 
 private:
 	Robot *robot;
-#if defined JOYSTICK_CONTROLS	
+#ifdef JOYSTICK_CONTROLS	
 	Joystick speedStick;
 	Joystick turnStick;
 	Joystick operatorStick;
-#elif defined XBOX_CONTROLS
-	XBoxController xbox;
-#endif
-
-	double getSpeedStick();
-	double getTurnStick();
-	double getAccumulatorStick();
-	double getAccumulator();
-#if defined JOYSTICK_CONTROLS
+	//bool lastFlushTrigger;
+	//bool prevRangeButton;
+	bool shootButtonPrev;
 	bool getShootButton();
-#elif defined XBOX_CONTROLS
-	int getShootButton();
-#endif
-	bool getWarmupButton();
-#ifdef JOYSTICK_CONTROLS
 	bool getFlushTrigger();
 	double getOperatorZ();
 	bool getRangeButton();
-#endif
-	//booleans used to make sure we don't reissue same command
-	bool accuButtonPrev;
-#if defined JOYSTICK_CONTROLS
-	bool shootButtonPrev;
+	double getAccumulatorStick();
 #elif defined XBOX_CONTROLS
+	XBoxController xbox;
 	int shootButtonPrev;
+	int getShootButton();
+	bool getWarmupButton();
 #endif
-	bool warmupButtonPrev;
-	bool passButtonPrev;
-#ifdef JOYSTICK_CONTROLS
-	bool lastFlushTrigger;
-	bool prevRangeButton;
-#endif
+	double getSpeedStick();
+	double getTurnStick();
+
+	//booleans used to make sure we don't reissue same command;
 	bool prevStop;
 	bool prevShoot;
 };

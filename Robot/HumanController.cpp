@@ -24,12 +24,12 @@ void HumanController::update() {
 	void *argPointer = malloc(sizeof(DriveArgs));
 
 #ifdef JOYSTICK_CONTROLS
-	if (speedStick.GetTrigger()) {
-		RobotCommand::Method findRange;
-		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
-		robot->setCommand(command);
-	}
+//	if (speedStick.GetTrigger()) {
+//		RobotCommand::Method findRange;
+//		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
+//		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
+//		robot->setCommand(command);
+//	}
 #endif
 
 	if(abs(getTurnStick())<=.1 && abs(getSpeedStick())<=.1) {
@@ -64,14 +64,14 @@ void HumanController::update() {
 
 	/*ACCUMULATOR Joystick Controls*/
 #if defined JOYSTICK_CONTROLS
-	if(getAccumulator()<-0.2) {
+	if(getAccumulatorStick()<-0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot->setCommand(command);
 		prevStop = false;
 	}
-	else if(getAccumulator()>0.2) {
+	else if(getAccumulatorStick()>0.2) {
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
@@ -92,7 +92,7 @@ void HumanController::update() {
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
 			robot->setCommand(command);
-		
+		}
 		prevStop = true;
 	}
 #endif
@@ -116,7 +116,7 @@ void HumanController::update() {
 		robot->setCommand(command);
 	}
 #endif
-	
+
 	/*FLUSH Joystick Controls*/
 #ifdef JOYSTICK_CONTROLS
 	if (getFlushTrigger()) {
@@ -140,7 +140,7 @@ void HumanController::update() {
 		RobotCommand shooterIdleCommand(RobotCommand::SHOOTER, shooterIdle, 0);
 		robot->setCommand(shooterIdleCommand);
 
-		if (abs(getAccumulator()) < 0.2) {
+		if (abs(getAccumulatorStick()) < 0.2) {
 			RobotCommand::Method accuStop;
 			accuStop.accumulatorMethod = RobotCommand::STOP;
 			RobotCommand accuStopCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
@@ -159,7 +159,6 @@ void HumanController::update() {
 			robot->setCommand(shootCommand);
 		}
 	}
-#endif
 
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
@@ -186,8 +185,8 @@ void HumanController::update() {
 #endif
 
 #ifdef JOYSTICK_CONTROLS
-	lastFlushTrigger = getFlushTrigger();
-	prevRangeButton = getRangeButton(); 
+	//lastFlushTrigger = getFlushTrigger();
+	//prevRangeButton = getRangeButton(); 
 #endif
 	shootButtonPrev = getShootButton();
 }
@@ -199,6 +198,7 @@ double HumanController::getSpeedStick() {
 	return xbox.getLeftY();
 #endif
 }
+
 
 double HumanController::getTurnStick() {
 #if defined JOYSTICK_CONTROLS
