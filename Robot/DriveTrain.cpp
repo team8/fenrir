@@ -79,39 +79,12 @@ void DriveTrain::update() {
 		 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 		 *Logic: Right victor is negative because we are turning
 		*/
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-		/*NORMAL*/
-//		std::printf("leftSpeed: %g \n", leftSpeed);
-//		std::printf("rightSpeed: %g \n", rightSpeed);
-=======
 		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
 		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
->>>>>>> parent of 8cff6cb... tried to get rates working
-=======
-		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
->>>>>>> parent of 8cff6cb... tried to get rates working
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(-rightSpeed);
 		rightBackVic.Set(-rightSpeed);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		/*ByRate*/
-		std::printf("leftRate: %g \t \n" , leftEnc.GetRate());
-		std::printf("rightRate: %g \t \n" , rightEnc.GetRate());		
-
-//		rightFrontVic.Set(-rightFrontController.Get());
-//		rightBackVic.Set(-rightBackController.Get());
-//
-//		leftFrontVic.Set(leftFrontController.Get());
-//		leftBackVic.Set(leftBackController.Get());
-=======
->>>>>>> parent of 8cff6cb... tried to get rates working
-=======
->>>>>>> parent of 8cff6cb... tried to get rates working
 		break;
 
 	case DRIVE_DIST:
