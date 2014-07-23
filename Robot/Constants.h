@@ -1,8 +1,6 @@
 /***########*******Only one of these should be defined at a time*******#######***/
-//#define JOYSTICK_CONTROLS
-#ifndef JOYSTICK_CONTROLS
+//#define JOYSTICK_CONTROLS 
 #define XBOX_CONTROLS
-#endif
 
 /*Joystick and XBox Ports*/
 #if defined JOYSTICK_CONTROLS
