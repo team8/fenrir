@@ -77,6 +77,8 @@ void DriveTrain::runCommand(RobotCommand command) {
 
 void DriveTrain::update() {
 
+	std::printf("Left encoder: %d",leftEnc.Get());
+	std::printf(" Right encoder: %d\n", rightEnc.Get());
 	switch (state) {
 	case ROTATE_SPEED:
 
