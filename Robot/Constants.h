@@ -1,9 +1,12 @@
 
 /***########*******Only one of these should be defined at a time*******#######***/
+<<<<<<< HEAD
 #define JOYSTICK_CONTROLS
 #ifndef JOYSTICK_CONTROLS
+=======
+//#define JOYSTICK_CONTROLS 
+>>>>>>> parent of e6f043b... fixed switvhing b/w xbox and joystickws
 #define XBOX_CONTROLS
-#endif
 
 /*Joystick and XBox Ports*/
 #if defined JOYSTICK_CONTROLS
