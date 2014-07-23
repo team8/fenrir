@@ -32,7 +32,6 @@ void HumanController::update() {
 	}
 #endif
 
-	/*DRIVING Joystick Controls && XBox Controls*/
 	if(abs(getTurnStick())<=.1 && abs(getSpeedStick())<=.1) {
 
 		((DriveArgs*)argPointer)->speedValue = getSpeedStick();

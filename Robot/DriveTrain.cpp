@@ -77,8 +77,6 @@ void DriveTrain::runCommand(RobotCommand command) {
 
 void DriveTrain::update() {
 
-	std::printf("Left encoder: %d",leftEnc.Get());
-	std::printf(" Right encoder: %d\n", rightEnc.Get());
 	switch (state) {
 	case ROTATE_SPEED:
 
@@ -89,12 +87,10 @@ void DriveTrain::update() {
 		 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 		 *Logic: Right victor is negative because we are turning
 		*/
-		
+
 		/*NORMAL*/
 //		std::printf("leftSpeed: %g \n", leftSpeed);
 //		std::printf("rightSpeed: %g \n", rightSpeed);
-		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(-rightSpeed);
@@ -102,7 +98,7 @@ void DriveTrain::update() {
 		/*ByRate*/
 		std::printf("leftRate: %g \t \n" , leftEnc.GetRate());
 		std::printf("rightRate: %g \t \n" , rightEnc.GetRate());		
-		
+
 //		rightFrontVic.Set(-rightFrontController.Get());
 //		rightBackVic.Set(-rightBackController.Get());
 //
