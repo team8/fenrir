@@ -67,6 +67,8 @@ void Fenrir::TeleopPeriodic() {
 }
 
 void Fenrir::TeleopDisabled() {
+	robot.disable();
+	robot.update();
 }
 
 void Fenrir::TestInit() {

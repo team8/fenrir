@@ -120,6 +120,7 @@ void HumanController::update() {
 	}
 #endif
 
+	
 	/*FLUSH Joystick Controls*/
 #ifdef JOYSTICK_CONTROLS
 	if (getFlushTrigger()) {
