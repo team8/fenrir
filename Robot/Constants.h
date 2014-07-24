@@ -13,6 +13,8 @@
 #define PORT_XBOX 1
 #endif
 
+#define MAX_CIM_RATE_LOADED 0 //under load. persecond (encoder.getRate() returns dist/sec
+
 
 //Helps refine sensitivity of joystiks
 #define SPEED_SENSITIVITY 0.5
