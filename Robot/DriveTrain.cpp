@@ -41,10 +41,6 @@ void DriveTrain::init() {
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
 	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
-//	leftFrontController.Enable();
-//	rightFrontController.Enable();
-//	leftBackController.Enable();
-//	rightBackController.Enable();
 	state = STOP_VICTORS;
 }
 //runs method according to what newCommand is received
@@ -85,13 +81,10 @@ void DriveTrain::update() {
 		*/
 		double leftSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
 		double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-		
 		leftFrontVic.Set(leftSpeed);
 		leftBackVic.Set(leftSpeed);
 		rightFrontVic.Set(-rightSpeed);
 		rightBackVic.Set(-rightSpeed);
-		std::printf("leftRate: %g \t \n" , leftEnc.GetRate());
-		std::printf("rightRate: %g \t \n" , rightEnc.GetRate());
 		break;
 
 	case DRIVE_DIST:
@@ -144,7 +137,6 @@ void DriveTrain::driveD(double dist) {
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
 	targetSpeed = spd;
-	
 	state = ROTATE_SPEED;
 }
 
