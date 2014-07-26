@@ -1,8 +1,8 @@
 #include "Constants.h"
 #include "RobotCommand.h"
 
-	RobotCommand::RobotCommand(SubsystemType subsystemType, Method methodType, void * args) {
-	
+RobotCommand::RobotCommand(SubsystemType subsystemType, Method methodType, void * args) {
+
 	// Use one of the command type enums here
 	subsystem = subsystemType;
 	method = methodType;

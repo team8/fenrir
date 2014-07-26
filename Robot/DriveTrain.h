@@ -46,6 +46,7 @@ class DriveTrain {
 		DriveTrain();
 
 		void init();
+		void disable();
 		/*Takes input of distance to destination
 		 //Will use PID or PIDControllers to calculate input for victors. 
 		 //Uses encoders as input for distance from destination*/
@@ -67,4 +68,6 @@ class DriveTrain {
 		double getRightEnc();
 		double getLeftEnc();
 };
+
+double absolute(double n);
 #endif

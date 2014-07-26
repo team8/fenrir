@@ -8,7 +8,6 @@
 #include "RobotCommand.h"
 #include "Accumulator.h"
 
-
 class Robot {
 	private:
 		DriveTrain driveTrain;

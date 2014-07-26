@@ -80,10 +80,10 @@ void HumanController::update() {
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 		robot->setCommand(command);
 
-		RobotCommand::Method eject;
-		eject.shooterMethod = RobotCommand::EJECT;
-		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
-		robot->setCommand(ejectCommand);
+//		RobotCommand::Method eject;
+//		eject.shooterMethod = RobotCommand::EJECT;
+//		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
+//		robot->setCommand(ejectCommand);
 
 	} else {
 		RobotCommand::Method stopAccumulator;

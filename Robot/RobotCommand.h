@@ -4,81 +4,60 @@
 
 // Arguments used for Drivetrain methods
 typedef union DriveArgs {
-	double driveDist;
-	double rotAngle;
-	double rotSpeed;
-	double driveSpeed;
-	double speedValue;
+		double driveDist;
+		double rotAngle;
+		double rotSpeed;
+		double driveSpeed;
+		double speedValue;
 } DriveArgs;
 
 typedef struct ShooterArgs {
-	bool trigger;
+		bool trigger;
 } ShooterArgs;
 
 typedef struct RangefinderArgs {
-	float target;
+		float target;
 } RangefinderArgs;
 
 /*COMMAND OBJECT*/
 class RobotCommand {
 	public:
 		typedef enum SubsystemType {
-			DRIVE,
-			SHOOTER,
-			ACCUMULATOR,
-			RANGEFINDER,
-			ROBOT
-		} SubsystemType; 
-	
+			DRIVE, SHOOTER, ACCUMULATOR, RANGEFINDER, ROBOT
+		} SubsystemType;
+
 		/*SUBSYSTEM METHODS*/
 		typedef enum DriveMethod {
-			SETSPEED,
-			DRIVEDIST,
-			ROTATEANGLE,
-			ROTATESPEED,
-			STOPVICTORS
+			SETSPEED, DRIVEDIST, ROTATEANGLE, ROTATESPEED, STOPVICTORS
 		} DriveMethod;
-		
+
 		typedef enum AccumulatorMethod {
-			ACCUMULATE,
-			STOP,
-			PASS
+			ACCUMULATE, STOP, PASS
 		} AccumulatorMethod;
-		
+
 		typedef enum ExtensionMethod {
-			FOWARD,
-			BACKWARD,
-			HALT
+			FOWARD, BACKWARD, HALT
 		} ExtensionMethod;
-		
+
 		typedef enum ShooterMethod {
-			FIRE,
-			EJECT,
-			IDLE,
-			FLUSH,
-			MANUAL_FIRE,
-			MANUAL_LOAD
+			FIRE, EJECT, IDLE, FLUSH, MANUAL_FIRE, MANUAL_LOAD
 		} ShooterMethod;
-		
+
 		typedef enum RangefinderMethod {
-			ANGLE,
-			SET_DIST,
-			LEFT_ON,
-			RIGHT_ON,
-			WALL_DIST
+			ANGLE, SET_DIST, LEFT_ON, RIGHT_ON, WALL_DIST
 		};
-		
+
 		typedef enum RobotMethod {
 			ALIGN_THEN_SHOOT
 		};
-		
+
 		typedef union {
-			DriveMethod driveMethod;
-			AccumulatorMethod accumulatorMethod;
-			ShooterMethod shooterMethod;
-			ExtensionMethod extensionMethod;
-			RangefinderMethod rangefinderMethod;
-			RobotMethod robotMethod;
+				DriveMethod driveMethod;
+				AccumulatorMethod accumulatorMethod;
+				ShooterMethod shooterMethod;
+				ExtensionMethod extensionMethod;
+				RangefinderMethod rangefinderMethod;
+				RobotMethod robotMethod;
 		} Method;
 
 		RobotCommand(RobotCommand::SubsystemType subsystemType, Method methodType, void *args);
@@ -91,9 +70,9 @@ class RobotCommand {
 };
 
 typedef union Method {
-	RobotCommand::DriveMethod driveMethod;
-	RobotCommand::ShooterMethod shooterMethod;
-	RobotCommand::AccumulatorMethod accumulatorMethod;
+		RobotCommand::DriveMethod driveMethod;
+		RobotCommand::ShooterMethod shooterMethod;
+		RobotCommand::AccumulatorMethod accumulatorMethod;
 } Method;
 
 #endif

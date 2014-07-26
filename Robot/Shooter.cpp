@@ -1,7 +1,7 @@
 #include "Shooter.h"
 
 Shooter::Shooter() :
-	shooterVic1((uint32_t) PORT_SHOOTER_VIC_1), shooterVic2((uint32_t) PORT_SHOOTER_VIC_2),
+			shooterVic1((uint32_t) PORT_SHOOTER_VIC_1), shooterVic2((uint32_t) PORT_SHOOTER_VIC_2),
 			shooterVic3((uint32_t) PORT_SHOOTER_VIC_3), shooterVic4((uint32_t) PORT_SHOOTER_VIC_4),
 
 			loaderVic((uint32_t) PORT_LOADER_VIC),

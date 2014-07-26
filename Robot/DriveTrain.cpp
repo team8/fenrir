@@ -50,6 +50,15 @@ void DriveTrain::init() {
 	rightBackController.Enable();
 	state = STOP_VICTORS;
 }
+
+void DriveTrain::disable() {
+	leftFrontController.Disable();
+	rightFrontController.Disable();
+	leftBackController.Disable();
+	rightBackController.Disable();
+	stopVictors();
+}
+
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
 
@@ -86,18 +95,18 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-			//			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-			//			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-			//			leftFrontVic.Set(-leftSpeed);
-			//			leftBackVic.Set(-leftSpeed);
-			//			rightFrontVic.Set(rightSpeed);
-			//			rightBackVic.Set(rightSpeed);
+//						double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+//						double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+//						leftFrontVic.Set(-leftSpeed);
+//						leftBackVic.Set(-leftSpeed);
+//						rightFrontVic.Set(rightSpeed);
+//						rightBackVic.Set(rightSpeed);
 
 			leftFrontVic.Set(leftFrontController.Get());
 			leftBackVic.Set(leftBackController.Get());
 			rightFrontVic.Set(-rightFrontController.Get());
 			rightBackVic.Set(-rightBackController.Get());
-			std::cout << "leftFrontPID: " << leftFrontController.Get << std::endl;
+			std::cout << "leftFrontPID: " << leftFrontController.Get() << std::endl;
 			std::cout << "rightFrontPID: " << rightFrontController.Get() << std::endl;
 			std::cout << "supposed rate: " << leftFrontController.GetSetpoint() << std::endl;
 		break;
@@ -118,10 +127,10 @@ void DriveTrain::update() {
 		break;
 
 		case STOP_VICTORS:
-			leftFrontVic.Set(0);
-			leftBackVic.Set(0);
-			rightFrontVic.Set(0);
-			rightBackVic.Set(0);
+			leftFrontVic.Set(0.0);
+			leftBackVic.Set(0.0);
+			rightFrontVic.Set(0.0);
+			rightBackVic.Set(0.0);
 		break;
 	}
 }
@@ -152,14 +161,14 @@ void DriveTrain::driveD(double dist) {
 void DriveTrain::setSpeed(double spd) {
 
 	double rate = spd * CIM_MAX_RATE;
-
-	leftFrontController.SetSetpoint(rate);
-	rightFrontController.SetSetpoint(rate);
-	leftBackController.SetSetpoint(rate);
-	rightBackController.SetSetpoint(rate);
-
+	if (::absolute(rate) <= 0.01) { rate = 0; }
 	targetRate = rate;
-	targetSpeed = spd;
+	leftFrontController.SetSetpoint(targetRate);
+	rightFrontController.SetSetpoint(targetRate);
+	leftBackController.SetSetpoint(targetRate);
+	rightBackController.SetSetpoint(targetRate);
+	std::cout << "rate: " << rate << std::endl;
+	std::cout << "targetRate: " << targetRate << std::endl;
 	state = ROTATE_SPEED;
 }
 
@@ -181,6 +190,10 @@ void DriveTrain::rotateS(double speed) {
 }
 
 void DriveTrain::stopVictors() {
+	leftFrontVic.Set(0.0);
+	leftBackVic.Set(0.0);
+	rightFrontVic.Set(0.0);
+	rightBackVic.Set(0.0);
 	state = STOP_VICTORS;
 }
 
@@ -191,3 +204,11 @@ double DriveTrain::getRightEnc() {
 double DriveTrain::getLeftEnc() {
 	return leftEnc.GetDistance();
 }
+
+double absolute(double n) {
+	if (n < 0) {
+		return -n;
+	}
+	return n;
+}
+
