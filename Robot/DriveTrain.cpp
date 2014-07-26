@@ -95,12 +95,12 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-//						double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-//						double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-//						leftFrontVic.Set(-leftSpeed);
-//						leftBackVic.Set(-leftSpeed);
-//						rightFrontVic.Set(rightSpeed);
-//						rightBackVic.Set(rightSpeed);
+			//						double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+			//						double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+			//						leftFrontVic.Set(-leftSpeed);
+			//						leftBackVic.Set(-leftSpeed);
+			//						rightFrontVic.Set(rightSpeed);
+			//						rightBackVic.Set(rightSpeed);
 
 			leftFrontVic.Set(leftFrontController.Get());
 			leftBackVic.Set(leftBackController.Get());
@@ -161,7 +161,9 @@ void DriveTrain::driveD(double dist) {
 void DriveTrain::setSpeed(double spd) {
 
 	double rate = spd * CIM_MAX_RATE;
-	if (::absolute(rate) <= 0.01) { rate = 0; }
+	if (::absolute(rate) <= 0.01) {
+		rate = 0;
+	}
 	targetRate = rate;
 	leftFrontController.SetSetpoint(targetRate);
 	rightFrontController.SetSetpoint(targetRate);

@@ -9,11 +9,11 @@
 
 HumanController::HumanController(Robot *robotPointer) :
 #if defined JOYSTICK_CONTROLS
-		speedStick((uint32_t) PORT_SPEED), 
-		turnStick((uint32_t) PORT_TURN), 
-		operatorStick((uint32_t) PORT_OPERATOR)
+			speedStick((uint32_t) PORT_SPEED), 
+			turnStick((uint32_t) PORT_TURN), 
+			operatorStick((uint32_t) PORT_OPERATOR)
 #elif defined XBOX_CONTROLS
-		xbox((uint32_t)PORT_XBOX)
+			xbox((uint32_t)PORT_XBOX)
 #endif
 {
 #ifdef JOYSTICK_CONTROLS
@@ -79,11 +79,6 @@ void HumanController::update() {
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 		robot->setCommand(command);
-
-//		RobotCommand::Method eject;
-//		eject.shooterMethod = RobotCommand::EJECT;
-//		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
-//		robot->setCommand(ejectCommand);
 
 	} else {
 		RobotCommand::Method stopAccumulator;
