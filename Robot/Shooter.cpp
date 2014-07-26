@@ -1,21 +1,15 @@
 #include "Shooter.h"
 
 Shooter::Shooter() :
-			shooterVic1((uint32_t) PORT_SHOOTER_VIC_1),
-			shooterVic2((uint32_t) PORT_SHOOTER_VIC_2),
-			shooterVic3((uint32_t) PORT_SHOOTER_VIC_3),
-			shooterVic4((uint32_t) PORT_SHOOTER_VIC_4),
+	shooterVic1((uint32_t) PORT_SHOOTER_VIC_1), shooterVic2((uint32_t) PORT_SHOOTER_VIC_2),
+			shooterVic3((uint32_t) PORT_SHOOTER_VIC_3), shooterVic4((uint32_t) PORT_SHOOTER_VIC_4),
 
 			loaderVic((uint32_t) PORT_LOADER_VIC),
 
-			encShooter1((uint32_t) PORT_SHOOTER_ENCODER_1A,
-					(uint32_t) PORT_SHOOTER_ENCODER_1B, true),
-			encShooter2((uint32_t) PORT_SHOOTER_ENCODER_2A,
-					(uint32_t) PORT_SHOOTER_ENCODER_2B, true),
-			encShooter3((uint32_t) PORT_SHOOTER_ENCODER_3A,
-					(uint32_t) PORT_SHOOTER_ENCODER_3B, true),
-			encShooter4((uint32_t) PORT_SHOOTER_ENCODER_4A,
-					(uint32_t) PORT_SHOOTER_ENCODER_4B, true),
+			encShooter1((uint32_t) PORT_SHOOTER_ENCODER_1A, (uint32_t) PORT_SHOOTER_ENCODER_1B, true),
+			encShooter2((uint32_t) PORT_SHOOTER_ENCODER_2A, (uint32_t) PORT_SHOOTER_ENCODER_2B, true),
+			encShooter3((uint32_t) PORT_SHOOTER_ENCODER_3A, (uint32_t) PORT_SHOOTER_ENCODER_3B, true),
+			encShooter4((uint32_t) PORT_SHOOTER_ENCODER_4A, (uint32_t) PORT_SHOOTER_ENCODER_4B, true),
 
 			encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 			encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),

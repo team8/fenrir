@@ -2,63 +2,63 @@
 #include <stdlib.h>
 #include <cmath>
 /* Command example - How to issue commands
-  void * argPointer = malloc(sizeof(DriveArgs)); //this lets you access the drive args stored in command
-  argPointer -> variable in DriveArgs = Enter parameter here; //this lets you set a variable to what you want
-  robot.setCommand(Command command(false, DRIVE, Method, argPointer)); //replace Method with appropriate method
+ void * argPointer = malloc(sizeof(DriveArgs)); //this lets you access the drive args stored in command
+ argPointer -> variable in DriveArgs = Enter parameter here; //this lets you set a variable to what you want
+ robot.setCommand(Command command(false, DRIVE, Method, argPointer)); //replace Method with appropriate method
  */
 
-HumanController::HumanController(Robot *robotPointer):
+HumanController::HumanController(Robot *robotPointer) :
 #if defined JOYSTICK_CONTROLS
-	speedStick((uint32_t)PORT_SPEED),
-	turnStick((uint32_t)PORT_TURN),
-	operatorStick((uint32_t)PORT_OPERATOR)
+		speedStick((uint32_t) PORT_SPEED), 
+		turnStick((uint32_t) PORT_TURN), 
+		operatorStick((uint32_t) PORT_OPERATOR)
 #elif defined XBOX_CONTROLS
-	xbox((uint32_t)PORT_XBOX)
+		xbox((uint32_t)PORT_XBOX)
 #endif
-{  
+{
 #ifdef JOYSTICK_CONTROLS
 	prevZ = false;
 	prevStop = false;
 #endif
 	this->robot = robotPointer;
-} 
+}
 
 void HumanController::update() {
 	void *argPointer = malloc(sizeof(DriveArgs));
 
 #ifdef JOYSTICK_CONTROLS
-//	if (speedStick.GetTrigger()) {
-//		RobotCommand::Method findRange;
-//		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
-//		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
-//		robot->setCommand(command);
-//	}
+	//	if (speedStick.GetTrigger()) {
+	//		RobotCommand::Method findRange;
+	//		findRange.rangefinderMethod = RobotCommand::WALL_DIST;
+	//		RobotCommand command(RobotCommand::RANGEFINDER, findRange, 0);
+	//		robot->setCommand(command);
+	//	}
 #endif
 
-	if(abs(getTurnStick())<=.1 && abs(getSpeedStick())<=.1) {
+	if (abs(getTurnStick()) <= .1 && abs(getSpeedStick()) <= .1) {
 
-		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 
-		((DriveArgs*)argPointer) -> rotSpeed = 0;
+		((DriveArgs*) argPointer) -> rotSpeed = 0;
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
 		robot->setCommand(rotateCommand);
 	}
-	if(abs(getSpeedStick())>0.1){
-		((DriveArgs*)argPointer)->speedValue = getSpeedStick();
+	if (abs(getSpeedStick()) > 0.1) {
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 	}
 
-	if(abs(getTurnStick())>0.1){
-		((DriveArgs*)argPointer) -> rotSpeed = getTurnStick();
+	if (abs(getTurnStick()) > 0.1) {
+		((DriveArgs*) argPointer) -> rotSpeed = getTurnStick();
 		RobotCommand::Method rotSpeed;
 		rotSpeed.driveMethod = RobotCommand::ROTATESPEED;
 		RobotCommand rotateCommand(RobotCommand::DRIVE, rotSpeed, argPointer);
@@ -67,19 +67,19 @@ void HumanController::update() {
 
 	/*ACCUMULATOR Joystick Controls*/
 #if defined JOYSTICK_CONTROLS
-	if(getAccumulatorStick()<-0.2) {
+	if (getAccumulatorStick() < -0.2) {
 		RobotCommand::Method setAccumulator;
 		setAccumulator.accumulatorMethod = RobotCommand::ACCUMULATE;
 		RobotCommand command(RobotCommand::ACCUMULATOR, setAccumulator, 0);
 		robot->setCommand(command);
 		prevStop = false;
-	} else if(getAccumulatorStick()>0.2) {
-		
+	} else if (getAccumulatorStick() > 0.2) {
+
 		RobotCommand::Method pass;
 		pass.accumulatorMethod = RobotCommand::PASS;
 		RobotCommand command(RobotCommand::ACCUMULATOR, pass, 0);
 		robot->setCommand(command);
-		
+
 		RobotCommand::Method eject;
 		eject.shooterMethod = RobotCommand::EJECT;
 		RobotCommand ejectCommand(RobotCommand::SHOOTER, eject, 0);
@@ -90,7 +90,7 @@ void HumanController::update() {
 		stopAccumulator.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand command(RobotCommand::ACCUMULATOR, stopAccumulator, 0);
 		robot->setCommand(command);
-		if(!prevStop) {
+		if (!prevStop) {
 			RobotCommand::Method idle;
 			idle.shooterMethod = RobotCommand::IDLE;
 			RobotCommand command(RobotCommand::RobotCommand::SHOOTER, idle, 0);
@@ -120,7 +120,6 @@ void HumanController::update() {
 	}
 #endif
 
-	
 	/*FLUSH Joystick Controls*/
 #ifdef JOYSTICK_CONTROLS
 	if (getFlushTrigger()) {
@@ -143,7 +142,7 @@ void HumanController::update() {
 		accuStop.accumulatorMethod = RobotCommand::STOP;
 		RobotCommand accuFlushCommand(RobotCommand::ACCUMULATOR, accuStop, 0);
 		robot->setCommand(accuFlushCommand);
-		
+
 		RobotCommand::Method shooterIdle;
 		shooterIdle.shooterMethod = RobotCommand::IDLE;
 		RobotCommand shooterIdleCommand(RobotCommand::SHOOTER, shooterIdle, 0);
@@ -172,7 +171,7 @@ void HumanController::update() {
 		shoot.shooterMethod = RobotCommand::MANUAL_FIRE;
 		RobotCommand command(RobotCommand::SHOOTER, shoot, 0);
 		robot->setCommand(command);
-		
+
 		if (getShootButton()) {
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::MANUAL_LOAD;
@@ -221,7 +220,6 @@ double HumanController::getSpeedStick() {
 #endif
 }
 
-
 double HumanController::getTurnStick() {
 #if defined JOYSTICK_CONTROLS
 	return turnStick.GetX();
@@ -255,7 +253,7 @@ int HumanController::getShootButton() {
 
 #ifdef JOYSTICK_CONTROLS
 bool HumanController::getFlushTrigger() {
-	return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
+	return operatorStick.GetRawButton((uint32_t) FLUSH_TRIGGER);
 }
 
 double HumanController::getOperatorZ() {
@@ -263,6 +261,6 @@ double HumanController::getOperatorZ() {
 }
 
 bool HumanController::getRangeButton() {
-	return operatorStick.GetRawButton((uint32_t)4);
-}	
+	return operatorStick.GetRawButton((uint32_t) 4);
+}
 #endif

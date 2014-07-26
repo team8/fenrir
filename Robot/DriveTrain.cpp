@@ -9,10 +9,8 @@ DriveTrain::DriveTrain() : // Victors
 			//gyroscope((uint32_t) PORT_GYRO),
 
 			// Encoders
-			leftEnc((uint32_t) PORT_ENCODER_LEFT_A,
-					(uint32_t) PORT_ENCODER_LEFT_B, false),
-			rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,
-					(uint32_t) PORT_ENCODER_RIGHT_B, true),
+			leftEnc((uint32_t) PORT_ENCODER_LEFT_A, (uint32_t) PORT_ENCODER_LEFT_B, false),
+			rightEnc((uint32_t) PORT_ENCODER_RIGHT_A, (uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 			// PIDControllers
 			leftFrontController(0.1, 0.01, 0.1, &leftEnc, &leftBackVic),
@@ -88,12 +86,12 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-//			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-//			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-//			leftFrontVic.Set(-leftSpeed);
-//			leftBackVic.Set(-leftSpeed);
-//			rightFrontVic.Set(rightSpeed);
-//			rightBackVic.Set(rightSpeed);
+			//			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+			//			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+			//			leftFrontVic.Set(-leftSpeed);
+			//			leftBackVic.Set(-leftSpeed);
+			//			rightFrontVic.Set(rightSpeed);
+			//			rightBackVic.Set(rightSpeed);
 
 			leftFrontVic.Set(leftFrontController.Get());
 			leftBackVic.Set(leftBackController.Get());
@@ -107,7 +105,6 @@ void DriveTrain::update() {
 		case DRIVE_DIST:
 			rightFrontVic.Set(-rightFrontController.Get());
 			rightBackVic.Set(-rightBackController.Get());
-
 			leftFrontVic.Set(leftFrontController.Get());
 			leftBackVic.Set(leftBackController.Get());
 
