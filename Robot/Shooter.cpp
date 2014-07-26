@@ -8,10 +8,14 @@ Shooter::Shooter() :
 
 			loaderVic((uint32_t) PORT_LOADER_VIC),
 
-			encShooter1((uint32_t) PORT_SHOOTER_ENCODER_1A, (uint32_t) PORT_SHOOTER_ENCODER_1B, true),
-			encShooter2((uint32_t) PORT_SHOOTER_ENCODER_2A, (uint32_t) PORT_SHOOTER_ENCODER_2B, true),
-			encShooter3((uint32_t) PORT_SHOOTER_ENCODER_3A, (uint32_t) PORT_SHOOTER_ENCODER_3B, true),
-			encShooter4((uint32_t) PORT_SHOOTER_ENCODER_4A, (uint32_t) PORT_SHOOTER_ENCODER_4B, true),
+			encShooter1((uint32_t) PORT_SHOOTER_ENCODER_1A,
+					(uint32_t) PORT_SHOOTER_ENCODER_1B, true),
+			encShooter2((uint32_t) PORT_SHOOTER_ENCODER_2A,
+					(uint32_t) PORT_SHOOTER_ENCODER_2B, true),
+			encShooter3((uint32_t) PORT_SHOOTER_ENCODER_3A,
+					(uint32_t) PORT_SHOOTER_ENCODER_3B, true),
+			encShooter4((uint32_t) PORT_SHOOTER_ENCODER_4A,
+					(uint32_t) PORT_SHOOTER_ENCODER_4B, true),
 
 			encController1(0.1, 0.1, 0.1, &encShooter1, &shooterVic1),
 			encController2(0.1, 0.1, 0.1, &encShooter2, &shooterVic2),
@@ -36,25 +40,25 @@ Shooter::Shooter() :
 void Shooter::runCommand(RobotCommand command) {
 	ShooterArgs* args = (ShooterArgs*) command.argPointer;
 	switch (command.getMethod().shooterMethod) {
-	case RobotCommand::MANUAL_LOAD:
-		state = M_LOAD;
+		case RobotCommand::MANUAL_LOAD:
+			state = M_LOAD;
 		break;
-	case RobotCommand::MANUAL_FIRE:
-		state = M_FIRE;
+		case RobotCommand::MANUAL_FIRE:
+			state = M_FIRE;
 		break;
-	case RobotCommand::FIRE:
-		shootTimer.Reset();
-		shootTimer.Start();
-		state = PREPARING;
+		case RobotCommand::FIRE:
+			shootTimer.Reset();
+			shootTimer.Start();
+			state = PREPARING;
 		break;
-	case RobotCommand::EJECT:
-		state = EJECT;
+		case RobotCommand::EJECT:
+			state = EJECT;
 		break;
-	case RobotCommand::IDLE:
-		state = IDLE;
+		case RobotCommand::IDLE:
+			state = IDLE;
 		break;
-	case RobotCommand::FLUSH:
-		state = FLUSH;
+		case RobotCommand::FLUSH:
+			state = FLUSH;
 		break;
 	}
 	free(args);
@@ -63,38 +67,39 @@ void Shooter::runCommand(RobotCommand command) {
 void Shooter::update() {
 	//for certain cases, will not automatically switch case, waits for timer
 	switch (state) {
-	// M FOR MANUAL
-	case M_FIRE:
-		startShooterVics(1.0);
-		break;
-	case M_LOAD:
-		loaderVic.Set(LOAD_SPEED);
-		break;
-	case IDLE:
-		setAllVics(0);
-		break;
-		//Prepares AND Aligns simultaneously
-	case PREPARING:
-		if (!shootTimer.HasPeriodPassed(3.0)) {
+		// M FOR MANUAL
+		case M_FIRE:
 			startShooterVics(1.0);
-		} else {
-			std::printf("fire\n");
-			state = FIRING;
-			shootTimer.Reset();
-		}
 		break;
-	case FIRING:
-		if (!shootTimer.HasPeriodPassed(3.0)) {
+		case M_LOAD:
 			loaderVic.Set(LOAD_SPEED);
-		} else {
-			state = IDLE;
-		}
 		break;
-	case EJECT:
-		eject();
+		case IDLE:
+			setAllVics(0);
 		break;
-	case FLUSH:
-		setAllVics(-0.50);
+			//Prepares AND Aligns simultaneously
+		case PREPARING:
+			if (!shootTimer.HasPeriodPassed(3.0)) {
+				startShooterVics(1.0);
+				loaderVic.Set(0.0);
+			} else {
+				std::printf("fire\n");
+				state = FIRING;
+				shootTimer.Reset();
+			}
+		break;
+		case FIRING:
+			if (!shootTimer.HasPeriodPassed(3.0)) {
+				loaderVic.Set(LOAD_SPEED);
+			} else {
+				state = IDLE;
+			}
+		break;
+		case EJECT:
+			eject();
+		break;
+		case FLUSH:
+			setAllVics(-0.50);
 		break;
 	}
 }
