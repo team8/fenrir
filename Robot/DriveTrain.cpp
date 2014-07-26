@@ -14,10 +14,10 @@ DriveTrain::DriveTrain() :
 	rightEnc((uint32_t) PORT_ENCODER_RIGHT_A,(uint32_t) PORT_ENCODER_RIGHT_B, true),
 
 	// PIDControllers
-	leftFrontController(0.1, 0.1, 0.1, &leftEnc, &leftBackVic),
-	rightFrontController(0.1, 0.1, 0.1, &rightEnc, &rightBackVic),
-	leftBackController(0.1, .1, .1, &leftEnc, &leftFrontVic),
-	rightBackController(.1, .1, .1, &rightEnc, &rightBackVic )
+	leftFrontController(0.1, 0.01, 0.1, &leftEnc, &leftBackVic),
+	rightFrontController(0.1, 0.01, 0.1, &rightEnc, &rightBackVic),
+	leftBackController(0.1, .01, .1, &leftEnc, &leftFrontVic),
+	rightBackController(.1, .01, .1, &rightEnc, &rightBackVic )
 	//angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	rotateSpeed = 0;
@@ -83,19 +83,19 @@ void DriveTrain::update() {
 		 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 		 *Logic: Right victor is negative because we are turning
 		*/
-		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-		double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
-		leftFrontVic.Set(-leftSpeed);
-		leftBackVic.Set(-leftSpeed);
-		rightFrontVic.Set(rightSpeed);
-		rightBackVic.Set(rightSpeed);
-//		rightFrontVic.Set(-rightFrontController.Get());
-//		rightBackVic.Set(-rightBackController.Get());
-//		leftFrontVic.Set(leftFrontController.Get());
-//		leftBackVic.Set(leftBackController.Get());
-//		
-//		std::printf("leftRate: %g \n", leftEnc.GetRate());
-//		std::printf("rightRate: %g \n", rightEnc.GetRate());
+//		double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+//		double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+//		leftFrontVic.Set(-leftSpeed);
+//		leftBackVic.Set(-leftSpeed);
+//		rightFrontVic.Set(rightSpeed);
+//		rightBackVic.Set(rightSpeed);
+		rightFrontVic.Set(-rightFrontController.Get());
+		rightBackVic.Set(-rightBackController.Get());
+		leftFrontVic.Set(leftFrontController.Get());
+		leftBackVic.Set(leftBackController.Get());
+		
+		std::printf("leftRate: %g \n", leftEnc.GetRate());
+		std::printf("rightRate: %g \n", rightEnc.GetRate());
 		break;
 
 	case DRIVE_DIST:
@@ -147,13 +147,25 @@ void DriveTrain::driveD(double dist) {
 //sets the spd of all vics to the specified amount between 1.0 and -1.0
 //Makes robot go straight
 void DriveTrain::setSpeed(double spd) {
-//	double speed = spd*CIM_MAX_RATE;
-//	
-//	leftFrontController.SetSetpoint(speed);
-//	rightFrontController.SetSetpoint(speed);
-//	leftBackController.SetSetpoint(speed);
-//	rightBackController.SetSetpoint(speed);
-	targetSpeed = spd;
+
+	double rate = spd*CIM_MAX_RATE;
+	
+	leftEnc.Reset();
+	rightEnc.Reset();
+	leftFrontController.Reset();
+	leftBackController.Reset();
+	rightFrontController.Reset();
+	rightBackController.Reset();
+	leftFrontController.SetSetpoint(rate);
+	rightFrontController.SetSetpoint(rate);
+	leftBackController.SetSetpoint(rate);
+	rightBackController.SetSetpoint(rate);
+	leftFrontController.Enable();
+	rightFrontController.Enable();
+	leftBackController.Enable();
+	rightBackController.Enable();
+
+	//targetSpeed = spd;
 	state = ROTATE_SPEED;
 }
 
