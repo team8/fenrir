@@ -1,8 +1,9 @@
 /***########*******Only one of these should be defined at a time*******#######***/
 #define JOYSTICK_CONTROLS
 #ifndef JOYSTICK_CONTROLS
-#define XBOX_CONTROLS
+#define XBOX_CONTROLS /*##$$$$$$$$$$$$$$%%%%@!#$^^ NEVER PUT ON XBOX_CONTROLS. BROKEN. *u#(@*%u(@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #endif
+
 
 /*Joystick and XBox Ports*/
 #if defined JOYSTICK_CONTROLS
@@ -13,7 +14,7 @@
 #define PORT_XBOX 1
 #endif
 
-#define CIM_MAX_RATE .5 //
+#define CIM_MAX_RATE 10 //
 //Helps refine sensitivity of joystiks
 #define SPEED_SENSITIVITY 0.5
 #define ROTATE_SENSITIVITY
