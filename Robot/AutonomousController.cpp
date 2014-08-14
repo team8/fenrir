@@ -20,10 +20,10 @@ void AutonomousController::pathOne(){
 
 	//Drive into position
 	void *argPointer = malloc(sizeof(DriveArgs));
-	((DriveArgs *) argPointer) -> driveDist = 10; //This value is not confirmed
-	RobotCommand::Method setSpeed;
-	setSpeed.driveMethod = RobotCommand::DRIVEDIST;
-	RobotCommand positionCommand(RobotCommand::DRIVE, setSpeed, argPointer);
+	((DriveArgs *) argPointer) -> driveDist = 100; //This value is not confirmed
+	RobotCommand::Method driveDist;
+	driveDist.driveMethod = RobotCommand::DRIVEDIST;
+	RobotCommand positionCommand(RobotCommand::DRIVE, driveDist, argPointer);
 	robot -> setCommand(positionCommand);
 
 	//Use rangefinders to calibrate exactly
