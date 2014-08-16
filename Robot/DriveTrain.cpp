@@ -20,6 +20,7 @@ DriveTrain::DriveTrain() : // Victors
 //angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	std::printf("Drive train constructor\n");
+	proportionalGain = 1.1;
 	//gyroscope.Start();
 	//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
@@ -90,7 +91,6 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-			
 			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
 			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
 		//	std::cout << "left: " << leftEnc.Get() << "      right: " << rightEnc.Get() << std::endl;
@@ -113,7 +113,7 @@ void DriveTrain::update() {
 		break;
 
 		case DRIVE_DIST:
-			std::cout << "leftEnc: " << leftEnc.Get() << "      rightEnc: " << rightEnc.Get() << std::endl;
+			std::cout << "leftEnc: " << leftEnc.GetRate() << "      rightEnc: " << rightEnc.GetRate() << std::endl;
 			std::cout << "leftBCtrlr: " << -leftBackController.Get() << "   rightBCtrlr: " << -rightBackController.Get() << std::endl;
 			std::cout << "leftFCtrlr: " << -leftFrontController.Get() << "   rightFCtrlr: " << -rightFrontController.Get() << std::endl;
 			rightFrontVic.Set(-rightFrontController.Get());
@@ -173,6 +173,12 @@ void DriveTrain::setSpeed(double spd) {
 //	rightFrontController.Enable();
 //	leftBackController.Enable();
 //	rightBackController.Enable();
+//  derivative rate of change
+//  proportional gain
+//  
+	double leftError = targetSpeed - leftEnc.GetRate();
+	leftError *= 1.1; 
+	
 	targetSpeed = spd;
 	
 	state = ROTATE_SPEED;

@@ -35,6 +35,8 @@ class DriveTrain {
 		// For testing
 		double prevLeftDist;
 		double prevRightDist;
+		
+		double proportionalGain; 
 
 		//state 
 		typedef enum DriveState {
