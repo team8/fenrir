@@ -181,6 +181,14 @@ void DriveTrain::setSpeed(double spd) {
 	double leftOut = leftError*proportional;
 	double rightError = targetSpeed - rightEnc.GetRate();
 	double rightOut = rightout*proportional;
+	if(targetSpeed>0) {
+		if(leftError < 0) {
+			leftError == CIM_MAX_RATE-leftError;
+		}
+		if(rightError < 0) {
+			rightError == CIM_MAX_RATE-rightError;
+		}
+	}
 	
 	/*MAX AND MIN*/
 	leftOut = leftOut/CIM_MAX_RATE;
