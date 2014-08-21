@@ -173,13 +173,18 @@ void DriveTrain::setSpeed(double spd) {
 //	rightFrontController.Enable();
 //	leftBackController.Enable();
 //	rightBackController.Enable();
-//  derivative rate of change
-//  proportional gain
-//  
-	double leftError = targetSpeed - leftEnc.GetRate();
-	leftError *= 1.1; 
-	
 	targetSpeed = spd;
+	
+	/*PROPORTIONAL*/
+	double proportional = 1.1;
+	double leftError = targetSpeed - leftEnc.GetRate();
+	double leftOut = leftError*proportional;
+	double rightError = targetSpeed - rightEnc.GetRate();
+	double rightOut = rightout*proportional;
+	
+	/*MAX AND MIN*/
+	leftOut = leftOut/CIM_MAX_RATE;
+	rightOut = rightOUt/CIM_MAX_RATE;
 	
 	state = ROTATE_SPEED;
 }
