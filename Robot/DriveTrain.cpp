@@ -21,7 +21,7 @@ DriveTrain::DriveTrain() : // Victors
 {
 	std::printf("Drive train constructor\n");
 	leftOut = 0;
-	rightOUt = 0;
+	rightOut = 0;
 	//gyroscope.Start();
 	//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
@@ -58,9 +58,8 @@ void DriveTrain::disable() {
 
 //runs method according to what newCommand is received
 void DriveTrain::runCommand(RobotCommand command) {
-
 	DriveArgs* args = (DriveArgs*) command.argPointer;
-	switch (command.getMethod().driveMethod) {
+	switch(command.getMethod().driveMethod) {
 		case RobotCommand::SETSPEED:
 			setSpeed(args -> speedValue);
 		break;
@@ -81,12 +80,10 @@ void DriveTrain::runCommand(RobotCommand command) {
 }
 
 void DriveTrain::update() {
-
-	switch (state) {
+	switch(state) {
 		case ROTATE_SPEED:
-
 			/*
-			 *Logic: Take speed you want to generally go at (targetSpeed)
+			 *Logic: Take speed you want (targetSpeed)
 			 *Logic: leftVic goes positive, rightVic goes negative
 			 *Logic: Vics are restricted to -1,1, so min-max to that range
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
@@ -101,16 +98,6 @@ void DriveTrain::update() {
 			leftBackVic.Set(-leftSpeed);
 			rightFrontVic.Set(rightSpeed);
 			rightBackVic.Set(rightSpeed);
-
-//			leftFrontVic.Set(leftFrontController.Get());
-//			leftBackVic.Set(leftBackController.Get());
-//			rightFrontVic.Set(-rightFrontController.Get());
-//			rightBackVic.Set(-rightBackController.Get());
-//			std::cout << "leftFrontPID: " << leftFrontController.Get() << std::endl;
-//			std::cout << "rightFrontPID: " << rightFrontController.Get() << std::endl;
-//			std::cout << "supposed rate: " << leftFrontController.GetSetpoint() << std::endl;
-//			std::cout << "targetRate: " << targetRate << std::endl;
-
 		break;
 
 		case DRIVE_DIST:
@@ -123,14 +110,6 @@ void DriveTrain::update() {
 			leftBackVic.Set(leftBackController.Get());
 
 		break;
-
-		case TURN_ANGLE:
-			//		leftFrontVic.Set(-(angleController.Get()));
-			//		leftBackVic.Set(-(angleController.Get()));
-			//		rightFrontVic.Set(angleController.Get());
-			//		rightBackVic.Set(angleController.Get());
-		break;
-
 		case STOP_VICTORS:
 			leftFrontVic.Set(0.0);
 			leftBackVic.Set(0.0);
@@ -204,15 +183,6 @@ void DriveTrain::setSpeed(double spd) {
 	rightOut = rightError*proportional/CIM_MAX_RATE;
 	
 	state = ROTATE_SPEED;
-}
-
-//lets you rotate in place
-void DriveTrain::rotateA(double angle) {
-	//	gyroscope.Reset();
-	//	angleController.SetSetpoint(angle);
-	//	angleController.Enable();
-	//	rotateAngle = angle;
-	state = TURN_ANGLE;
 }
 
 //Sets speed of rotation
