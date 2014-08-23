@@ -3,7 +3,7 @@
 DriveTrain::DriveTrain() : // Victors
 			leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
 			leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
-			rightFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
+			rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
 			rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
 			//gyroscope((uint32_t) PORT_GYRO),
@@ -99,7 +99,6 @@ void DriveTrain::update() {
 			rightFrontVic.Set(rightSpeed);
 			rightBackVic.Set(rightSpeed);
 		break;
-
 		case DRIVE_DIST:
 			std::cout << "leftEnc: " << leftEnc.GetRate() << "      rightEnc: " << rightEnc.GetRate() << std::endl;
 			std::cout << "leftBCtrlr: " << -leftBackController.Get() << "   rightBCtrlr: " << -rightBackController.Get() << std::endl;
