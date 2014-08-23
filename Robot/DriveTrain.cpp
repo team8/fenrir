@@ -20,7 +20,8 @@ DriveTrain::DriveTrain() : // Victors
 //angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	std::printf("Drive train constructor\n");
-	proportionalGain = 1.1;
+	leftOut = 0;
+	rightOUt = 0;
 	//gyroscope.Start();
 	//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
