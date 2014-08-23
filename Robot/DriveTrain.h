@@ -38,8 +38,6 @@ class DriveTrain {
 		
 		double leftOut;
 		double rightOut;
-		
-		double proportionalGain; 
 
 		//state 
 		typedef enum DriveState {
