@@ -36,6 +36,9 @@ class DriveTrain {
 		double prevLeftDist;
 		double prevRightDist;
 		
+		double leftOut;
+		double rightOut;
+		
 		double proportionalGain; 
 
 		//state 
