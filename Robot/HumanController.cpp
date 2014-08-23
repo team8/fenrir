@@ -39,7 +39,7 @@ void HumanController::update() {
 
 		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED*CIM_MAX_RATE;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 
@@ -52,7 +52,7 @@ void HumanController::update() {
 	if (abs(getSpeedStick()) > 0.1) {
 		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED*CIM_MAX_RATE;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 	}

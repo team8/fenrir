@@ -41,7 +41,7 @@ class DriveTrain {
 
 		//state 
 		typedef enum DriveState {
-			DRIVE_DIST, ROTATE_SPEED, TURN_ANGLE, STOP_VICTORS
+			DRIVE_DIST, ROTATE_SPEED, STOP_VICTORS
 		} DriveState;
 		DriveState state;
 
