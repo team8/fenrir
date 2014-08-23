@@ -178,10 +178,10 @@ void DriveTrain::setSpeed(double spd) {
 	/*PROPORTIONAL*/
 	double proportional = 1.1;
 	double leftError = targetSpeed - leftEnc.GetRate();
-	double leftOut = leftError*proportional;
+	
 	double rightError = targetSpeed - rightEnc.GetRate();
-	double rightOut = rightout*proportional;
-	if(targetSpeed>0) {
+	
+	if(targetSpeed>=0) {
 		if(leftError < 0) {
 			leftError == CIM_MAX_RATE-leftError;
 		}
@@ -190,9 +190,17 @@ void DriveTrain::setSpeed(double spd) {
 		}
 	}
 	
+	else if(targetSpeed<0) {
+		if(leftError > 0) {
+			leftError == -CIM_MAX_RATE+leftError;
+		}
+		if(rightError > 0) {
+			leftError == -CIM_MAX_RATE+rightError;
+		}
+	}
 	/*MAX AND MIN*/
-	leftOut = leftOut/CIM_MAX_RATE;
-	rightOut = rightOUt/CIM_MAX_RATE;
+	leftOut = leftError*proportional/CIM_MAX_RATE;
+	rightOut = rightError*proportional/CIM_MAX_RATE;
 	
 	state = ROTATE_SPEED;
 }
