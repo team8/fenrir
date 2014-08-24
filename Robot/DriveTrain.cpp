@@ -162,13 +162,12 @@ void DriveTrain::setSpeed(double spd) {
 	
 	if(targetSpeed>=0) {
 		if(leftError < 0) {
-			leftError == CIM_MAX_RATE-leftError;
+			leftError == CIM_MAX_RATE-leftError; //you're adding to cimmaxrate? what? (+)-(-)? what
 		}
 		if(rightError < 0) {
 			rightError == CIM_MAX_RATE-rightError;
 		}
 	}
-	
 	else if(targetSpeed<0) {
 		if(leftError > 0) {
 			leftError == -CIM_MAX_RATE+leftError;
