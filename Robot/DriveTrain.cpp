@@ -41,7 +41,6 @@ void DriveTrain::init() {
 	leftEnc.SetDistancePerPulse(.0813);//(.07849);
 	rightEnc.SetPIDSourceParameter(PIDSource::kDistance);
 	leftEnc.SetPIDSourceParameter(PIDSource::kDistance);
-	state = STOP_VICTORS;
 }
 
 void DriveTrain::disable() {
@@ -154,31 +153,31 @@ void DriveTrain::setSpeed(double spd) {
 //	rightBackController.Enable();
 	targetSpeed = spd;
 	
-	/*PROPORTIONAL*/
-	double proportional = 1.1;
-	double leftError = targetSpeed - leftEnc.GetRate();
-	
-	double rightError = targetSpeed - rightEnc.GetRate();
-	
-	if(targetSpeed>=0) {
-		if(leftError < 0) {
-			leftError == CIM_MAX_RATE-leftError; //you're adding to cimmaxrate? what? (+)-(-)? what
-		}
-		if(rightError < 0) {
-			rightError == CIM_MAX_RATE-rightError;
-		}
-	}
-	else if(targetSpeed<0) {
-		if(leftError > 0) {
-			leftError == -CIM_MAX_RATE+leftError;
-		}
-		if(rightError > 0) {
-			leftError == -CIM_MAX_RATE+rightError;
-		}
-	}
-	/*MAX AND MIN*/
-	leftOut = leftError*proportional/CIM_MAX_RATE;
-	rightOut = rightError*proportional/CIM_MAX_RATE;
+//	/*PROPORTIONAL*/
+//	double proportional = 1.1;
+//	double leftError = targetSpeed - leftEnc.GetRate();
+//	
+//	double rightError = targetSpeed - rightEnc.GetRate();
+//	
+//	if(targetSpeed>=0) {
+//		if(leftError < 0) {
+//			leftError == CIM_MAX_RATE-leftError; //you're adding to cimmaxrate? what? (+)-(-)? what
+//		}
+//		if(rightError < 0) {
+//			rightError == CIM_MAX_RATE-rightError;
+//		}
+//	}
+//	else if(targetSpeed<0) {
+//		if(leftError > 0) {
+//			leftError == -CIM_MAX_RATE+leftError;
+//		}
+//		if(rightError > 0) {
+//			leftError == -CIM_MAX_RATE+rightError;
+//		}
+//	}
+//	/*MAX AND MIN*/
+//	leftOut = leftError*proportional/CIM_MAX_RATE;
+//	rightOut = rightError*proportional/CIM_MAX_RATE;
 	
 	state = ROTATE_SPEED;
 }
