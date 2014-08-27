@@ -3,7 +3,7 @@
 DriveTrain::DriveTrain() : // Victors
 			leftFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
 			leftBackVic((uint32_t) PORT_DRIVE_VIC_LEFT_BACK),
-			rightFrontVic((uint32_t) PORT_DRIVE_VIC_LEFT_FRONT),
+			rightFrontVic((uint32_t) PORT_DRIVE_VIC_RIGHT_FRONT),
 			rightBackVic((uint32_t) PORT_DRIVE_VIC_RIGHT_BACK),
 
 			//gyroscope((uint32_t) PORT_GYRO),
@@ -21,7 +21,7 @@ DriveTrain::DriveTrain() : // Victors
 {
 	std::printf("Drive train constructor\n");
 	leftOut = 0;
-	rightOUt = 0;
+	rightOut = 0;
 	//gyroscope.Start();
 	//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
@@ -189,9 +189,7 @@ void DriveTrain::setSpeed(double spd) {
 		if(rightError < 0) {
 			rightError == CIM_MAX_RATE-rightError;
 		}
-	}
-	
-	else if(targetSpeed<0) {
+	} else if(targetSpeed<0) {
 		if(leftError > 0) {
 			leftError == -CIM_MAX_RATE+leftError;
 		}

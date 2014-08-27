@@ -37,9 +37,9 @@ void HumanController::update() {
 
 	if (abs(getTurnStick()) <= .1 && abs(getSpeedStick()) <= .1) {
 
-		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick()*CIM_MAX_RATE;
 		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED*CIM_MAX_RATE;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 
@@ -50,9 +50,9 @@ void HumanController::update() {
 		robot->setCommand(rotateCommand);
 	}
 	if (abs(getSpeedStick()) > 0.1) {
-		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick()*CIM_MAX_RATE;
 		RobotCommand::Method setSpeed;
-		setSpeed.driveMethod = RobotCommand::SETSPEED*CIM_MAX_RATE;
+		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
 		robot->setCommand(speedCommand);
 	}
