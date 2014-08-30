@@ -40,7 +40,7 @@ class RobotCommand {
 		} ExtensionMethod;
 
 		typedef enum ShooterMethod {
-			FIRE, EJECT, IDLE, FLUSH, MANUAL_FIRE, MANUAL_LOAD
+			FIRE, EJECT, IDLE, FLUSH, MANUAL_FIRE, MANUAL_LOAD, OUT_FLUSH
 		} ShooterMethod;
 
 		typedef enum RangefinderMethod {

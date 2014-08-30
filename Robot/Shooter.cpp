@@ -55,6 +55,9 @@ void Shooter::runCommand(RobotCommand command) {
 		case RobotCommand::FLUSH:
 			state = FLUSH;
 		break;
+		case RobotCommand::OUT_FLUSH:
+			state = OUT_FLUSH;
+		break;
 	}
 	free(args);
 }
@@ -75,6 +78,7 @@ void Shooter::update() {
 			//Prepares AND Aligns simultaneously
 		case PREPARING:
 			if (!shootTimer.HasPeriodPassed(3.0)) {
+				std::printf("preparing\n");
 				startShooterVics(1.0);
 				loaderVic.Set(0.0);
 			} else {
@@ -94,7 +98,10 @@ void Shooter::update() {
 			eject();
 		break;
 		case FLUSH:
-			setAllVics(-0.50);
+			setAllVics(-0.5);
+		break;
+		case OUT_FLUSH:
+			setAllVics(0.5);
 		break;
 	}
 }

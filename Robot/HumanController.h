@@ -25,8 +25,11 @@ private:
 	bool getShootButton();
 	bool getFlushTrigger();
 	double getOperatorZ();
-	bool getRangeButton();
+	bool getManualFireButton();
+	bool getManualLoadButton();
 	double getAccumulatorStick();
+	double getFlushOutButton();
+	bool lastOutButton;
 #elif defined XBOX_CONTROLS
 	XBoxController xbox;
 	int shootButtonPrev;
