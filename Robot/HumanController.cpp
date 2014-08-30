@@ -20,6 +20,8 @@ HumanController::HumanController(Robot *robotPointer) :
 	prevZ = false;
 	prevStop = false;
 	lastOutButton = false;
+	lastManualFireButton = false;
+	lastManualLoadButton = false;
 #endif
 	this->robot = robotPointer;
 }
@@ -168,18 +170,24 @@ void HumanController::update() {
 			robot->setCommand(shootCommand);
 			std::printf("firing\n");
 		} 
-//		if(getManualLoadButton()) {
-//			RobotCommand::Method manualLoad;
-//			manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
-//			RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
-//			robot->setCommand(loadCommand);
-//		}
-//		if(getManualFireButton()) {
-//			RobotCommand::Method manualFire;
-//			manualFire.shooterMethod = RobotCommand::MANUAL_FIRE;
-//			RobotCommand fireCommand(RobotCommand::SHOOTER, manualFire, 0);
-//			robot->setCommand(fireCommand);
-//		}
+		if(getManualLoadButton()) {
+			RobotCommand::Method manualLoad;
+			manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
+			RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
+			robot->setCommand(loadCommand);
+		}
+		if(getManualFireButton()) {
+			RobotCommand::Method manualFire;
+			manualFire.shooterMethod = RobotCommand::MANUAL_FIRE;
+			RobotCommand fireCommand(RobotCommand::SHOOTER, manualFire, 0);
+			robot->setCommand(fireCommand);
+		}
+		if(!getManualFireButton()&& !getManualLoadButton()) {
+			RobotCommand::Method idle;
+			idle.shooterMethod = RobotCommand::IDLE;
+			RobotCommand fireCommand(RobotCommand::SHOOTER, idle, 0);
+			robot->setCommand(fireCommand);
+		}
 		
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
@@ -208,6 +216,8 @@ void HumanController::update() {
 #ifdef JOYSTICK_CONTROLS
 	lastFlushTrigger = getFlushTrigger();
 	//prevRangeButton = getRangeButton(); 
+	lastManualFireButton = getManualFireButton();
+	lastManualLoadButton = getManualLoadButton();
 	lastOutButton = getFlushOutButton();
 #endif
 	shootButtonPrev = getShootButton();

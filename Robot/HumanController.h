@@ -29,6 +29,8 @@ private:
 	bool getManualLoadButton();
 	double getAccumulatorStick();
 	double getFlushOutButton();
+	bool lastManualFireButton;
+	bool lastManualLoadButton;
 	bool lastOutButton;
 #elif defined XBOX_CONTROLS
 	XBoxController xbox;
