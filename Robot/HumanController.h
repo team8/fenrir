@@ -29,6 +29,9 @@ private:
 	bool getManualLoadButton();
 	double getAccumulatorStick();
 	double getFlushOutButton();
+	bool getManualButton();
+	bool manualControl;
+	bool lastManualButton;
 	bool lastManualFireButton;
 	bool lastManualLoadButton;
 	bool lastOutButton;

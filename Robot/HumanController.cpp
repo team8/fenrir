@@ -22,6 +22,8 @@ HumanController::HumanController(Robot *robotPointer) :
 	lastOutButton = false;
 	lastManualFireButton = false;
 	lastManualLoadButton = false;
+	manualControl = false;
+	lastManualButton = false;
 #endif
 	this->robot = robotPointer;
 }
@@ -163,6 +165,15 @@ void HumanController::update() {
 
 	/*SHOOTER Joystick Controls*/
 #ifdef JOYSTICK_CONTROLS
+	if(getManualButton() && !lastManualButton) {
+		if(manualControl) {
+			manualControl = false;
+		}
+		else {
+			manualControl = true;
+		}
+	}
+	if(!manualControl) {
 		if (shootButtonPrev != getShootButton() && getShootButton()) {
 			RobotCommand::Method shoot;
 			shoot.shooterMethod = RobotCommand::FIRE;
@@ -170,24 +181,27 @@ void HumanController::update() {
 			robot->setCommand(shootCommand);
 			std::printf("firing\n");
 		} 
-		if(getManualLoadButton()) {
-			RobotCommand::Method manualLoad;
-			manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
-			RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
-			robot->setCommand(loadCommand);
-		}
-		if(getManualFireButton()) {
-			RobotCommand::Method manualFire;
-			manualFire.shooterMethod = RobotCommand::MANUAL_FIRE;
-			RobotCommand fireCommand(RobotCommand::SHOOTER, manualFire, 0);
-			robot->setCommand(fireCommand);
-		}
-		if(!getManualFireButton()&& !getManualLoadButton()) {
-			RobotCommand::Method idle;
-			idle.shooterMethod = RobotCommand::IDLE;
-			RobotCommand fireCommand(RobotCommand::SHOOTER, idle, 0);
-			robot->setCommand(fireCommand);
-		}
+		
+	}else {
+		if(getManualLoadButton()&& getManualFireButton()) {
+				RobotCommand::Method manualLoad;
+				manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
+				RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
+				robot->setCommand(loadCommand);
+			}
+			if(getManualFireButton()) {
+				RobotCommand::Method manualFire;
+				manualFire.shooterMethod = RobotCommand::MANUAL_FIRE;
+				RobotCommand fireCommand(RobotCommand::SHOOTER, manualFire, 0);
+				robot->setCommand(fireCommand);
+			}
+			if(!getManualFireButton()&& !getManualLoadButton()) {
+				RobotCommand::Method idle;
+				idle.shooterMethod = RobotCommand::IDLE;
+				RobotCommand fireCommand(RobotCommand::SHOOTER, idle, 0);
+				robot->setCommand(fireCommand);
+			}
+	}
 		
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS
@@ -219,6 +233,7 @@ void HumanController::update() {
 	lastManualFireButton = getManualFireButton();
 	lastManualLoadButton = getManualLoadButton();
 	lastOutButton = getFlushOutButton();
+	lastManualButton = getManualButton();
 #endif
 	shootButtonPrev = getShootButton();
 }
@@ -279,5 +294,8 @@ bool HumanController::getManualLoadButton() {
 }
 double HumanController::getFlushOutButton() {
 	return operatorStick.GetRawButton((uint32_t)3);
+}
+bool HumanController::getManualButton() {
+	return operatorStick.GetRawButton((uint32_t)6);
 }
 #endif

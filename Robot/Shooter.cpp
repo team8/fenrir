@@ -98,10 +98,10 @@ void Shooter::update() {
 			eject();
 		break;
 		case FLUSH:
-			setAllVics(-0.5);
+			setAllVics(-0.4);
 		break;
 		case OUT_FLUSH:
-			setAllVics(0.5);
+			setAllVics(0.4);
 		break;
 	}
 }
