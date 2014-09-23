@@ -183,7 +183,7 @@ void HumanController::update() {
 		} 
 		
 	}else {
-		if(getManualLoadButton()&& getManualFireButton()) {
+		if(getManualLoadButton() && getManualFireButton()) {
 				RobotCommand::Method manualLoad;
 				manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
 				RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
@@ -202,6 +202,7 @@ void HumanController::update() {
 				robot->setCommand(fireCommand);
 			}
 	}
+
 		
 	/*SHOOTER XBox Controls*/
 #elif defined XBOX_CONTROLS

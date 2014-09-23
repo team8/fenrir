@@ -92,15 +92,15 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+			double leftSpeed = min(max(targetSpeed - rotateSpeed*2, -1), 1);
+			double rightSpeed = min(max(targetSpeed + rotateSpeed*2, -1), 1);
 		//	std::cout << "left: " << leftEnc.Get() << "      right: " << rightEnc.Get() << std::endl;
 		//	std::cout << "leftSpeed: " << leftSpeed << "      rightSpeed: " << rightSpeed << std::endl;
 	
-			leftFrontVic.Set(-leftSpeed);
-			leftBackVic.Set(-leftSpeed);
-			rightFrontVic.Set(rightSpeed);
-			rightBackVic.Set(rightSpeed);
+			leftFrontVic.Set(-leftSpeed*leftSpeed*leftSpeed);
+			leftBackVic.Set(-leftSpeed*leftSpeed*leftSpeed);
+			rightFrontVic.Set(rightSpeed*rightSpeed*rightSpeed);
+			rightBackVic.Set(rightSpeed*rightSpeed*rightSpeed);
 
 //			leftFrontVic.Set(leftFrontController.Get());
 //			leftBackVic.Set(leftBackController.Get());
