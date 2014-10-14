@@ -107,10 +107,10 @@ void Shooter::update() {
 }
 
 void Shooter::startShooterVics(double speed) {
-	shooterVic1.Set(-speed);
+	shooterVic1.Set(-speed*.85);
 	shooterVic2.Set(-speed);
 	shooterVic3.Set(speed);
-	shooterVic4.Set(speed);
+	shooterVic4.Set(speed*.85);
 }
 
 void Shooter::setAllVics(double speed) {

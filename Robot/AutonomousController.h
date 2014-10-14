@@ -12,7 +12,8 @@ class AutonomousController {
 		void update();
 		void startTimer();
 	private:
-		bool firstCommand;
+		bool timerStarted;
+		bool shootInAuto;
 		Timer time;
 		Robot* robot;
 		void drive(float v = 0.7);

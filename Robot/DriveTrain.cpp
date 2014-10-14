@@ -20,8 +20,8 @@ DriveTrain::DriveTrain() : // Victors
 //angleController(0.1, 0.1, 0.1, &gyroscope, &leftBackVic) 
 {
 	std::printf("Drive train constructor\n");
-	leftOut = 0;
-	rightOut = 0;
+	rotateSpeed = 0;
+	targetSpeed = 0;
 	//gyroscope.Start();
 	//	rightController.SetOutputRange(-1, 1);
 	//angleController.SetOutputRange(-1, 1);
@@ -92,15 +92,13 @@ void DriveTrain::update() {
 			 *Logic: Take targetSpeed and add/subtract rotateSpeed for turning
 			 *Logic: Right victor is negative because we are turning
 			 */
-			double leftSpeed = min(max(targetSpeed - rotateSpeed*2, -1), 1);
-			double rightSpeed = min(max(targetSpeed + rotateSpeed*2, -1), 1);
-		//	std::cout << "left: " << leftEnc.Get() << "      right: " << rightEnc.Get() << std::endl;
-		//	std::cout << "leftSpeed: " << leftSpeed << "      rightSpeed: " << rightSpeed << std::endl;
-	
-			leftFrontVic.Set(-leftSpeed*leftSpeed*leftSpeed);
-			leftBackVic.Set(-leftSpeed*leftSpeed*leftSpeed);
-			rightFrontVic.Set(rightSpeed*rightSpeed*rightSpeed);
-			rightBackVic.Set(rightSpeed*rightSpeed*rightSpeed);
+			double leftSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+			double rightSpeed = min(max(targetSpeed + rotateSpeed, -1), 1);
+
+				leftFrontVic.Set(-leftSpeed*leftSpeed*leftSpeed);
+				leftBackVic.Set(-leftSpeed*leftSpeed*leftSpeed);
+				rightFrontVic.Set(rightSpeed*leftSpeed*leftSpeed);
+				rightBackVic.Set(rightSpeed*leftSpeed*leftSpeed);
 
 //			leftFrontVic.Set(leftFrontController.Get());
 //			leftBackVic.Set(leftBackController.Get());
@@ -114,9 +112,6 @@ void DriveTrain::update() {
 		break;
 
 		case DRIVE_DIST:
-			std::cout << "leftEnc: " << leftEnc.GetRate() << "      rightEnc: " << rightEnc.GetRate() << std::endl;
-			std::cout << "leftBCtrlr: " << -leftBackController.Get() << "   rightBCtrlr: " << -rightBackController.Get() << std::endl;
-			std::cout << "leftFCtrlr: " << -leftFrontController.Get() << "   rightFCtrlr: " << -rightFrontController.Get() << std::endl;
 			rightFrontVic.Set(-rightFrontController.Get());
 			rightBackVic.Set(-rightBackController.Get());
 			leftFrontVic.Set(leftFrontController.Get());
@@ -175,32 +170,31 @@ void DriveTrain::setSpeed(double spd) {
 //	leftBackController.Enable();
 //	rightBackController.Enable();
 	targetSpeed = spd;
-	
 	/*PROPORTIONAL*/
-	double proportional = 1.1;
-	double leftError = targetSpeed - leftEnc.GetRate();
+	//double proportional = 1.1;
+	//double leftError = targetSpeed - leftEnc.GetRate();
+	//double rightError = targetSpeed - rightEnc.GetRate();
 	
-	double rightError = targetSpeed - rightEnc.GetRate();
-	
-	if(targetSpeed>=0) {
-		if(leftError < 0) {
-			leftError == CIM_MAX_RATE+leftError;
-		}
-		if(rightError < 0) {
-			rightError == CIM_MAX_RATE+rightError;
-		}
-	} 
-	else if(targetSpeed<0) {
-		if(leftError > 0) {
-			leftError == -CIM_MAX_RATE+leftError;
-		}
-		if(rightError > 0) {
-			leftError == -CIM_MAX_RATE+rightError;
-		}
-	}
-	/*MAX AND MIN*/
-	leftOut = leftError*proportional/CIM_MAX_RATE;
-	rightOut = rightError*proportional/CIM_MAX_RATE;
+//	if(targetSpeed >= 0) {
+//		//if we're going too fast
+//		if(leftError < 0) {
+//			leftError = targetSpeed + leftError;
+//		}
+//		if(rightError < 0) {
+//			rightError = targetSpeed + rightError;
+//		}
+//	} 
+//	else if(targetSpeed < 0) {
+//		if(leftError > 0) {
+//			leftError = -targetSpeed + leftError;
+//		}
+//		if(rightError > 0) {
+//			rightError = -targetSpeed + rightError;
+//		}
+//	}
+//	/*MAX AND MIN*/
+//	leftOut = leftError*proportional/CIM_MAX_RATE;
+//	rightOut = rightError*proportional/CIM_MAX_RATE;
 	
 	state = ROTATE_SPEED;
 }

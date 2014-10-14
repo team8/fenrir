@@ -14,7 +14,7 @@
 #define PORT_XBOX 1
 #endif
 
-#define CIM_MAX_RATE 2 //
+#define CIM_MAX_RATE 133 //
 //Helps refine sensitivity of joystiks
 #define SPEED_SENSITIVITY 0.5
 #define ROTATE_SENSITIVITY

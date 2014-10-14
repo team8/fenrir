@@ -42,7 +42,7 @@ void HumanController::update() {
 
 	if (abs(getTurnStick()) <= .1 && abs(getSpeedStick()) <= .1) {
 
-		((DriveArgs*) argPointer)->speedValue = getSpeedStick()*CIM_MAX_RATE;
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -55,7 +55,7 @@ void HumanController::update() {
 		robot->setCommand(rotateCommand);
 	}
 	if (abs(getSpeedStick()) > 0.1) {
-		((DriveArgs*) argPointer)->speedValue = getSpeedStick()*CIM_MAX_RATE;
+		((DriveArgs*) argPointer)->speedValue = getSpeedStick();
 		RobotCommand::Method setSpeed;
 		setSpeed.driveMethod = RobotCommand::SETSPEED;
 		RobotCommand speedCommand(RobotCommand::DRIVE, setSpeed, argPointer);
@@ -183,19 +183,19 @@ void HumanController::update() {
 		} 
 		
 	}else {
-		if(getManualLoadButton() && getManualFireButton()) {
-				RobotCommand::Method manualLoad;
-				manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
-				RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
-				robot->setCommand(loadCommand);
-			}
 			if(getManualFireButton()) {
 				RobotCommand::Method manualFire;
 				manualFire.shooterMethod = RobotCommand::MANUAL_FIRE;
 				RobotCommand fireCommand(RobotCommand::SHOOTER, manualFire, 0);
 				robot->setCommand(fireCommand);
 			}
-			if(!getManualFireButton()&& !getManualLoadButton()) {
+			if(getManualLoadButton() && getManualFireButton()) {
+					RobotCommand::Method manualLoad;
+					manualLoad.shooterMethod = RobotCommand::MANUAL_LOAD;
+					RobotCommand loadCommand(RobotCommand::SHOOTER, manualLoad, 0);
+					robot->setCommand(loadCommand);
+				}
+			if(!getManualFireButton()&& !getManualLoadButton() && !getFlushTrigger() && !getFlushOutButton()) {
 				RobotCommand::Method idle;
 				idle.shooterMethod = RobotCommand::IDLE;
 				RobotCommand fireCommand(RobotCommand::SHOOTER, idle, 0);
@@ -280,7 +280,7 @@ int HumanController::getShootButton() {
 
 #ifdef JOYSTICK_CONTROLS
 bool HumanController::getFlushTrigger() {
-	return operatorStick.GetRawButton((uint32_t) FLUSH_TRIGGER);
+	return operatorStick.GetRawButton((uint32_t) 4);
 }
 
 double HumanController::getOperatorZ() {
@@ -288,10 +288,10 @@ double HumanController::getOperatorZ() {
 }
 
 bool HumanController::getManualFireButton() {
-	return operatorStick.GetRawButton((uint32_t) 4);
+	return operatorStick.GetTrigger();
 }
 bool HumanController::getManualLoadButton() {
-	return operatorStick.GetRawButton((uint32_t) 5);
+	return operatorStick.GetRawButton((uint32_t) 2);
 }
 double HumanController::getFlushOutButton() {
 	return operatorStick.GetRawButton((uint32_t)3);
