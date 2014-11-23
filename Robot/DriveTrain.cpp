@@ -97,8 +97,8 @@ void DriveTrain::update() {
 
 				leftFrontVic.Set(-leftSpeed*leftSpeed*leftSpeed);
 				leftBackVic.Set(-leftSpeed*leftSpeed*leftSpeed);
-				rightFrontVic.Set(rightSpeed*leftSpeed*leftSpeed);
-				rightBackVic.Set(rightSpeed*leftSpeed*leftSpeed);
+				rightFrontVic.Set(rightSpeed*rightSpeed*rightSpeed);
+				rightBackVic.Set(rightSpeed*rightSpeed*rightSpeed);
 
 //			leftFrontVic.Set(leftFrontController.Get());
 //			leftBackVic.Set(leftBackController.Get());
